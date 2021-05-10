@@ -1,0 +1,12 @@
+ControllerTest
+==============
+
+.. java:package:: de.unistuttgart.t2.uibackend
+   :noindex:
+
+.. java:type:: public class ControllerTest
+
+   This is, where we assert, that the controller sends the expected replies. TODO ????
+
+   :author: maumau
+

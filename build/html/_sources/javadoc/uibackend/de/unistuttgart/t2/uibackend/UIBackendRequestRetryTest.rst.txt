@@ -1,0 +1,122 @@
+.. java:import:: org.junit.jupiter.api BeforeEach
+
+.. java:import:: org.junit.jupiter.api Test
+
+.. java:import:: org.junit.jupiter.api.extension ExtendWith
+
+.. java:import:: org.mockito.junit.jupiter MockitoExtension
+
+.. java:import:: org.springframework.beans.factory.annotation Autowired
+
+.. java:import:: org.springframework.http HttpMethod
+
+.. java:import:: org.springframework.http HttpStatus
+
+.. java:import:: org.springframework.http MediaType
+
+.. java:import:: org.springframework.test.context ActiveProfiles
+
+.. java:import:: org.springframework.test.context.junit.jupiter SpringJUnitConfig
+
+.. java:import:: org.springframework.test.web.client ExpectedCount
+
+.. java:import:: org.springframework.test.web.client MockRestServiceServer
+
+.. java:import:: org.springframework.web.client RestTemplate
+
+.. java:import:: com.fasterxml.jackson.databind ObjectMapper
+
+.. java:import:: de.unistuttgart.t2.common.saga SagaRequest
+
+.. java:import:: de.unistuttgart.t2.uibackend.exceptions CartInteractionFailedException
+
+.. java:import:: de.unistuttgart.t2.uibackend.exceptions OrderNotPlacedException
+
+.. java:import:: de.unistuttgart.t2.uibackend.exceptions ReservationFailedException
+
+.. java:import:: de.unistuttgart.t2.uibackend.supplicants JSONs
+
+.. java:import:: de.unistuttgart.t2.uibackend.supplicants TestContext
+
+UIBackendRequestRetryTest
+=========================
+
+.. java:package:: de.unistuttgart.t2.uibackend
+   :noindex:
+
+.. java:type:: @ExtendWith @SpringJUnitConfig @ActiveProfiles public class UIBackendRequestRetryTest
+
+   Test whether UIBackendservice retries requests as it should. The set up is similar to \ :java:ref:`UIBackendRequestTest`\  except that the mock server does now always reply with a \ :java:ref:`HttpStatus.INTERNAL_SERVER_ERROR`\  at some point and that the the test always assert that the request that received the Error is placed twice.
+
+   :author: maumau
+
+Fields
+------
+service
+^^^^^^^
+
+.. java:field:: @Autowired  UIBackendService service
+   :outertype: UIBackendRequestRetryTest
+
+Methods
+-------
+setUp
+^^^^^
+
+.. java:method:: @BeforeEach public void setUp()
+   :outertype: UIBackendRequestRetryTest
+
+testAddItemToCart_failAtCart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testAddItemToCart_failAtCart() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testConfirmOrder_failAtOrchestrator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testConfirmOrder_failAtOrchestrator() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testDeleteItemFromCart_failAtCart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testDeleteItemFromCart_failAtCart() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testGetAllProducts_failAtInventory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetAllProducts_failAtInventory() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testGetCart_failAtCart
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetCart_failAtCart() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testGetProductsInCart_failAtCart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetProductsInCart_failAtCart() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testGetProductsInCart_failAtInventory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetProductsInCart_failAtInventory() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testGetSingleProduct_failAtInventory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetSingleProduct_failAtInventory() throws Exception
+   :outertype: UIBackendRequestRetryTest
+
+testMakeReservation_failAtInventory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testMakeReservation_failAtInventory() throws Exception
+   :outertype: UIBackendRequestRetryTest
+

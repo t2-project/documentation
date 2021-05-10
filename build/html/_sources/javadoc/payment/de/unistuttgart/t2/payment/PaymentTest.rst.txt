@@ -1,0 +1,74 @@
+.. java:import:: org.junit.jupiter.api BeforeEach
+
+.. java:import:: org.junit.jupiter.api Test
+
+.. java:import:: org.junit.jupiter.api.extension ExtendWith
+
+.. java:import:: org.mockito.junit.jupiter MockitoExtension
+
+.. java:import:: org.springframework.beans.factory.annotation Autowired
+
+.. java:import:: org.springframework.boot.test.context SpringBootTest
+
+.. java:import:: org.springframework.http HttpMethod
+
+.. java:import:: org.springframework.http HttpStatus
+
+.. java:import:: org.springframework.test.context ActiveProfiles
+
+.. java:import:: org.springframework.test.context.junit.jupiter SpringJUnitConfig
+
+.. java:import:: org.springframework.test.web.client ExpectedCount
+
+.. java:import:: org.springframework.test.web.client MockRestServiceServer
+
+.. java:import:: org.springframework.web.client RestTemplate
+
+.. java:import:: de.unistuttgart.t2.payment.saga CreditCardInfo
+
+PaymentTest
+===========
+
+.. java:package:: de.unistuttgart.t2.payment
+   :noindex:
+
+.. java:type:: @ExtendWith @SpringJUnitConfig @ActiveProfiles public class PaymentTest
+
+   i dont even know what to test here...
+
+   :author: maumau
+
+Fields
+------
+info
+^^^^
+
+.. java:field::  CreditCardInfo info
+   :outertype: PaymentTest
+
+service
+^^^^^^^
+
+.. java:field:: @Autowired  PaymentService service
+   :outertype: PaymentTest
+
+total
+^^^^^
+
+.. java:field::  double total
+   :outertype: PaymentTest
+
+Methods
+-------
+setUp
+^^^^^
+
+.. java:method:: @BeforeEach public void setUp()
+   :outertype: PaymentTest
+
+testTest
+^^^^^^^^
+
+.. java:method:: @Test public void testTest() throws Exception
+   :outertype: PaymentTest
+

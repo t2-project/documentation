@@ -1,0 +1,239 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SagaRequest &#8212; T2 Store  documentation</title>
+    <link rel="stylesheet" href="../../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../../" src="../../../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../search.html" />
+    <link rel="next" title="de.unistuttgart.t2.common.saga.commands" href="commands/package-index.html" />
+    <link rel="prev" title="SagaData" href="SagaData.html" />
+   
+  <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="sagarequest">
+<h1>SagaRequest<a class="headerlink" href="#sagarequest" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest">
+public class <code class="descname">SagaRequest</code><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>all the Data, that any saga participant might possibly need. for passing from uibackend to orchestrator this is a separate class even though the content is literally the same as in <a class="reference internal" href="SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData"><code class="xref java java-ref docutils literal notranslate"><span class="pre">SagaData</span></code></a> such that i can change the communication backend - orchestrator and orchestrator - participants independently of each other. also i dont want to clutter my saga data with those json annotations.</p>
+</dd></dl>
+
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>SagaRequest<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.SagaRequest()">
+public <code class="descname">SagaRequest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.SagaRequest()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>SagaRequest<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.SagaRequest(String, String, String, String, double)">
+public <code class="descname">SagaRequest</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardNumber</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardOwner</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> checksum</em>, double<em> total</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.SagaRequest(String, String, String, String, double)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getcardnumber">
+<h3>getCardNumber<a class="headerlink" href="#getcardnumber" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.getCardNumber()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">getCardNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.getCardNumber()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="getcardowner">
+<h3>getCardOwner<a class="headerlink" href="#getcardowner" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.getCardOwner()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">getCardOwner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.getCardOwner()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="getchecksum">
+<h3>getChecksum<a class="headerlink" href="#getchecksum" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.getChecksum()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">getChecksum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.getChecksum()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="getsessionid">
+<h3>getSessionId<a class="headerlink" href="#getsessionid" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.getSessionId()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">getSessionId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.getSessionId()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="gettotal">
+<h3>getTotal<a class="headerlink" href="#gettotal" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.getTotal()">
+public double <code class="descname">getTotal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.getTotal()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="setcardnumber">
+<h3>setCardNumber<a class="headerlink" href="#setcardnumber" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.setCardNumber(String)">
+public void <code class="descname">setCardNumber</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardNumber</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.setCardNumber(String)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="setcardowner">
+<h3>setCardOwner<a class="headerlink" href="#setcardowner" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.setCardOwner(String)">
+public void <code class="descname">setCardOwner</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardOwner</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.setCardOwner(String)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="setchecksum">
+<h3>setChecksum<a class="headerlink" href="#setchecksum" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.setChecksum(String)">
+public void <code class="descname">setChecksum</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> checksum</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.setChecksum(String)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="setsessionid">
+<h3>setSessionId<a class="headerlink" href="#setsessionid" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.setSessionId(String)">
+public void <code class="descname">setSessionId</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.setSessionId(String)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="settotal">
+<h3>setTotal<a class="headerlink" href="#settotal" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.setTotal(double)">
+public void <code class="descname">setTotal</code><span class="sig-paren">(</span>double<em> total</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.setTotal(double)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="tostring">
+<h3>toString<a class="headerlink" href="#tostring" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.SagaRequest.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaRequest.toString()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../../index.html">T2 Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../packages.html">common</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../package-index.html">de.unistuttgart.t2.common</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="package-index.html">de.unistuttgart.t2.common.saga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/package-index.html">de.unistuttgart.t2.common.saga.commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../order/packages.html">order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../payment/packages.html">payment</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../packages.html">common</a><ul>
+  <li><a href="package-index.html">de.unistuttgart.t2.common.saga</a><ul>
+      <li>Previous: <a href="SagaData.html" title="previous chapter">SagaData</a></li>
+      <li>Next: <a href="commands/package-index.html" title="next chapter">de.unistuttgart.t2.common.saga.commands</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Sarah Sophie Stieß.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../../../_sources/javadoc/common/de/unistuttgart/t2/common/saga/SagaRequest.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

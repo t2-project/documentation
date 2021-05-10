@@ -1,0 +1,74 @@
+.. java:import:: org.junit.jupiter.api BeforeEach
+
+.. java:import:: org.junit.jupiter.api Test
+
+.. java:import:: org.junit.jupiter.api.extension ExtendWith
+
+.. java:import:: org.mockito.junit.jupiter MockitoExtension
+
+.. java:import:: org.springframework.beans.factory.annotation Autowired
+
+.. java:import:: org.springframework.http HttpMethod
+
+.. java:import:: org.springframework.http HttpStatus
+
+.. java:import:: org.springframework.test.context ActiveProfiles
+
+.. java:import:: org.springframework.test.context.junit.jupiter SpringJUnitConfig
+
+.. java:import:: org.springframework.test.web.client ExpectedCount
+
+.. java:import:: org.springframework.test.web.client MockRestServiceServer
+
+.. java:import:: org.springframework.web.client RestTemplate
+
+.. java:import:: org.springframework.web.client HttpServerErrorException.InternalServerError
+
+.. java:import:: de.unistuttgart.t2.common.saga SagaData
+
+PaymentRequestTest
+==================
+
+.. java:package:: de.unistuttgart.t2.payment
+   :noindex:
+
+.. java:type:: @ExtendWith @SpringJUnitConfig @ActiveProfiles public class PaymentRequestTest
+
+   Test whether Payment service makes requests and retries as it should.
+
+   :author: maumau
+
+Fields
+------
+data
+^^^^
+
+.. java:field::  SagaData data
+   :outertype: PaymentRequestTest
+
+service
+^^^^^^^
+
+.. java:field:: @Autowired  PaymentService service
+   :outertype: PaymentRequestTest
+
+Methods
+-------
+setUp
+^^^^^
+
+.. java:method:: @BeforeEach public void setUp()
+   :outertype: PaymentRequestTest
+
+testRequest
+^^^^^^^^^^^
+
+.. java:method:: @Test public void testRequest() throws Exception
+   :outertype: PaymentRequestTest
+
+testRequestRetry
+^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testRequestRetry()
+   :outertype: PaymentRequestTest
+

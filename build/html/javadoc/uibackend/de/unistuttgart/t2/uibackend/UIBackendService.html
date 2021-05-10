@@ -1,0 +1,421 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UIBackendService &#8212; T2 Store  documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="de.unistuttgart.t2.uibackend.exceptions" href="exceptions/package-index.html" />
+    <link rel="prev" title="UIBackendController" href="UIBackendController.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="uibackendservice">
+<h1>UIBackendService<a class="headerlink" href="#uibackendservice" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService">
+public class <code class="descname">UIBackendService</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages interaction with other services.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">maumau</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="config">
+<h3>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.config">
+ RetryConfig <code class="descname">config</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="registry">
+<h3>registry<a class="headerlink" href="#registry" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.registry">
+ RetryRegistry <code class="descname">registry</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.registry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="retry">
+<h3>retry<a class="headerlink" href="#retry" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.retry">
+ Retry <code class="descname">retry</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.retry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="template">
+<h3>template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.template">
+ RestTemplate <code class="descname">template</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>UIBackendService<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.UIBackendService(String, String, String, String)">
+public <code class="descname">UIBackendService</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cartUrl</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> inventoryUrl</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> orchestratorUrl</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> reservationEndpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.UIBackendService(String, String, String, String)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="additemtocart">
+<h3>addItemToCart<a class="headerlink" href="#additemtocart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.addItemToCart(String, String, Integer)">
+public void <code class="descname">addItemToCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> productId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" title="java.lang.Integer">Integer</a><em> units</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.addItemToCart(String, String, Integer)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the given number units of product to a users cart.</p>
+<p>If the product is already in the cart, the units of that product will be updated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – identifies the cart to add to</li>
+<li><strong>productId</strong> – id of product to be added</li>
+<li><strong>units</strong> – number of units to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="exceptions/CartInteractionFailedException.html#de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException" title="de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException"><strong>CartInteractionFailedException</strong></a> – if the request number of unit could not be placed in the cart.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="confirmorder">
+<h3>confirmOrder<a class="headerlink" href="#confirmorder" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.confirmOrder(String, String, String, String)">
+public void <code class="descname">confirmOrder</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardNumber</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> cardOwner</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> checksum</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.confirmOrder(String, String, String, String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Posts a request to start a transaction to the orchestrator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sessionId</strong> – identifies the session</li>
+<li><strong>cardNumber</strong> – part of payment details</li>
+<li><strong>cardOwner</strong> – part of payment details</li>
+<li><strong>checksum</strong> – part of payment details</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="deletecart">
+<h3>deleteCart<a class="headerlink" href="#deletecart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.deleteCart(String)">
+public void <code class="descname">deleteCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.deleteCart(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the entire cart for the given sessionId.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – identifies the cart content to delete</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="exceptions/CartInteractionFailedException.html#de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException" title="de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException"><strong>CartInteractionFailedException</strong></a> – if anything went wrong while talking to the cart</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="deleteitemfromcart">
+<h3>deleteItemFromCart<a class="headerlink" href="#deleteitemfromcart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.deleteItemFromCart(String, String, Integer)">
+public void <code class="descname">deleteItemFromCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> productId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" title="java.lang.Integer">Integer</a><em> units</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.deleteItemFromCart(String, String, Integer)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the given number units of product from a users cart.</p>
+<p>If the number of units in the cart decrease to zero or less, the product is remove from the cart. If the no such product is in cart, do nothing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – identifies the cart to delete from</li>
+<li><strong>productId</strong> – id of the product to be deleted</li>
+<li><strong>units</strong> – number of units to be deleted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="exceptions/CartInteractionFailedException.html#de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException" title="de.unistuttgart.t2.uibackend.exceptions.CartInteractionFailedException"><strong>CartInteractionFailedException</strong></a> – if anything went wrong while talking to the cart</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="getallproducts">
+<h3>getAllProducts<a class="headerlink" href="#getallproducts" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.getAllProducts()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getAllProducts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.getAllProducts()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all products from the inventory.</p>
+<p>TODO : the generated endpoints do things with pages. this gets the first twenty items only.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list of all products in the inventory. (might be incomplete)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="getcartcontent">
+<h3>getCartContent<a class="headerlink" href="#getcartcontent" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.getCartContent(String)">
+protected <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" title="java.util.Optional">Optional</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/CartContent.html#de.unistuttgart.t2.common.CartContent" title="de.unistuttgart.t2.common.CartContent">CartContent</a>&gt; <code class="descname">getCartContent</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.getCartContent(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the content of the cart belonging to the given sessionId.</p>
+<p>If there is either no cart content for the given sessionId, or the retrieval of the content failed, an empty optional is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">content of cart iff it exists</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="getproductsincart">
+<h3>getProductsInCart<a class="headerlink" href="#getproductsincart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.getProductsInCart(String)">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getProductsInCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.getProductsInCart(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all products in a users cart.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – identfies the cart content to get</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a list of the product in the cart</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="getsingleproduct">
+<h3>getSingleProduct<a class="headerlink" href="#getsingleproduct" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.getSingleProduct(String)">
+protected <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" title="java.util.Optional">Optional</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getSingleProduct</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> productId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.getSingleProduct(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the product with the given productId from the inventory.</p>
+<p>If there is either no product with the given sessionId, or the retrieval of the product failed, an empty optional is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>productId</strong> – id of the product to be retrieved</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">product with given id iff it exists</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="makereservations">
+<h3>makeReservations<a class="headerlink" href="#makereservations" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendService.makeReservations(String, String, Integer)">
+public <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a> <code class="descname">makeReservations</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> productId</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" title="java.lang.Integer">Integer</a><em> units</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendService.makeReservations(String, String, Integer)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserve a the given number of units of the given product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sessionId</strong> – identifies the session to reserve for</li>
+<li><strong>productId</strong> – identifies the product to reserve of</li>
+<li><strong>units</strong> – number of units to reserve</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference internal" href="exceptions/ReservationFailedException.html#de.unistuttgart.t2.uibackend.exceptions.ReservationFailedException" title="de.unistuttgart.t2.uibackend.exceptions.ReservationFailedException"><strong>ReservationFailedException</strong></a> – if the reservation could not be placed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the product the reservation was made for</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">T2 Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/packages.html">common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../order/packages.html">order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../packages.html">uibackend</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="package-index.html">de.unistuttgart.t2.uibackend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions/package-index.html">de.unistuttgart.t2.uibackend.exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../packages.html">uibackend</a><ul>
+  <li><a href="package-index.html">de.unistuttgart.t2.uibackend</a><ul>
+      <li>Previous: <a href="UIBackendController.html" title="previous chapter">UIBackendController</a></li>
+      <li>Next: <a href="exceptions/package-index.html" title="next chapter">de.unistuttgart.t2.uibackend.exceptions</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Sarah Sophie Stieß.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../../_sources/javadoc/uibackend/de/unistuttgart/t2/uibackend/UIBackendService.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

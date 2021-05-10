@@ -1,0 +1,230 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UIBackendRequestRetryTest &#8212; T2 Store  documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="uibackendrequestretrytest">
+<h1>UIBackendRequestRetryTest<a class="headerlink" href="#uibackendrequestretrytest" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest">
+public class <code class="descname">UIBackendRequestRetryTest</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether UIBackendservice retries requests as it should. The set up is similar to <a class="reference internal" href="UIBackendRequestTest.html#de.unistuttgart.t2.uibackend.UIBackendRequestTest" title="de.unistuttgart.t2.uibackend.UIBackendRequestTest"><code class="xref java java-ref docutils literal notranslate"><span class="pre">UIBackendRequestTest</span></code></a> except that the mock server does now always reply with a <code class="xref java java-ref docutils literal notranslate"><span class="pre">HttpStatus.INTERNAL_SERVER_ERROR</span></code> at some point and that the the test always assert that the request that received the Error is placed twice.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">maumau</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="service">
+<h3>service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.service">
+ <a class="reference internal" href="UIBackendService.html#de.unistuttgart.t2.uibackend.UIBackendService" title="de.unistuttgart.t2.uibackend.UIBackendService">UIBackendService</a> <code class="descname">service</code><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setup">
+<h3>setUp<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.setUp()">
+public void <code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.setUp()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testadditemtocart-failatcart">
+<h3>testAddItemToCart_failAtCart<a class="headerlink" href="#testadditemtocart-failatcart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testAddItemToCart_failAtCart()">
+public void <code class="descname">testAddItemToCart_failAtCart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testAddItemToCart_failAtCart()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testconfirmorder-failatorchestrator">
+<h3>testConfirmOrder_failAtOrchestrator<a class="headerlink" href="#testconfirmorder-failatorchestrator" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testConfirmOrder_failAtOrchestrator()">
+public void <code class="descname">testConfirmOrder_failAtOrchestrator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testConfirmOrder_failAtOrchestrator()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testdeleteitemfromcart-failatcart">
+<h3>testDeleteItemFromCart_failAtCart<a class="headerlink" href="#testdeleteitemfromcart-failatcart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testDeleteItemFromCart_failAtCart()">
+public void <code class="descname">testDeleteItemFromCart_failAtCart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testDeleteItemFromCart_failAtCart()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testgetallproducts-failatinventory">
+<h3>testGetAllProducts_failAtInventory<a class="headerlink" href="#testgetallproducts-failatinventory" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetAllProducts_failAtInventory()">
+public void <code class="descname">testGetAllProducts_failAtInventory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetAllProducts_failAtInventory()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testgetcart-failatcart">
+<h3>testGetCart_failAtCart<a class="headerlink" href="#testgetcart-failatcart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetCart_failAtCart()">
+public void <code class="descname">testGetCart_failAtCart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetCart_failAtCart()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testgetproductsincart-failatcart">
+<h3>testGetProductsInCart_failAtCart<a class="headerlink" href="#testgetproductsincart-failatcart" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetProductsInCart_failAtCart()">
+public void <code class="descname">testGetProductsInCart_failAtCart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetProductsInCart_failAtCart()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testgetproductsincart-failatinventory">
+<h3>testGetProductsInCart_failAtInventory<a class="headerlink" href="#testgetproductsincart-failatinventory" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetProductsInCart_failAtInventory()">
+public void <code class="descname">testGetProductsInCart_failAtInventory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetProductsInCart_failAtInventory()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testgetsingleproduct-failatinventory">
+<h3>testGetSingleProduct_failAtInventory<a class="headerlink" href="#testgetsingleproduct-failatinventory" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetSingleProduct_failAtInventory()">
+public void <code class="descname">testGetSingleProduct_failAtInventory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testGetSingleProduct_failAtInventory()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="testmakereservation-failatinventory">
+<h3>testMakeReservation_failAtInventory<a class="headerlink" href="#testmakereservation-failatinventory" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testMakeReservation_failAtInventory()">
+public void <code class="descname">testMakeReservation_failAtInventory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendRequestRetryTest.testMakeReservation_failAtInventory()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">T2 Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/packages.html">common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../order/packages.html">order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Sarah Sophie Stieß.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../../_sources/javadoc/uibackend/de/unistuttgart/t2/uibackend/UIBackendRequestRetryTest.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

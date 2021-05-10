@@ -3,17 +3,56 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to T2 Store's documentation!
-====================================
+T2 Store Documentation
+======================
+
+TODO : T2 Store - based on teastore - general information :x
+
+
+Architecture Stuff
+------------------
+
+Description of the architecture and its components.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: ARCHITECTURE
+
+   arch/arch 
+
+Guides
+------
+
+How to things.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: HOWTOS
+
+   guides/kube
+   guides/loadgenerator
+   guides/prometheus 
+
+JavaDoc
+-------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: JAVADOC
+
+   javadoc/common/packages
+   javadoc/order/packages
+   javadoc/payment/packages
+   javadoc/inventory/packages
+   javadoc/orchestrator/packages
+   javadoc/uibackend/packages
+   javadoc/cart/packages
+   javadoc/creditinstitute/packages
 
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

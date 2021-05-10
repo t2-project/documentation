@@ -1,0 +1,119 @@
+.. java:import:: org.junit.jupiter.api BeforeEach
+
+.. java:import:: org.junit.jupiter.api Test
+
+.. java:import:: org.junit.jupiter.api.extension ExtendWith
+
+.. java:import:: org.mockito.junit.jupiter MockitoExtension
+
+.. java:import:: org.springframework.beans.factory.annotation Autowired
+
+.. java:import:: org.springframework.http HttpMethod
+
+.. java:import:: org.springframework.http HttpStatus
+
+.. java:import:: org.springframework.http MediaType
+
+.. java:import:: org.springframework.test.context ActiveProfiles
+
+.. java:import:: org.springframework.test.context.junit.jupiter SpringJUnitConfig
+
+.. java:import:: org.springframework.test.web.client ExpectedCount
+
+.. java:import:: org.springframework.test.web.client MockRestServiceServer
+
+.. java:import:: org.springframework.web.client RestTemplate
+
+.. java:import:: com.fasterxml.jackson.databind ObjectMapper
+
+.. java:import:: de.unistuttgart.t2.common ReservationRequest
+
+.. java:import:: de.unistuttgart.t2.common.saga SagaRequest
+
+.. java:import:: de.unistuttgart.t2.uibackend.supplicants JSONs
+
+.. java:import:: de.unistuttgart.t2.uibackend.supplicants TestContext
+
+UIBackendRequestTest
+====================
+
+.. java:package:: de.unistuttgart.t2.uibackend
+   :noindex:
+
+.. java:type:: @ExtendWith @SpringJUnitConfig @ActiveProfiles public class UIBackendRequestTest
+
+   Test whether UIBackendservice makes the right requests.
+
+   The Set up is like this:
+
+   ..
+
+   * Call the operation under test.
+   * Uses the mock server to receive the request and verify that it is placed as intended.
+
+   :author: maumau
+
+Fields
+------
+service
+^^^^^^^
+
+.. java:field:: @Autowired  UIBackendService service
+   :outertype: UIBackendRequestTest
+
+Methods
+-------
+setUp
+^^^^^
+
+.. java:method:: @BeforeEach public void setUp()
+   :outertype: UIBackendRequestTest
+
+testAddItemToCart
+^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testAddItemToCart() throws Exception
+   :outertype: UIBackendRequestTest
+
+testConfirmOrder
+^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testConfirmOrder() throws Exception
+   :outertype: UIBackendRequestTest
+
+testDeleteItemFromCart
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testDeleteItemFromCart() throws Exception
+   :outertype: UIBackendRequestTest
+
+testGetAllProducts
+^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetAllProducts() throws Exception
+   :outertype: UIBackendRequestTest
+
+testGetCart
+^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetCart() throws Exception
+   :outertype: UIBackendRequestTest
+
+testGetProductsInCart
+^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetProductsInCart() throws Exception
+   :outertype: UIBackendRequestTest
+
+testGetSingleProduct
+^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testGetSingleProduct() throws Exception
+   :outertype: UIBackendRequestTest
+
+testMakeReservation
+^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void testMakeReservation() throws Exception
+   :outertype: UIBackendRequestTest
+

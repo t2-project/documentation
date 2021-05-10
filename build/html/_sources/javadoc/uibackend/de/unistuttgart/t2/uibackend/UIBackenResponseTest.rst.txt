@@ -1,0 +1,76 @@
+.. java:import:: java.util List
+
+.. java:import:: org.junit.jupiter.api Test
+
+.. java:import:: org.junit.jupiter.api.extension ExtendWith
+
+.. java:import:: org.mockito InjectMocks
+
+.. java:import:: org.mockito Mock
+
+.. java:import:: org.mockito Mockito
+
+.. java:import:: org.mockito.junit.jupiter MockitoExtension
+
+.. java:import:: org.springframework.http HttpHeaders
+
+.. java:import:: org.springframework.http HttpStatus
+
+.. java:import:: org.springframework.http ResponseEntity
+
+.. java:import:: org.springframework.test.context.junit.jupiter SpringExtension
+
+.. java:import:: org.springframework.web.client RestTemplate
+
+.. java:import:: de.unistuttgart.t2.common CartContent
+
+.. java:import:: de.unistuttgart.t2.common Product
+
+.. java:import:: de.unistuttgart.t2.uibackend.supplicants JSONs
+
+UIBackenResponseTest
+====================
+
+.. java:package:: de.unistuttgart.t2.uibackend
+   :noindex:
+
+.. java:type:: @ExtendWith @ExtendWith public class UIBackenResponseTest
+
+   Test whether UIBackendservice handles all responses correctly.
+
+   The Set up is like this:
+
+   ..
+
+   * Call the operation under test.
+   * Mock the responses that the operation would receive from other services.
+   * Assert that the operation under test processes the replies as intended.
+
+   :author: maumau
+
+Methods
+-------
+getAllProductsTest
+^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void getAllProductsTest()
+   :outertype: UIBackenResponseTest
+
+getCartContentTest
+^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void getCartContentTest()
+   :outertype: UIBackenResponseTest
+
+getProductsInCartTest
+^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void getProductsInCartTest()
+   :outertype: UIBackenResponseTest
+
+getSingleProductTest
+^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @Test public void getSingleProductTest()
+   :outertype: UIBackenResponseTest
+

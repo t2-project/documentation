@@ -1,0 +1,28 @@
+========================
+Credit Institute Service
+========================
+
+General purpose of Credit Institute Service
+
+
+Overview
+--------
+
+The Credit Institute  Component is structured like this:
+
+.. image:: ../figs/todo.png
+
+
+More Detailed Package Description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lorem ipsum.
+
+
+
+Links
+-----
+
+*  `GitHub <https://github.com/t2-project/creditinstitute>`__
+*  :ref:`JavaDoc<creditinstitute>`
+

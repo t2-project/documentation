@@ -1,0 +1,88 @@
+.. java:import:: java.util Date
+
+.. java:import:: org.springframework.data.annotation Id
+
+OrderItem
+=========
+
+.. java:package:: de.unistuttgart.t2.repository
+   :noindex:
+
+.. java:type:: public class OrderItem
+
+Constructors
+------------
+OrderItem
+^^^^^^^^^
+
+.. java:constructor:: public OrderItem()
+   :outertype: OrderItem
+
+OrderItem
+^^^^^^^^^
+
+.. java:constructor:: public OrderItem(String sessionId, OrderStatus status, Date timestamp)
+   :outertype: OrderItem
+
+OrderItem
+^^^^^^^^^
+
+.. java:constructor:: public OrderItem(String orderId, String sessionId, OrderStatus status, Date timestamp)
+   :outertype: OrderItem
+
+Methods
+-------
+getOrderId
+^^^^^^^^^^
+
+.. java:method:: public String getOrderId()
+   :outertype: OrderItem
+
+getSessionId
+^^^^^^^^^^^^
+
+.. java:method:: public String getSessionId()
+   :outertype: OrderItem
+
+getStatus
+^^^^^^^^^
+
+.. java:method:: public OrderStatus getStatus()
+   :outertype: OrderItem
+
+getTimestamp
+^^^^^^^^^^^^
+
+.. java:method:: public Date getTimestamp()
+   :outertype: OrderItem
+
+setOrderId
+^^^^^^^^^^
+
+.. java:method:: public void setOrderId(String orderId)
+   :outertype: OrderItem
+
+setSessionId
+^^^^^^^^^^^^
+
+.. java:method:: public void setSessionId(String sessionId)
+   :outertype: OrderItem
+
+setStatus
+^^^^^^^^^
+
+.. java:method:: public void setStatus(OrderStatus status)
+   :outertype: OrderItem
+
+setTimestamp
+^^^^^^^^^^^^
+
+.. java:method:: public void setTimestamp(Date timestamp)
+   :outertype: OrderItem
+
+toString
+^^^^^^^^
+
+.. java:method:: @Override public String toString()
+   :outertype: OrderItem
+
