@@ -10,7 +10,11 @@ ReservationRequest
 
 .. java:type:: public class ReservationRequest
 
-   to be passed from ui backend to inventory.
+   Request to place a reservation on a product.
+
+   This request if for reservation of single product. If you want to place reservations on multiple products you have to request one after another.
+
+   Used to communicate with the inventory service.
 
    :author: maumau
 

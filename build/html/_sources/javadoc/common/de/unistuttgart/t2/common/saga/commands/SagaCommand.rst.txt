@@ -10,7 +10,11 @@ SagaCommand
 
 .. java:type:: public abstract class SagaCommand implements Command
 
-   generic command to saga participants. storing the names of the channels here is not intended, but i do it anyway because i want them at one central place.
+   Generic command to the saga participants.
+
+   Holds the \ :java:ref:`SagaData <de.unistuttgart.t2.common.saga.SagaData>`\  that the saga participants need to perform actions or compensations.
+
+   Storing the names of the queues here is not intended, but i do it anyway because i want them at one central place.
 
    :author: maumau
 

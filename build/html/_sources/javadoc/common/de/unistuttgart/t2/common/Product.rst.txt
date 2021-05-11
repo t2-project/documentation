@@ -10,7 +10,17 @@ Product
 
 .. java:type:: public class Product
 
-   a product as sold by the store. to be passed from inventory to ui backend.
+   A single product in the store.
+
+   Depending on the context the product is used in, the \ ``units``\  represent different things:
+
+   ..
+
+   * reservations : reserved number of units of that product
+   * inventory : available number of units in the inventory
+   * cart : number of units in the cart
+
+   Used to communicate from UI to UIBackend to inventory.
 
    :author: maumau
 

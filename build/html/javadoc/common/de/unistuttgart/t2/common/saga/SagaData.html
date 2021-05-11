@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../../../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
-    <link rel="next" title="SagaRequest" href="SagaRequest.html" />
+    <link rel="next" title="de.unistuttgart.t2.common.saga.commands" href="commands/package-index.html" />
     <link rel="prev" title="OrderCreatedReply" href="OrderCreatedReply.html" />
    
   <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
@@ -39,7 +39,22 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.common.saga.SagaData">
 public class <code class="descname">SagaData</code><a class="headerlink" href="#de.unistuttgart.t2.common.saga.SagaData" title="Permalink to this definition">¶</a></dt>
-<dd><p>all the Data, that any saga participant might possibly need. the other option would be, that each saga participant collects its data from other services personally (e.g. payment again asks cart for which and what quantity of items were bought), but that is a lot of communication effort, thus biiig message. Payment wants: - payment info (creditcard stuff) - total money Inventory wants: - sessionid (to identify which reservations to delete) - (maybe) total for verification Order wants: - (nothing really) - but takes total, ordered units and products and, session id anyway.</p>
+<dd><p>All the Information that any saga participant might possibly need.</p>
+<p>Payment wants:</p>
+<ul class="simple">
+<li>the information usually found on a credit card</li>
+<li>the total money to pay</li>
+</ul>
+<p>Inventory wants:</p>
+<ul class="simple">
+<li>the sessionId to identify the reservations to commit / delete.</li>
+</ul>
+<p>Order wants:</p>
+<ul class="simple">
+<li>nothing really</li>
+<li>but takes total and sessionId anyway.</li>
+</ul>
+<p>Another option would be, that each saga participant collects its data from other services personally (e.g. payment again asks cart for which and what quantity of items were bought), but that is a lot of communication effort. To avoid this there is just this one big messages, that contains all information and every one just picks what they need.</p>
 </dd></dl>
 
 <div class="section" id="constructors">
@@ -147,7 +162,17 @@ public void <code class="descname">setOrderId</code><span class="sig-paren">(</s
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../../packages.html">common</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../package-index.html">de.unistuttgart.t2.common</a></li>
@@ -157,6 +182,11 @@ public void <code class="descname">setOrderId</code><span class="sig-paren">(</s
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../order/packages.html">order</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 </ul>
 
 <div class="relations">
@@ -166,7 +196,7 @@ public void <code class="descname">setOrderId</code><span class="sig-paren">(</s
   <li><a href="../../../../../packages.html">common</a><ul>
   <li><a href="package-index.html">de.unistuttgart.t2.common.saga</a><ul>
       <li>Previous: <a href="OrderCreatedReply.html" title="previous chapter">OrderCreatedReply</a></li>
-      <li>Next: <a href="SagaRequest.html" title="next chapter">SagaRequest</a></li>
+      <li>Next: <a href="commands/package-index.html" title="next chapter">de.unistuttgart.t2.common.saga.commands</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

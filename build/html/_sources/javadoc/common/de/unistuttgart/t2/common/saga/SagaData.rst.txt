@@ -6,7 +6,29 @@ SagaData
 
 .. java:type:: public class SagaData
 
-   all the Data, that any saga participant might possibly need. the other option would be, that each saga participant collects its data from other services personally (e.g. payment again asks cart for which and what quantity of items were bought), but that is a lot of communication effort, thus biiig message. Payment wants: - payment info (creditcard stuff) - total money Inventory wants: - sessionid (to identify which reservations to delete) - (maybe) total for verification Order wants: - (nothing really) - but takes total, ordered units and products and, session id anyway.
+   All the Information that any saga participant might possibly need.
+
+   Payment wants:
+
+   ..
+
+   * the information usually found on a credit card
+   * the total money to pay
+
+   Inventory wants:
+
+   ..
+
+   * the sessionId to identify the reservations to commit / delete.
+
+   Order wants:
+
+   ..
+
+   * nothing really
+   * but takes total and sessionId anyway.
+
+   Another option would be, that each saga participant collects its data from other services personally (e.g. payment again asks cart for which and what quantity of items were bought), but that is a lot of communication effort. To avoid this there is just this one big messages, that contains all information and every one just picks what they need.
 
 Constructors
 ------------

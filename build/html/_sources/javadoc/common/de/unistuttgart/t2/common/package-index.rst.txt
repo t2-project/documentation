@@ -10,4 +10,5 @@ de.unistuttgart.t2.common
    OrderRequest
    Product
    ReservationRequest
+   SagaRequest
 

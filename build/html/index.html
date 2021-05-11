@@ -36,88 +36,37 @@
   <div class="section" id="t2-store-documentation">
 <h1>T2 Store Documentation<a class="headerlink" href="#t2-store-documentation" title="Permalink to this headline">¶</a></h1>
 <p>TODO : T2 Store - based on teastore - general information :x</p>
-<div class="section" id="architecture-stuff">
-<h2>Architecture Stuff<a class="headerlink" href="#architecture-stuff" title="Permalink to this headline">¶</a></h2>
-<p>Description of the architecture and its components.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="arch/arch.html">Architecture Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/order.html">Order Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/payment.html">Payment Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/inventory.html">Inventroy Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/orchestrator.html">Orchestrator Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/uibackend.html">UI Backend Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/cart.html">Cart Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arch/services/creditinstitute.html">Credit Institute Service</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="arch/arch.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/arch.html#the-saga">The Saga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/arch.html#the-services">The Services</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="guides">
-<h2>Guides<a class="headerlink" href="#guides" title="Permalink to this headline">¶</a></h2>
-<p>How to things.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">HOWTOS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guides/kube.html">kube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/loadgenerator.html">loadgenerator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/prometheus.html">monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#local">local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#loadgenerator">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="javadoc">
-<h2>JavaDoc<a class="headerlink" href="#javadoc" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/common/packages.html">common</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/common/de/unistuttgart/t2/common/package-index.html">de.unistuttgart.t2.common</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/common/de/unistuttgart/t2/common/saga/package-index.html">de.unistuttgart.t2.common.saga</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/common/de/unistuttgart/t2/common/saga/commands/package-index.html">de.unistuttgart.t2.common.saga.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/common/packages.html">common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/order/packages.html">order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/creditinstitute/packages.html">creditinstitute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/e2etest/packages.html">e2etest</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/order/packages.html">order</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/order/de/unistuttgart/t2/order/package-index.html">de.unistuttgart.t2.order</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/order/de/unistuttgart/t2/order/repository/package-index.html">de.unistuttgart.t2.order.repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/order/de/unistuttgart/t2/order/saga/package-index.html">de.unistuttgart.t2.order.saga</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/payment/packages.html">payment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/payment/de/unistuttgart/t2/payment/package-index.html">de.unistuttgart.t2.payment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/payment/de/unistuttgart/t2/payment/config/package-index.html">de.unistuttgart.t2.payment.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/payment/de/unistuttgart/t2/payment/saga/package-index.html">de.unistuttgart.t2.payment.saga</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/inventory/packages.html">inventory</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/inventory/de/unistuttgart/t2/inventory/package-index.html">de.unistuttgart.t2.inventory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/inventory/de/unistuttgart/t2/inventory/config/package-index.html">de.unistuttgart.t2.inventory.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/inventory/de/unistuttgart/t2/inventory/repository/package-index.html">de.unistuttgart.t2.inventory.repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/inventory/de/unistuttgart/t2/inventory/saga/package-index.html">de.unistuttgart.t2.inventory.saga</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/orchestrator/packages.html">orchestrator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/orchestrator/de/unistuttgart/t2/orchestrator/package-index.html">de.unistuttgart.t2.orchestrator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/orchestrator/de/unistuttgart/t2/orchestrator/saga/package-index.html">de.unistuttgart.t2.orchestrator.saga</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/uibackend/packages.html">uibackend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/uibackend/de/unistuttgart/t2/uibackend/package-index.html">de.unistuttgart.t2.uibackend</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/uibackend/de/unistuttgart/t2/uibackend/exceptions/package-index.html">de.unistuttgart.t2.uibackend.exceptions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/cart/packages.html">cart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/cart/de/unistuttgart/t2/cart/package-index.html">de.unistuttgart.t2.cart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/cart/de/unistuttgart/t2/cart/repository/package-index.html">de.unistuttgart.t2.cart.repository</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="javadoc/creditinstitute/packages.html">creditinstitute</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="javadoc/creditinstitute/de/unistuttgart/t2/creditinstitute/package-index.html">de.unistuttgart.t2.creditinstitute</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
@@ -149,12 +98,16 @@
 <p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="arch/arch.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/arch.html#the-saga">The Saga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/arch.html#the-services">The Services</a></li>
 </ul>
 <p class="caption"><span class="caption-text">HOWTOS</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guides/kube.html">kube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/loadgenerator.html">loadgenerator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/prometheus.html">monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#local">local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#loadgenerator">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul>
@@ -166,6 +119,7 @@
 <li class="toctree-l1"><a class="reference internal" href="javadoc/uibackend/packages.html">uibackend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/creditinstitute/packages.html">creditinstitute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/e2etest/packages.html">e2etest</a></li>
 </ul>
 
 <div class="relations">

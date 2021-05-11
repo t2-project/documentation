@@ -1,3 +1,5 @@
+.. _svc-creditinstitute:
+
 ========================
 Credit Institute Service
 ========================

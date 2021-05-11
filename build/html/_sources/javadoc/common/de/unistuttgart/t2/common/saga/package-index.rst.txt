@@ -8,5 +8,4 @@ de.unistuttgart.t2.common.saga
 
    OrderCreatedReply
    SagaData
-   SagaRequest
 

@@ -8,7 +8,7 @@ ActionCommand
 
 .. java:type:: public class ActionCommand extends SagaCommand
 
-   command that makes saga participant take an action.
+   A command that makes a saga participant perform an action.
 
    :author: maumau
 

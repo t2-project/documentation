@@ -39,7 +39,14 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.common.Product">
 public class <code class="descname">Product</code><a class="headerlink" href="#de.unistuttgart.t2.common.Product" title="Permalink to this definition">¶</a></dt>
-<dd><p>a product as sold by the store. to be passed from inventory to ui backend.</p>
+<dd><p>A single product in the store.</p>
+<p>Depending on the context the product is used in, the <code class="docutils literal notranslate"><span class="pre">units</span></code> represent different things:</p>
+<ul class="simple">
+<li>reservations : reserved number of units of that product</li>
+<li>inventory : available number of units in the inventory</li>
+<li>cart : number of units in the cart</li>
+</ul>
+<p>Used to communicate from UI to UIBackend to inventory.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -179,7 +186,17 @@ public void <code class="descname">setUnits</code><span class="sig-paren">(</spa
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../packages.html">common</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="package-index.html">de.unistuttgart.t2.common</a></li>
@@ -189,6 +206,11 @@ public void <code class="descname">setUnits</code><span class="sig-paren">(</spa
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../order/packages.html">order</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 </ul>
 
 <div class="relations">

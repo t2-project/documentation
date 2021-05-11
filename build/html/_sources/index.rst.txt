@@ -8,36 +8,22 @@ T2 Store Documentation
 
 TODO : T2 Store - based on teastore - general information :x
 
-
-Architecture Stuff
-------------------
-
-Description of the architecture and its components.
-
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: ARCHITECTURE
 
    arch/arch 
 
-Guides
-------
-
-How to things.
 
 .. toctree::
    :maxdepth: 1
    :caption: HOWTOS
 
-   guides/kube
-   guides/loadgenerator
-   guides/prometheus 
+   guides/kube 
 
-JavaDoc
--------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: JAVADOC
 
    javadoc/common/packages
@@ -48,8 +34,7 @@ JavaDoc
    javadoc/uibackend/packages
    javadoc/cart/packages
    javadoc/creditinstitute/packages
-
-
+   javadoc/e2etest/packages
 
 Indices and tables
 ------------------

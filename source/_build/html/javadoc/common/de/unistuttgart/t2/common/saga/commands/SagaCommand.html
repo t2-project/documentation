@@ -1,0 +1,218 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SagaCommand &#8212; T2 Store  documentation</title>
+    <link rel="stylesheet" href="../../../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../../../" src="../../../../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../search.html" />
+    <link rel="next" title="order" href="../../../../../../../order/packages.html" />
+    <link rel="prev" title="CompensationCommand" href="CompensationCommand.html" />
+   
+  <link rel="stylesheet" href="../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="sagacommand">
+<h1>SagaCommand<a class="headerlink" href="#sagacommand" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand">
+public abstract class <code class="descname">SagaCommand</code> implements Command<a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic command to the saga participants.</p>
+<p>Holds the <a class="reference internal" href="../SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData"><code class="xref java java-ref docutils literal notranslate"><span class="pre">SagaData</span></code></a> that the saga participants need to perform actions or compensations.</p>
+<p>Storing the names of the queues here is not intended, but i do it anyway because i want them at one central place.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">maumau</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inventory">
+<h3>inventory<a class="headerlink" href="#inventory" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.inventory">
+public static final <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">inventory</code><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.inventory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="order">
+<h3>order<a class="headerlink" href="#order" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.order">
+public static final <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">order</code><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.order" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="payment">
+<h3>payment<a class="headerlink" href="#payment" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.payment">
+public static final <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">payment</code><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.payment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>SagaCommand<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.SagaCommand(SagaData)">
+public <code class="descname">SagaCommand</code><span class="sig-paren">(</span><a class="reference internal" href="../SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData">SagaData</a><em> data</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.SagaCommand(SagaData)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>SagaCommand<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.SagaCommand()">
+public <code class="descname">SagaCommand</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.SagaCommand()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getdata">
+<h3>getData<a class="headerlink" href="#getdata" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.getData()">
+public <a class="reference internal" href="../SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData">SagaData</a> <code class="descname">getData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.getData()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="setdata">
+<h3>setData<a class="headerlink" href="#setdata" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand.setData(SagaData)">
+public void <code class="descname">setData</code><span class="sig-paren">(</span><a class="reference internal" href="../SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData">SagaData</a><em> data</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand.setData(SagaData)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../../../index.html">T2 Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../guides/kube.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../../packages.html">common</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../package-index.html">de.unistuttgart.t2.common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../package-index.html">de.unistuttgart.t2.common.saga</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="package-index.html">de.unistuttgart.t2.common.saga.commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../order/packages.html">order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../creditinstitute/packages.html">creditinstitute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../e2etest/packages.html">e2etest</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../../packages.html">common</a><ul>
+  <li><a href="package-index.html">de.unistuttgart.t2.common.saga.commands</a><ul>
+      <li>Previous: <a href="CompensationCommand.html" title="previous chapter">CompensationCommand</a></li>
+      <li>Next: <a href="../../../../../../../order/packages.html" title="next chapter">order</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Sarah Sophie Stieß.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../../../../_sources/javadoc/common/de/unistuttgart/t2/common/saga/commands/SagaCommand.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

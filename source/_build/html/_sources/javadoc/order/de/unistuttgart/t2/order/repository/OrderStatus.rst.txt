@@ -1,0 +1,22 @@
+OrderStatus
+===========
+
+.. java:package:: de.unistuttgart.t2.order.repository
+   :noindex:
+
+.. java:type:: public enum OrderStatus
+
+Enum Constants
+--------------
+FAILURE
+^^^^^^^
+
+.. java:field:: public static final OrderStatus FAILURE
+   :outertype: OrderStatus
+
+SUCCESS
+^^^^^^^
+
+.. java:field:: public static final OrderStatus SUCCESS
+   :outertype: OrderStatus
+

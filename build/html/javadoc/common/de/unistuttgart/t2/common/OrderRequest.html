@@ -39,7 +39,9 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.common.OrderRequest">
 public class <code class="descname">OrderRequest</code><a class="headerlink" href="#de.unistuttgart.t2.common.OrderRequest" title="Permalink to this definition">¶</a></dt>
-<dd><p>to be passed from ui to the ui backend.</p>
+<dd><p>Request to order all Items in a users cart.</p>
+<p>Holds the payment information only. The products to be ordered will be retrieved from the cart service, and the sessionId is in that session object that is always there.</p>
+<p>Used to communicate from UI to UIBackend.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -115,7 +117,17 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../packages.html">common</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="package-index.html">de.unistuttgart.t2.common</a></li>
@@ -125,6 +137,11 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../order/packages.html">order</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 </ul>
 
 <div class="relations">

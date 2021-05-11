@@ -39,7 +39,9 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.common.saga.commands.SagaCommand">
 public abstract class <code class="descname">SagaCommand</code> implements Command<a class="headerlink" href="#de.unistuttgart.t2.common.saga.commands.SagaCommand" title="Permalink to this definition">¶</a></dt>
-<dd><p>generic command to saga participants. storing the names of the channels here is not intended, but i do it anyway because i want them at one central place.</p>
+<dd><p>Generic command to the saga participants.</p>
+<p>Holds the <a class="reference internal" href="../SagaData.html#de.unistuttgart.t2.common.saga.SagaData" title="de.unistuttgart.t2.common.saga.SagaData"><code class="xref java java-ref docutils literal notranslate"><span class="pre">SagaData</span></code></a> that the saga participants need to perform actions or compensations.</p>
+<p>Storing the names of the queues here is not intended, but i do it anyway because i want them at one central place.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -134,7 +136,17 @@ public void <code class="descname">setData</code><span class="sig-paren">(</span
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../guides/kube.html">kube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../guides/loadgenerator.html">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../guides/prometheus.html">monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../../../packages.html">common</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../package-index.html">de.unistuttgart.t2.common</a></li>
@@ -144,6 +156,11 @@ public void <code class="descname">setData</code><span class="sig-paren">(</span
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../order/packages.html">order</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../payment/packages.html">payment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../inventory/packages.html">inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../orchestrator/packages.html">orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../cart/packages.html">cart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 </ul>
 
 <div class="relations">

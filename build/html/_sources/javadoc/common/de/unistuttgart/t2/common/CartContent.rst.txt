@@ -16,7 +16,11 @@ CartContent
 
 .. java:type:: public class CartContent
 
-   content of a users shopping cart to be passed from cart to ui backend to ui and vice versa.
+   The content of a users shopping cart.
+
+   Holds the productIds of the products in the cart and how many units of each product are in the cart.
+
+   Used to communicated with the cart service.
 
    :author: maumau
 
@@ -48,16 +52,20 @@ getProductIds
 .. java:method:: public Collection<String> getProductIds()
    :outertype: CartContent
 
+   Get the productIds of the products in this cart.
+
+   :return: ids of all products in the cart
+
 getUnits
 ^^^^^^^^
 
 .. java:method:: public Integer getUnits(String productId)
    :outertype: CartContent
 
-   get units of product with given id or zero if product not in the cart
+   Get the number of units of a product with the given id or zero if the product is not in the cart.
 
-   :param productId:
-   :return: units of product with given id
+   :param productId: to identify the product
+   :return: number of units if the product is in the cart, zero otherwise
 
 setContent
 ^^^^^^^^^^

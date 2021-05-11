@@ -8,7 +8,7 @@ CompensationCommand
 
 .. java:type:: public class CompensationCommand extends SagaCommand
 
-   command that makes saga participant execute a compensation
+   A command that makes a saga participant perfomr a compensation.
 
    :author: maumau
 
