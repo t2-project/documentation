@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Order Service" href="services/order.html" />
+    <link rel="next" title="Run on a Kubernetes Cluster" href="../guides/kube.html" />
     <link rel="prev" title="T2 Store Documentation" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -35,44 +35,70 @@
           <div class="body" role="main">
             
   <div class="section" id="architecture-overview">
-<h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
-<p>The T2 store consists of seven services:</p>
-<img alt="../_images/component_queue.jpg" src="../_images/component_queue.jpg" />
+<span id="arch"></span><h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
+<p>The T2 Store consists of seven services.</p>
+<img alt="../_images/component_total_colour.jpg" src="../_images/component_total_colour.jpg" />
+<p>The green and blue services are the core T2 Services:</p>
 <ul class="simple">
-<li>UI : The application frontend.</li>
-<li>UIBackend : API Gateway.</li>
-<li>Cart : Manages user’s shopping carts.</li>
-<li>Orchestrator : Orchestrates the saga.</li>
-<li>Order : Persists orders to a database and marks them either as success or as failure.</li>
-<li>Payment : Handles the store’s payment by contacting an external credit institutes.</li>
-<li>Inventory: Manages the store’s products.</li>
+<li><strong>UI</strong> : The application frontend.</li>
+<li><strong>UIBackend</strong> : API Gateway.</li>
+<li><strong>Cart</strong> : Manages the user shopping carts. It saves the cart contents to the <em>cart repository</em>.</li>
+<li><strong>Orchestrator</strong> : Orchestrates the saga.</li>
+<li><strong>Order</strong> : Persists orders to the <em>order repository</em> and marks them either as <em>success</em> or <em>failure</em>.</li>
+<li><strong>Payment</strong> : Handles the store’s payment by contacting an external payment provider.</li>
+<li><strong>Inventory</strong>: Manages the store’s products. They are stored in the <em>product repository</em>.</li>
 </ul>
-<p>All components, except for the UI and its back end, who have no database at all, have their own databases.
-The communication is either over HTTP or messaging. The UI and its back end communicate with HTTP calls.
-All participants of the saga as well as the orchestrator communicate among each other with messages.</p>
-<p>The T2 store realises the following business process:</p>
-<img alt="../_images/todo.png" src="../_images/todo.png" />
-<p>The transaction is implemented as an orchestrated <a class="reference external" href="https://microservices.io/patterns/data/saga.html">Saga</a> using the <a class="reference external" href="https://eventuate.io/docs/manual/eventuate-tram/latest/getting-started-eventuate-tram.html">Eventuate Tram</a> framework.
-The T2 Store makes use of the <a class="reference external" href="https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html">Eventuate CDC Serivce</a> to realise the <a class="reference external" href="https://microservices.io/patterns/data/transactional-outbox.html">Transactional Outboxing Pattern</a> required by the Saga.</p>
-<p>In more detail, and including the CDC service, the T2 Store’s architecture looks like this:</p>
-<p>(arch sketch including CDC and mom)</p>
-<img alt="../_images/todo.png" src="../_images/todo.png" />
-</div>
+<p>The UIBackend communicates REST like over HTTP.
+The Saga participants (marked in blue) use message based communication among each other.
+This is necessary because of the saga.</p>
+<p>The T2 Store realizes the following business process:</p>
+<img alt="../_images/bpmn_sub.png" src="../_images/bpmn_sub.png" />
+<p>The activities within the <em>Saga</em> subprocess must be executed as an transaction.
+The transaction is implemented according to the <a class="reference external" href="https://microservices.io/patterns/data/saga.html">Saga Pattern</a>.</p>
+<p>The T2 Store’s services realise the activities like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Service</th>
+<th class="head">Activity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Cart</td>
+<td>add item to cart</td>
+</tr>
+<tr class="row-odd"><td>Inventory</td>
+<td>add reservation, delete reservation, commit reservation</td>
+</tr>
+<tr class="row-even"><td>Order</td>
+<td>create order, reject order</td>
+</tr>
+<tr class="row-odd"><td>Payment</td>
+<td>do payment</td>
+</tr>
+<tr class="row-even"><td>Orchestrator</td>
+<td>confirm order</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="the-saga">
-<h1>The Saga<a class="headerlink" href="#the-saga" title="Permalink to this headline">¶</a></h1>
+<h2>The Saga<a class="headerlink" href="#the-saga" title="Permalink to this headline">¶</a></h2>
 <p>The T2 Store’s saga looks like this:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="5%" />
-<col width="12%" />
-<col width="26%" />
-<col width="57%" />
+<col width="7%" />
+<col width="16%" />
+<col width="35%" />
+<col width="42%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Step</th>
 <th class="head">Service</th>
 <th class="head">Transaction</th>
-<th class="head">Compensation Transaction</th>
+<th class="head">Compensation</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -100,94 +126,170 @@ The T2 Store makes use of the <a class="reference external" href="https://eventu
 </table>
 <p>The doPayment() step is the saga’s pivot transaction.
 If this step succeeds, the saga runs to completion.</p>
-<p>The step commitReservations() is designed to be retriable.
+<p>The step commitReservations() is designed to be retrieable.
 It will succeed eventually.</p>
 <p>The same applies to the compensations rejectOrder() and cancelReservations().</p>
 <p>Every order is persisted, those that succeeded as well as those that failed.
-An order consist of some irrelevant details and the order state.
-Upon creation the order state is set to “success”.
-As all order should be persisted, the compensation of creating an order is to set its state to “failed”.</p>
+An order holds, among other details, the order state.
+Upon creation the order state is set to <em>success</em>.
+As all orders should be persisted, the compensation of creating an order is to set its state to <em>failed</em>.</p>
 <p>Currently an order cannot be cancelled after submission to the orchestrator.</p>
-<p>The inventory manages the number of available units per products.</p>
-<p>If the inventory decreases the number of available units per product after placing the order, the product may be unavailable because another user bought to many units of a product.</p>
+<p>The inventory manages the number of available units per product.</p>
+<p>If the inventory decreases the number of available units only after placing the order, the product may not be available anymore because another user bought to many units of that product.</p>
 <p>To prevent such failures the ordered units of a product are locked as soon as they are placed in the shopping cart.</p>
 <p>As result there is only the compensation to delete the reservation, but no saga step do make them.
-Alternatively one could also remove the compensation, attach a time to life to each reservation and delete reservation once the time to life runs out.
 The step commitReservations() handles served reservations.</p>
 </div>
+<div class="section" id="frameworks-dependencies-and-others">
+<h2>Frameworks, Dependencies and Others<a class="headerlink" href="#frameworks-dependencies-and-others" title="Permalink to this headline">¶</a></h2>
+<p>The T2 Store uses the following frameworks (and services).</p>
+<div class="section" id="spring-and-spring-boot">
+<h3>Spring and Spring Boot<a class="headerlink" href="#spring-and-spring-boot" title="Permalink to this headline">¶</a></h3>
+<p>It’s Spring. Deal with it.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Dependency</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Spring Boot</td>
+<td>2.4.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="eventuate-tram-and-eventuate-tram-saga">
+<h3>Eventuate Tram and Eventuate Tram Saga<a class="headerlink" href="#eventuate-tram-and-eventuate-tram-saga" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/eventuate-tram/eventuate-tram-core">Eventuate Tram</a> is a framework for Transactional Messaging and <a class="reference external" href="https://github.com/eventuate-tram/eventuate-tram-sagas">Eventuate Tram Sagas</a> is a framework for saga orchestration.
+They are both for Spring Boot.
+The T2 Store uses the Eventuate Tram Core framework with Kafka as message broker and Postgres as database.</p>
+<div class="section" id="versions">
+<h4>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Dependency</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>io.eventuate.tram.core</td>
+<td>0.29.0.RELEASE</td>
+</tr>
+<tr class="row-odd"><td>io.eventuate.tram.sagas</td>
+<td>0.18.0.RELEASE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="eventuate-cdc-service">
+<h3>Eventuate CDC Service<a class="headerlink" href="#eventuate-cdc-service" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html">Eventuate CDC Service</a> realizes the <a class="reference external" href="https://microservices.io/patterns/data/transactional-outbox.html">Transactional Outboxing Pattern</a> required by the Saga Pattern.</p>
+<p>TODO Version
+TODO i might need to rebuild this after all :x</p>
+</div>
+<div class="section" id="message-broker">
+<h3>Message Broker<a class="headerlink" href="#message-broker" title="Permalink to this headline">¶</a></h3>
+<p>The T2 Store uses Kafka and Zookeeper as message broker.
+It uses these images:</p>
+<ul class="simple">
+<li>Kafka : <a class="reference external" href="gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1">gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1</a></li>
+<li>Zookeeper : <a class="reference external" href="gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10">gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10</a></li>
+</ul>
+</div>
+<div class="section" id="saga-database">
+<h3>Saga Database<a class="headerlink" href="#saga-database" title="Permalink to this headline">¶</a></h3>
+<p>The T2 Store uses a Postgres Database for the saga data.
+It uses the Postgres image from <a class="reference external" href="https://hub.docker.com/r/eventuateio/eventuate-postgres">eventuateio</a> because it already contains the tables required for the transactional outboxing.</p>
+</div>
+<div class="section" id="domain-database">
+<h3>Domain Database<a class="headerlink" href="#domain-database" title="Permalink to this headline">¶</a></h3>
+<p>The T2 Store uses MongoDBs as databases for the domain data.
+Thus the repositories <em>cart repository</em>, <em>product repository</em> and <em>order repository</em> are MongoDBs.</p>
+</div>
+<div class="section" id="prometheus">
+<h3>Prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h3>
+<p>TODO Dependency, Version, micronaut</p>
+</div>
+<div class="section" id="open-tracing-and-jaeger">
+<h3>Open-tracing and Jaeger<a class="headerlink" href="#open-tracing-and-jaeger" title="Permalink to this headline">¶</a></h3>
+<p>TODO Dependency, Version,</p>
+<p>io.opentracing.contrib</p>
+</div>
+</div>
 <div class="section" id="the-services">
-<h1>The Services<a class="headerlink" href="#the-services" title="Permalink to this headline">¶</a></h1>
-<p>All Services are implemented as <a class="reference external" href="https://spring.io/projects/spring-boot">Spring Boot</a> Applications.</p>
-<p>They are structured like this:</p>
-<img alt="../_images/todo.png" src="../_images/todo.png" />
-<p>(a package diagramm with app, repositories, saga, exceptions)</p>
-<p>(read like this: order has an app, saga and repository package)</p>
+<h2>The Services<a class="headerlink" href="#the-services" title="Permalink to this headline">¶</a></h2>
+<p>All Services are implemented as <a class="reference external" href="https://spring.io/projects/spring-boot">Spring Boot</a> Applications.
+The services’ package structure is summarized below.</p>
+<p>Read the picture like this:
+Orchestrator has a package <em>app</em> and a packages <em>saga</em>, Order and Inventory have those packages and also a package <em>repository</em>, and so on.</p>
+<img alt="../_images/packages.jpg" src="../_images/packages.jpg" />
 <div class="section" id="app-package">
-<h2>app package<a class="headerlink" href="#app-package" title="Permalink to this headline">¶</a></h2>
+<h3>app package<a class="headerlink" href="#app-package" title="Permalink to this headline">¶</a></h3>
+<p>The app package contains the following classes, usually prefixed with the service name.
+E.g the application class of the Order Service is called <em>OrderApplication</em>, the controller is called <em>OrderController</em> and so on.</p>
 <ul class="simple">
 <li>Application : annotated with &#64;SpringBootApplication.</li>
 <li>Service : contains the logic of the service.</li>
-<li>Controller : defines http endpoint of the service.
-This class is only present, if the service needs http endpoints.</li>
+<li>Controller : defines the HTTP endpoint of the service.
+This class is only present, if the service has HTTP endpoints.</li>
 </ul>
-<div class="section" id="config-package">
-<h3>config package<a class="headerlink" href="#config-package" title="Permalink to this headline">¶</a></h3>
-<p>If the configuration is a bit complicated, it is seperated from the Application class.
-E.g. for the saga participants inventory and payment there are two differen configurations, one that configures the service to be a saga participants and one that configures the service with out the saga things.</p>
-</div>
+<p>Services with complicated configurations have an additional config package that contains the various configuration classes.</p>
 </div>
 <div class="section" id="saga-package">
-<h2>saga package<a class="headerlink" href="#saga-package" title="Permalink to this headline">¶</a></h2>
-<p>For the participants:</p>
+<h3>saga package<a class="headerlink" href="#saga-package" title="Permalink to this headline">¶</a></h3>
+<p>The saga package contains classes that are saga specific.
+For the participants:</p>
 <ul class="simple">
 <li>CommandHandler : handles incoming messages.</li>
 </ul>
 <p>For the orchestrator:</p>
 <ul class="simple">
-<li>Saga : definition of the saga</li>
+<li>Saga : definition of the saga.</li>
 </ul>
 </div>
 <div class="section" id="repository-package">
-<h2>repository package<a class="headerlink" href="#repository-package" title="Permalink to this headline">¶</a></h2>
+<h3>repository package<a class="headerlink" href="#repository-package" title="Permalink to this headline">¶</a></h3>
+<p>The repository packages contain all classes and interfaces for the domain databases.</p>
 <ul class="simple">
-<li>Item : the item to be persisted</li>
-<li>Repository : an Interface that extends spring boots Mongo Interface (TODO: link)</li>
+<li>Item : the items in the database.</li>
+<li>Repository : an Interface that extends Spring’s <a class="reference external" href="https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/repository/MongoRepository.html">MongoRepository</a> to access the database.</li>
 </ul>
 </div>
 <div class="section" id="exceptions-package">
-<h2>exceptions package<a class="headerlink" href="#exceptions-package" title="Permalink to this headline">¶</a></h2>
+<h3>exceptions package<a class="headerlink" href="#exceptions-package" title="Permalink to this headline">¶</a></h3>
 <p>Any kind of service specific exceptions can be found here.</p>
 </div>
 <div class="section" id="domain-package">
-<h2>domain package<a class="headerlink" href="#domain-package" title="Permalink to this headline">¶</a></h2>
-<p>Any classes that represent something domain specific.
-Most domain specific things are used by multiple services and thus located in the common package, however things that onyl one service needs are located here.</p>
-<p>For more Details on each service lookie here:</p>
+<h3>domain package<a class="headerlink" href="#domain-package" title="Permalink to this headline">¶</a></h3>
+<p>Any classes that represent something domain specific, but does not belong into the repository package.
+Most domain specific things are used by multiple services and thus located in the common package, however things that only one service needs are located here.</p>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<p>For more Details on each service, look at the repositories or the API documentation:</p>
 <ul class="simple">
 <li>Order service: <a class="reference external" href="https://github.com/t2-project/order">GitHub</a>, <a class="reference internal" href="../javadoc/order/packages.html#order"><span class="std std-ref">JavaDoc</span></a></li>
 <li>Inventory service: <a class="reference external" href="https://github.com/t2-project/inventory">GitHub</a>, <a class="reference internal" href="../javadoc/inventory/packages.html#inventory"><span class="std std-ref">JavaDoc</span></a></li>
-<li>TODO : others</li>
+<li>Payment service: <a class="reference external" href="https://github.com/t2-project/payment">GitHub</a>, <a class="reference internal" href="../javadoc/payment/packages.html#payment"><span class="std std-ref">JavaDoc</span></a></li>
+<li>Orchestrator service: <a class="reference external" href="https://github.com/t2-project/orchestrator">GitHub</a>, <a class="reference internal" href="../javadoc/orchestrator/packages.html#orchestrator"><span class="std std-ref">JavaDoc</span></a></li>
+<li>Cart service: <a class="reference external" href="https://github.com/t2-project/cart">GitHub</a>, <a class="reference internal" href="../javadoc/cart/packages.html#cart"><span class="std std-ref">JavaDoc</span></a></li>
+<li>Credit Institute service: <a class="reference external" href="https://github.com/t2-project/creditinstitute">GitHub</a>, <a class="reference internal" href="../javadoc/creditinstitute/packages.html#creditinstitute"><span class="std std-ref">JavaDoc</span></a></li>
+<li>UIBackend : <a class="reference external" href="https://github.com/t2-project/uibackend">GitHub</a>, <a class="reference internal" href="../javadoc/uibackend/packages.html#uibackend"><span class="std std-ref">JavaDoc</span></a></li>
+<li>UI : <a class="reference external" href="https://github.com/t2-project/ui">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Common: <a class="reference external" href="https://github.com/t2-project/common">GitHub</a>, <a class="reference internal" href="../javadoc/common/packages.html#common"><span class="std std-ref">JavaDoc</span></a></li>
+<li>E2E Test: <a class="reference external" href="https://github.com/t2-project/e2e-tests">GitHub</a>, <a class="reference internal" href="../javadoc/e2etest/packages.html#eetest"><span class="std std-ref">JavaDoc</span></a></li>
 </ul>
-<p>TOOD delete the toc.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">services:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="services/order.html">Order Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/payment.html">Payment Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/inventory.html">Inventroy Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/orchestrator.html">Orchestrator Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/uibackend.html">UI Backend Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/cart.html">Cart Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/creditinstitute.html">Credit Institute Service</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">others:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="services/common.html">Common Things</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/e2etest.html">End to end Test</a></li>
-</ul>
-</div>
 </div>
 </div>
 
@@ -211,21 +313,12 @@ Most domain specific things are used by multiple services and thus located in th
 <p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#the-saga">The Saga</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#the-services">The Services</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#app-package">app package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#saga-package">saga package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#repository-package">repository package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exceptions-package">exceptions package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#domain-package">domain package</a></li>
-</ul>
-</li>
 </ul>
 <p class="caption"><span class="caption-text">HOWTOS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html">kube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#local">local</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#loadgenerator">loadgenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html">Run on a Kubernetes Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#run-locally">Run Locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#prometheus">prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
@@ -247,7 +340,7 @@ Most domain specific things are used by multiple services and thus located in th
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../index.html" title="previous chapter">T2 Store Documentation</a></li>
-      <li>Next: <a href="services/order.html" title="next chapter">Order Service</a></li>
+      <li>Next: <a href="../guides/kube.html" title="next chapter">Run on a Kubernetes Cluster</a></li>
   </ul></li>
 </ul>
 </div>

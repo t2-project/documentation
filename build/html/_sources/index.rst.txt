@@ -3,12 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+======================
 T2 Store Documentation
 ======================
 
-TODO : T2 Store - based on teastore - general information :x
+.. toctrees must come first or they won't be displayed correctly
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: ARCHITECTURE
 
@@ -17,13 +19,14 @@ TODO : T2 Store - based on teastore - general information :x
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
    :caption: HOWTOS
 
-   guides/kube 
-
+   guides/kube
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
    :caption: JAVADOC
 
    javadoc/common/packages
@@ -35,6 +38,76 @@ TODO : T2 Store - based on teastore - general information :x
    javadoc/cart/packages
    javadoc/creditinstitute/packages
    javadoc/e2etest/packages
+
+
+Introduction
+============
+
+The T2 Store is a micro-service reference application that implements the Saga pattern.
+It is loosely base on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
+
+The T2 Store consists of seven services that realise the store’s business logic plus two additional service, one that simulates an external payment provider and one to test the store at runtime. 
+
+All services are Spring Boot Applications. 
+They are instrumented with `Prometheus <https://prometheus.io/>`__ for metrics and with `Jaeger <https://www.jaegertracing.io/>`__  for tracing.
+
+See the :ref:`architecture overview <arch>` for more information about the architecture.
+See :ref:`TODO <todo>` for more information about how to use the store.
+
+
+Requirements
+------------
+
+The T2 Store was developed to be a reference application for some master thesis.
+
+
+TODO : copy Requirements from proposal
+
+Repository Structure
+--------------------
+
+.. TODO : where do i want do put this?
+
+The T2 Store services are organized in multiple repositories under the `t2-project <https://github.com/t2-project>`__ GitHub organization.
+
+These repositories contain the core services of the T2 Store:
+
+*  `Order service <https://github.com/t2-project/order>`__
+*  `Inventory service <https://github.com/t2-project/inventory>`__
+*  `Payment service <https://github.com/t2-project/payment>`__
+*  `Orchestrator service  <https://github.com/t2-project/orchestrator>`__
+*  `Cart service  <https://github.com/t2-project/cart>`__
+*  `UIBackend service <https://github.com/t2-project/uibackend>`__
+*  `UI <https://github.com/t2-project/ui>`__
+
+These repositories contain supplemental services:
+
+*  `E2E Test <https://github.com/t2-project/e2e-test>`__
+*  `Credit Institute service  <https://github.com/t2-project/creditinstitute>`__
+
+This repository contains shared domain classes. 
+It is a dependency to all other services:
+
+*  `Common <https://github.com/t2-project/common>`__
+
+This repository contains the source for this documentation:
+
+*  `Documentation <https://github.com/t2-project/documentation>`__
+
+This repository contains the files to deploy the T2 store on kubernetes as well as other files.
+
+*  `Kube <https://github.com/t2-project/kube>`__
+
+
+Service Repository Structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Each service repositories contain the following things:
+
+*  Dockerfile : To build a docker image of the service.
+*  src/ : Actual code of the service.
+
+
 
 Indices and tables
 ------------------
