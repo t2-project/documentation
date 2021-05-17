@@ -107,14 +107,14 @@ That means you either have to manually export the versions you want to use, or y
 </div>
 <div class="section" id="step-2-set-application-properties">
 <h2>Step 2 : Set Application properties<a class="headerlink" href="#step-2-set-application-properties" title="Permalink to this headline">¶</a></h2>
-<p>Set the <a class="reference external" href="https://github.com/t2-project/order/tree/main/src/main/resources">application properties</a>
+<p>Set the <a class="reference external" href="https://github.com/t2-project/order/tree/main/src/main/resources">application properties</a>.
 They are in located at <code class="file docutils literal notranslate"><span class="pre">./src/main/resources/</span></code>
 You want to consult the service’s README on the meaning of the properties.</p>
 </div>
 <div class="section" id="step-3-build-local-dependencies">
 <h2>Step 3 : Build Local Dependencies<a class="headerlink" href="#step-3-build-local-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Most services of the T2 store depend on <a class="reference external" href="https://github.com/t2-project/common">common</a>, thus you need to build that first:</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com:t2-project/common.git</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/common.git</span>
 <span class="x">cd common/</span>
 <span class="x">mvn clean install</span>
 </pre></div>
@@ -127,19 +127,19 @@ You want to consult the service’s README on the meaning of the properties.</p>
 <h3>Step 2.1 : Exceptions for Service E2E Test<a class="headerlink" href="#step-2-1-exceptions-for-service-e2e-test" title="Permalink to this headline">¶</a></h3>
 <p>The E2E Test also depends on the saga participants <em>inventory</em>, <em>payment</em> and <em>order</em>.</p>
 <p>You must build and install them to your local maven repository as well.</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com:t2-project/payment.git</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/payment.git</span>
 <span class="x">cd payment/</span>
 <span class="x">mvn clean install</span>
 <span class="x">mvn install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
 </pre></div>
 </div>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com:t2-project/inventory.git</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/inventory.git</span>
 <span class="x">cd inventory/</span>
 <span class="x">mvn clean install</span>
 <span class="x">mvn install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
 </pre></div>
 </div>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com:t2-project/order.git</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/order.git</span>
 <span class="x">cd order/</span>
 <span class="x">mvn clean install</span>
 <span class="x">mvn install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
@@ -149,12 +149,12 @@ You want to consult the service’s README on the meaning of the properties.</p>
 </div>
 <div class="section" id="step-4-build-and-run">
 <h2>Step 4 : Build and Run<a class="headerlink" href="#step-4-build-and-run" title="Permalink to this headline">¶</a></h2>
-<p>Now you can build and run the order service:</p>
+<p>Now you can build and run the order service.</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">cd order/</span>
 <span class="x">./mvnw spring-boot:run</span>
 </pre></div>
 </div>
-<p>Or like this, in case you want to supply local application properties (remember to use the path to <em>your</em> local properties file):</p>
+<p>Or like this, in case you want to supply specific application properties (remember to use the path to <em>your</em> properties file).</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">cd order/</span>
 <span class="x">mvn clean install</span>
 <span class="x">java -jar -Dspring.config.location=./src/main/resources/application.local.properties ./target/order-0.0.1-SNAPSHOT.jar</span>
@@ -164,6 +164,91 @@ You want to consult the service’s README on the meaning of the properties.</p>
 <div class="section" id="step-5-build-docker-image">
 <h2>Step 5 : Build Docker Image<a class="headerlink" href="#step-5-build-docker-image" title="Permalink to this headline">¶</a></h2>
 <p>Each service repository contains a Dockerfile to build an image of that service.</p>
+</div>
+</div>
+<div class="section" id="run-with-test-service">
+<h1>Run with Test Service<a class="headerlink" href="#run-with-test-service" title="Permalink to this headline">¶</a></h1>
+<p>The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider stead.
+The setup is depicted below.
+With this setup Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.</p>
+<p>For more Details, see the <a class="reference external" href="https://github.com/t2-project/e2e-tests">Test Service’s README</a>.</p>
+<img alt="../_images/component_test.jpg" src="../_images/component_test.jpg" />
+<div class="section" id="step-by-step">
+<h2>Step by Step<a class="headerlink" href="#step-by-step" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Run the E2E Test Service</li>
+<li>Configure the UI Backend and the Payment Service</li>
+<li>Generate load</li>
+<li>Look at the Logs</li>
+</ol>
+</div>
+<div class="section" id="step-1-run-e2e-test-service">
+<h2>Step 1 : Run E2E Test Service<a class="headerlink" href="#step-1-run-e2e-test-service" title="Permalink to this headline">¶</a></h2>
+<p>Run the <a class="reference external" href="todo">E2E Test Service</a> as described in the previous section.</p>
+</div>
+<div class="section" id="step-2-configure-the-ui-backend-and-the-payment-service">
+<h2>Step 2 : Configure the UI Backend and the Payment Service<a class="headerlink" href="#step-2-configure-the-ui-backend-and-the-payment-service" title="Permalink to this headline">¶</a></h2>
+<p>Configure the UI Backend such that it sends confirmed orders to the Test service and configure the Payment service to send the payment requests to the Test service.</p>
+<div class="section" id="for-kubernetes">
+<h3>For Kubernetes<a class="headerlink" href="#for-kubernetes" title="Permalink to this headline">¶</a></h3>
+<p>In the UI Backend Deployment (<code class="file docutils literal notranslate"><span class="pre">uibackend.yml</span></code>):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">- name: T2_ORCHESTRATOR_URL</span>
+<span class="x">  value: http://&lt;e2e-test-host&gt;/test/</span>
+</pre></div>
+</div>
+<p>In the Payment Deployment (<code class="file docutils literal notranslate"><span class="pre">payment.yml</span></code>):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">- name: T2_PAYMENT_PROVIDER_DUMMY_URL</span>
+<span class="x">  value: http://&lt;e2e-test-host&gt;/fakepay</span>
+</pre></div>
+</div>
+<p>In both cases replace <code class="file docutils literal notranslate"><span class="pre">&lt;e2e-test-host&gt;</span></code> with the location of the Test Service.</p>
+<p>Or apply the deployment in the folder <a class="reference external" href="https://github.com/t2-project/kube/tree/main/testsetup">testsetup</a> because there the environment variables are already set as described above.</p>
+</div>
+</div>
+<div class="section" id="step-3-generate-load">
+<h2>Step 3 : Generate Load<a class="headerlink" href="#step-3-generate-load" title="Permalink to this headline">¶</a></h2>
+<p>Confer the following section on how to generate load.
+There must be some request or else there is nothing to test.
+The Test service does not generate load by itself.</p>
+</div>
+<div class="section" id="step-4-look-at-the-logs">
+<h2>Step 4 : Look at the Logs<a class="headerlink" href="#step-4-look-at-the-logs" title="Permalink to this headline">¶</a></h2>
+<p>The Test results are printed to the logs.
+This might change but for now it is the easiest solution.</p>
+<div class="section" id="id1">
+<h3>For Kubernetes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">kubectl logs &lt;e2etest-pod&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interpret-output">
+<h3>Interpret Output<a class="headerlink" href="#interpret-output" title="Permalink to this headline">¶</a></h3>
+<p>A Test Report contains these Infomation:</p>
+<ul class="simple">
+<li><strong>Expected Saga Status</strong> : If it is <code class="file docutils literal notranslate"><span class="pre">FAILURE</span></code> then the saga instance supposed to have rolled back, other wise it should have run to completion.</li>
+<li><strong>Saga Id</strong> : Id of the Saga Instance in the Saga Instance DB. Used to look the Saga Instance up.</li>
+<li><strong>Correlation Id</strong> : Id used by the test service to correlate saga request to the Orchestrator with payment request from the Payment Service.</li>
+<li><strong>Order</strong>, <strong>Inventory</strong>, <strong>Saga Instance</strong> : Displays the test Result for the Order and Inventory service and the Saga Instance.</li>
+</ul>
+<p>Report for Test that found every thing correct:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">Test Report:</span>
+<span class="x">    Expected Saga Status: FAILURE</span>
+<span class="x">    Saga Id: 000001796a7b7be5-7aef648a26a50000 Correlation Id: B42A90324D7639C1BCCC7A5E60080504</span>
+<span class="x">     Order: correct</span>
+<span class="x">     Inventory: correct</span>
+<span class="x">     Saga Instance: correct</span>
+</pre></div>
+</div>
+<p>Report for Test that found that some entries in the inventory database were not deleted correctly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">Test Report:</span>
+<span class="x">    Expected Saga Status: SUCCESS</span>
+<span class="x">    Saga Id: 000001796a7b7bde-7aef648a26a50000 Correlation Id: A79799BA296DF9035A11D1FF553D1AD2</span>
+<span class="x">     Order: correct</span>
+<span class="x">     Inventory : reservations for sessionId A79799BA296DF9035A11D1FF553D1AD2 not deleted. ==&gt; expected: &lt;false&gt; but was: &lt;true&gt;</span>
+<span class="x">     Saga Instance: correct</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="load-generation">
@@ -181,45 +266,52 @@ I recommend <a class="reference external" href="https://jmeter.apache.org/">Apac
 <li>Create or download a load profile</li>
 <li>Run the load generator</li>
 </ol>
+<p>Confer the previous sections on how to deploy the T2 Store.</p>
 <p>Confer the <a class="reference external" href="https://github.com/DescartesResearch/TeaStore/wiki/Testing-and-Benchmarking#22-jmeter">TeaStore Wiki</a> on how to install and use JMeter.
-Just use the T2 Store load profiles instead of the TeaStore once.</p>
-<p>You can download the T2 Store load profiles here : <a class="reference external" href="https://github.com/t2-project/kube/tree/main/loadprofiles">https://github.com/t2-project/kube/tree/main/loadprofiles</a></p>
+Use the T2 Store load profiles instead of those from the TeaStore.</p>
+<p>You can find the T2 Store load profiles here : <a class="reference external" href="https://github.com/t2-project/kube/tree/main/loadprofiles">https://github.com/t2-project/kube/tree/main/loadprofiles</a></p>
+<div class="section" id="the-load-profiles">
+<h3>The Load Profiles<a class="headerlink" href="#the-load-profiles" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="random-infinite-load-profile">
-<h3>Random Infinite Load Profile<a class="headerlink" href="#random-infinite-load-profile" title="Permalink to this headline">¶</a></h3>
+<h4>Random Infinite Load Profile<a class="headerlink" href="#random-infinite-load-profile" title="Permalink to this headline">¶</a></h4>
 <p>The profile <code class="file docutils literal notranslate"><span class="pre">t2-store-random_infinite.jmx</span></code> generates requests to the UI Backend as visualized below.
-Beware to set <code class="file docutils literal notranslate"><span class="pre">-Jhostname</span></code> and <code class="file docutils literal notranslate"><span class="pre">-Jport</span></code> to you UI Backend address and port.</p>
+Beware to set <code class="file docutils literal notranslate"><span class="pre">-Jhostname</span></code> and <code class="file docutils literal notranslate"><span class="pre">-Jport</span></code> to your UI Backend’s address and port.</p>
 <img alt="../_images/load_generator.jpg" src="../_images/load_generator.jpg" />
 <p>With this profile the generator adds between 1 to 5 products to the cart, and confirm the order afterwards.
 It chooses the product at random from the products in the inventory.</p>
 </div>
 <div class="section" id="fixed-single-load-profile">
-<h3>Fixed Single Load Profile<a class="headerlink" href="#fixed-single-load-profile" title="Permalink to this headline">¶</a></h3>
-<p>The profile <code class="file docutils literal notranslate"><span class="pre">t2-store-random_infinite.jmx</span></code> is similar to the previous one, but, as visualized below, it places only on order over 3 random products.</p>
+<h4>Fixed Single Load Profile<a class="headerlink" href="#fixed-single-load-profile" title="Permalink to this headline">¶</a></h4>
+<p>The profile <code class="file docutils literal notranslate"><span class="pre">t2-store-fixed_single.jmx</span></code> is similar to the previous one, but, as visualized below, it places only one order over 3 random products.</p>
 <img alt="../_images/load_generator_single.jpg" src="../_images/load_generator_single.jpg" />
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="prometheus">
-<h1>prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h1>
-<p>The T2 store can be monitored with <a class="reference external" href="https://prometheus.io/">Prometheus</a></p>
-<p>These services expose metric with help of <a class="reference external" href="https://TODO">Micrometer</a></p>
+<h1>Prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h1>
+<p>The T2 Store can be monitored with <a class="reference external" href="https://prometheus.io/">Prometheus</a></p>
+<p>The T2 Store services use <a class="reference external" href="https://micrometer.io/docs/registry/prometheus">Micrometer</a> to expose metrics endpoints for prometheus.
+At the endpoint <code class="file docutils literal notranslate"><span class="pre">/actuator/prometheus</span></code> the following metrics are exposed:</p>
 <ul class="simple">
-<li><cite>Credit Institute Service &lt;svc-creditinstitute&gt;</cite></li>
-<li>usw.</li>
+<li>http_server_requests_seconds</li>
+<li>http_server_requests_seconds_count</li>
+<li>http_server_requests_seconds_sum</li>
+<li>http_server_requests_seconds_max</li>
+<li>quantile 0.5, 0.75, 0.95, 0.98, 0.99, 0.999, 1.0 for http_server_requests_seconds</li>
 </ul>
+<p>The Monitoring is not yet configured for all Service, but it is for the <a class="reference external" href="https://github.com/t2-project/creditinstitute">Credit Institute</a>.
+This is where its the most relevant because i want to know, wether the payment provider’s service is good enough for the Payment Service.</p>
 <div class="section" id="rules-and-alerts">
 <h2>Rules and Alerts<a class="headerlink" href="#rules-and-alerts" title="Permalink to this headline">¶</a></h2>
-<p>may be found here <a class="reference external" href="https://github.com/t2-project/TODO">TODO insert link to file</a></p>
-<p>They are for the Credit Institute and represent the following SLO:</p>
-<p>TODO</p>
-<p>TODO</p>
+<p>The prometheus files can be found <a class="reference external" href="https://github.com/t2-project/kube/tree/main/prometheusfiles">here</a></p>
+<p>Confer the README located in that folder for more details on them.</p>
 </div>
 </div>
 <div class="section" id="jaeger-opentracing">
 <h1>jaeger / opentracing<a class="headerlink" href="#jaeger-opentracing" title="Permalink to this headline">¶</a></h1>
-<p>The T2 store can be traced with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a></p>
-<p>The service use <a class="reference external" href="https://TODO">Maven link??</a> to enable tracing.
-the send spans to jaeger service as set in application properties</p>
+<p>The T2 store can be traced with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a> - or rather at some point in the future it’s supposed to work.</p>
+<p>TODO</p>
 </div>
 
 
@@ -247,8 +339,9 @@ the send spans to jaeger service as set in application properties</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Run on a Kubernetes Cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#run-locally">Run Locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#load-generation">Load Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#prometheus">Prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
