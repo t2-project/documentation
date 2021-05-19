@@ -82,24 +82,21 @@ There is no guarantee that it works with others as well.</p>
 <td><code class="file docutils literal notranslate"><span class="pre">0.18.0.RELEASE</span></code></td>
 </tr>
 <tr class="row-even"><td>jaeger</td>
-<td>:file:`  `</td>
+<td><code class="file docutils literal notranslate"><span class="pre">3.2.0</span></code></td>
 </tr>
-<tr class="row-odd"><td>prometheus</td>
-<td>:file:`  `</td>
+<tr class="row-odd"><td>resilience4j</td>
+<td><code class="file docutils literal notranslate"><span class="pre">3.2.0</span></code></td>
 </tr>
-<tr class="row-even"><td>resilience4j</td>
-<td>:file:`  `</td>
+<tr class="row-even"><td>junit4</td>
+<td><code class="file docutils literal notranslate"><span class="pre">4.13.2</span></code></td>
 </tr>
-<tr class="row-odd"><td>junit4</td>
-<td>:file:`  `</td>
-</tr>
-<tr class="row-even"><td>Docker</td>
+<tr class="row-odd"><td>Docker</td>
 <td><code class="file docutils literal notranslate"><span class="pre">20.10.6</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>The <code class="file docutils literal notranslate"><span class="pre">pom.xml</span></code> files read the versions from environment variables.
-That means you either have to manually export the versions you want to use, or you source the provided <a class="reference external" href="https://github.com/t2-project/kube/blob/main/setenv.sh">setenv.sh</a> file.</p>
+That means you either have to manually export the versions into environment variables, or you source the <a class="reference external" href="https://github.com/t2-project/kube/blob/main/setenv.sh">setenv.sh</a> file.</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">wget https://raw.githubusercontent.com/t2-project/kube/main/setenv.sh</span>
 <span class="x">. ./setenv.sh</span>
 </pre></div>
@@ -184,7 +181,7 @@ With this setup Test service knows the supposed outcome of all requests and can 
 </div>
 <div class="section" id="step-1-run-e2e-test-service">
 <h2>Step 1 : Run E2E Test Service<a class="headerlink" href="#step-1-run-e2e-test-service" title="Permalink to this headline">¶</a></h2>
-<p>Run the <a class="reference external" href="todo">E2E Test Service</a> as described in the previous section.</p>
+<p>Run the <a class="reference external" href="https://github.com/t2-project/e2e-tests">E2E Test Service</a> as described in the previous section.</p>
 </div>
 <div class="section" id="step-2-configure-the-ui-backend-and-the-payment-service">
 <h2>Step 2 : Configure the UI Backend and the Payment Service<a class="headerlink" href="#step-2-configure-the-ui-backend-and-the-payment-service" title="Permalink to this headline">¶</a></h2>

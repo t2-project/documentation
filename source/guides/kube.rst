@@ -41,15 +41,14 @@ Maven                   :file:`3.6.3`
 Spring Boot             :file:`2.4.4`
 io.eventuate.tram.core  :file:`0.29.0.RELEASE`
 io.eventuate.tram.sagas :file:`0.18.0.RELEASE`
-jaeger                  :file:`  `
-prometheus              :file:`  `
-resilience4j            :file:`  `
-junit4                  :file:`  `
+jaeger                  :file:`3.2.0`
+resilience4j            :file:`3.2.0`
+junit4                  :file:`4.13.2`
 Docker                  :file:`20.10.6`
 ======================= ==========================
 
 The :file:`pom.xml` files read the versions from environment variables. 
-That means you either have to manually export the versions you want to use, or you source the provided `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
+That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
 
 .. code-block:: php
 
@@ -156,7 +155,7 @@ Step by Step
 Step 1 : Run E2E Test Service
 -----------------------------
 
-Run the `E2E Test Service <todo>`__ as described in the previous section.
+Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__ as described in the previous section.
 
 
 Step 2 : Configure the UI Backend and the Payment Service 

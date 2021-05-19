@@ -35,6 +35,7 @@ T2 Store Documentation
    javadoc/inventory/packages
    javadoc/orchestrator/packages
    javadoc/uibackend/packages
+   javadoc/ui/packages
    javadoc/cart/packages
    javadoc/creditinstitute/packages
    javadoc/e2etest/packages
@@ -46,22 +47,21 @@ Introduction
 The T2 Store is a micro-service reference application that implements the Saga pattern.
 It is loosely base on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
-The T2 Store consists of seven services that realise the store’s business logic plus two additional service, one that simulates an external payment provider and one to test the store at runtime. 
+The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one simulates an external payment provider and the other tests the store at runtime. 
 
 All services are Spring Boot Applications. 
 They are instrumented with `Prometheus <https://prometheus.io/>`__ for metrics and with `Jaeger <https://www.jaegertracing.io/>`__  for tracing.
 
 See the :ref:`architecture overview <arch>` for more information about the architecture.
-See :ref:`TODO <todo>` for more information about how to use the store.
+See the :ref:`howtos  <usage>` for more information about how to use the store.
 
 
-Requirements
-------------
+.. Requirements
+.. ------------
 
-The T2 Store was developed to be a reference application for some master thesis.
+.. The T2 Store is developed as a reference application.
 
-
-TODO : copy Requirements from proposal
+.. TODO : copy Requirements from proposal
 
 Repository Structure
 --------------------
@@ -94,24 +94,25 @@ This repository contains the source for this documentation:
 
 *  `Documentation <https://github.com/t2-project/documentation>`__
 
-This repository contains the files to deploy the T2 store on kubernetes as well as other files.
+This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else.
 
 *  `Kube <https://github.com/t2-project/kube>`__
 
 
-Service Repository Structure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. Common Repository Structure
+.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. 
+.. Each service repositories contain the following files and directories:
+.. 
+.. *  Dockerfile : To build a docker image of the service.
+.. *  README.md : The readme. Look here for more information about the service.
+.. *  src/ : Actual code of the service.
 
-Each service repositories contain the following things:
-
-*  Dockerfile : To build a docker image of the service.
-*  src/ : Actual code of the service.
 
 
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. Indices and tables
+.. ------------------
+.. 
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

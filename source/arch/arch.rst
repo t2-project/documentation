@@ -8,28 +8,29 @@ The T2 Store consists of seven services.
 
 .. image:: figs/component_total_colour.jpg
 
-The green and blue services are the core T2 Services:
+The green and blue services are the core T2 Services. The blue ones are participate in the saga, the green ones do not. 
+The white things are databases and external services.  
 
 *  **UI** : The application frontend. 
-*  **UIBackend** : API Gateway.
+*  **UIBackend** : API Gateway for the UI.
 *  **Cart** : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
-*  **Orchestrator** : Orchestrates the saga.
-*  **Order** : Persists orders to the *order repository* and marks them either as *success* or *failure*.
+*  **Orchestrator** : Manages the saga.
+*  **Order** : Persists orders to the *order repository* and marks them as either *success* or *failure*.
 *  **Payment** : Handles the store’s payment by contacting an external payment provider.
 *  **Inventory**: Manages the store's products. They are stored in the *product repository*.
 
-The UIBackend communicates REST like over HTTP.
+The UIBackend communicates over HTTP with a REST like interface.
 The Saga participants (marked in blue) use message based communication among each other. 
-This is necessary because of the saga. 
+This is necessary because of the saga pattern. 
 
 The T2 Store realizes the following business process:
 
 .. image:: figs/bpmn_sub.png
 
-The activities within the *Saga* subprocess must be executed as an transaction.
+The activities within the *Saga* subprocess must be executed as a transaction.
 The transaction is implemented according to the `Saga Pattern <https://microservices.io/patterns/data/saga.html>`__.
 
-The T2 Store's services realise the activities like this:
+The T2 Store's services realise the activities of the business process like this:
 
 ============    ========================================================
 Service	        Activity
@@ -45,7 +46,7 @@ Orchestrator    confirm order
 The Saga
 ========
 
-The T2 Store's saga looks like this: 
+The T2 Store's saga is composed of the following steps: 
 
 ====  =========  ====================  ========================
 Step	Service	  Transaction           Compensation 
@@ -70,24 +71,18 @@ Every order is persisted, those that succeeded as well as those that failed.
 An order holds, among other details, the order state.
 Upon creation the order state is set to *success*. 
 As all orders should be persisted, the compensation of creating an order is to set its state to *failed*.
-
 Currently an order cannot be cancelled after submission to the orchestrator. 
 
 The inventory manages the number of available units per product. 
-
 If the inventory decreases the number of available units only after placing the order, the product may not be available anymore because another user bought to many units of that product. 
-
-
 To prevent such failures the ordered units of a product are locked as soon as they are placed in the shopping cart.
-
-As result there is only the compensation to delete the reservation, but no saga step do make them. 
-The step commitReservations() handles served reservations. 
+As there is now no action to perform on the inventory before the pivot transaction (do payment), there is only the compensation that deletes the reservation (in case the saga rolls back) or the step commitReservations() that handles served reservations. 
 
 
 Frameworks, Dependencies and Others
 ===================================
 
-The T2 Store uses the following frameworks (and services).
+The T2 Store uses the following frameworks (and services):
 
 Spring and Spring Boot
 ----------------------
@@ -105,8 +100,8 @@ Eventuate Tram and Eventuate Tram Saga
 --------------------------------------
 
 `Eventuate Tram <https://github.com/eventuate-tram/eventuate-tram-core>`__ is a framework for Transactional Messaging and `Eventuate Tram Sagas <https://github.com/eventuate-tram/eventuate-tram-sagas>`__ is a framework for saga orchestration.
-They are both for Spring Boot. 
-The T2 Store uses the Eventuate Tram Core framework with Kafka as message broker and Postgres as database.
+They are both work on top of Spring / Spring Boot. 
+The T2 Store uses the Eventuate Tram Core framework with Kafka as the message broker and Postgres as the database.
 
 Versions
 ^^^^^^^^
@@ -123,18 +118,21 @@ Eventuate CDC Service
 
 The `Eventuate CDC Service <https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html>`__ realizes the `Transactional Outboxing Pattern <https://microservices.io/patterns/data/transactional-outbox.html>`__ required by the Saga Pattern.
 
-TODO Version 
-TODO i might need to rebuild this after all :x
 
+================================== ==============
+Dependency                         Version
+================================== ==============
+eventuateio/eventuate-cdc-service  latest
+================================== ==============
 
 Message Broker
 --------------
 
-The T2 Store uses Kafka and Zookeeper as message broker.
+The T2 Store uses Kafka as message broker.
 It uses these images:
 
-*  Kafka : `<gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1>`__
-*  Zookeeper : `<gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10>`__
+*  Kafka : `gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1 <http://gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1>`__
+*  Zookeeper : `gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10 <http://gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10>`__
 
 
 Saga Database
@@ -152,28 +150,34 @@ Thus the repositories *cart repository*, *product repository* and *order reposit
 
 Prometheus
 ----------
-TODO Dependency, Version, micronaut
+TODO Dependency, Version, ....
 
 Open-tracing and Jaeger
 -----------------------
-TODO Dependency, Version, 
+TODO Dependency, Version, ....
 
-io.opentracing.contrib
 
 The Services
 ============
 
 All Services are implemented as `Spring Boot <https://spring.io/projects/spring-boot>`__ Applications.
-The services' package structure is summarized below. 
+This is the services' general package structure:
 
-Read the picture like this: 
-Orchestrator has a package *app* and a packages *saga*, Order and Inventory have those packages and also a package *repository*, and so on.
+*  :file:`de.unistuttgart.t2.<service-name>`
+*  :file:`de.unistuttgart.t2.<service-name>.saga`
+*  :file:`de.unistuttgart.t2.<service-name>.repository`
+*  :file:`de.unistuttgart.t2.<service-name>.exception`
+*  :file:`de.unistuttgart.t2.<service-name>.domain`
+
+Each service has a subset of those packages, as visualized in the diagram below.
+The diagram reads as follows: 
+Orchestrator has the *<service-name>* package and a packages *saga*, Order and Inventory have those packages and also a package *repository*, and so on.
 
 .. image:: figs/packages.jpg
 
 
-app package
------------
+de.unistuttgart.t2.<service-name>
+---------------------------------
 
 The app package contains the following classes, usually prefixed with the service name.
 E.g the application class of the Order Service is called *OrderApplication*, the controller is called *OrderController* and so on.
@@ -185,8 +189,8 @@ E.g the application class of the Order Service is called *OrderApplication*, the
 
 Services with complicated configurations have an additional config package that contains the various configuration classes.
 
-saga package
-------------
+de.unistuttgart.t2.<service-name>.saga
+------------------------------------------------
 
 The saga package contains classes that are saga specific.
 For the participants: 
@@ -197,21 +201,21 @@ For the orchestrator:
 
 * Saga : definition of the saga.
 
-repository package
-------------------
+de.unistuttgart.t2.<service-name>.repository
+-------------------------------------------------
 
 The repository packages contain all classes and interfaces for the domain databases.
 
 * Item : the items in the database.
 * Repository : an Interface that extends Spring's `MongoRepository <https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/repository/MongoRepository.html>`__ to access the database.
 
-exceptions package
-------------------
+de.unistuttgart.t2.<service-name>.exceptions
+------------------------------------------------------
 
 Any kind of service specific exceptions can be found here.
 
-domain package
---------------
+de.unistuttgart.t2.<service-name>.domain
+------------------------------------------
 
 Any classes that represent something domain specific, but does not belong into the repository package. 
 Most domain specific things are used by multiple services and thus located in the common package, however things that only one service needs are located here.

@@ -45,16 +45,11 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The T2 Store is a micro-service reference application that implements the Saga pattern.
 It is loosely base on the <a class="reference external" href="https://github.com/DescartesResearch/TeaStore">TeaStore Application</a>.</p>
-<p>The T2 Store consists of seven services that realise the store’s business logic plus two additional service, one that simulates an external payment provider and one to test the store at runtime.</p>
+<p>The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one simulates an external payment provider and the other tests the store at runtime.</p>
 <p>All services are Spring Boot Applications.
 They are instrumented with <a class="reference external" href="https://prometheus.io/">Prometheus</a> for metrics and with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a>  for tracing.</p>
 <p>See the <a class="reference internal" href="arch/arch.html#arch"><span class="std std-ref">architecture overview</span></a> for more information about the architecture.
-See <span class="xref std std-ref">TODO</span> for more information about how to use the store.</p>
-<div class="section" id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
-<p>The T2 Store was developed to be a reference application for some master thesis.</p>
-<p>TODO : copy Requirements from proposal</p>
-</div>
+See the <a class="reference internal" href="guides/kube.html#usage"><span class="std std-ref">howtos</span></a> for more information about how to use the store.</p>
 <div class="section" id="repository-structure">
 <h3>Repository Structure<a class="headerlink" href="#repository-structure" title="Permalink to this headline">¶</a></h3>
 <p>The T2 Store services are organized in multiple repositories under the <a class="reference external" href="https://github.com/t2-project">t2-project</a> GitHub organization.</p>
@@ -82,25 +77,9 @@ It is a dependency to all other services:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/t2-project/documentation">Documentation</a></li>
 </ul>
-<p>This repository contains the files to deploy the T2 store on kubernetes as well as other files.</p>
+<p>This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/t2-project/kube">Kube</a></li>
-</ul>
-<div class="section" id="service-repository-structure">
-<h4>Service Repository Structure<a class="headerlink" href="#service-repository-structure" title="Permalink to this headline">¶</a></h4>
-<p>Each service repositories contain the following things:</p>
-<ul class="simple">
-<li>Dockerfile : To build a docker image of the service.</li>
-<li>src/ : Actual code of the service.</li>
-</ul>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 </div>
@@ -144,6 +123,7 @@ It is a dependency to all other services:</p>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/inventory/packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javadoc/ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="javadoc/e2etest/packages.html">e2etest</a></li>
