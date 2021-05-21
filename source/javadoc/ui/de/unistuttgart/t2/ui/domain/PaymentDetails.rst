@@ -1,7 +1,7 @@
 PaymentDetails
 ==============
 
-.. java:package:: de.unistuttgart.t2.ui.webui.domain
+.. java:package:: de.unistuttgart.t2.ui.domain
    :noindex:
 
 .. java:type:: public class PaymentDetails

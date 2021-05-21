@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../search.html" />
-    <link rel="next" title="OrderTest" href="OrderTest.html" />
+    <link rel="next" title="de.unistuttgart.t2.order.repository" href="repository/package-index.html" />
     <link rel="prev" title="OrderApplication" href="OrderApplication.html" />
    
   <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
@@ -57,20 +57,17 @@ public class <code class="descname">OrderService</code><a class="headerlink" hre
 <dl class="method">
 <dt id="de.unistuttgart.t2.order.OrderService.createOrder(String)">
 public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">createOrder</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.order.OrderService.createOrder(String)" title="Permalink to this definition">¶</a></dt>
-<dd><p>create a new Order and save it to the repository. the status of the new order is <a class="reference internal" href="repository/OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS" title="de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS"><code class="xref java java-ref docutils literal notranslate"><span class="pre">OrderStatus.SUCCESS</span></code></a>.</p>
+<dd><p>create a new Order and save it to the repository. the status of the new order is <a class="reference internal" href="repository/OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS" title="de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS"><code class="xref java java-ref docutils literal notranslate"><span class="pre">SUCCESS</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sessionId</strong> – <ul>
-<li></li>
-</ul>
-</li>
+<li><strong>sessionId</strong> – id of session to create order for</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Id of created order</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">orderId of created order</p>
 </td>
 </tr>
 </tbody>
@@ -83,16 +80,13 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <dl class="method">
 <dt id="de.unistuttgart.t2.order.OrderService.rejectOrder(String)">
 public void <code class="descname">rejectOrder</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> orderId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.order.OrderService.rejectOrder(String)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the state of an order to <a class="reference internal" href="repository/OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.FAILURE" title="de.unistuttgart.t2.order.repository.OrderStatus.FAILURE"><code class="xref java java-ref docutils literal notranslate"><span class="pre">OrderStatus.FAILURE</span></code></a>. If the given id does not match any order nothing happens. This operation is idempotent, as a order may never change from “failure” to any other status.</p>
+<dd><p>Set the state of an order to <a class="reference internal" href="repository/OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.FAILURE" title="de.unistuttgart.t2.order.repository.OrderStatus.FAILURE"><code class="xref java java-ref docutils literal notranslate"><span class="pre">FAILURE</span></code></a>. This operation is idempotent, as a order may never change from <a class="reference internal" href="repository/OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.FAILURE" title="de.unistuttgart.t2.order.repository.OrderStatus.FAILURE"><code class="xref java java-ref docutils literal notranslate"><span class="pre">FAILURE</span></code></a> to any other status.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>orderId</strong> – <ul>
-<li>id of order that is to be rejected</li>
-</ul>
-</li>
+<li><strong>orderId</strong> – id of order that is to be rejected</li>
 </ul>
 </td>
 </tr>
@@ -136,7 +130,7 @@ public void <code class="descname">rejectOrder</code><span class="sig-paren">(</
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-locally">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
@@ -147,6 +141,7 @@ public void <code class="descname">rejectOrder</code><span class="sig-paren">(</
 <li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../e2etest/packages.html">e2etest</a></li>
@@ -159,7 +154,7 @@ public void <code class="descname">rejectOrder</code><span class="sig-paren">(</
   <li><a href="../../../../packages.html">order</a><ul>
   <li><a href="package-index.html">de.unistuttgart.t2.order</a><ul>
       <li>Previous: <a href="OrderApplication.html" title="previous chapter">OrderApplication</a></li>
-      <li>Next: <a href="OrderTest.html" title="next chapter">OrderTest</a></li>
+      <li>Next: <a href="repository/package-index.html" title="next chapter">de.unistuttgart.t2.order.repository</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

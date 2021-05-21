@@ -10,7 +10,9 @@ Reservation
 
 .. java:type:: public class Reservation
 
-   A Reservation of a certain number of units. Reservations have a \ ``creationDate``\  such that they might be killed after they exceeded their time to life.
+   A Reservation of a certain number of units.
+
+   Reservations have a \ ``creationDate``\  such that they might be killed after they exceeded their time to life.
 
    :author: maumau
 
@@ -63,4 +65,10 @@ setUnits
    set number of units and also renew the creation date.
 
    :param units: new number of reserved units
+
+toString
+^^^^^^^^
+
+.. java:method:: @Override public String toString()
+   :outertype: Reservation
 

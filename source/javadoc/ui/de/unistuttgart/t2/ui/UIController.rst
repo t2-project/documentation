@@ -48,14 +48,14 @@
 
 .. java:import:: de.unistuttgart.t2.common Product
 
-.. java:import:: de.unistuttgart.t2.ui.webui.domain ItemToAdd
+.. java:import:: de.unistuttgart.t2.ui.domain ItemToAdd
 
-.. java:import:: de.unistuttgart.t2.ui.webui.domain PaymentDetails
+.. java:import:: de.unistuttgart.t2.ui.domain PaymentDetails
 
 UIController
 ============
 
-.. java:package:: de.unistuttgart.t2.ui.webui.app
+.. java:package:: de.unistuttgart.t2.ui
    :noindex:
 
 .. java:type:: @Controller public class UIController

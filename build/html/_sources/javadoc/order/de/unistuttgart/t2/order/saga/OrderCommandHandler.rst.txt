@@ -36,7 +36,7 @@ OrderCommandHandler
 
    handles messages for the order service. listens to the \ ``order``\  queue. creates a new order upon receiving a \ :java:ref:`ActionCommand <de.unistuttgart.t2.common.saga.commands.ActionCommand>`\  or rejects an existing order upon receiving a \ :java:ref:`CompensationCommand <de.unistuttgart.t2.common.saga.commands.CompensationCommand>`\ .
 
-   :author: sarah sophie stieß
+   :author: stiesssh
 
 Methods
 -------
@@ -54,7 +54,7 @@ createOrder
 
    create a new order.
 
-   :param cm: - the command message
+   :param cm: the command message
    :return: the reply message. if successful it contains the id of the created order.
 
 rejectOrder
@@ -65,6 +65,6 @@ rejectOrder
 
    reject an existing order.
 
-   :param cm: - the command message
+   :param cm: the command message
    :return: the reply message
 

@@ -14,9 +14,9 @@
 
 .. java:import:: org.springframework.web.bind.annotation RestController
 
-.. java:import:: de.unistuttgart.t2.common.saga SagaData
+.. java:import:: de.unistuttgart.t2.common SagaRequest
 
-.. java:import:: de.unistuttgart.t2.common.saga SagaRequest
+.. java:import:: de.unistuttgart.t2.common.saga SagaData
 
 OrchestratorController
 ======================

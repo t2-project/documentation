@@ -24,7 +24,7 @@ OrderItem
 .. java:constructor:: public OrderItem()
    :outertype: OrderItem
 
-   used (and required) by repository template
+   used (and required) by spring framework.
 
 OrderItem
 ^^^^^^^^^
@@ -32,7 +32,7 @@ OrderItem
 .. java:constructor:: public OrderItem(String sessionId)
    :outertype: OrderItem
 
-   create a new order there is no \ ``orderId``\  because it gets set by repository. \ ``status``\  of a new order is always \ :java:ref:`OrderStatus.SUCCESS`\ , \ ``timestamp``\  is always the current time.
+   create a new order. there is no \ ``orderId``\  because it gets set by repository. \ ``status``\  of a new order is always \ :java:ref:`OrderStatus.SUCCESS`\ , \ ``timestamp``\  is always the current time.
 
    :param sessionId:
 

@@ -36,29 +36,32 @@ TimeoutCollector
 
 .. java:type:: @Component public class TimeoutCollector
 
-   Periodically checks all reservations and deletes those whose time to life has been exceeded. (apparently there is a mongo native attach on expiry date to documents, but i didn't find anything on whether this also works with the spring repository interface. thus the manual deletion.)
+   Periodically checks all reservations and deletes those whose time to life has been exceeded.
+
+   (apparently there is a mongo native attach on expiry date to documents, but i didn't find anything on whether this also works with the spring repository interface. thus the manual deletion.)
 
    :author: maumau
 
 Fields
 ------
-TTL
-^^^
-
-.. java:field:: @Value  long TTL
-   :outertype: TimeoutCollector
-
 repository
 ^^^^^^^^^^
 
 .. java:field:: @Autowired  ProductRepository repository
    :outertype: TimeoutCollector
 
-taskRate
-^^^^^^^^
+Constructors
+------------
+TimeoutCollector
+^^^^^^^^^^^^^^^^
 
-.. java:field:: @Value  int taskRate
+.. java:constructor:: @Autowired public TimeoutCollector(long TTL, int taskRate)
    :outertype: TimeoutCollector
+
+   Create collector.
+
+   :param TTL: the cart entries' time to live in seconds
+   :param taskRate: rate at which the collector checks the repo in milliseconds
 
 Methods
 -------
@@ -68,5 +71,7 @@ schedulePeriodically
 .. java:method:: @PostConstruct public void schedulePeriodically()
    :outertype: TimeoutCollector
 
-   schedule the task to check reservations and delete them if necessary. if either the TTL if reservations, or the taskRate is 0, no task will be scheduled.
+   Schedule the task to check reservations and delete them if necessary.
+
+   If either the TTL or the taskRate is 0, no task will be scheduled.
 

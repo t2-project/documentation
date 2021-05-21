@@ -8,6 +8,4 @@ de.unistuttgart.t2.order
 
    OrderApplication
    OrderService
-   OrderTest
-   TestContext
 

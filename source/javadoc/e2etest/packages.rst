@@ -1,5 +1,3 @@
-.. _eetest:
-
 e2etest
 =======
 

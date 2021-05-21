@@ -28,13 +28,13 @@
 
 .. java:import:: org.springframework.transaction.annotation Transactional
 
-TimeoutCollector.RevercationCheckAndDeleteTask
+TimeoutCollector.RecervationCheckAndDeleteTask
 ==============================================
 
 .. java:package:: de.unistuttgart.t2.inventory.repository
    :noindex:
 
-.. java:type::  class RevercationCheckAndDeleteTask implements Runnable
+.. java:type:: protected class RecervationCheckAndDeleteTask implements Runnable
    :outertype: TimeoutCollector
 
    The Task that does the actual checking and deleting of reservations.
@@ -47,5 +47,5 @@ run
 ^^^
 
 .. java:method:: @Override public void run()
-   :outertype: TimeoutCollector.RevercationCheckAndDeleteTask
+   :outertype: TimeoutCollector.RecervationCheckAndDeleteTask
 

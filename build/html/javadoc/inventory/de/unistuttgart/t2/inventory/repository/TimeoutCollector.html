@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../../../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
-    <link rel="next" title="TimeoutCollector.RevercationCheckAndDeleteTask" href="TimeoutCollector-RevercationCheckAndDeleteTask.html" />
+    <link rel="next" title="TimeoutCollector.RecervationCheckAndDeleteTask" href="TimeoutCollector-RecervationCheckAndDeleteTask.html" />
     <link rel="prev" title="Reservation" href="Reservation.html" />
    
   <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
@@ -39,7 +39,8 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector">
 public class <code class="descname">TimeoutCollector</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Periodically checks all reservations and deletes those whose time to life has been exceeded. (apparently there is a mongo native attach on expiry date to documents, but i didn’t find anything on whether this also works with the spring repository interface. thus the manual deletion.)</p>
+<dd><p>Periodically checks all reservations and deletes those whose time to life has been exceeded.</p>
+<p>(apparently there is a mongo native attach on expiry date to documents, but i didn’t find anything on whether this also works with the spring repository interface. thus the manual deletion.)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -52,14 +53,6 @@ public class <code class="descname">TimeoutCollector</code><a class="headerlink"
 
 <div class="section" id="fields">
 <h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="ttl">
-<h3>TTL<a class="headerlink" href="#ttl" title="Permalink to this headline">¶</a></h3>
-<dl class="field">
-<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.TTL">
- long <code class="descname">TTL</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.TTL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
 <div class="section" id="repository">
 <h3>repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h3>
 <dl class="field">
@@ -68,12 +61,28 @@ public class <code class="descname">TimeoutCollector</code><a class="headerlink"
 <dd></dd></dl>
 
 </div>
-<div class="section" id="taskrate">
-<h3>taskRate<a class="headerlink" href="#taskrate" title="Permalink to this headline">¶</a></h3>
-<dl class="field">
-<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.taskRate">
- int <code class="descname">taskRate</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.taskRate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</div>
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>TimeoutCollector<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int)">
+public <code class="descname">TimeoutCollector</code><span class="sig-paren">(</span>long<em> TTL</em>, int<em> taskRate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create collector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>TTL</strong> – the cart entries’ time to live in seconds</li>
+<li><strong>taskRate</strong> – rate at which the collector checks the repo in milliseconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -84,7 +93,8 @@ public class <code class="descname">TimeoutCollector</code><a class="headerlink"
 <dl class="method">
 <dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.schedulePeriodically()">
 public void <code class="descname">schedulePeriodically</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.schedulePeriodically()" title="Permalink to this definition">¶</a></dt>
-<dd><p>schedule the task to check reservations and delete them if necessary. if either the TTL if reservations, or the taskRate is 0, no task will be scheduled.</p>
+<dd><p>Schedule the task to check reservations and delete them if necessary.</p>
+<p>If either the TTL or the taskRate is 0, no task will be scheduled.</p>
 </dd></dl>
 
 </div>
@@ -118,7 +128,7 @@ public void <code class="descname">schedulePeriodically</code><span class="sig-p
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-locally">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
@@ -129,6 +139,7 @@ public void <code class="descname">schedulePeriodically</code><span class="sig-p
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../../packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../e2etest/packages.html">e2etest</a></li>
@@ -141,7 +152,7 @@ public void <code class="descname">schedulePeriodically</code><span class="sig-p
   <li><a href="../../../../../packages.html">inventory</a><ul>
   <li><a href="package-index.html">de.unistuttgart.t2.inventory.repository</a><ul>
       <li>Previous: <a href="Reservation.html" title="previous chapter">Reservation</a></li>
-      <li>Next: <a href="TimeoutCollector-RevercationCheckAndDeleteTask.html" title="next chapter">TimeoutCollector.RevercationCheckAndDeleteTask</a></li>
+      <li>Next: <a href="TimeoutCollector-RecervationCheckAndDeleteTask.html" title="next chapter">TimeoutCollector.RecervationCheckAndDeleteTask</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

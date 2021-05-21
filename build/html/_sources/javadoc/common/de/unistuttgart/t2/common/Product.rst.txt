@@ -18,7 +18,7 @@ Product
 
    * reservations : reserved number of units of that product
    * inventory : available number of units in the inventory
-   * cart : number of units in the cart
+   * cart : number of units of the product in the cart
 
    Used to communicate from UI to UIBackend to inventory.
 

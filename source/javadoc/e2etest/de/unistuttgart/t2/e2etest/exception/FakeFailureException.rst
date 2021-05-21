@@ -10,3 +10,11 @@ FakeFailureException
 
    :author: maumau
 
+Constructors
+------------
+FakeFailureException
+^^^^^^^^^^^^^^^^^^^^
+
+.. java:constructor:: public FakeFailureException(String message)
+   :outertype: FakeFailureException
+

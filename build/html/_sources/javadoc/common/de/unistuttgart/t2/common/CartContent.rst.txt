@@ -6,6 +6,8 @@
 
 .. java:import:: com.fasterxml.jackson.annotation JsonCreator
 
+.. java:import:: com.fasterxml.jackson.annotation JsonIgnore
+
 .. java:import:: com.fasterxml.jackson.annotation JsonProperty
 
 CartContent
@@ -49,7 +51,7 @@ getContent
 getProductIds
 ^^^^^^^^^^^^^
 
-.. java:method:: public Collection<String> getProductIds()
+.. java:method:: @JsonIgnore public Collection<String> getProductIds()
    :outertype: CartContent
 
    Get the productIds of the products in this cart.
@@ -59,7 +61,7 @@ getProductIds
 getUnits
 ^^^^^^^^
 
-.. java:method:: public Integer getUnits(String productId)
+.. java:method:: @JsonIgnore public Integer getUnits(String productId)
    :outertype: CartContent
 
    Get the number of units of a product with the given id or zero if the product is not in the cart.

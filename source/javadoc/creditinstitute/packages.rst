@@ -1,5 +1,3 @@
-.. _creditinstitute:
-
 creditinstitute
 ===============
 

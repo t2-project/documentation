@@ -4,10 +4,6 @@
 
 .. java:import:: org.springframework.beans.factory.annotation Autowired
 
-.. java:import:: org.springframework.transaction.annotation Isolation
-
-.. java:import:: org.springframework.transaction.annotation Transactional
-
 .. java:import:: de.unistuttgart.t2.inventory.repository InventoryItem
 
 .. java:import:: de.unistuttgart.t2.inventory.repository ProductRepository
@@ -18,9 +14,9 @@ InventoryService
 .. java:package:: de.unistuttgart.t2.inventory
    :noindex:
 
-.. java:type:: @Transactional public class InventoryService
+.. java:type:: public class InventoryService
 
-   Interactions with the product repository that involve reservations.
+   Interactions with the product repository that involve reservations. too many failed attempts to fix the transaction thing later. whatever. just don't replicate the inventory. Once i start replicating the inventory, the 'synchronized' won't help anymore though.
 
    :author: maumau
 

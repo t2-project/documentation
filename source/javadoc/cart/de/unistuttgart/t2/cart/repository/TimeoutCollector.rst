@@ -36,35 +36,28 @@ TimeoutCollector
 
    :author: maumau
 
-Fields
-------
-TTL
-^^^
+Constructors
+------------
+TimeoutCollector
+^^^^^^^^^^^^^^^^
 
-.. java:field:: @Value protected long TTL
+.. java:constructor:: @Autowired public TimeoutCollector(long TTL, int taskRate)
    :outertype: TimeoutCollector
 
-repository
-^^^^^^^^^^
+   Create collector.
 
-.. java:field:: @Autowired  CartRepository repository
-   :outertype: TimeoutCollector
-
-taskRate
-^^^^^^^^
-
-.. java:field:: @Value protected int taskRate
-   :outertype: TimeoutCollector
+   :param TTL: the cart entries' time to live in seconds
+   :param taskRate: rate at which the collector checks the repo in milliseconds
 
 Methods
 -------
-schedulePeriodically
-^^^^^^^^^^^^^^^^^^^^
+scheduleTask
+^^^^^^^^^^^^
 
-.. java:method:: @PostConstruct public void schedulePeriodically()
+.. java:method:: @PostConstruct public void scheduleTask()
    :outertype: TimeoutCollector
 
    Schedule the task to check cart contents and delete them if necessary.
 
-   If either the TTL or the taskRate is 0, no task will be scheduled.
+   If the taskRate is 0, no task will be scheduled.
 

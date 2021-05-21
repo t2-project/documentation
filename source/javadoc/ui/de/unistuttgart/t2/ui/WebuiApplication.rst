@@ -13,7 +13,7 @@
 WebuiApplication
 ================
 
-.. java:package:: de.unistuttgart.t2.ui.webui.app
+.. java:package:: de.unistuttgart.t2.ui
    :noindex:
 
 .. java:type:: @SpringBootApplication public class WebuiApplication extends SpringBootServletInitializer

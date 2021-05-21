@@ -62,6 +62,12 @@ getTotal
 .. java:method:: public double getTotal()
    :outertype: SagaRequest
 
+setChecksum
+^^^^^^^^^^^
+
+.. java:method:: public void setChecksum(String checksum)
+   :outertype: SagaRequest
+
 toString
 ^^^^^^^^
 

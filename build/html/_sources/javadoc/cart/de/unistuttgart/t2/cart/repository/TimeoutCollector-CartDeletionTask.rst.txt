@@ -28,7 +28,7 @@ TimeoutCollector.CartDeletionTask
 .. java:package:: de.unistuttgart.t2.cart.repository
    :noindex:
 
-.. java:type::  class CartDeletionTask implements Runnable
+.. java:type:: protected class CartDeletionTask implements Runnable
    :outertype: TimeoutCollector
 
    The Task that does the actual checking and deleting.

@@ -32,7 +32,7 @@
 
 .. java:import:: de.unistuttgart.t2.common ReservationRequest
 
-.. java:import:: de.unistuttgart.t2.common.saga SagaRequest
+.. java:import:: de.unistuttgart.t2.common SagaRequest
 
 .. java:import:: de.unistuttgart.t2.uibackend.exceptions CartInteractionFailedException
 

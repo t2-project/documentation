@@ -55,8 +55,8 @@ public class <code class="descname">UIBackendController</code><a class="headerli
 <div class="section" id="additemstocart">
 <h3>addItemsToCart<a class="headerlink" href="#additemstocart" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.addItemsToCart(HttpSession, CartContent)">
-public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">addItemsToCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/javax/servlet/http/HttpSession.html" title="javax.servlet.http.HttpSession">HttpSession</a><em> session</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/CartContent.html#de.unistuttgart.t2.common.CartContent" title="de.unistuttgart.t2.common.CartContent">CartContent</a><em> products</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.addItemsToCart(HttpSession, CartContent)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.addItemsToCart(String, CartContent)">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">addItemsToCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/CartContent.html#de.unistuttgart.t2.common.CartContent" title="de.unistuttgart.t2.common.CartContent">CartContent</a><em> products</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.addItemsToCart(String, CartContent)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add units of the given products to the cart.</p>
 <p>Only add the products to the cart if the requested number of unit is available. To achieve this, at first a reservations are placed in the inventory and only after the reservations are succeeded be are the products added to the cart.</p>
 <p>Replies as long as at least on product is added to the cart.</p>
@@ -65,7 +65,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>session</strong> – http session of user</li>
+<li><strong>sessionId</strong> – sessionId of user</li>
 <li><strong>products</strong> – products to be added, including the number of units thereof</li>
 </ul>
 </td>
@@ -86,15 +86,15 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <div class="section" id="confirmorder">
 <h3>confirmOrder<a class="headerlink" href="#confirmorder" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.confirmOrder(HttpSession, OrderRequest)">
-public void <code class="descname">confirmOrder</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/javax/servlet/http/HttpSession.html" title="javax.servlet.http.HttpSession">HttpSession</a><em> session</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/OrderRequest.html#de.unistuttgart.t2.common.OrderRequest" title="de.unistuttgart.t2.common.OrderRequest">OrderRequest</a><em> request</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.confirmOrder(HttpSession, OrderRequest)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.confirmOrder(String, OrderRequest)">
+public void <code class="descname">confirmOrder</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/OrderRequest.html#de.unistuttgart.t2.common.OrderRequest" title="de.unistuttgart.t2.common.OrderRequest">OrderRequest</a><em> request</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.confirmOrder(String, OrderRequest)" title="Permalink to this definition">¶</a></dt>
 <dd><p>place an order, i.e. start a transaction. upon successfully placing the order the cart is cleared and the session gets invalidated. if the user wants to place another order he needs a new http session.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>session</strong> – http session of user</li>
+<li><strong>sessionId</strong> – sessionId of user</li>
 <li><strong>request</strong> – payment details</li>
 </ul>
 </td>
@@ -112,15 +112,15 @@ public void <code class="descname">confirmOrder</code><span class="sig-paren">(<
 <div class="section" id="deleteitemsfromcart">
 <h3>deleteItemsFromCart<a class="headerlink" href="#deleteitemsfromcart" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.deleteItemsFromCart(HttpSession, CartContent)">
-public void <code class="descname">deleteItemsFromCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/javax/servlet/http/HttpSession.html" title="javax.servlet.http.HttpSession">HttpSession</a><em> session</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/CartContent.html#de.unistuttgart.t2.common.CartContent" title="de.unistuttgart.t2.common.CartContent">CartContent</a><em> products</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.deleteItemsFromCart(HttpSession, CartContent)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.deleteItemsFromCart(String, CartContent)">
+public void <code class="descname">deleteItemsFromCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em>, <a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/CartContent.html#de.unistuttgart.t2.common.CartContent" title="de.unistuttgart.t2.common.CartContent">CartContent</a><em> products</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.deleteItemsFromCart(String, CartContent)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a product from the cart.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>session</strong> – http session of user</li>
+<li><strong>sessionId</strong> – sessionId of user</li>
 <li><strong>products</strong> – products products to be deleted, including the number of units</li>
 </ul>
 </td>
@@ -133,14 +133,20 @@ public void <code class="descname">deleteItemsFromCart</code><span class="sig-pa
 <div class="section" id="getallproducts">
 <h3>getAllProducts<a class="headerlink" href="#getallproducts" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.getAllProducts()">
-public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getAllProducts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.getAllProducts()" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a list of all products in the inventory.</p>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.getAllProducts(HttpSession)">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getAllProducts</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/javax/servlet/http/HttpSession.html" title="javax.servlet.http.HttpSession">HttpSession</a><em> session</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.getAllProducts(HttpSession)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all products in the inventory. The session exists such that i can get a cookie even though i am not using the ui (frontend), e.g. as the load generator does.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list of all product in the inventory.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>session</strong> – http session</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a list of all product in the inventory.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -150,15 +156,15 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <div class="section" id="getcart">
 <h3>getCart<a class="headerlink" href="#getcart" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.getCart(HttpSession)">
-public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/javax/servlet/http/HttpSession.html" title="javax.servlet.http.HttpSession">HttpSession</a><em> session</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.getCart(HttpSession)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.getCart(String)">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="../../../../../common/de/unistuttgart/t2/common/Product.html#de.unistuttgart.t2.common.Product" title="de.unistuttgart.t2.common.Product">Product</a>&gt; <code class="descname">getCart</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.getCart(String)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of all products in users cart.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>session</strong> – http session of user</li>
+<li><strong>sessionId</strong> – sessionId of user</li>
 </ul>
 </td>
 </tr>
@@ -170,11 +176,11 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 </dd></dl>
 
 </div>
-<div class="section" id="greetings">
-<h3>greetings<a class="headerlink" href="#greetings" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="greetingswithheaders">
+<h3>greetingsWithHeaders<a class="headerlink" href="#greetingswithheaders" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.uibackend.UIBackendController.greetings()">
-public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">greetings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.greetings()" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.uibackend.UIBackendController.greetingsWithHeaders(String)">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">greetingsWithHeaders</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.uibackend.UIBackendController.greetingsWithHeaders(String)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Greets in a friendly manner.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -286,7 +292,7 @@ public ResponseEntity&lt;<a class="reference external" href="http://docs.oracle.
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-locally">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
@@ -297,6 +303,7 @@ public ResponseEntity&lt;<a class="reference external" href="http://docs.oracle.
 <li class="toctree-l1"><a class="reference internal" href="../../../../../inventory/packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../e2etest/packages.html">e2etest</a></li>

@@ -8,6 +8,8 @@
 
 .. java:import:: org.springframework.beans.factory.annotation Autowired
 
+.. java:import:: org.springframework.http HttpHeaders
+
 .. java:import:: org.springframework.http HttpStatus
 
 .. java:import:: org.springframework.http ResponseEntity
@@ -19,6 +21,8 @@
 .. java:import:: org.springframework.web.bind.annotation PostMapping
 
 .. java:import:: org.springframework.web.bind.annotation RequestBody
+
+.. java:import:: org.springframework.web.bind.annotation RequestHeader
 
 .. java:import:: org.springframework.web.bind.annotation ResponseStatus
 
@@ -53,7 +57,7 @@ Methods
 addItemsToCart
 ^^^^^^^^^^^^^^
 
-.. java:method:: @PostMapping public List<Product> addItemsToCart(HttpSession session, CartContent products) throws ReservationFailedException, CartInteractionFailedException
+.. java:method:: @PostMapping public List<Product> addItemsToCart(String sessionId, CartContent products) throws ReservationFailedException, CartInteractionFailedException
    :outertype: UIBackendController
 
    Add units of the given products to the cart.
@@ -62,7 +66,7 @@ addItemsToCart
 
    Replies as long as at least on product is added to the cart.
 
-   :param session: http session of user
+   :param sessionId: sessionId of user
    :param products: products to be added, including the number of units thereof
    :throws ReservationFailedException: if all reservations failed.
    :return: a list of all products that were added with \ ``units``\  being the number of unit that were added / reserved.
@@ -70,51 +74,52 @@ addItemsToCart
 confirmOrder
 ^^^^^^^^^^^^
 
-.. java:method:: @PostMapping public void confirmOrder(HttpSession session, OrderRequest request) throws OrderNotPlacedException, CartInteractionFailedException
+.. java:method:: @PostMapping public void confirmOrder(String sessionId, OrderRequest request) throws OrderNotPlacedException, CartInteractionFailedException
    :outertype: UIBackendController
 
    place an order, i.e. start a transaction. upon successfully placing the order the cart is cleared and the session gets invalidated. if the user wants to place another order he needs a new http session.
 
-   :param session: http session of user
+   :param sessionId: sessionId of user
    :param request: payment details
    :throws OrderNotPlacedException: if the order could not be placed.
 
 deleteItemsFromCart
 ^^^^^^^^^^^^^^^^^^^
 
-.. java:method:: @PostMapping public void deleteItemsFromCart(HttpSession session, CartContent products)
+.. java:method:: @PostMapping public void deleteItemsFromCart(String sessionId, CartContent products)
    :outertype: UIBackendController
 
    Delete a product from the cart.
 
-   :param session: http session of user
+   :param sessionId: sessionId of user
    :param products: products products to be deleted, including the number of units
 
 getAllProducts
 ^^^^^^^^^^^^^^
 
-.. java:method:: @GetMapping public List<Product> getAllProducts()
+.. java:method:: @GetMapping public List<Product> getAllProducts(HttpSession session)
    :outertype: UIBackendController
 
-   Get a list of all products in the inventory.
+   Get a list of all products in the inventory. The session exists such that i can get a cookie even though i am not using the ui (frontend), e.g. as the load generator does.
 
+   :param session: http session
    :return: a list of all product in the inventory.
 
 getCart
 ^^^^^^^
 
-.. java:method:: @GetMapping public List<Product> getCart(HttpSession session)
+.. java:method:: @GetMapping public List<Product> getCart(String sessionId)
    :outertype: UIBackendController
 
    Get a list of all products in users cart.
 
-   :param session: http session of user
+   :param sessionId: sessionId of user
    :return: a list of all products in the users cart.
 
-greetings
-^^^^^^^^^
+greetingsWithHeaders
+^^^^^^^^^^^^^^^^^^^^
 
-.. java:method:: @GetMapping public String greetings()
+.. java:method:: @GetMapping public String greetingsWithHeaders(String sessionId)
    :outertype: UIBackendController
 
    Greets in a friendly manner.

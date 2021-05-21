@@ -57,7 +57,7 @@ public class <code class="descname">OrderItem</code><a class="headerlink" href="
 <dl class="constructor">
 <dt id="de.unistuttgart.t2.order.repository.OrderItem.OrderItem()">
 public <code class="descname">OrderItem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.order.repository.OrderItem.OrderItem()" title="Permalink to this definition">¶</a></dt>
-<dd><p>used (and required) by repository template</p>
+<dd><p>used (and required) by spring framework.</p>
 </dd></dl>
 
 </div>
@@ -66,7 +66,7 @@ public <code class="descname">OrderItem</code><span class="sig-paren">(</span><s
 <dl class="constructor">
 <dt id="de.unistuttgart.t2.order.repository.OrderItem.OrderItem(String)">
 public <code class="descname">OrderItem</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.order.repository.OrderItem.OrderItem(String)" title="Permalink to this definition">¶</a></dt>
-<dd><p>create a new order there is no <code class="docutils literal notranslate"><span class="pre">orderId</span></code> because it gets set by repository. <code class="docutils literal notranslate"><span class="pre">status</span></code> of a new order is always <a class="reference internal" href="OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS" title="de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS"><code class="xref java java-ref docutils literal notranslate"><span class="pre">OrderStatus.SUCCESS</span></code></a>, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> is always the current time.</p>
+<dd><p>create a new order. there is no <code class="docutils literal notranslate"><span class="pre">orderId</span></code> because it gets set by repository. <code class="docutils literal notranslate"><span class="pre">status</span></code> of a new order is always <a class="reference internal" href="OrderStatus.html#de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS" title="de.unistuttgart.t2.order.repository.OrderStatus.SUCCESS"><code class="xref java java-ref docutils literal notranslate"><span class="pre">OrderStatus.SUCCESS</span></code></a>, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> is always the current time.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -186,7 +186,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-locally">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
@@ -197,6 +197,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../inventory/packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../e2etest/packages.html">e2etest</a></li>
