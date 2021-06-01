@@ -36,11 +36,22 @@
             
   <div class="section" id="run-on-a-kubernetes-cluster">
 <span id="usage"></span><h1>Run on a Kubernetes Cluster<a class="headerlink" href="#run-on-a-kubernetes-cluster" title="Permalink to this headline">¶</a></h1>
-<p>The preferred deployment for the T2 Store is in a Kubernetes cluster (with at least 2 nodes).</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">wget &lt;all-in-one-deployment&gt;</span>
-<span class="x">kubectl create -f .</span>
+<p>The preferred deployment for the T2 Store is in a Kubernetes cluster.</p>
+<p>The T2 Store needs Kafka and a MongoDB. Install them anyway you want to, e.g. with helm charts:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">helm install mongo --set auth.enabled=false bitnami/mongodb</span>
+<span class="x">helm install kafka bitnami/kafka</span>
 </pre></div>
 </div>
+<p>In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments.
+Confer the services’ READMEs for more details.</p>
+<p>For the T2 Store itself get the deployments and deploy them:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/kube.git</span>
+<span class="x">kubectl create -f cdc/*</span>
+<span class="x">kubectl create -f saga/*</span>
+<span class="x">kubectl create -f notsaga/*</span>
+</pre></div>
+</div>
+<p>Look at the <a class="reference external" href="https://github.com/t2-project/kube">kube repository</a> for more details.</p>
 </div>
 <div class="section" id="run-locally">
 <h1>Run Locally<a class="headerlink" href="#run-locally" title="Permalink to this headline">¶</a></h1>
@@ -349,6 +360,7 @@ This is where its the most relevant because i want to know, wether the payment p
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/inventory/packages.html">inventory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/orchestrator/packages.html">orchestrator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/uibackend/packages.html">uibackend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../javadoc/ui/packages.html">ui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/cart/packages.html">cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/creditinstitute/packages.html">creditinstitute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../javadoc/e2etest/packages.html">e2etest</a></li>

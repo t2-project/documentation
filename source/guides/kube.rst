@@ -3,12 +3,28 @@
 Run on a Kubernetes Cluster
 ========================================
 
-The preferred deployment for the T2 Store is in a Kubernetes cluster (with at least 2 nodes).
+The preferred deployment for the T2 Store is in a Kubernetes cluster.
+
+The T2 Store needs Kafka and a MongoDB. Install them anyway you want to, e.g. with helm charts:
 
 .. code-block:: php
 
-   wget <all-in-one-deployment>
-   kubectl create -f .
+    helm install mongo --set auth.enabled=false bitnami/mongodb
+    helm install kafka bitnami/kafka
+
+In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
+Confer the services' READMEs for more details.
+
+For the T2 Store itself get the deployments and deploy them: 
+
+.. code-block:: php
+
+   git clone https://github.com/t2-project/kube.git
+   kubectl create -f cdc/*
+   kubectl create -f saga/*
+   kubectl create -f notsaga/*
+
+Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
 
 
 Run Locally  
@@ -25,7 +41,7 @@ Step 0 : Clone Repository
 
 .. code-block:: php
 
-   git clone https://github.com:t2-project/order.git
+   git clone https://github.com/t2-project/order.git
 
 
 Step 1 : Versions and Environment Variables
