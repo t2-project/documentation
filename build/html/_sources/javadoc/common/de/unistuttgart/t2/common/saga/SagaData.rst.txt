@@ -1,3 +1,5 @@
+.. java:import:: java.util Map
+
 SagaData
 ========
 
@@ -35,7 +37,7 @@ Constructors
 SagaData
 ^^^^^^^^
 
-.. java:constructor:: public SagaData(String cardNumber, String cardOwner, String checksum, String sessionId, String orderId, double total)
+.. java:constructor:: public SagaData(String cardNumber, String cardOwner, String checksum, String sessionId, String orderId, double total, Map<String, String> traceContext)
    :outertype: SagaData
 
 SagaData
@@ -88,9 +90,21 @@ getTotal
 .. java:method:: public double getTotal()
    :outertype: SagaData
 
+getTraceContext
+^^^^^^^^^^^^^^^
+
+.. java:method:: public Map<String, String> getTraceContext()
+   :outertype: SagaData
+
 setOrderId
 ^^^^^^^^^^
 
 .. java:method:: public void setOrderId(String orderId)
+   :outertype: SagaData
+
+setTraceContext
+^^^^^^^^^^^^^^^
+
+.. java:method:: public void setTraceContext(Map<String, String> traceContext)
    :outertype: SagaData
 

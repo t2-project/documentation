@@ -23,12 +23,6 @@ Constructors
 OrderRequest
 ^^^^^^^^^^^^
 
-.. java:constructor:: public OrderRequest()
-   :outertype: OrderRequest
-
-OrderRequest
-^^^^^^^^^^^^
-
 .. java:constructor:: @JsonCreator public OrderRequest(String cardNumber, String cardOwner, String checksum)
    :outertype: OrderRequest
 

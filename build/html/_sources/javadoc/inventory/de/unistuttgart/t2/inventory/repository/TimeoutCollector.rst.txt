@@ -1,16 +1,12 @@
 .. java:import:: java.time Instant
 
-.. java:import:: java.util ArrayList
+.. java:import:: java.util Collection
 
 .. java:import:: java.util Date
 
-.. java:import:: java.util HashMap
-
 .. java:import:: java.util List
 
-.. java:import:: java.util Map
-
-.. java:import:: java.util Optional
+.. java:import:: java.util.stream Collectors
 
 .. java:import:: javax.annotation PostConstruct
 
@@ -26,8 +22,6 @@
 
 .. java:import:: org.springframework.stereotype Component
 
-.. java:import:: org.springframework.transaction.annotation Transactional
-
 TimeoutCollector
 ================
 
@@ -36,26 +30,16 @@ TimeoutCollector
 
 .. java:type:: @Component public class TimeoutCollector
 
-   Periodically checks all reservations and deletes those whose time to life has been exceeded.
-
-   (apparently there is a mongo native attach on expiry date to documents, but i didn't find anything on whether this also works with the spring repository interface. thus the manual deletion.)
+   Periodically checks all reservations and deletes those whose time to life has been exceeded. TODO : ensure that only reservations that are not part of a running saga are deleted
 
    :author: maumau
-
-Fields
-------
-repository
-^^^^^^^^^^
-
-.. java:field:: @Autowired  ProductRepository repository
-   :outertype: TimeoutCollector
 
 Constructors
 ------------
 TimeoutCollector
 ^^^^^^^^^^^^^^^^
 
-.. java:constructor:: @Autowired public TimeoutCollector(long TTL, int taskRate)
+.. java:constructor:: @Autowired public TimeoutCollector(long TTL, int taskRate, ThreadPoolTaskScheduler taskScheduler, ReservationRepository repository, ProductRepository itemRepository)
    :outertype: TimeoutCollector
 
    Create collector.

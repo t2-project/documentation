@@ -32,7 +32,7 @@ InventoryCommandHandler
 
 .. java:type:: public class InventoryCommandHandler
 
-   handles messages for the inventroy service. listens to the \ ``inventory``\  queue. commits reservations upon receiving a \ :java:ref:`ActionCommand <de.unistuttgart.t2.common.saga.commands.ActionCommand>`\  or deletes reservations without committing them upon receiving a \ :java:ref:`CompensationCommand <de.unistuttgart.t2.common.saga.commands.CompensationCommand>`\ .
+   handles messages for the inventory service. listens to the \ ``inventory``\  queue. commits reservations upon receiving a \ :java:ref:`ActionCommand <de.unistuttgart.t2.common.saga.commands.ActionCommand>`\  or deletes reservations without committing them upon receiving a \ :java:ref:`CompensationCommand <de.unistuttgart.t2.common.saga.commands.CompensationCommand>`\ .
 
    :author: stiesssh
 

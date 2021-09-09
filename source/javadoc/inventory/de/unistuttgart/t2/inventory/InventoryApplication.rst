@@ -6,9 +6,9 @@
 
 .. java:import:: org.springframework.context.annotation Import
 
-.. java:import:: org.springframework.data.mongodb.repository.config EnableMongoRepositories
+.. java:import:: org.springframework.data.jpa.repository.config EnableJpaRepositories
 
-.. java:import:: org.springframework.scheduling.concurrent ThreadPoolTaskScheduler
+.. java:import:: org.springframework.transaction.annotation EnableTransactionManagement
 
 .. java:import:: de.unistuttgart.t2.inventory.config ExculdeSagaConfig
 
@@ -16,7 +16,7 @@
 
 .. java:import:: de.unistuttgart.t2.inventory.repository ProductRepository
 
-.. java:import:: de.unistuttgart.t2.inventory.repository TimeoutCollector
+.. java:import:: de.unistuttgart.t2.inventory.repository ReservationRepository
 
 InventoryApplication
 ====================
@@ -24,14 +24,14 @@ InventoryApplication
 .. java:package:: de.unistuttgart.t2.inventory
    :noindex:
 
-.. java:type:: @Import @EnableMongoRepositories @SpringBootApplication public class InventoryApplication
+.. java:type:: @Import @EnableJpaRepositories @EnableTransactionManagement @SpringBootApplication public class InventoryApplication
 
 Methods
 -------
 inventoryService
 ^^^^^^^^^^^^^^^^
 
-.. java:method:: @Bean public InventoryService inventoryService()
+.. java:method:: @Bean public InventoryService inventoryService(ProductRepository repository, ReservationRepository reservationRepository)
    :outertype: InventoryApplication
 
 main

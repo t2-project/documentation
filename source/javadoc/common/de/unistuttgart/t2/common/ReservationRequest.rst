@@ -23,12 +23,6 @@ Constructors
 ReservationRequest
 ^^^^^^^^^^^^^^^^^^
 
-.. java:constructor:: public ReservationRequest()
-   :outertype: ReservationRequest
-
-ReservationRequest
-^^^^^^^^^^^^^^^^^^
-
 .. java:constructor:: @JsonCreator public ReservationRequest(String productId, String sessionId, int units)
    :outertype: ReservationRequest
 

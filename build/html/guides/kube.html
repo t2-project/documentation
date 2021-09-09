@@ -36,8 +36,8 @@
             
   <div class="section" id="run-on-a-kubernetes-cluster">
 <span id="usage"></span><h1>Run on a Kubernetes Cluster<a class="headerlink" href="#run-on-a-kubernetes-cluster" title="Permalink to this headline">¶</a></h1>
-<p>The preferred deployment for the T2 Store is in a Kubernetes cluster.</p>
-<p>The T2 Store needs Kafka and a MongoDB. Install them anyway you want to, e.g. with helm charts:</p>
+<p>The preferred deployment for the T2 Store is on a Kubernetes cluster.</p>
+<p>The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">helm install mongo --set auth.enabled=false bitnami/mongodb</span>
 <span class="x">helm install kafka bitnami/kafka</span>
 </pre></div>
@@ -56,12 +56,12 @@ Confer the services’ READMEs for more details.</p>
 <div class="section" id="run-locally">
 <h1>Run Locally<a class="headerlink" href="#run-locally" title="Permalink to this headline">¶</a></h1>
 <p>You can run the entire T2 Store locally, either by using the pre build docker images, or by building all services yourself.</p>
-<p>The following guide describes how to build an run the T2 services with the Order service as an example.
+<p>The following guide describes how to build and run the T2 store’s services with the Order service as an example.
 You can build all other services (with minor exceptions) the same way.
 You just need to replace ‘order’ with the respective service name.</p>
 <div class="section" id="step-0-clone-repository">
 <h2>Step 0 : Clone Repository<a class="headerlink" href="#step-0-clone-repository" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com:t2-project/order.git</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/order.git</span>
 </pre></div>
 </div>
 </div>
@@ -121,14 +121,10 @@ You want to consult the service’s README on the meaning of the properties.</p>
 </div>
 <div class="section" id="step-3-build-local-dependencies">
 <h2>Step 3 : Build Local Dependencies<a class="headerlink" href="#step-3-build-local-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>Most services of the T2 store depend on <a class="reference external" href="https://github.com/t2-project/common">common</a>, thus you need to build that first:</p>
+<p>Most services of the T2 store depend on <a class="reference external" href="https://github.com/t2-project/common">common</a>, thus you need to install that first:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/common.git</span>
 <span class="x">cd common/</span>
-<span class="x">mvn clean install</span>
-</pre></div>
-</div>
-<p>And install it to your local maven repository:</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">mvn install:install-file -Dfile=./target/common-1.0-SNAPSHOT.jar  -DpomFile=./pom.xml</span>
+<span class="x">./mvnw clean install</span>
 </pre></div>
 </div>
 <div class="section" id="step-2-1-exceptions-for-service-e2e-test">
@@ -137,20 +133,20 @@ You want to consult the service’s README on the meaning of the properties.</p>
 <p>You must build and install them to your local maven repository as well.</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/payment.git</span>
 <span class="x">cd payment/</span>
-<span class="x">mvn clean install</span>
-<span class="x">mvn install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
+<span class="x">./mvnw clean install</span>
+<span class="x">./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
 </pre></div>
 </div>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/inventory.git</span>
 <span class="x">cd inventory/</span>
-<span class="x">mvn clean install</span>
-<span class="x">mvn install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
+<span class="x">./mvnw clean install</span>
+<span class="x">./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
 </pre></div>
 </div>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">git clone https://github.com/t2-project/order.git</span>
 <span class="x">cd order/</span>
-<span class="x">mvn clean install</span>
-<span class="x">mvn install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
+<span class="x">./mvnw clean install</span>
+<span class="x">./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml</span>
 </pre></div>
 </div>
 </div>
@@ -164,7 +160,7 @@ You want to consult the service’s README on the meaning of the properties.</p>
 </div>
 <p>Or like this, in case you want to supply specific application properties (remember to use the path to <em>your</em> properties file).</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">cd order/</span>
-<span class="x">mvn clean install</span>
+<span class="x">./mvnw clean install</span>
 <span class="x">java -jar -Dspring.config.location=./src/main/resources/application.local.properties ./target/order-0.0.1-SNAPSHOT.jar</span>
 </pre></div>
 </div>
@@ -176,9 +172,9 @@ You want to consult the service’s README on the meaning of the properties.</p>
 </div>
 <div class="section" id="run-with-test-service">
 <h1>Run with Test Service<a class="headerlink" href="#run-with-test-service" title="Permalink to this headline">¶</a></h1>
-<p>The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider stead.
+<p>The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider’s stead.
 The setup is depicted below.
-With this setup Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.</p>
+With this setup, the Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.</p>
 <p>For more Details, see the <a class="reference external" href="https://github.com/t2-project/e2e-tests">Test Service’s README</a>.</p>
 <img alt="../_images/component_test.jpg" src="../_images/component_test.jpg" />
 <div class="section" id="step-by-step">
@@ -192,7 +188,11 @@ With this setup Test service knows the supposed outcome of all requests and can 
 </div>
 <div class="section" id="step-1-run-e2e-test-service">
 <h2>Step 1 : Run E2E Test Service<a class="headerlink" href="#step-1-run-e2e-test-service" title="Permalink to this headline">¶</a></h2>
-<p>Run the <a class="reference external" href="https://github.com/t2-project/e2e-tests">E2E Test Service</a> as described in the previous section.</p>
+<p>Run the <a class="reference external" href="https://github.com/t2-project/e2e-tests">E2E Test Service</a>.
+If you are on a kubernetes cluster, you may apply the deployment from the folder <code class="file docutils literal notranslate"><span class="pre">testsetup/</span></code> in the <code class="file docutils literal notranslate"><span class="pre">kube</span></code> repository.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">kubectl apply -f testsetup/e2etest.yaml</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="step-2-configure-the-ui-backend-and-the-payment-service">
 <h2>Step 2 : Configure the UI Backend and the Payment Service<a class="headerlink" href="#step-2-configure-the-ui-backend-and-the-payment-service" title="Permalink to this headline">¶</a></h2>
@@ -210,7 +210,7 @@ With this setup Test service knows the supposed outcome of all requests and can 
 </pre></div>
 </div>
 <p>In both cases replace <code class="file docutils literal notranslate"><span class="pre">&lt;e2e-test-host&gt;</span></code> with the location of the Test Service.</p>
-<p>Or apply the deployment in the folder <a class="reference external" href="https://github.com/t2-project/kube/tree/main/testsetup">testsetup</a> because there the environment variables are already set as described above.</p>
+<p>Or use the deployment in the folder <a class="reference external" href="https://github.com/t2-project/kube/tree/main/testsetup">testsetup</a> because there the environment variables are already set as described above.</p>
 </div>
 </div>
 <div class="section" id="step-3-generate-load">
@@ -261,15 +261,16 @@ This might change but for now it is the easiest solution.</p>
 </div>
 <div class="section" id="load-generation">
 <h1>Load Generation<a class="headerlink" href="#load-generation" title="Permalink to this headline">¶</a></h1>
-<p>You can generate load manually by sending requests to the UIBackend (or using the UI, once it is there).
+<p>You can generate load manually by sending requests to the UIBackend (or using the UI, but it is ugly).
 Confer the <a class="reference external" href="https://github.com/t2-project/uibackend">UI Backend’s README</a> on how to talk to the UI Backend.</p>
 <p>Or you can use a Load Generator to send request.
-I recommend <a class="reference external" href="https://jmeter.apache.org/">Apache JMeter</a>.</p>
+We recommend <a class="reference external" href="https://jmeter.apache.org/">Apache JMeter</a>.</p>
 <div class="section" id="apache-jmeter">
 <h2>Apache JMeter<a class="headerlink" href="#apache-jmeter" title="Permalink to this headline">¶</a></h2>
-<p>To run the T2 Store with the JMeter Load Generator, you must do the following :</p>
+<p>To run the T2 Store with the JMeter Load Generator, do the following :</p>
 <ol class="arabic simple">
 <li>Deploy the T2 Store</li>
+<li>Make sure that the UI-Backend is accessible from outside the cluster - unless you want to put the load generator onto the cluster.</li>
 <li>Install JMeter</li>
 <li>Create or download a load profile</li>
 <li>Run the load generator</li>
@@ -300,26 +301,11 @@ It chooses the product at random from the products in the inventory.</p>
 <h1>Prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h1>
 <p>The T2 Store can be monitored with <a class="reference external" href="https://prometheus.io/">Prometheus</a></p>
 <p>The T2 Store services use <a class="reference external" href="https://micrometer.io/docs/registry/prometheus">Micrometer</a> to expose metrics endpoints for prometheus.
-At the endpoint <code class="file docutils literal notranslate"><span class="pre">/actuator/prometheus</span></code> the following metrics are exposed:</p>
-<ul class="simple">
-<li>http_server_requests_seconds</li>
-<li>http_server_requests_seconds_count</li>
-<li>http_server_requests_seconds_sum</li>
-<li>http_server_requests_seconds_max</li>
-<li>quantile 0.5, 0.75, 0.95, 0.98, 0.99, 0.999, 1.0 for http_server_requests_seconds</li>
-</ul>
-<p>The Monitoring is not yet configured for all Service, but it is for the <a class="reference external" href="https://github.com/t2-project/creditinstitute">Credit Institute</a>.
-This is where its the most relevant because i want to know, wether the payment provider’s service is good enough for the Payment Service.</p>
-<div class="section" id="rules-and-alerts">
-<h2>Rules and Alerts<a class="headerlink" href="#rules-and-alerts" title="Permalink to this headline">¶</a></h2>
-<p>The prometheus files can be found <a class="reference external" href="https://github.com/t2-project/kube/tree/main/prometheusfiles">here</a></p>
-<p>Confer the README located in that folder for more details on them.</p>
-</div>
+Check the endpoint <code class="file docutils literal notranslate"><span class="pre">/actuator/prometheus</span></code> to see which metrics are exposed.</p>
 </div>
 <div class="section" id="jaeger-opentracing">
-<h1>jaeger / opentracing<a class="headerlink" href="#jaeger-opentracing" title="Permalink to this headline">¶</a></h1>
-<p>The T2 store can be traced with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a> - or rather at some point in the future it’s supposed to work.</p>
-<p>TODO</p>
+<h1>Jaeger / Opentracing<a class="headerlink" href="#jaeger-opentracing" title="Permalink to this headline">¶</a></h1>
+<p>Most of the  T2 store’s services include the dependencies to be traced with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a>.</p>
 </div>
 
 
@@ -350,7 +336,7 @@ This is where its the most relevant because i want to know, wether the payment p
 <li class="toctree-l1"><a class="reference internal" href="#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul>

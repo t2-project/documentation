@@ -67,7 +67,7 @@ public class <code class="descname">CreditInstituteController</code><a class="he
 <h3>doPayment<a class="headerlink" href="#dopayment" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.doPayment(PaymentData)">
-public void <code class="descname">doPayment</code><span class="sig-paren">(</span><a class="reference internal" href="PaymentData.html#de.unistuttgart.t2.creditinstitute.PaymentData" title="de.unistuttgart.t2.creditinstitute.PaymentData">PaymentData</a><em> card</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.doPayment(PaymentData)" title="Permalink to this definition">¶</a></dt>
+public void <code class="descname">doPayment</code><span class="sig-paren">(</span><a class="reference internal" href="domain/PaymentData.html#de.unistuttgart.t2.creditinstitute.domain.PaymentData" title="de.unistuttgart.t2.creditinstitute.domain.PaymentData">PaymentData</a><em> card</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.doPayment(PaymentData)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fakes performs some payment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -88,11 +88,81 @@ public void <code class="descname">doPayment</code><span class="sig-paren">(</sp
 </dd></dl>
 
 </div>
+<div class="section" id="getfailurerate">
+<h3>getFailurerate<a class="headerlink" href="#getfailurerate" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.getFailurerate()">
+public double <code class="descname">getFailurerate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.getFailurerate()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="gettimeout">
+<h3>getTimeout<a class="headerlink" href="#gettimeout" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.getTimeout()">
+public int <code class="descname">getTimeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.getTimeout()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="gettimeoutrate">
+<h3>getTimeoutrate<a class="headerlink" href="#gettimeoutrate" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.getTimeoutrate()">
+public double <code class="descname">getTimeoutrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.getTimeoutrate()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="handleillegalargumentexception">
+<h3>handleIllegalArgumentException<a class="headerlink" href="#handleillegalargumentexception" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.handleIllegalArgumentException(IllegalArgumentException)">
+public ResponseEntity&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>&gt; <code class="descname">handleIllegalArgumentException</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException">IllegalArgumentException</a><em> exception</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.handleIllegalArgumentException(IllegalArgumentException)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the response entity if setting the timeout or the rates failed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exception</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a response entity with an exceptional message</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="handlepaymentfailedexception">
+<h3>handlePaymentFailedException<a class="headerlink" href="#handlepaymentfailedexception" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.handlePaymentFailedException(PaymentFailedException)">
+public ResponseEntity&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>&gt; <code class="descname">handlePaymentFailedException</code><span class="sig-paren">(</span><a class="reference internal" href="exceptions/PaymentFailedException.html#de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException" title="de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException">PaymentFailedException</a><em> exception</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.handlePaymentFailedException(PaymentFailedException)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the response entity if serving a payment request failed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exception</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a response entity with an exceptional message</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="setfailurerate">
 <h3>setFailurerate<a class="headerlink" href="#setfailurerate" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setFailurerate(String)">
-public double <code class="descname">setFailurerate</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> rate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setFailurerate(String)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setFailurerate(double)">
+public double <code class="descname">setFailurerate</code><span class="sig-paren">(</span>double<em> rate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setFailurerate(double)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updated and get the failure rate.</p>
 <p>If the parameter cannot be processed, the rate remains unchanged.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -115,8 +185,8 @@ public double <code class="descname">setFailurerate</code><span class="sig-paren
 <div class="section" id="settimeout">
 <h3>setTimeout<a class="headerlink" href="#settimeout" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeout(String)">
-public int <code class="descname">setTimeout</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeout(String)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeout(int)">
+public int <code class="descname">setTimeout</code><span class="sig-paren">(</span>int<em> timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeout(int)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updated and get the timeout duration.</p>
 <p>If the parameter cannot be processed, the timeout remains unchanged.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -139,8 +209,8 @@ public int <code class="descname">setTimeout</code><span class="sig-paren">(</sp
 <div class="section" id="settimeoutrate">
 <h3>setTimeoutrate<a class="headerlink" href="#settimeoutrate" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeoutrate(String)">
-public double <code class="descname">setTimeoutrate</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> rate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeoutrate(String)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeoutrate(double)">
+public double <code class="descname">setTimeoutrate</code><span class="sig-paren">(</span>double<em> rate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.creditinstitute.CreditInstituteController.setTimeoutrate(double)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updated and get the timeout rate.</p>
 <p>If the parameter cannot be processed, the rate remains unchanged.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -191,7 +261,7 @@ public double <code class="descname">setTimeoutrate</code><span class="sig-paren
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">

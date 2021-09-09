@@ -1,16 +1,12 @@
 .. java:import:: java.time Instant
 
-.. java:import:: java.util ArrayList
+.. java:import:: java.util Collection
 
 .. java:import:: java.util Date
 
-.. java:import:: java.util HashMap
-
 .. java:import:: java.util List
 
-.. java:import:: java.util Map
-
-.. java:import:: java.util Optional
+.. java:import:: java.util.stream Collectors
 
 .. java:import:: javax.annotation PostConstruct
 
@@ -26,8 +22,6 @@
 
 .. java:import:: org.springframework.stereotype Component
 
-.. java:import:: org.springframework.transaction.annotation Transactional
-
 TimeoutCollector.RecervationCheckAndDeleteTask
 ==============================================
 
@@ -37,12 +31,18 @@ TimeoutCollector.RecervationCheckAndDeleteTask
 .. java:type:: protected class RecervationCheckAndDeleteTask implements Runnable
    :outertype: TimeoutCollector
 
-   The Task that does the actual checking and deleting of reservations.
+   The Task that does the actual checking and deleting of reservations. TODO how do i prevent this from collection 'in progress' sagas? TODO 'father less' reservations are only caused when orchestrator is down. I could flag the reservations as 'PENDING' (not yet ordered) 'PROCESSING' (saga runs) or 'DONE' (you may delete) and frequently delete 'DONE', scarcely delete 'PENDING' (i.e. after cookie death) and report 'PROCESSING' after some time as major erro...
 
    :author: maumau
 
 Methods
 -------
+deleteAtItems
+^^^^^^^^^^^^^
+
+.. java:method:: public void deleteAtItems(Collection<Reservation> rs)
+   :outertype: TimeoutCollector.RecervationCheckAndDeleteTask
+
 run
 ^^^
 

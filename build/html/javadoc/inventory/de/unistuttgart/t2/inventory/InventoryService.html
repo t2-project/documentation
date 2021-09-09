@@ -39,7 +39,7 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.inventory.InventoryService">
 public class <code class="descname">InventoryService</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.InventoryService" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interactions with the product repository that involve reservations. too many failed attempts to fix the transaction thing later. whatever. just don’t replicate the inventory. Once i start replicating the inventory, the ‘synchronized’ won’t help anymore though.</p>
+<dd><p>Interactions with the product repository that involve reservations.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -50,13 +50,13 @@ public class <code class="descname">InventoryService</code><a class="headerlink"
 </table>
 </dd></dl>
 
-<div class="section" id="fields">
-<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="productrepository">
-<h3>productRepository<a class="headerlink" href="#productrepository" title="Permalink to this headline">¶</a></h3>
-<dl class="field">
-<dt id="de.unistuttgart.t2.inventory.InventoryService.productRepository">
- <a class="reference internal" href="repository/ProductRepository.html#de.unistuttgart.t2.inventory.repository.ProductRepository" title="de.unistuttgart.t2.inventory.repository.ProductRepository">ProductRepository</a> <code class="descname">productRepository</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.InventoryService.productRepository" title="Permalink to this definition">¶</a></dt>
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>InventoryService<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.inventory.InventoryService.InventoryService(ProductRepository, ReservationRepository)">
+public <code class="descname">InventoryService</code><span class="sig-paren">(</span><a class="reference internal" href="repository/ProductRepository.html#de.unistuttgart.t2.inventory.repository.ProductRepository" title="de.unistuttgart.t2.inventory.repository.ProductRepository">ProductRepository</a><em> productRepository</em>, <a class="reference internal" href="repository/ReservationRepository.html#de.unistuttgart.t2.inventory.repository.ReservationRepository" title="de.unistuttgart.t2.inventory.repository.ReservationRepository">ReservationRepository</a><em> reservationRepository</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.InventoryService.InventoryService(ProductRepository, ReservationRepository)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -162,7 +162,7 @@ public <a class="reference internal" href="repository/InventoryItem.html#de.unis
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">

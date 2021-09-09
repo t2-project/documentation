@@ -4,9 +4,15 @@
 
 .. java:import:: org.springframework.context.annotation Configuration
 
+.. java:import:: org.springframework.context.annotation Profile
+
 .. java:import:: org.springframework.scheduling.concurrent ThreadPoolTaskScheduler
 
 .. java:import:: de.unistuttgart.t2.inventory.repository TimeoutCollector
+
+.. java:import:: io.eventuate.tram.spring.consumer.jdbc TramConsumerJdbcAutoConfiguration
+
+.. java:import:: io.eventuate.tram.spring.messaging.common TramMessagingCommonAutoConfiguration
 
 TimeoutCollectorConfig
 ======================
@@ -14,7 +20,7 @@ TimeoutCollectorConfig
 .. java:package:: de.unistuttgart.t2.inventory.config
    :noindex:
 
-.. java:type:: @EnableAutoConfiguration @Configuration public class TimeoutCollectorConfig
+.. java:type:: @Configuration public class TimeoutCollectorConfig
 
    Configuration to have all beans required for the \ :java:ref:`TimeoutCollector <TimeoutCollector>`\ .
 

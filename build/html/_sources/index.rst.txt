@@ -47,7 +47,7 @@ Introduction
 The T2 Store is a micro-service reference application that implements the Saga pattern.
 It is loosely base on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
-The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one simulates an external payment provider and the other tests the store at runtime. 
+The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one to simulate an external payment provider and the other to test the store at runtime. 
 
 All services are Spring Boot Applications. 
 They are instrumented with `Prometheus <https://prometheus.io/>`__ for metrics and with `Jaeger <https://www.jaegertracing.io/>`__  for tracing.
@@ -80,7 +80,7 @@ These repositories contain the core services of the T2 Store:
 *  `UIBackend service <https://github.com/t2-project/uibackend>`__
 *  `UI <https://github.com/t2-project/ui>`__
 
-These repositories contain supplemental services:
+These repositories contain the supplemental services:
 
 *  `E2E Test <https://github.com/t2-project/e2e-test>`__
 *  `Credit Institute service  <https://github.com/t2-project/creditinstitute>`__
@@ -94,7 +94,7 @@ This repository contains the source for this documentation:
 
 *  `Documentation <https://github.com/t2-project/documentation>`__
 
-This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else.
+This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else:
 
 *  `Kube <https://github.com/t2-project/kube>`__
 

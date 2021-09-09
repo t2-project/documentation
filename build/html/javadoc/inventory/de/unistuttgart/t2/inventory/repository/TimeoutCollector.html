@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
     <link rel="next" title="TimeoutCollector.RecervationCheckAndDeleteTask" href="TimeoutCollector-RecervationCheckAndDeleteTask.html" />
-    <link rel="prev" title="Reservation" href="Reservation.html" />
+    <link rel="prev" title="ReservationRepository" href="ReservationRepository.html" />
    
   <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
   
@@ -39,8 +39,7 @@
 <dl class="type">
 <dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector">
 public class <code class="descname">TimeoutCollector</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Periodically checks all reservations and deletes those whose time to life has been exceeded.</p>
-<p>(apparently there is a mongo native attach on expiry date to documents, but i didn’t find anything on whether this also works with the spring repository interface. thus the manual deletion.)</p>
+<dd><p>Periodically checks all reservations and deletes those whose time to life has been exceeded. TODO : ensure that only reservations that are not part of a running saga are deleted</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -51,24 +50,13 @@ public class <code class="descname">TimeoutCollector</code><a class="headerlink"
 </table>
 </dd></dl>
 
-<div class="section" id="fields">
-<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="repository">
-<h3>repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h3>
-<dl class="field">
-<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.repository">
- <a class="reference internal" href="ProductRepository.html#de.unistuttgart.t2.inventory.repository.ProductRepository" title="de.unistuttgart.t2.inventory.repository.ProductRepository">ProductRepository</a> <code class="descname">repository</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.repository" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-</div>
 <div class="section" id="constructors">
 <h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>TimeoutCollector<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="constructor">
-<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int)">
-public <code class="descname">TimeoutCollector</code><span class="sig-paren">(</span>long<em> TTL</em>, int<em> taskRate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int, ThreadPoolTaskScheduler, ReservationRepository, ProductRepository)">
+public <code class="descname">TimeoutCollector</code><span class="sig-paren">(</span>long<em> TTL</em>, int<em> taskRate</em>, ThreadPoolTaskScheduler<em> taskScheduler</em>, <a class="reference internal" href="ReservationRepository.html#de.unistuttgart.t2.inventory.repository.ReservationRepository" title="de.unistuttgart.t2.inventory.repository.ReservationRepository">ReservationRepository</a><em> repository</em>, <a class="reference internal" href="ProductRepository.html#de.unistuttgart.t2.inventory.repository.ProductRepository" title="de.unistuttgart.t2.inventory.repository.ProductRepository">ProductRepository</a><em> itemRepository</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.TimeoutCollector.TimeoutCollector(long, int, ThreadPoolTaskScheduler, ReservationRepository, ProductRepository)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create collector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -129,7 +117,7 @@ public void <code class="descname">schedulePeriodically</code><span class="sig-p
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
@@ -151,7 +139,7 @@ public void <code class="descname">schedulePeriodically</code><span class="sig-p
   <li><a href="../../../../../../../index.html">Documentation overview</a><ul>
   <li><a href="../../../../../packages.html">inventory</a><ul>
   <li><a href="package-index.html">de.unistuttgart.t2.inventory.repository</a><ul>
-      <li>Previous: <a href="Reservation.html" title="previous chapter">Reservation</a></li>
+      <li>Previous: <a href="ReservationRepository.html" title="previous chapter">ReservationRepository</a></li>
       <li>Next: <a href="TimeoutCollector-RecervationCheckAndDeleteTask.html" title="next chapter">TimeoutCollector.RecervationCheckAndDeleteTask</a></li>
   </ul></li>
   </ul></li>

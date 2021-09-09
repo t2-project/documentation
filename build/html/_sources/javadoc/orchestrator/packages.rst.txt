@@ -1,3 +1,5 @@
+.. _orchestrator:
+
 orchestrator
 ============
 

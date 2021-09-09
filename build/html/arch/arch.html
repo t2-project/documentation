@@ -38,7 +38,7 @@
 <span id="arch"></span><h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
 <p>The T2 Store consists of seven services.</p>
 <img alt="../_images/component_total_colour.jpg" src="../_images/component_total_colour.jpg" />
-<p>The green and blue services are the core T2 Services. The blue ones are participate in the saga, the green ones do not.
+<p>The green and blue services are the core T2 Services. The blue ones participate in the saga, the green ones do not.
 The white things are databases and external services.</p>
 <ul class="simple">
 <li><strong>UI</strong> : The application frontend.</li>
@@ -145,7 +145,6 @@ As there is now no action to perform on the inventory before the pivot transacti
 <p>The T2 Store uses the following frameworks (and services):</p>
 <div class="section" id="spring-and-spring-boot">
 <h3>Spring and Spring Boot<a class="headerlink" href="#spring-and-spring-boot" title="Permalink to this headline">¶</a></h3>
-<p>It’s Spring. Deal with it.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="58%" />
@@ -213,12 +212,7 @@ The T2 Store uses the Eventuate Tram Core framework with Kafka as the message br
 </div>
 <div class="section" id="message-broker">
 <h3>Message Broker<a class="headerlink" href="#message-broker" title="Permalink to this headline">¶</a></h3>
-<p>The T2 Store uses Kafka as message broker.
-It uses these images:</p>
-<ul class="simple">
-<li>Kafka : <a class="reference external" href="http://gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1">gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1</a></li>
-<li>Zookeeper : <a class="reference external" href="http://gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10">gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10</a></li>
-</ul>
+<p>The T2 Store uses Kafka and Zookeeper as message broker.</p>
 </div>
 <div class="section" id="saga-database">
 <h3>Saga Database<a class="headerlink" href="#saga-database" title="Permalink to this headline">¶</a></h3>
@@ -227,16 +221,9 @@ It uses the Postgres image from <a class="reference external" href="https://hub.
 </div>
 <div class="section" id="domain-database">
 <h3>Domain Database<a class="headerlink" href="#domain-database" title="Permalink to this headline">¶</a></h3>
-<p>The T2 Store uses MongoDBs as databases for the domain data.
-Thus the repositories <em>cart repository</em>, <em>product repository</em> and <em>order repository</em> are MongoDBs.</p>
-</div>
-<div class="section" id="prometheus">
-<h3>Prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h3>
-<p>TODO Dependency, Version, ….</p>
-</div>
-<div class="section" id="open-tracing-and-jaeger">
-<h3>Open-tracing and Jaeger<a class="headerlink" href="#open-tracing-and-jaeger" title="Permalink to this headline">¶</a></h3>
-<p>TODO Dependency, Version, ….</p>
+<p>The T2 Store uses MongoDBs and a Postgres Database as databases for the domain data.
+The <em>cart repository</em> and the <em>order repository</em> are MongoDBs.
+The <em>product repository</em> is a Postgres Database.</p>
 </div>
 </div>
 <div class="section" id="the-services">
@@ -300,16 +287,16 @@ Most domain specific things are used by multiple services and thus located in th
 <h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
 <p>For more Details on each service, look at the repositories or the API documentation:</p>
 <ul class="simple">
-<li>Order service: <a class="reference external" href="https://github.com/t2-project/order">GitHub</a>, <a class="reference internal" href="../javadoc/order/packages.html#order"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Inventory service: <a class="reference external" href="https://github.com/t2-project/inventory">GitHub</a>, <a class="reference internal" href="../javadoc/inventory/packages.html#inventory"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Payment service: <a class="reference external" href="https://github.com/t2-project/payment">GitHub</a>, <a class="reference internal" href="../javadoc/payment/packages.html#payment"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Orchestrator service: <a class="reference external" href="https://github.com/t2-project/orchestrator">GitHub</a>, <a class="reference internal" href="../javadoc/orchestrator/packages.html#orchestrator"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Cart service: <a class="reference external" href="https://github.com/t2-project/cart">GitHub</a>, <a class="reference internal" href="../javadoc/cart/packages.html#cart"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Credit Institute service: <a class="reference external" href="https://github.com/t2-project/creditinstitute">GitHub</a>, <a class="reference internal" href="../javadoc/creditinstitute/packages.html#creditinstitute"><span class="std std-ref">JavaDoc</span></a></li>
-<li>UIBackend : <a class="reference external" href="https://github.com/t2-project/uibackend">GitHub</a>, <a class="reference internal" href="../javadoc/uibackend/packages.html#uibackend"><span class="std std-ref">JavaDoc</span></a></li>
-<li>UI : <a class="reference external" href="https://github.com/t2-project/ui">GitHub</a>, <a class="reference internal" href="../javadoc/ui/packages.html#ui"><span class="std std-ref">JavaDoc</span></a></li>
-<li>Common: <a class="reference external" href="https://github.com/t2-project/common">GitHub</a>, <a class="reference internal" href="../javadoc/common/packages.html#common"><span class="std std-ref">JavaDoc</span></a></li>
-<li>E2E Test: <a class="reference external" href="https://github.com/t2-project/e2e-tests">GitHub</a>, <a class="reference internal" href="../javadoc/e2etest/packages.html#eetest"><span class="std std-ref">JavaDoc</span></a></li>
+<li>Order service: <a class="reference external" href="https://github.com/t2-project/order">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Inventory service: <a class="reference external" href="https://github.com/t2-project/inventory">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Payment service: <a class="reference external" href="https://github.com/t2-project/payment">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Orchestrator service: <a class="reference external" href="https://github.com/t2-project/orchestrator">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Cart service: <a class="reference external" href="https://github.com/t2-project/cart">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Credit Institute service: <a class="reference external" href="https://github.com/t2-project/creditinstitute">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>UIBackend : <a class="reference external" href="https://github.com/t2-project/uibackend">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>UI : <a class="reference external" href="https://github.com/t2-project/ui">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>Common: <a class="reference external" href="https://github.com/t2-project/common">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
+<li>E2E Test: <a class="reference external" href="https://github.com/t2-project/e2e-tests">GitHub</a>, <span class="xref std std-ref">JavaDoc</span></li>
 </ul>
 </div>
 </div>
@@ -342,7 +329,7 @@ Most domain specific things are used by multiple services and thus located in th
 <li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul>

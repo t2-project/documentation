@@ -2,19 +2,45 @@
 
 .. java:import:: java.util Date
 
+.. java:import:: javax.persistence Column
+
+.. java:import:: javax.persistence Entity
+
+.. java:import:: javax.persistence FetchType
+
+.. java:import:: javax.persistence GeneratedValue
+
+.. java:import:: javax.persistence Id
+
+.. java:import:: javax.persistence ManyToOne
+
+.. java:import:: javax.persistence Table
+
+.. java:import:: javax.persistence Temporal
+
+.. java:import:: javax.persistence TemporalType
+
 Reservation
 ===========
 
 .. java:package:: de.unistuttgart.t2.inventory.repository
    :noindex:
 
-.. java:type:: public class Reservation
+.. java:type:: @Entity @Table public class Reservation
 
    A Reservation of a certain number of units.
 
    Reservations have a \ ``creationDate``\  such that they might be killed after they exceeded their time to life.
 
    :author: maumau
+
+Fields
+------
+item
+^^^^
+
+.. java:field:: @ManyToOne public InventoryItem item
+   :outertype: Reservation
 
 Constructors
 ------------
@@ -27,7 +53,13 @@ Reservation
 Reservation
 ^^^^^^^^^^^
 
-.. java:constructor:: public Reservation(int units)
+.. java:constructor:: public Reservation(int units, String userId, InventoryItem item)
+   :outertype: Reservation
+
+Reservation
+^^^^^^^^^^^
+
+.. java:constructor:: protected Reservation(int units, Date date, String userId, InventoryItem item)
    :outertype: Reservation
 
 Methods
@@ -44,31 +76,37 @@ getCreationDate
 .. java:method:: public Date getCreationDate()
    :outertype: Reservation
 
+getId
+^^^^^
+
+.. java:method:: public int getId()
+   :outertype: Reservation
+
 getUnits
 ^^^^^^^^
 
 .. java:method:: public int getUnits()
    :outertype: Reservation
 
-setCreationDate
-^^^^^^^^^^^^^^^
+getUserId
+^^^^^^^^^
 
-.. java:method:: public void setCreationDate(Date creationDate)
+.. java:method:: public String getUserId()
    :outertype: Reservation
-
-setUnits
-^^^^^^^^
-
-.. java:method:: public void setUnits(int units)
-   :outertype: Reservation
-
-   set number of units and also renew the creation date.
-
-   :param units: new number of reserved units
 
 toString
 ^^^^^^^^
 
 .. java:method:: @Override public String toString()
    :outertype: Reservation
+
+updateUnits
+^^^^^^^^^^^
+
+.. java:method:: public void updateUnits(int update)
+   :outertype: Reservation
+
+   increase number of units by 'update' and also renew the creation date.
+
+   :param update: additionally reserved units
 

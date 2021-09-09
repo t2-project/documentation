@@ -21,12 +21,6 @@ Constructors
 SagaRequest
 ^^^^^^^^^^^
 
-.. java:constructor:: public SagaRequest()
-   :outertype: SagaRequest
-
-SagaRequest
-^^^^^^^^^^^
-
 .. java:constructor:: @JsonCreator public SagaRequest(String sessionId, String cardNumber, String cardOwner, String checksum, double total)
    :outertype: SagaRequest
 
@@ -60,12 +54,6 @@ getTotal
 ^^^^^^^^
 
 .. java:method:: public double getTotal()
-   :outertype: SagaRequest
-
-setChecksum
-^^^^^^^^^^^
-
-.. java:method:: public void setChecksum(String checksum)
    :outertype: SagaRequest
 
 toString

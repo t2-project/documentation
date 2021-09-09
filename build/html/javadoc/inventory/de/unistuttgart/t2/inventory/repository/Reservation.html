@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../../../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
-    <link rel="next" title="TimeoutCollector" href="TimeoutCollector.html" />
+    <link rel="next" title="ReservationRepository" href="ReservationRepository.html" />
     <link rel="prev" title="ProductRepository" href="ProductRepository.html" />
    
   <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
@@ -51,6 +51,17 @@ public class <code class="descname">Reservation</code><a class="headerlink" href
 </table>
 </dd></dl>
 
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="item">
+<h3>item<a class="headerlink" href="#item" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.item">
+public <a class="reference internal" href="InventoryItem.html#de.unistuttgart.t2.inventory.repository.InventoryItem" title="de.unistuttgart.t2.inventory.repository.InventoryItem">InventoryItem</a> <code class="descname">item</code><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
 <div class="section" id="constructors">
 <h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
@@ -64,8 +75,16 @@ public <code class="descname">Reservation</code><span class="sig-paren">(</span>
 <div class="section" id="id2">
 <h3>Reservation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="constructor">
-<dt id="de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int)">
-public <code class="descname">Reservation</code><span class="sig-paren">(</span>int<em> units</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int, String, InventoryItem)">
+public <code class="descname">Reservation</code><span class="sig-paren">(</span>int<em> units</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> userId</em>, <a class="reference internal" href="InventoryItem.html#de.unistuttgart.t2.inventory.repository.InventoryItem" title="de.unistuttgart.t2.inventory.repository.InventoryItem">InventoryItem</a><em> item</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int, String, InventoryItem)" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id3">
+<h3>Reservation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="constructor">
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int, Date, String, InventoryItem)">
+protected <code class="descname">Reservation</code><span class="sig-paren">(</span>int<em> units</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html" title="java.util.Date">Date</a><em> date</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> userId</em>, <a class="reference internal" href="InventoryItem.html#de.unistuttgart.t2.inventory.repository.InventoryItem" title="de.unistuttgart.t2.inventory.repository.InventoryItem">InventoryItem</a><em> item</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.Reservation(int, Date, String, InventoryItem)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -88,6 +107,14 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <dd></dd></dl>
 
 </div>
+<div class="section" id="getid">
+<h3>getId<a class="headerlink" href="#getid" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.getId()">
+public int <code class="descname">getId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.getId()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
 <div class="section" id="getunits">
 <h3>getUnits<a class="headerlink" href="#getunits" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
@@ -96,32 +123,12 @@ public int <code class="descname">getUnits</code><span class="sig-paren">(</span
 <dd></dd></dl>
 
 </div>
-<div class="section" id="setcreationdate">
-<h3>setCreationDate<a class="headerlink" href="#setcreationdate" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getuserid">
+<h3>getUserId<a class="headerlink" href="#getuserid" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.Reservation.setCreationDate(Date)">
-public void <code class="descname">setCreationDate</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html" title="java.util.Date">Date</a><em> creationDate</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.setCreationDate(Date)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.getUserId()">
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">getUserId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.getUserId()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</div>
-<div class="section" id="setunits">
-<h3>setUnits<a class="headerlink" href="#setunits" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.Reservation.setUnits(int)">
-public void <code class="descname">setUnits</code><span class="sig-paren">(</span>int<em> units</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.setUnits(int)" title="Permalink to this definition">¶</a></dt>
-<dd><p>set number of units and also renew the creation date.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>units</strong> – new number of reserved units</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
 
 </div>
 <div class="section" id="tostring">
@@ -130,6 +137,26 @@ public void <code class="descname">setUnits</code><span class="sig-paren">(</spa
 <dt id="de.unistuttgart.t2.inventory.repository.Reservation.toString()">
 public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.toString()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</div>
+<div class="section" id="updateunits">
+<h3>updateUnits<a class="headerlink" href="#updateunits" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.inventory.repository.Reservation.updateUnits(int)">
+public void <code class="descname">updateUnits</code><span class="sig-paren">(</span>int<em> update</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.Reservation.updateUnits(int)" title="Permalink to this definition">¶</a></dt>
+<dd><p>increase number of units by ‘update’ and also renew the creation date.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>update</strong> – additionally reserved units</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -163,7 +190,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">
@@ -186,7 +213,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
   <li><a href="../../../../../packages.html">inventory</a><ul>
   <li><a href="package-index.html">de.unistuttgart.t2.inventory.repository</a><ul>
       <li>Previous: <a href="ProductRepository.html" title="previous chapter">ProductRepository</a></li>
-      <li>Next: <a href="TimeoutCollector.html" title="next chapter">TimeoutCollector</a></li>
+      <li>Next: <a href="ReservationRepository.html" title="next chapter">ReservationRepository</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

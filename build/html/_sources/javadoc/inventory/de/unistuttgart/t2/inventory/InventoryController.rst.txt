@@ -28,18 +28,12 @@ InventoryController
 
    :author: maumau
 
-Fields
-------
-generator
-^^^^^^^^^
+Constructors
+------------
+InventoryController
+^^^^^^^^^^^^^^^^^^^
 
-.. java:field:: @Autowired  DataGenerator generator
-   :outertype: InventoryController
-
-inventoryService
-^^^^^^^^^^^^^^^^
-
-.. java:field:: @Autowired  InventoryService inventoryService
+.. java:constructor:: public InventoryController(InventoryService inventoryService, DataGenerator generator)
    :outertype: InventoryController
 
 Methods

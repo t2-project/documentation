@@ -9,5 +9,4 @@ de.unistuttgart.t2.creditinstitute
    CreditInstituteApplication
    CreditInstituteController
    CreditInstituteService
-   PaymentData
 

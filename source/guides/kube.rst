@@ -3,9 +3,9 @@
 Run on a Kubernetes Cluster
 ========================================
 
-The preferred deployment for the T2 Store is in a Kubernetes cluster.
+The preferred deployment for the T2 Store is on a Kubernetes cluster.
 
-The T2 Store needs Kafka and a MongoDB. Install them anyway you want to, e.g. with helm charts:
+The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
 .. code-block:: php
 
@@ -31,7 +31,7 @@ Run Locally
 
 You can run the entire T2 Store locally, either by using the pre build docker images, or by building all services yourself. 
 
-The following guide describes how to build an run the T2 services with the Order service as an example. 
+The following guide describes how to build and run the T2 store's services with the Order service as an example. 
 You can build all other services (with minor exceptions) the same way.
 You just need to replace 'order' with the respective service name.
 
@@ -81,19 +81,13 @@ You want to consult the service's README on the meaning of the properties.
 Step 3 : Build Local Dependencies
 ------------------------------------------
 
-Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to build that first:
+Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
 
 .. code-block:: php
 
    git clone https://github.com/t2-project/common.git
    cd common/
-   mvn clean install
-
-And install it to your local maven repository:  
-
-.. code-block:: php
-
-   mvn install:install-file -Dfile=./target/common-1.0-SNAPSHOT.jar  -DpomFile=./pom.xml
+   ./mvnw clean install
 
 Step 2.1 : Exceptions for Service E2E Test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,22 +100,22 @@ You must build and install them to your local maven repository as well.
 
    git clone https://github.com/t2-project/payment.git
    cd payment/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
    
 .. code-block:: php
 
    git clone https://github.com/t2-project/inventory.git
    cd inventory/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
 .. code-block:: php
 
    git clone https://github.com/t2-project/order.git
    cd order/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
 
 Step 4 : Build and Run
@@ -139,7 +133,7 @@ Or like this, in case you want to supply specific application properties (rememb
 .. code-block:: php
 
    cd order/
-   mvn clean install
+   ./mvnw clean install
    java -jar -Dspring.config.location=./src/main/resources/application.local.properties ./target/order-0.0.1-SNAPSHOT.jar
 
 Step 5 : Build Docker Image
@@ -151,9 +145,9 @@ Each service repository contains a Dockerfile to build an image of that service.
 Run with Test Service
 =======================
 
-The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider stead. 
+The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider's stead. 
 The setup is depicted below.
-With this setup Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
+With this setup, the Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
 
 For more Details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
 
@@ -170,8 +164,12 @@ Step by Step
 Step 1 : Run E2E Test Service
 -----------------------------
 
-Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__ as described in the previous section.
+Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
+If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
 
+.. code-block:: php
+
+   kubectl apply -f testsetup/e2etest.yaml 
 
 Step 2 : Configure the UI Backend and the Payment Service 
 ---------------------------------------------------------
@@ -197,7 +195,7 @@ In the Payment Deployment (:file:`payment.yml`):
 
 In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
 
-Or apply the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
+Or use the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
 
 Step 3 : Generate Load
 -----------------------------

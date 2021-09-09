@@ -3,9 +3,9 @@
 Run on a Kubernetes Cluster
 ========================================
 
-The preferred deployment for the T2 Store is in a Kubernetes cluster.
+The preferred deployment for the T2 Store is on a Kubernetes cluster.
 
-The T2 Store needs Kafka and a MongoDB. Install them anyway you want to, e.g. with helm charts:
+The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
 .. code-block:: php
 
@@ -26,13 +26,12 @@ For the T2 Store itself get the deployments and deploy them:
 
 Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
 
-
 Run Locally  
 ===========
 
 You can run the entire T2 Store locally, either by using the pre build docker images, or by building all services yourself. 
 
-The following guide describes how to build an run the T2 services with the Order service as an example. 
+The following guide describes how to build and run the T2 store's services with the Order service as an example. 
 You can build all other services (with minor exceptions) the same way.
 You just need to replace 'order' with the respective service name.
 
@@ -41,7 +40,7 @@ Step 0 : Clone Repository
 
 .. code-block:: php
 
-   git clone https://github.com:t2-project/order.git
+   git clone https://github.com/t2-project/order.git
 
 
 Step 1 : Versions and Environment Variables
@@ -82,19 +81,13 @@ You want to consult the service's README on the meaning of the properties.
 Step 3 : Build Local Dependencies
 ------------------------------------------
 
-Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to build that first:
+Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
 
 .. code-block:: php
 
    git clone https://github.com/t2-project/common.git
    cd common/
-   mvn clean install
-
-And install it to your local maven repository:  
-
-.. code-block:: php
-
-   mvn install:install-file -Dfile=./target/common-1.0-SNAPSHOT.jar  -DpomFile=./pom.xml
+   ./mvnw clean install
 
 Step 2.1 : Exceptions for Service E2E Test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,22 +100,22 @@ You must build and install them to your local maven repository as well.
 
    git clone https://github.com/t2-project/payment.git
    cd payment/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
    
 .. code-block:: php
 
    git clone https://github.com/t2-project/inventory.git
    cd inventory/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
 .. code-block:: php
 
    git clone https://github.com/t2-project/order.git
    cd order/
-   mvn clean install
-   mvn install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw clean install
+   ./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
 
 Step 4 : Build and Run
@@ -140,7 +133,7 @@ Or like this, in case you want to supply specific application properties (rememb
 .. code-block:: php
 
    cd order/
-   mvn clean install
+   ./mvnw clean install
    java -jar -Dspring.config.location=./src/main/resources/application.local.properties ./target/order-0.0.1-SNAPSHOT.jar
 
 Step 5 : Build Docker Image
@@ -152,9 +145,9 @@ Each service repository contains a Dockerfile to build an image of that service.
 Run with Test Service
 =======================
 
-The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider stead. 
+The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Payment provider and answers them in the provider's stead. 
 The setup is depicted below.
-With this setup Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
+With this setup, the Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
 
 For more Details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
 
@@ -171,8 +164,12 @@ Step by Step
 Step 1 : Run E2E Test Service
 -----------------------------
 
-Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__ as described in the previous section.
+Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
+If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
 
+.. code-block:: php
+
+   kubectl apply -f testsetup/e2etest.yaml 
 
 Step 2 : Configure the UI Backend and the Payment Service 
 ---------------------------------------------------------
@@ -198,7 +195,7 @@ In the Payment Deployment (:file:`payment.yml`):
 
 In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
 
-Or apply the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
+Or use the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
 
 Step 3 : Generate Load
 -----------------------------
@@ -259,18 +256,19 @@ Report for Test that found that some entries in the inventory database were not 
 Load Generation
 ===============
 
-You can generate load manually by sending requests to the UIBackend (or using the UI, once it is there).
+You can generate load manually by sending requests to the UIBackend (or using the UI, but it is ugly).
 Confer the `UI Backend's README <https://github.com/t2-project/uibackend>`__ on how to talk to the UI Backend.
 
 Or you can use a Load Generator to send request.
-I recommend `Apache JMeter <https://jmeter.apache.org/>`__.
+We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
 
 Apache JMeter
 -------------
 
-To run the T2 Store with the JMeter Load Generator, you must do the following :
+To run the T2 Store with the JMeter Load Generator, do the following :
 
 #. Deploy the T2 Store
+#. Make sure that the UI-Backend is accessible from outside the cluster - unless you want to put the load generator onto the cluster.
 #. Install JMeter
 #. Create or download a load profile
 #. Run the load generator
@@ -310,28 +308,9 @@ Prometheus
 The T2 Store can be monitored with `Prometheus <https://prometheus.io/>`__
 
 The T2 Store services use `Micrometer <https://micrometer.io/docs/registry/prometheus>`__ to expose metrics endpoints for prometheus. 
-At the endpoint :file:`/actuator/prometheus` the following metrics are exposed:
+Check the endpoint :file:`/actuator/prometheus` to see which metrics are exposed.
 
-*  http_server_requests_seconds
-*  http_server_requests_seconds_count
-*  http_server_requests_seconds_sum
-*  http_server_requests_seconds_max 
-*  quantile 0.5, 0.75, 0.95, 0.98, 0.99, 0.999, 1.0 for http_server_requests_seconds
-
-The Monitoring is not yet configured for all Service, but it is for the `Credit Institute <https://github.com/t2-project/creditinstitute>`__. 
-This is where its the most relevant because i want to know, wether the payment provider's service is good enough for the Payment Service.
-
-Rules and Alerts
-----------------
-
-The prometheus files can be found `here <https://github.com/t2-project/kube/tree/main/prometheusfiles>`__
-
-Confer the README located in that folder for more details on them. 
-
-
-jaeger / opentracing
+Jaeger / Opentracing
 ====================
 
-The T2 store can be traced with `Jaeger <https://www.jaegertracing.io/>`__ - or rather at some point in the future it's supposed to work.
-
-TODO
+Most of the  T2 store's services include the dependencies to be traced with `Jaeger <https://www.jaegertracing.io/>`__.

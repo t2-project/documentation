@@ -1,14 +1,24 @@
 .. java:import:: org.springframework.beans.factory.annotation Autowired
 
-.. java:import:: org.springframework.web.bind.annotation GetMapping
+.. java:import:: org.springframework.http HttpStatus
 
-.. java:import:: org.springframework.web.bind.annotation PathVariable
+.. java:import:: org.springframework.http ResponseEntity
+
+.. java:import:: org.springframework.web.bind.annotation ExceptionHandler
+
+.. java:import:: org.springframework.web.bind.annotation GetMapping
 
 .. java:import:: org.springframework.web.bind.annotation PostMapping
 
 .. java:import:: org.springframework.web.bind.annotation RequestBody
 
+.. java:import:: org.springframework.web.bind.annotation ResponseStatus
+
 .. java:import:: org.springframework.web.bind.annotation RestController
+
+.. java:import:: de.unistuttgart.t2.creditinstitute.domain PaymentData
+
+.. java:import:: de.unistuttgart.t2.creditinstitute.exceptions PaymentFailedException
 
 CreditInstituteController
 =========================
@@ -43,10 +53,50 @@ doPayment
    :param card: informations usually found on a credit card
    :throws Exception: if anything 'failed'
 
+getFailurerate
+^^^^^^^^^^^^^^
+
+.. java:method:: @GetMapping public double getFailurerate()
+   :outertype: CreditInstituteController
+
+getTimeout
+^^^^^^^^^^
+
+.. java:method:: @GetMapping public int getTimeout()
+   :outertype: CreditInstituteController
+
+getTimeoutrate
+^^^^^^^^^^^^^^
+
+.. java:method:: @GetMapping public double getTimeoutrate()
+   :outertype: CreditInstituteController
+
+handleIllegalArgumentException
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @ExceptionHandler @ResponseStatus public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException exception)
+   :outertype: CreditInstituteController
+
+   Creates the response entity if setting the timeout or the rates failed.
+
+   :param exception:
+   :return: a response entity with an exceptional message
+
+handlePaymentFailedException
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. java:method:: @ExceptionHandler @ResponseStatus public ResponseEntity<String> handlePaymentFailedException(PaymentFailedException exception)
+   :outertype: CreditInstituteController
+
+   Creates the response entity if serving a payment request failed.
+
+   :param exception:
+   :return: a response entity with an exceptional message
+
 setFailurerate
 ^^^^^^^^^^^^^^
 
-.. java:method:: @GetMapping public double setFailurerate(String rate)
+.. java:method:: @PostMapping public double setFailurerate(double rate)
    :outertype: CreditInstituteController
 
    Updated and get the failure rate.
@@ -59,7 +109,7 @@ setFailurerate
 setTimeout
 ^^^^^^^^^^
 
-.. java:method:: @GetMapping public int setTimeout(String timeout)
+.. java:method:: @PostMapping public int setTimeout(int timeout)
    :outertype: CreditInstituteController
 
    Updated and get the timeout duration.
@@ -72,7 +122,7 @@ setTimeout
 setTimeoutrate
 ^^^^^^^^^^^^^^
 
-.. java:method:: @GetMapping public double setTimeoutrate(String rate)
+.. java:method:: @PostMapping public double setTimeoutrate(double rate)
    :outertype: CreditInstituteController
 
    Updated and get the timeout rate.

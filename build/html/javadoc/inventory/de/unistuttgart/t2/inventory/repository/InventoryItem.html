@@ -72,8 +72,8 @@ public <code class="descname">InventoryItem</code><span class="sig-paren">(</spa
 <div class="section" id="id3">
 <h3>InventoryItem<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <dl class="constructor">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.InventoryItem(String, String, String, int, double, Map)">
-public <code class="descname">InventoryItem</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> id</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> name</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> description</em>, int<em> units</em>, double<em> price</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="java.util.Map">Map</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>, <a class="reference internal" href="Reservation.html#de.unistuttgart.t2.inventory.repository.Reservation" title="de.unistuttgart.t2.inventory.repository.Reservation">Reservation</a>&gt;<em> reservations</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.InventoryItem(String, String, String, int, double, Map)" title="Permalink to this definition">¶</a></dt>
+<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.InventoryItem(String, String, String, int, double, List)">
+public <code class="descname">InventoryItem</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> id</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> name</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> description</em>, int<em> units</em>, double<em> price</em>, <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="Reservation.html#de.unistuttgart.t2.inventory.repository.Reservation" title="de.unistuttgart.t2.inventory.repository.Reservation">Reservation</a>&gt;<em> reservations</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.InventoryItem(String, String, String, int, double, List)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -118,6 +118,25 @@ public void <code class="descname">commitReservation</code><span class="sig-pare
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>sessionId</strong> – to identify the reservation to be committed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="deletereservation">
+<h3>deleteReservation<a class="headerlink" href="#deletereservation" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.deleteReservation(String)">
+public void <code class="descname">deleteReservation</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> sessionId</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.deleteReservation(String)" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sessionId</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -193,7 +212,7 @@ public double <code class="descname">getPrice</code><span class="sig-paren">(</s
 <h3>getReservations<a class="headerlink" href="#getreservations" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.getReservations()">
-public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="java.util.Map">Map</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>, <a class="reference internal" href="Reservation.html#de.unistuttgart.t2.inventory.repository.Reservation" title="de.unistuttgart.t2.inventory.repository.Reservation">Reservation</a>&gt; <code class="descname">getReservations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.getReservations()" title="Permalink to this definition">¶</a></dt>
+public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="Reservation.html#de.unistuttgart.t2.inventory.repository.Reservation" title="de.unistuttgart.t2.inventory.repository.Reservation">Reservation</a>&gt; <code class="descname">getReservations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.getReservations()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -202,46 +221,6 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <dl class="method">
 <dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.getUnits()">
 public int <code class="descname">getUnits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.getUnits()" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="setdescription">
-<h3>setDescription<a class="headerlink" href="#setdescription" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.setDescription(String)">
-public void <code class="descname">setDescription</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> description</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.setDescription(String)" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="setid">
-<h3>setId<a class="headerlink" href="#setid" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.setId(String)">
-public void <code class="descname">setId</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> id</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.setId(String)" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="setname">
-<h3>setName<a class="headerlink" href="#setname" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.setName(String)">
-public void <code class="descname">setName</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> name</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.setName(String)" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="setprice">
-<h3>setPrice<a class="headerlink" href="#setprice" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.setPrice(double)">
-public void <code class="descname">setPrice</code><span class="sig-paren">(</span>double<em> price</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.setPrice(double)" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="setreservations">
-<h3>setReservations<a class="headerlink" href="#setreservations" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="de.unistuttgart.t2.inventory.repository.InventoryItem.setReservations(Map)">
-public void <code class="descname">setReservations</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="java.util.Map">Map</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>, <a class="reference internal" href="Reservation.html#de.unistuttgart.t2.inventory.repository.Reservation" title="de.unistuttgart.t2.inventory.repository.Reservation">Reservation</a>&gt;<em> reservations</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.inventory.repository.InventoryItem.setReservations(Map)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -304,7 +283,7 @@ public <a class="reference external" href="http://docs.oracle.com/javase/8/docs/
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul class="current">

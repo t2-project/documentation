@@ -16,10 +16,6 @@
 
 .. java:import:: org.springframework.transaction.annotation Transactional
 
-.. java:import:: org.springframework.web.client RestTemplate
-
-.. java:import:: de.unistuttgart.t2.common CartContent
-
 DataGenerator
 =============
 
@@ -32,24 +28,12 @@ DataGenerator
 
    :author: maumau
 
-Fields
-------
-inventorySize
+Constructors
+------------
+DataGenerator
 ^^^^^^^^^^^^^
 
-.. java:field:: @Value protected int inventorySize
-   :outertype: DataGenerator
-
-repository
-^^^^^^^^^^
-
-.. java:field:: @Autowired  ProductRepository repository
-   :outertype: DataGenerator
-
-template
-^^^^^^^^
-
-.. java:field::  RestTemplate template
+.. java:constructor:: public DataGenerator(ProductRepository repository, int inventorySize)
    :outertype: DataGenerator
 
 Methods

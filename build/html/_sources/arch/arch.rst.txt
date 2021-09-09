@@ -8,7 +8,7 @@ The T2 Store consists of seven services.
 
 .. image:: figs/component_total_colour.jpg
 
-The green and blue services are the core T2 Services. The blue ones are participate in the saga, the green ones do not. 
+The green and blue services are the core T2 Services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  
 
 *  **UI** : The application frontend. 
@@ -87,8 +87,6 @@ The T2 Store uses the following frameworks (and services):
 Spring and Spring Boot
 ----------------------
 
-It's Spring. Deal with it.
-
 =================== ==============
 Dependency          Version
 =================== ==============
@@ -128,12 +126,7 @@ eventuateio/eventuate-cdc-service  latest
 Message Broker
 --------------
 
-The T2 Store uses Kafka as message broker.
-It uses these images:
-
-*  Kafka : `gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1 <http://gcr.io/google_containers/kubernetes-kafka:1.0-10.2.1>`__
-*  Zookeeper : `gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10 <http://gcr.io/google_containers/kubernetes-zookeeper:1.0-3.4.10>`__
-
+The T2 Store uses Kafka and Zookeeper as message broker.
 
 Saga Database
 -------------
@@ -145,17 +138,9 @@ It uses the Postgres image from `eventuateio <https://hub.docker.com/r/eventuate
 Domain Database
 ---------------
 
-The T2 Store uses MongoDBs as databases for the domain data.
-Thus the repositories *cart repository*, *product repository* and *order repository* are MongoDBs.
-
-Prometheus
-----------
-TODO Dependency, Version, ....
-
-Open-tracing and Jaeger
------------------------
-TODO Dependency, Version, ....
-
+The T2 Store uses MongoDBs and a Postgres Database as databases for the domain data.
+The *cart repository* and the *order repository* are MongoDBs.
+The *product repository* is a Postgres Database. 
 
 The Services
 ============

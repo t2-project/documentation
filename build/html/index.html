@@ -45,7 +45,7 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The T2 Store is a micro-service reference application that implements the Saga pattern.
 It is loosely base on the <a class="reference external" href="https://github.com/DescartesResearch/TeaStore">TeaStore Application</a>.</p>
-<p>The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one simulates an external payment provider and the other tests the store at runtime.</p>
+<p>The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one to simulate an external payment provider and the other to test the store at runtime.</p>
 <p>All services are Spring Boot Applications.
 They are instrumented with <a class="reference external" href="https://prometheus.io/">Prometheus</a> for metrics and with <a class="reference external" href="https://www.jaegertracing.io/">Jaeger</a>  for tracing.</p>
 <p>See the <a class="reference internal" href="arch/arch.html#arch"><span class="std std-ref">architecture overview</span></a> for more information about the architecture.
@@ -63,7 +63,7 @@ See the <a class="reference internal" href="guides/kube.html#usage"><span class=
 <li><a class="reference external" href="https://github.com/t2-project/uibackend">UIBackend service</a></li>
 <li><a class="reference external" href="https://github.com/t2-project/ui">UI</a></li>
 </ul>
-<p>These repositories contain supplemental services:</p>
+<p>These repositories contain the supplemental services:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/t2-project/e2e-test">E2E Test</a></li>
 <li><a class="reference external" href="https://github.com/t2-project/creditinstitute">Credit Institute service</a></li>
@@ -77,7 +77,7 @@ It is a dependency to all other services:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/t2-project/documentation">Documentation</a></li>
 </ul>
-<p>This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else.</p>
+<p>This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/t2-project/kube">Kube</a></li>
 </ul>
@@ -113,7 +113,7 @@ It is a dependency to all other services:</p>
 <li class="toctree-l1"><a class="reference internal" href="guides/kube.html#run-with-test-service">Run with Test Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/kube.html#load-generation">Load Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/kube.html#prometheus">Prometheus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#jaeger-opentracing">jaeger / opentracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">JAVADOC</span></p>
 <ul>

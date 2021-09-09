@@ -1,8 +1,22 @@
-.. java:import:: java.util HashMap
+.. java:import:: java.util ArrayList
 
-.. java:import:: java.util Map
+.. java:import:: java.util List
 
-.. java:import:: org.springframework.data.annotation Id
+.. java:import:: javax.persistence CascadeType
+
+.. java:import:: javax.persistence Column
+
+.. java:import:: javax.persistence Entity
+
+.. java:import:: javax.persistence GeneratedValue
+
+.. java:import:: javax.persistence Id
+
+.. java:import:: javax.persistence OneToMany
+
+.. java:import:: javax.persistence Table
+
+.. java:import:: org.hibernate.annotations GenericGenerator
 
 .. java:import:: com.fasterxml.jackson.annotation JsonCreator
 
@@ -16,7 +30,7 @@ InventoryItem
 .. java:package:: de.unistuttgart.t2.inventory.repository
    :noindex:
 
-.. java:type:: public class InventoryItem
+.. java:type:: @Entity @Table public class InventoryItem
 
    A Product in the inventory. Each product has some describing attributes such as a name, a description and a price, as well as the number of units in stock. If a user placed units of product in their cart, that product has some reservations attached. The actual number of unit in stock shall only ever be changed by committing reservations (c.f. \ :java:ref:`InventoryItem.commitReservation(String)`\ })
 
@@ -35,13 +49,13 @@ InventoryItem
 InventoryItem
 ^^^^^^^^^^^^^
 
-.. java:constructor:: @JsonCreator public InventoryItem(String id, String name, String description, int units, double price)
+.. java:constructor:: public InventoryItem(String id, String name, String description, int units, double price)
    :outertype: InventoryItem
 
 InventoryItem
 ^^^^^^^^^^^^^
 
-.. java:constructor:: public InventoryItem(String id, String name, String description, int units, double price, Map<String, Reservation> reservations)
+.. java:constructor:: @JsonCreator public InventoryItem(String id, String name, String description, int units, double price, List<Reservation> reservations)
    :outertype: InventoryItem
 
 Methods
@@ -67,6 +81,14 @@ commitReservation
    remove a reservation and decrease units in stock. always use this operation to decrease the the number of unit in stock.
 
    :param sessionId: to identify the reservation to be committed
+
+deleteReservation
+^^^^^^^^^^^^^^^^^
+
+.. java:method:: public void deleteReservation(String sessionId)
+   :outertype: InventoryItem
+
+   :param sessionId:
 
 equals
 ^^^^^^
@@ -112,43 +134,13 @@ getPrice
 getReservations
 ^^^^^^^^^^^^^^^
 
-.. java:method:: public Map<String, Reservation> getReservations()
+.. java:method:: public List<Reservation> getReservations()
    :outertype: InventoryItem
 
 getUnits
 ^^^^^^^^
 
 .. java:method:: public int getUnits()
-   :outertype: InventoryItem
-
-setDescription
-^^^^^^^^^^^^^^
-
-.. java:method:: public void setDescription(String description)
-   :outertype: InventoryItem
-
-setId
-^^^^^
-
-.. java:method:: public void setId(String id)
-   :outertype: InventoryItem
-
-setName
-^^^^^^^
-
-.. java:method:: public void setName(String name)
-   :outertype: InventoryItem
-
-setPrice
-^^^^^^^^
-
-.. java:method:: public void setPrice(double price)
-   :outertype: InventoryItem
-
-setReservations
-^^^^^^^^^^^^^^^
-
-.. java:method:: public void setReservations(Map<String, Reservation> reservations)
    :outertype: InventoryItem
 
 setUnits

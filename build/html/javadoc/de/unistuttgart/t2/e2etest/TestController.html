@@ -1,0 +1,220 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TestController &#8212; T2 Store  documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="testcontroller">
+<h1>TestController<a class="headerlink" href="#testcontroller" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="de.unistuttgart.t2.e2etest.TestController">
+public class <code class="descname">TestController</code><a class="headerlink" href="#de.unistuttgart.t2.e2etest.TestController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines endpoints for the e2e test.</p>
+<p>The e2e test is intercepts the t2 store at two points. First it takes the <a class="reference internal" href="../common/SagaRequest.html#de.unistuttgart.t2.common.SagaRequest" title="de.unistuttgart.t2.common.SagaRequest"><code class="xref java java-ref docutils literal notranslate"><span class="pre">SagaRequest</span></code></a> from the UIBackend to the orchestrator, and then it takes the requests that the payment service posts. This way the e2e test knows what reply the payment service received and thus also knows whether the saga instance is supposed to succeed or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">maumau</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="service">
+<h3>service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h3>
+<dl class="field">
+<dt id="de.unistuttgart.t2.e2etest.TestController.service">
+ <a class="reference internal" href="TestService.html#de.unistuttgart.t2.e2etest.TestService" title="de.unistuttgart.t2.e2etest.TestService">TestService</a> <code class="descname">service</code><a class="headerlink" href="#de.unistuttgart.t2.e2etest.TestController.service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fakepay">
+<h3>fakepay<a class="headerlink" href="#fakepay" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.e2etest.TestController.fakepay(PaymentData)">
+public void <code class="descname">fakepay</code><span class="sig-paren">(</span><a class="reference internal" href="../payment/PaymentData.html#de.unistuttgart.t2.payment.PaymentData" title="de.unistuttgart.t2.payment.PaymentData">PaymentData</a><em> paymentdata</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.e2etest.TestController.fakepay(PaymentData)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fakes the reply to the payment service and start a thread that asserts the saga instance.</p>
+<p>The payment service request payment for each saga instance. If that request fails, the service tries again. This endpoints replies are consistent for a request and its retries.</p>
+<p>Also the assertion thing is triggered only once for each saga instance. There is no need to check the same thing twice.</p>
+<p>As described in <a class="reference internal" href="#de.unistuttgart.t2.e2etest.TestController.test(SagaRequest)" title="de.unistuttgart.t2.e2etest.TestController.test(SagaRequest)"><code class="xref java java-ref docutils literal notranslate"><span class="pre">TestController.test(SagaRequest)</span></code></a>, the field <code class="docutils literal notranslate"><span class="pre">checksum</span></code> hold an id to correlate the payment request to the saga instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paymentdata</strong> – request data. the <code class="docutils literal notranslate"><span class="pre">checksum</span></code> is the with correlation id</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html" title="java.lang.Exception"><strong>Exception</strong></a> – if payment ‘failed’</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="handlefakefailureexception">
+<h3>handleFakeFailureException<a class="headerlink" href="#handlefakefailureexception" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.e2etest.TestController.handleFakeFailureException(FakeFailureException)">
+public ResponseEntity&lt;<a class="reference external" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="java.lang.String">String</a>&gt; <code class="descname">handleFakeFailureException</code><span class="sig-paren">(</span><a class="reference internal" href="exception/FakeFailureException.html#de.unistuttgart.t2.e2etest.exception.FakeFailureException" title="de.unistuttgart.t2.e2etest.exception.FakeFailureException">FakeFailureException</a><em> exception</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.e2etest.TestController.handleFakeFailureException(FakeFailureException)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the response entity in case of faked failure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exception</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a response entity with an exceptional message</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="test">
+<h3>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="de.unistuttgart.t2.e2etest.TestController.test(SagaRequest)">
+public void <code class="descname">test</code><span class="sig-paren">(</span><a class="reference internal" href="../common/SagaRequest.html#de.unistuttgart.t2.common.SagaRequest" title="de.unistuttgart.t2.common.SagaRequest">SagaRequest</a><em> request</em><span class="sig-paren">)</span><a class="headerlink" href="#de.unistuttgart.t2.e2etest.TestController.test(SagaRequest)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intercepts the communication from the UIBackend to the orchestrator.</p>
+<p>Takes the <code class="docutils literal notranslate"><span class="pre">request</span></code> that from UIBackend and modifies it such that it might be correlated to an incoming payment request. Also sets what reply said payment request will receive and forward finally forwards the request to the orchestrator.</p>
+<p>As only the information about the credit cart will end up in the request to the payment provider, the field <code class="docutils literal notranslate"><span class="pre">checksum</span></code> will be miss used to correlate the payment requests received in <a class="reference internal" href="#de.unistuttgart.t2.e2etest.TestController.fakepay(PaymentData)" title="de.unistuttgart.t2.e2etest.TestController.fakepay(PaymentData)"><code class="xref java java-ref docutils literal notranslate"><span class="pre">TestController.fakepay(PaymentData)</span></code></a> to the saga request reveiced in this operation.</p>
+<p>It would have been pretty cool, if i could just put the saga id into the request but i cannot because i only get the saga id after i post the request to the orchestrator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>request</strong> – intended for orchestrator</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">T2 Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">ARCHITECTURE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../arch/arch.html">Architecture Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">HOWTOS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html">Run on a Kubernetes Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html#run-locally">Run Locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html#run-with-test-service">Run with Test Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html#load-generation">Load Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html#prometheus">Prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/kube.html#jaeger-opentracing">Jaeger / Opentracing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Sarah Sophie Stieß.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../_sources/javadoc/de/unistuttgart/t2/e2etest/TestController.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

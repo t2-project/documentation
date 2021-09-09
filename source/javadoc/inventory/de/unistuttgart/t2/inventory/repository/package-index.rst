@@ -10,6 +10,7 @@ de.unistuttgart.t2.inventory.repository
    InventoryItem
    ProductRepository
    Reservation
+   ReservationRepository
    TimeoutCollector
    TimeoutCollector-RecervationCheckAndDeleteTask
 

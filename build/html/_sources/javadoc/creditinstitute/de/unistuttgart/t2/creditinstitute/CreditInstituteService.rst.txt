@@ -1,5 +1,9 @@
 .. java:import:: java.util Random
 
+.. java:import:: de.unistuttgart.t2.creditinstitute.domain PaymentData
+
+.. java:import:: de.unistuttgart.t2.creditinstitute.exceptions PaymentFailedException
+
 CreditInstituteService
 ======================
 
@@ -34,7 +38,7 @@ doPayment
 .. java:method:: public void doPayment(PaymentData data) throws Exception
    :outertype: CreditInstituteService
 
-   Fake executes some payment. Depending on \ :java:ref:`failurerate <CreditInstituteService.failurerate>`\ , \ :java:ref:`timeoutrate <CreditInstituteService.timeoutrate>`\  and \ :java:ref:`timeout <CreditInstituteService.timeout>`\  this operation either throws an exception or delays up to \ :java:ref:`timeoutrate <CreditInstituteService.timeoutrate>`\  millisecondsa.
+   Fake executes some payment. Depending on \ :java:ref:`failurerate <CreditInstituteService.failurerate>`\ , \ :java:ref:`timeoutrate <CreditInstituteService.timeoutrate>`\  and \ :java:ref:`timeout <CreditInstituteService.timeout>`\  this operation either throws an exception or delays up to \ :java:ref:`timeoutrate <CreditInstituteService.timeoutrate>`\  milliseconds.
 
    :param data: informations usually found on a credit card
    :throws Exception: if anything 'failed'
