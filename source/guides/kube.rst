@@ -26,7 +26,6 @@ For the T2 Store itself get the deployments and deploy them:
 
 Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
 
-
 Run Locally  
 ===========
 
@@ -259,18 +258,19 @@ Report for Test that found that some entries in the inventory database were not 
 Load Generation
 ===============
 
-You can generate load manually by sending requests to the UIBackend (or using the UI, once it is there).
+You can generate load manually by sending requests to the UIBackend (or using the UI, but it is ugly).
 Confer the `UI Backend's README <https://github.com/t2-project/uibackend>`__ on how to talk to the UI Backend.
 
 Or you can use a Load Generator to send request.
-I recommend `Apache JMeter <https://jmeter.apache.org/>`__.
+We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
 
 Apache JMeter
 -------------
 
-To run the T2 Store with the JMeter Load Generator, you must do the following :
+To run the T2 Store with the JMeter Load Generator, do the following :
 
 #. Deploy the T2 Store
+#. Make sure that the UI-Backend is accessible from outside the cluster - unless you want to put the load generator onto the cluster.
 #. Install JMeter
 #. Create or download a load profile
 #. Run the load generator
@@ -310,28 +310,9 @@ Prometheus
 The T2 Store can be monitored with `Prometheus <https://prometheus.io/>`__
 
 The T2 Store services use `Micrometer <https://micrometer.io/docs/registry/prometheus>`__ to expose metrics endpoints for prometheus. 
-At the endpoint :file:`/actuator/prometheus` the following metrics are exposed:
+Check the endpoint :file:`/actuator/prometheus` to see which metrics are exposed.
 
-*  http_server_requests_seconds
-*  http_server_requests_seconds_count
-*  http_server_requests_seconds_sum
-*  http_server_requests_seconds_max 
-*  quantile 0.5, 0.75, 0.95, 0.98, 0.99, 0.999, 1.0 for http_server_requests_seconds
-
-The Monitoring is not yet configured for all Service, but it is for the `Credit Institute <https://github.com/t2-project/creditinstitute>`__. 
-This is where its the most relevant because i want to know, wether the payment provider's service is good enough for the Payment Service.
-
-Rules and Alerts
-----------------
-
-The prometheus files can be found `here <https://github.com/t2-project/kube/tree/main/prometheusfiles>`__
-
-Confer the README located in that folder for more details on them. 
-
-
-jaeger / opentracing
+Jaeger / Opentracing
 ====================
 
-The T2 store can be traced with `Jaeger <https://www.jaegertracing.io/>`__ - or rather at some point in the future it's supposed to work.
-
-TODO
+Most of the  T2 store's services include the dependencies to be traced with `Jaeger <https://www.jaegertracing.io/>`__.
