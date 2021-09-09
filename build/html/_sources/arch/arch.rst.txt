@@ -210,14 +210,14 @@ Links
 
 For more Details on each service, look at the repositories or the API documentation:
 
-*  Order service: `GitHub <https://github.com/t2-project/order>`__, :ref:`JavaDoc<order>`
-*  Inventory service: `GitHub <https://github.com/t2-project/inventory>`__, :ref:`JavaDoc<inventory>`
-*  Payment service: `GitHub <https://github.com/t2-project/payment>`__, :ref:`JavaDoc<payment>`
-*  Orchestrator service: `GitHub <https://github.com/t2-project/orchestrator>`__, :ref:`JavaDoc<orchestrator>`
-*  Cart service: `GitHub <https://github.com/t2-project/cart>`__, :ref:`JavaDoc<cart>`
-*  Credit Institute service: `GitHub <https://github.com/t2-project/creditinstitute>`__, :ref:`JavaDoc<creditinstitute>`
-*  UIBackend : `GitHub <https://github.com/t2-project/uibackend>`__, :ref:`JavaDoc<uibackend>`
-*  UI : `GitHub <https://github.com/t2-project/ui>`__, :ref:`JavaDoc<ui>`
+*  Order service: `GitHub <https://github.com/t2-project/order>`__
+*  Inventory service: `GitHub <https://github.com/t2-project/inventory>`__
+*  Payment service: `GitHub <https://github.com/t2-project/payment>`__
+*  Orchestrator service: `GitHub <https://github.com/t2-project/orchestrator>`__
+*  Cart service: `GitHub <https://github.com/t2-project/cart>`__
+*  Credit Institute service: `GitHub <https://github.com/t2-project/creditinstitute>`__
+*  UIBackend : `GitHub <https://github.com/t2-project/uibackend>`__
+*  UI : `GitHub <https://github.com/t2-project/ui>`__
 
-*  Common: `GitHub <https://github.com/t2-project/common>`__, :ref:`JavaDoc<common>`
-*  E2E Test: `GitHub <https://github.com/t2-project/e2e-tests>`__, :ref:`JavaDoc<eetest>`
+*  Common: `GitHub <https://github.com/t2-project/common>`__
+*  E2E Test: `GitHub <https://github.com/t2-project/e2e-tests>`__
