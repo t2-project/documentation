@@ -9,8 +9,10 @@ The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. f
 
 .. code-block:: php
 
-    helm install mongo --set auth.enabled=false bitnami/mongodb
-    helm install kafka bitnami/kafka
+   helm repo add bitnami https://charts.bitnami.com/bitnami
+   helm repo update
+   helm install mongo --set auth.enabled=false bitnami/mongodb
+   helm install kafka bitnami/kafka
 
 In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
 Confer the services' READMEs for more details.
@@ -20,10 +22,8 @@ For the T2 Store itself get the deployments and deploy them:
 .. code-block:: php
 
    git clone https://github.com/t2-project/kube.git
-   cd kube
-   kubectl create -f cdc/*
-   kubectl create -f saga/*
-   kubectl create -f notsaga/*
+   cd kube/k8
+   kubectl create -f . 
 
 Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
 
