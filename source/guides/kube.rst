@@ -20,18 +20,31 @@ For the T2 Store itself get the deployments and deploy them:
 .. code-block:: php
 
    git clone https://github.com/t2-project/kube.git
+   cd kube
    kubectl create -f cdc/*
    kubectl create -f saga/*
    kubectl create -f notsaga/*
 
 Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
 
-Run Locally  
-===========
+Run with Docker  
+===============
 
-You can run the entire T2 Store locally, either by using the pre build docker images, or by building all services yourself. 
+You can run the T2 store as docker containers.
 
-The following guide describes how to build and run the T2 store's services with the Order service as an example. 
+.. code-block:: php
+
+   git clone https://github.com/t2-project/kube.git
+   cd kube/docker
+   docker-compose up -d
+
+
+Build and Run Locally  
+=====================
+
+You can build and run the entire T2 Store locally.
+
+The following guide describes how to this with the Order service as an example. 
 You can build all other services (with minor exceptions) the same way.
 You just need to replace 'order' with the respective service name.
 
@@ -58,7 +71,6 @@ io.eventuate.tram.core  :file:`0.29.0.RELEASE`
 io.eventuate.tram.sagas :file:`0.18.0.RELEASE`
 jaeger                  :file:`3.2.0`
 resilience4j            :file:`3.2.0`
-junit4                  :file:`4.13.2`
 Docker                  :file:`20.10.6`
 ======================= ==========================
 
