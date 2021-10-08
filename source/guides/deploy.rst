@@ -1,9 +1,20 @@
-.. _usage:
+.. _deploy:
 
-Run on a Kubernetes Cluster
+======================
+Deployment
+======================
+
+This section describes two ways to deploy the T2 Store.
+Either on an Kubernetes Cluster or as Dockercontainer with docker compose.
+The images for the T2 stores services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
+The images for the services from eventuate come also from dockerhub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
+
+This section also describes how to build an run the T2 Stores services locally, however this is discouraged unless you want to develop
+
+Deploy on a Kubernetes Cluster
 ========================================
 
-The preferred deployment for the T2 Store is on a Kubernetes cluster.
+This section describes how to deploy the T2 Store on a Kubernetes cluster. 
 
 The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
@@ -15,7 +26,7 @@ The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. f
    helm install kafka bitnami/kafka
 
 In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
-Confer the services' READMEs for more details.
+Confer the services' READMEs for more details regarding the setting of the services' properties.
 
 For the T2 Store itself get the deployments and deploy them: 
 
@@ -25,7 +36,10 @@ For the T2 Store itself get the deployments and deploy them:
    cd kube/k8
    kubectl create -f . 
 
-Look at the `kube repository <https://github.com/t2-project/kube>`__ for more details.
+These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
+
+See TODO-section reference on how to access the t2 store...
+
 
 Run with Docker  
 ===============
@@ -38,6 +52,23 @@ You can run the T2 store as docker containers.
    cd kube/docker
    docker-compose up -d
 
+These commands should deploy 13 services in total.
+
+
+Access the T2 Store  
+===================
+
+The UI is available through the service ui-cs.
+
+To acces the ui, port forward the ui-cs to your local machine:
+
+.. code-block:: php
+
+   kubectl port-forward ....
+
+And open `<https://localhost:8086>`__
+
+You may also access services api's directly at swagger, to do that, port forward a service and got to TODO-URL 
 
 Build and Run Locally  
 =====================
@@ -262,67 +293,3 @@ Report for Test that found that some entries in the inventory database were not 
         Order: correct 
         Inventory : reservations for sessionId A79799BA296DF9035A11D1FF553D1AD2 not deleted. ==> expected: <false> but was: <true>
         Saga Instance: correct 
-
-
-
-Load Generation
-===============
-
-You can generate load manually by sending requests to the UIBackend (or using the UI, but it is ugly).
-Confer the `UI Backend's README <https://github.com/t2-project/uibackend>`__ on how to talk to the UI Backend.
-
-Or you can use a Load Generator to send request.
-We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
-
-Apache JMeter
--------------
-
-To run the T2 Store with the JMeter Load Generator, do the following :
-
-#. Deploy the T2 Store
-#. Make sure that the UI-Backend is accessible from outside the cluster - unless you want to put the load generator onto the cluster.
-#. Install JMeter
-#. Create or download a load profile
-#. Run the load generator
-
-Confer the previous sections on how to deploy the T2 Store.
-
-Confer the `TeaStore Wiki <https://github.com/DescartesResearch/TeaStore/wiki/Testing-and-Benchmarking#22-jmeter>`__ on how to install and use JMeter.
-Use the T2 Store load profiles instead of those from the TeaStore. 
-
-You can find the T2 Store load profiles here : `<https://github.com/t2-project/kube/tree/main/loadprofiles>`__
-
-The Load Profiles
-~~~~~~~~~~~~~~~~~
-
-Random Infinite Load Profile
-""""""""""""""""""""""""""""
-
-The profile :file:`t2-store-random_infinite.jmx` generates requests to the UI Backend as visualized below.
-Beware to set :file:`-Jhostname` and :file:`-Jport` to your UI Backend's address and port. 
-
-.. image:: ../arch/figs/load_generator.jpg
-
-With this profile the generator adds between 1 to 5 products to the cart, and confirm the order afterwards.
-It chooses the product at random from the products in the inventory.
-
-
-Fixed Single Load Profile
-"""""""""""""""""""""""""
-
-The profile :file:`t2-store-fixed_single.jmx` is similar to the previous one, but, as visualized below, it places only one order over 3 random products.
-
-.. image:: ../arch/figs/load_generator_single.jpg
-
-Prometheus
-==========
-
-The T2 Store can be monitored with `Prometheus <https://prometheus.io/>`__
-
-The T2 Store services use `Micrometer <https://micrometer.io/docs/registry/prometheus>`__ to expose metrics endpoints for prometheus. 
-Check the endpoint :file:`/actuator/prometheus` to see which metrics are exposed.
-
-Jaeger / Opentracing
-====================
-
-Most of the  T2 store's services include the dependencies to be traced with `Jaeger <https://www.jaegertracing.io/>`__.

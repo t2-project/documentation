@@ -18,11 +18,12 @@ T2 Store Documentation
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :hidden:
    :caption: HOWTOS
 
-   guides/kube
+   guides/deploy
+   guides/use
 
 .. toctree::
    :maxdepth: 1
@@ -53,7 +54,7 @@ All services are Spring Boot Applications.
 They are instrumented with `Prometheus <https://prometheus.io/>`__ for metrics and with `Jaeger <https://www.jaegertracing.io/>`__  for tracing.
 
 See the :ref:`architecture overview <arch>` for more information about the architecture.
-See the :ref:`howtos  <usage>` for more information about how to use the store.
+See the :ref:`howtos  <use>` and :ref:`howtos  <deploy>` for more information about how to use the store.
 
 
 .. Requirements
