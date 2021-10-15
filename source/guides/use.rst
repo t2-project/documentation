@@ -4,133 +4,93 @@
 Usage
 ======================
 
-The T2 Store has multiple aspects of usage.
+The T2 Store main point of usage is to trigger SLO violations with regard to response time and availability.
+For that we need:
 
-- trigger slo violations with regard to response time and availability
+- :ref:`monitoring`
+- :ref:`trigger`
+- :ref:`generate` 
 
-to trigger and notice slo violations one doth require multiple things:
+.. _monitoring:
 
-- monitoring and the instrumentation 
-- load to get some values to monitor (we can not monitor any response time if no one uses the service.)
+Monitoring
+==========
 
-In addition there is a e2e-test-service that may be plugged in between uibackend and orchestrator.
+Instrumentation (Provided Metrics)
+----------------------------------
 
-sections
+The T2 Store's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__. 
 
-- description of monitoring instrumentation: prometheus, micrometer, endpoints
+Each service, except the CDC service, which is provided by eventuate, expose prometheus metrics at the endpoint :file:`/actuator/prometheus>`.
+Assuming you followed the instructions under :ref:`deploy` for either a deployment with kubernetes or docker-compose, and thus have the :file:`creditinstitute` service available at :file:`localhost:8087`, go to `<localhost:8087/actuator/prometheus>`__ to get the metrics of the credit institute service.
+Change the port according to your deployment to see the metrics of the other services.
 
+For the :file:`creditinstitute` service, the most interesting metrics are the :file:`http_server_requests_seconds` for the endpoint :file:`/pay`, because that is the API to be used by services that depend on the :file:`creditinstitute` service.
 
-- triggering of slo violations: tweaking the respones time -> req. load generator + killing services with kubernetes / docker
+Prometheus set up
+-----------------
 
+Beware: the T2 Store is instrumented to provide metrics (as described in the previous section), but you must still set up the actual monitoring yourself.
+This section describes how to set up prometheus along side the T2 store kubernetes deployment described under :ref:`deploy`.
+(If you are on docker, you are on you own.)
 
-Use
-========================================
-
-Step by Step 
-------------
-
-#. Run the E2E Test Service
-#. Configure the UI Backend and the Payment Service 
-#. Generate load
-#. Look at the Logs 
-
-Step 1 : Run E2E Test Service
------------------------------
-
-Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
-If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
+The following instructions rely on the helm charts from the prometheus community.
 
 .. code-block:: php
 
-   kubectl apply -f testsetup/e2etest.yaml 
-
-Step 2 : Configure the UI Backend and the Payment Service 
----------------------------------------------------------
-
-Configure the UI Backend such that it sends confirmed orders to the Test service and configure the Payment service to send the payment requests to the Test service.
-
-For Kubernetes
-~~~~~~~~~~~~~~
-
-In the UI Backend Deployment (:file:`uibackend.yml`):
-
-.. code-block:: php
-
-   - name: T2_ORCHESTRATOR_URL
-     value: http://<e2e-test-host>/test/
-
-In the Payment Deployment (:file:`payment.yml`):
+   # add repo for prometheus 
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
    
-.. code-block:: php
+   # get files to customize chart values
+   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-operator-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
 
-   - name: T2_PAYMENT_PROVIDER_DUMMY_URL
-     value: http://<e2e-test-host>/fakepay
-
-In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
-
-Or use the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
-
-Step 3 : Generate Load
------------------------------
-
-Confer the following section on how to generate load.
-There must be some request or else there is nothing to test. 
-The Test service does not generate load by itself.
-
-Step 4 : Look at the Logs
------------------------------
-
-The Test results are printed to the logs. 
-This might change but for now it is the easiest solution.
+   # install charts
+   helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
+   helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
 
 
-For Kubernetes
-~~~~~~~~~~~~~~
+
+.. _trigger:
+
+Triggers
+==========
+
+Trigger Violation of an Availability SLO
+----------------------------------------------------
+
+Easiest way to violate an availability SLO is to kill the service. 
+
+Kubernetes : 
 
 .. code-block:: php
+   
+   kubectl delete service creditinstitute-cs
 
-   kubectl logs <e2etest-pod>
+Docker :
 
-Interpret Output
-~~~~~~~~~~~~~~~~
+.. code-block:: php  
 
-A Test Report contains these Infomation:
-
-*  **Expected Saga Status** : If it is :file:`FAILURE` then the saga instance supposed to have rolled back, other wise it should have run to completion.
-*  **Saga Id** : Id of the Saga Instance in the Saga Instance DB. Used to look the Saga Instance up.
-*  **Correlation Id** : Id used by the test service to correlate saga request to the Orchestrator with payment request from the Payment Service.
-*  **Order**, **Inventory**, **Saga Instance** : Displays the test Result for the Order and Inventory service and the Saga Instance.
+   docker container stop creditinstitute
 
 
-Report for Test that found every thing correct:
+Trigger Violation of a Response Time SLO
+----------------------------------------------------
 
-.. code-block:: php
+Make sure to generate some load, because without request there are no responses and without responses you cannot measure any response time.
+Read section `generate`_ on how to generate load.
 
-   Test Report: 
-       Expected Saga Status: FAILURE
-       Saga Id: 000001796a7b7be5-7aef648a26a50000 Correlation Id: B42A90324D7639C1BCCC7A5E60080504
-        Order: correct 
-        Inventory: correct 
-        Saga Instance: correct 
+To manually change the response time, you can use the creditinstitute service.
 
-Report for Test that found that some entries in the inventory database were not deleted correctly:
+Assuming you deployed the T2 Store as described in section :ref:`Deployment  <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
+Use this API to increase or decrease the response time of the :file:`/pay` endpoint.
 
-.. code-block:: php
-
-   Test Report: 
-       Expected Saga Status: SUCCESS
-       Saga Id: 000001796a7b7bde-7aef648a26a50000 Correlation Id: A79799BA296DF9035A11D1FF553D1AD2
-        Order: correct 
-        Inventory : reservations for sessionId A79799BA296DF9035A11D1FF553D1AD2 not deleted. ==> expected: <false> but was: <true>
-        Saga Instance: correct 
-
-
+.. _generate:
 
 Load Generation
 ===============
 
-You can generate load manually by sending requests to the UIBackend (or using the UI, but it is ugly).
-Confer the `UI Backend's README <https://github.com/t2-project/uibackend>`__ on how to talk to the UI Backend.
+You can generate load manually accessing the UI or the UIBackend's Swagger-UI.
 
 Or you can use a Load Generator to send request.
 We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
@@ -141,64 +101,59 @@ Apache JMeter
 To run the T2 Store with the JMeter Load Generator, do the following :
 
 #. Deploy the T2 Store
-#. Make sure that the UI-Backend is accessible from outside the cluster - unless you want to put the load generator onto the cluster.
-#. Install JMeter
-#. Create or download a load profile
-#. Run the load generator
+#. Get JMeter
+#. Get a load profile and run the load generator
 
 Deploy T2 Store
 ~~~~~~~~~~~~~~~
 
-Confer the previous sections on how to deploy the T2 Store.
+Deploy the Store as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
 
-
+Get JMeter
 ~~~~~~~~~~~~~~~
 
-e.g. on a unix : 
-wget appache thing. --> java requirements?
-unzip
-wget load-profile-single
-java -jar ...
+Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/download_jmeter.cgi>`__. 
 
-explain parameters.
+.. code-block:: php
 
-Other T2 store load profiles here : `<https://github.com/t2-project/kube/tree/main/loadprofiles>`__ 
-They are explained below.
+   wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
+   tar xvf apache-jmeter-<version-of-your-choice>.tgz
 
-(Adapted from the `TeaStore Wiki <https://github.com/DescartesResearch/TeaStore/wiki/Testing-and-Benchmarking#22-jmeter>`__.)
- 
+Get Load Profiles and run Generator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Load Profiles
-~~~~~~~~~~~~~
+Download the load profiles for the T2 Store from `here <https://jmeter.apache.org/download_jmeter.cgi>`__ and run the generator.
+
+.. code-block:: php
+
+   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/t2-store-fixed-single.jmx 
+   java -jar ./apache-jmeter-5.4.1/bin/ApacheJMeter.jar -t ./t2-store-fixed-single.jmx -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 1 -l logfile.log -n
+
+This profiles generates load for placing three order and then stops.
+
+You can also use another profile that runs infinitely:
+
+.. code-block:: php
+
+   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/t2-store-random-infinite.jmx 
+   java -jar ./apache-jmeter-5.4.1/bin/ApacheJMeter.jar -t ./t2-store-random-infinite.jmx -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 1 -l logfile.log -n
+
+For more details on what the profiles do, read the next two sections.
+
+Fixed Single Load Profile
+"""""""""""""""""""""""""
+
+The profile :file:`t2-store-fixed-single.jmx` is similar to the previous one, but, as visualized below, it places only one order over 3 random products.
+
+.. image:: ../arch/figs/load_generator_single.jpg
 
 Random Infinite Load Profile
 """"""""""""""""""""""""""""
 
-The profile :file:`t2-store-random_infinite.jmx` generates requests to the UI Backend as visualized below.
+The profile :file:`t2-store-random-infinite.jmx` generates requests to the UI Backend as visualized below.
 Beware to set :file:`-Jhostname` and :file:`-Jport` to your UI Backend's address and port. 
 
 .. image:: ../arch/figs/load_generator.jpg
 
 With this profile the generator adds between 1 to 5 products to the cart, and confirm the order afterwards.
 It chooses the product at random from the products in the inventory.
-
-
-Fixed Single Load Profile
-"""""""""""""""""""""""""
-
-The profile :file:`t2-store-fixed_single.jmx` is similar to the previous one, but, as visualized below, it places only one order over 3 random products.
-
-.. image:: ../arch/figs/load_generator_single.jpg
-
-Prometheus
-==========
-
-The T2 Store can be monitored with `Prometheus <https://prometheus.io/>`__
-
-The T2 Store services use `Micrometer <https://micrometer.io/docs/registry/prometheus>`__ to expose metrics endpoints for prometheus. 
-Check the endpoint :file:`/actuator/prometheus` to see which metrics are exposed.
-
-Jaeger / Opentracing
-====================
-
-Most of the  T2 store's services include the dependencies to be traced with `Jaeger <https://www.jaegertracing.io/>`__.

@@ -16,7 +16,7 @@ The white things are databases and external services.
 *  **Cart** : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
 *  **Orchestrator** : Manages the saga.
 *  **Order** : Persists orders to the *order repository* and marks them as either *success* or *failure*.
-*  **Payment** : Handles the store’s payment by contacting an external payment provider.
+*  **Payment** : Handles the store’s payment by contacting some credit institute.
 *  **Inventory**: Manages the store's products. They are stored in the *product repository*.
 
 The UIBackend communicates over HTTP with a REST like interface.
