@@ -109,13 +109,17 @@ The following guide describes how to this with the Order service as an example.
 You can build all other services (with minor exceptions) the same way.
 You just need to replace 'order' with the respective service name.
 
-Step 0 : Clone Repository
+Step 0 : Clone Repositories
 ----------------------------------------------------
 
 .. code-block:: php
 
+   git clone --recursive https://github.com/t2-project/t2store.git
+   # Or if an SSH key has been registered with GitHub:
+   git clone --recursive git@github.com:t2-project/t2store.git
+   # Or to only download the order repo:
    git clone https://github.com/t2-project/order.git
-
+   
 
 Step 1 : Versions and Environment Variables
 ----------------------------------------------------
