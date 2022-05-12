@@ -36,7 +36,7 @@ This section describes how to set up prometheus along side the T2 store kubernet
 
 The following instructions rely on the helm charts from the prometheus community.
 
-.. code-block:: php
+.. code-block:: sh
 
    # add repo for prometheus 
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -63,13 +63,13 @@ Easiest way to violate an availability SLO is to kill the service.
 
 Kubernetes : 
 
-.. code-block:: php
+.. code-block:: sh
    
    kubectl delete service creditinstitute-cs
 
 Docker :
 
-.. code-block:: php  
+.. code-block:: sh
 
    docker container stop creditinstitute
 
@@ -114,7 +114,7 @@ Get JMeter
 
 Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/download_jmeter.cgi>`__. 
 
-.. code-block:: php
+.. code-block:: sh
 
    wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
    tar xvf apache-jmeter-<version-of-your-choice>.tgz
@@ -122,21 +122,41 @@ Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/down
 Get Load Profiles and run Generator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the load profiles for the T2 Store from `here <https://jmeter.apache.org/download_jmeter.cgi>`__ and run the generator.
+Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load profiles for the T2 Store and run the generator.
 
-.. code-block:: php
+There are two predefined loadprofiles:
 
-   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/t2-store-fixed-single.jmx 
-   java -jar ./apache-jmeter-5.4.1/bin/ApacheJMeter.jar -t ./t2-store-fixed-single.jmx -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 1 -l logfile.log -n
+.. code-block:: sh
 
-This profiles generates load for placing three order and then stops.
+   loadProfile=t2-store-fixed-single.jmx 
 
-You can also use another profile that runs infinitely:
+which generates load for placing exactly three orders per user and
 
-.. code-block:: php
+.. code-block:: sh
 
-   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/t2-store-random-infinite.jmx 
-   java -jar ./apache-jmeter-5.4.1/bin/ApacheJMeter.jar -t ./t2-store-random-infinite.jmx -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 1 -l logfile.log -n
+   loadProfile=t2-store-random-infinite.jmx 
+
+| which runs indefinitely.
+| Once you have chosen which profile to use, you can run them by calling
+
+.. code-block:: sh
+   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/$loadProfile
+   java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
+
+Both loadprofiles take the following arguments:
+
+==================== ======================================================================================================================================= ========== ======================================
+ Argument             Description                                                                                                                             Required              Default Value
+==================== ======================================================================================================================================= ========== ======================================
+ -Jhostname           Address of the UI Backend                                                                                                                true           "" (localhost for local testing)
+ -JnumUser            Number of users to test with                                                                                                             true           "" 
+ -Jport               Port of the UI Backend                                                                                                                   true           "" (8081 for local testing) 
+ -JrampUp             Timeout (in seconds) until every user must have been started - one user will be started after every ($numUser/ $rampUp) second(s)        true           "" 
+ -JthinkTimeTimeout   minimal amount of time (in millisceonds) a user needs to choose a product                                                                false      30000 (30s)
+ -JthinkTimeRange     Maximum possible value of the normal distribution deciding when the user chooses a product (in millisceonds) once the timeout is over    false      30000 (30s)
+ -l                   Logfile to write test results into                                                                                                       false          "" (logfile.log recommended)
+ -n                   Start JMeter in CLI Mode                                                                                                                 true           <no argument>
+==================== ======================================================================================================================================= ========== ======================================
 
 For more details on what the profiles do, read the next two sections.
 
@@ -151,7 +171,6 @@ Random Infinite Load Profile
 """"""""""""""""""""""""""""
 
 The profile :file:`t2-store-random-infinite.jmx` generates requests to the UI Backend as visualized below.
-Beware to set :file:`-Jhostname` and :file:`-Jport` to your UI Backend's address and port. 
 
 .. image:: ../arch/figs/load_generator.jpg
 

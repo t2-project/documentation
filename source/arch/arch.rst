@@ -11,13 +11,13 @@ The T2 Store consists of seven services.
 The green and blue services are the core T2 Services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  
 
-*  **UI** : The application frontend. 
-*  **UIBackend** : API Gateway for the UI.
-*  **Cart** : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
-*  **Orchestrator** : Manages the saga.
-*  **Order** : Persists orders to the *order repository* and marks them as either *success* or *failure*.
-*  **Payment** : Handles the store’s payment by contacting some credit institute.
-*  **Inventory**: Manages the store's products. They are stored in the *product repository*.
+*  `UI <https://github.com/t2-project/ui>` : The application frontend.
+*  `UIBackend <https://github.com/t2-project/uibackend>` : API Gateway for the UI.
+*  `Cart <https://github.com/t2-project/cart>` : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
+*  `Orchestrator <https://github.com/t2-project/orchestrator>` : Manages the saga.
+*  `Order <https://github.com/t2-project/order>` : Persists orders to the *order repository* and marks them as either *success* or *failure*.
+*  `Payment <https://github.com/t2-project/payment>` : Handles the store’s payment by contacting some credit institute.
+*  `Inventory <https://github.com/t2-project/inventory>`: Manages the store's products. They are stored in the *product repository*.
 
 The UIBackend communicates over HTTP with a REST like interface.
 The Saga participants (marked in blue) use message based communication among each other. 

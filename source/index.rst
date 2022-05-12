@@ -46,7 +46,7 @@ Introduction
 ============
 
 The T2 Store is a micro-service reference application that implements the Saga pattern.
-It is loosely base on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
+It is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
 The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one to simulate an external payment provider, as an example some credit institute and the other to test the store at runtime. 
 
