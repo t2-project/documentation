@@ -36,7 +36,7 @@ This section describes how to set up prometheus along side the T2 store kubernet
 
 The following instructions rely on the helm charts from the prometheus community.
 
-.. code-block:: php
+.. code-block:: sh
 
    # add repo for prometheus 
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -63,13 +63,13 @@ Easiest way to violate an availability SLO is to kill the service.
 
 Kubernetes : 
 
-.. code-block:: php
+.. code-block:: sh
    
    kubectl delete service creditinstitute-cs
 
 Docker :
 
-.. code-block:: php  
+.. code-block:: sh
 
    docker container stop creditinstitute
 
@@ -114,7 +114,7 @@ Get JMeter
 
 Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/download_jmeter.cgi>`__. 
 
-.. code-block:: php
+.. code-block:: sh
 
    wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
    tar xvf apache-jmeter-<version-of-your-choice>.tgz
@@ -126,20 +126,20 @@ Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load pro
 
 There are two predefined loadprofiles:
 
-.. code-block:: php
+.. code-block:: sh
 
    loadProfile=t2-store-fixed-single.jmx 
 
 which generates load for placing exactly three orders per user and
 
-.. code-block:: php
+.. code-block:: sh
 
    loadProfile=t2-store-random-infinite.jmx 
 
 | which runs indefinitely.
 | Once you have chosen which profile to use, you can run them by calling
 
-.. code-block:: php
+.. code-block:: sh
    wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/$loadProfile
    java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
 

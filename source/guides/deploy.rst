@@ -18,7 +18,7 @@ This section describes how to deploy the T2 Store on a Kubernetes cluster.
 
 The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
-.. code-block:: php
+.. code-block:: sh
 
    helm repo add bitnami https://charts.bitnami.com/bitnami
    helm repo update
@@ -30,7 +30,7 @@ Confer the services' READMEs for more details regarding the setting of the servi
 
 For the T2 Store itself get the deployments and deploy them: 
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/kube.git
    cd kube/k8
@@ -44,7 +44,7 @@ Access the T2 Store
 The UI is available through the service   ui-cs`.
 To access it forward that service to your local machine:
 
-.. code-block:: php
+.. code-block:: sh
    
    kubectl port-forward svc/ui-cs 8086:80
 
@@ -53,7 +53,7 @@ And open `<http://localhost:8086>`__.
 You can also skip the UI and access the service via the Swagger-UI.
 To do that, forward the service, as an example :file:`uibackend-cs`:
 
-.. code-block:: php
+.. code-block:: sh
 
    kubectl port-forward svc/uibackend-cs 8081:80
 
@@ -61,7 +61,7 @@ And open `<localhost:8081/swagger-ui.html>`__.
 
 This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, :file:`cart-cs` and :file:`creditinstitute-cs`.
 
-.. code-block:: php
+.. code-block:: sh
 
    kubectl port-forward svc/inventory-cs 8082:80 &
    kubectl port-forward svc/orchestrator-cs 8085:80 &
@@ -80,7 +80,7 @@ Run with Docker
 
 You can run the T2 store as docker containers.
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/kube.git
    cd kube/docker
@@ -112,7 +112,7 @@ You just need to replace 'order' with the respective service name.
 Step 0 : Clone Repositories
 ----------------------------------------------------
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone --recursive https://github.com/t2-project/t2store.git
    # Or if an SSH key has been registered with GitHub:
@@ -143,7 +143,7 @@ Docker                  :file:`20.10.6`
 The :file:`pom.xml` files read the versions from environment variables. 
 That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
 
-.. code-block:: php
+.. code-block:: sh
 
    wget https://raw.githubusercontent.com/t2-project/kube/main/setenv.sh
    . ./setenv.sh
@@ -161,7 +161,7 @@ Step 3 : Build Local Dependencies
 
 Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/common.git
    cd common/
@@ -174,21 +174,21 @@ The E2E Test also depends on the saga participants *inventory*, *payment* and *o
 
 You must build and install them to your local maven repository as well.
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/payment.git
    cd payment/
    ./mvnw clean install
    ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
    
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/inventory.git
    cd inventory/
    ./mvnw clean install
    ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
-.. code-block:: php
+.. code-block:: sh
 
    git clone https://github.com/t2-project/order.git
    cd order/
@@ -201,14 +201,14 @@ Step 4 : Build and Run
 
 Now you can build and run the order service.
 
-.. code-block:: php
+.. code-block:: sh
 
    cd order/
    ./mvnw spring-boot:run
 
 Or like this, in case you want to supply specific application properties (remember to use the path to *your* properties file).
 
-.. code-block:: php
+.. code-block:: sh
 
    cd order/
    ./mvnw clean install
@@ -245,7 +245,7 @@ Step 1 : Run E2E Test Service
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
 If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
 
-.. code-block:: php
+.. code-block:: sh
 
    kubectl apply -f testsetup/e2etest.yaml 
 
@@ -259,14 +259,14 @@ For Kubernetes
 
 In the UI Backend Deployment (:file:`uibackend.yml`):
 
-.. code-block:: php
+.. code-block:: yaml
 
    - name: T2_ORCHESTRATOR_URL
      value: http://<e2e-test-host>/test/
 
 In the Payment Deployment (:file:`payment.yml`):
    
-.. code-block:: php
+.. code-block:: yaml
 
    - name: T2_PAYMENT_PROVIDER_DUMMY_URL
      value: http://<e2e-test-host>/fakepay
@@ -292,7 +292,7 @@ This might change but for now it is the easiest solution.
 For Kubernetes
 ~~~~~~~~~~~~~~
 
-.. code-block:: php
+.. code-block:: sh
 
    kubectl logs <e2etest-pod>
 
@@ -309,7 +309,7 @@ A Test Report contains these Infomation:
 
 Report for Test that found every thing correct:
 
-.. code-block:: php
+.. code-block:: text
 
    Test Report: 
        Expected Saga Status: FAILURE
@@ -320,7 +320,7 @@ Report for Test that found every thing correct:
 
 Report for Test that found that some entries in the inventory database were not deleted correctly:
 
-.. code-block:: php
+.. code-block:: text
 
    Test Report: 
        Expected Saga Status: SUCCESS
