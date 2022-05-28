@@ -1,2 +1,2 @@
-javasphinx==0.9.15
-Sphinx==1.8.5
+myst-parser==0.17.2
+Sphinx==4.5.0
