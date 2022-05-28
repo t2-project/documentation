@@ -140,6 +140,7 @@ which generates load for placing exactly three orders per user and
 | Once you have chosen which profile to use, you can run them by calling
 
 .. code-block:: sh
+
    wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/$loadProfile
    java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
 

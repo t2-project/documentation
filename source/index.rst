@@ -25,23 +25,6 @@ T2 Store Documentation
    guides/deploy
    guides/use
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-   :caption: JAVADOC
-
-   javadoc/common/packages
-   javadoc/order/packages
-   javadoc/payment/packages
-   javadoc/inventory/packages
-   javadoc/orchestrator/packages
-   javadoc/uibackend/packages
-   javadoc/ui/packages
-   javadoc/cart/packages
-   javadoc/creditinstitute/packages
-   javadoc/e2etest/packages
-
-
 Introduction
 ============
 
