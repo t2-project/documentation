@@ -14,6 +14,9 @@ This section also describes how to build an run the T2 Stores services locally, 
 Deploy on a Kubernetes Cluster
 ========================================
 
+Get Helm Charts
+---------------
+
 This section describes how to deploy the T2 Store on a Kubernetes cluster. 
 
 The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
@@ -24,6 +27,10 @@ The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. f
    helm repo update
    helm install mongo --set auth.enabled=false bitnami/mongodb
    helm install kafka bitnami/kafka
+
+
+Deploy the T2 Store
+-------------------
 
 In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
 Confer the services' READMEs for more details regarding the setting of the services' properties.
@@ -74,6 +81,28 @@ This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, 
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
 Now go to :ref:`Usage  <use>` to figure out what you can to with the T2 Store.
+
+
+Prometheus set up
+-----------------
+
+Beware: the T2 Store is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
+(If you are on docker, you are on you own.)
+
+The following instructions rely on the helm charts from the prometheus community.
+
+.. code-block:: sh
+
+   # add repo for prometheus 
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   
+   # get files to customize chart values
+   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-operator-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
+
+   # install charts
+   helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
+   helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
 
 Run with Docker  
 ===============
