@@ -104,6 +104,29 @@ The following instructions rely on the helm charts from the prometheus community
    helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
    helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
 
+
+Setup autoscaling
+-----------------
+
+To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps including the Prometheus setup were completed successfully.
+Afterwards, navigate to the :file:`k8/autoscaling` directory in the `Kube repo <https://github.com/t2-project/kube>`__ and create all resources inside:
+
+.. code-block:: sh
+
+   kubectl create -f .
+
+
+Modifying the autoscaling behavior
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to modify the autoscaling behavior, i.e. by increasing the maximum replicas, add the change in the corresponding :file:`hpa_$SERVICE.yaml` file there, and apply it by calling
+
+.. code-block:: sh
+
+   kubectl delete horizontalpodautoscalers.autoscaling $SERVICE
+   kubectl create -f .
+
+
 Run with Docker  
 ===============
 
