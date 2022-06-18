@@ -17,7 +17,7 @@ Deploy on a Kubernetes Cluster
 Get Helm Charts
 ---------------
 
-This section describes how to deploy the T2 Store on a Kubernetes cluster. 
+This section describes how to deploy the T2 Store on a Kubernetes cluster.
 
 The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
@@ -32,27 +32,27 @@ The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. f
 Deploy the T2 Store
 -------------------
 
-In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
+In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments.
 Confer the services' READMEs for more details regarding the setting of the services' properties.
 
-For the T2 Store itself get the deployments and deploy them: 
+For the T2 Store itself get the deployments and deploy them:
 
 .. code-block:: sh
 
    git clone https://github.com/t2-project/kube.git
    cd kube/k8
-   kubectl create -f . 
+   kubectl create -f .
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
-Access the T2 Store  
+Access the T2 Store
 -------------------
 
 The UI is available through the service   ui-cs`.
 To access it forward that service to your local machine:
 
 .. code-block:: sh
-   
+
    kubectl port-forward svc/ui-cs 8086:80
 
 And open `<http://localhost:8086>`__.
@@ -83,7 +83,7 @@ This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, 
 Now go to :ref:`Usage  <use>` to figure out what you can to with the T2 Store.
 
 
-Prometheus set up
+Prometheus setup
 -----------------
 
 Beware: the T2 Store is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
@@ -93,9 +93,9 @@ The following instructions rely on the helm charts from the prometheus community
 
 .. code-block:: sh
 
-   # add repo for prometheus 
+   # add repo for prometheus
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-   
+
    # get files to customize chart values
    wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-operator-values.yaml
    wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
@@ -105,10 +105,40 @@ The following instructions rely on the helm charts from the prometheus community
    helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
 
 
-Setup autoscaling
+Autoscaling setup
 -----------------
 
-To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps including the Prometheus setup were completed successfully.
+To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps except for the Prometheus setup were completed successfully.
+Additionally, the `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ must have been set up and working.
+
+
+Metrics Server setup
+~~~~~~~~~~~~~~~~~~~~
+
+There are two ways to install the metrics server:
+
+* Install the `Helm Chart <https://artifacthub.io/packages/helm/metrics-server/metrics-server>`__
+* Install `manually <https://github.com/kubernetes-sigs/metrics-server#installation>`__
+
+If you use `Minikube <https://minikube.sigs.k8s.io/docs/>`__, there is a third way to install the metrics server:
+
+.. code-block:: sh
+
+   minikube addons enable metrics-server
+
+Should you encounter an error with your metrics server, the `following article <https://www.linuxsysadmins.com/service-unavailable-kubernetes-metrics/>`__ might be helpful.
+The metrics server is running as intended when the command
+
+.. code-block:: sh
+
+   kubectl top pod
+
+does not throw an error.
+
+
+Creating the autoscaling behavior
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Afterwards, navigate to the :file:`k8/autoscaling` directory in the `Kube repo <https://github.com/t2-project/kube>`__ and create all resources inside:
 
 .. code-block:: sh
@@ -127,7 +157,7 @@ If you want to modify the autoscaling behavior, i.e. by increasing the maximum r
    kubectl create -f .
 
 
-Run with Docker  
+Run with Docker
 ===============
 
 You can run the T2 store as docker containers.
@@ -141,7 +171,7 @@ You can run the T2 store as docker containers.
 These commands should deploy 13 services in total.
 
 You can now the UI at `<http://localhost:8086>`__.
-You can also access some services via Swagger-UI, as listed below (assuming that you did not change the mapped ports): 
+You can also access some services via Swagger-UI, as listed below (assuming that you did not change the mapped ports):
 
 *  UIBackend : `<localhost:8081/swagger-ui.html>`__
 *  Inventory : `<localhost:8082/swagger-ui.html>`__
@@ -151,13 +181,13 @@ You can also access some services via Swagger-UI, as listed below (assuming that
 
 Now go to :ref:`Usage  <use>` to figure out what you can to with the T2 Store.
 
-Build and Run Locally  
+Build and Run Locally
 =====================
 
-You can build and run the entire T2 Store locally. 
+You can build and run the entire T2 Store locally.
 This is most likely not relevant to you.
 
-The following guide describes how to this with the Order service as an example. 
+The following guide describes how to this with the Order service as an example.
 You can build all other services (with minor exceptions) the same way.
 You just need to replace 'order' with the respective service name.
 
@@ -171,13 +201,13 @@ Step 0 : Clone Repositories
    git clone --recursive git@github.com:t2-project/t2store.git
    # Or to only download the order repo:
    git clone https://github.com/t2-project/order.git
-   
+
 
 Step 1 : Versions and Environment Variables
 ----------------------------------------------------
 
-The T2 Store is build with the following dependencies and tools. 
-There is no guarantee that it works with others as well. 
+The T2 Store is build with the following dependencies and tools.
+There is no guarantee that it works with others as well.
 
 ======================= ==========================
 Name                    Version
@@ -192,7 +222,7 @@ springdoc               :file:`1.5.11`
 Docker                  :file:`20.10.6`
 ======================= ==========================
 
-The :file:`pom.xml` files read the versions from environment variables. 
+The :file:`pom.xml` files read the versions from environment variables.
 That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
 
 .. code-block:: sh
@@ -232,7 +262,7 @@ You must build and install them to your local maven repository as well.
    cd payment/
    ./mvnw clean install
    ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
-   
+
 .. code-block:: sh
 
    git clone https://github.com/t2-project/inventory.git
@@ -275,7 +305,7 @@ Each service repository contains a Dockerfile to build an image of that service.
 Run with Test Service
 =======================
 
-The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Credit Institute and answers them in the Credit Institute's stead. 
+The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Credit Institute and answers them in the Credit Institute's stead.
 The setup is depicted below.
 With this setup, the Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
 
@@ -283,13 +313,13 @@ For more Details, see the `Test Service's README <https://github.com/t2-project/
 
 .. image:: ../arch/figs/component_test.jpg
 
-Step by Step 
+Step by Step
 ------------
 
 #. Run the E2E Test Service
-#. Configure the UI Backend and the Payment Service 
+#. Configure the UI Backend and the Payment Service
 #. Generate load
-#. Look at the Logs 
+#. Look at the Logs
 
 Step 1 : Run E2E Test Service
 -----------------------------
@@ -299,9 +329,9 @@ If you are on a kubernetes cluster, you may apply the deployment from the folder
 
 .. code-block:: sh
 
-   kubectl apply -f testsetup/e2etest.yaml 
+   kubectl apply -f testsetup/e2etest.yaml
 
-Step 2 : Configure the UI Backend and the Payment Service 
+Step 2 : Configure the UI Backend and the Payment Service
 ---------------------------------------------------------
 
 Configure the UI Backend such that it sends confirmed orders to the Test service and configure the Payment service to send the payment requests to the Test service.
@@ -331,13 +361,13 @@ Step 3 : Generate Load
 -----------------------------
 
 Confer the following section on how to generate load.
-There must be some request or else there is nothing to test. 
+There must be some request or else there is nothing to test.
 The Test service does not generate load by itself.
 
 Step 4 : Look at the Logs
 -----------------------------
 
-The Test results are printed to the logs. 
+The Test results are printed to the logs.
 This might change but for now it is the easiest solution.
 
 
@@ -363,20 +393,20 @@ Report for Test that found every thing correct:
 
 .. code-block:: text
 
-   Test Report: 
+   Test Report:
        Expected Saga Status: FAILURE
        Saga Id: 000001796a7b7be5-7aef648a26a50000 Correlation Id: B42A90324D7639C1BCCC7A5E60080504
-        Order: correct 
-        Inventory: correct 
-        Saga Instance: correct 
+        Order: correct
+        Inventory: correct
+        Saga Instance: correct
 
 Report for Test that found that some entries in the inventory database were not deleted correctly:
 
 .. code-block:: text
 
-   Test Report: 
+   Test Report:
        Expected Saga Status: SUCCESS
        Saga Id: 000001796a7b7bde-7aef648a26a50000 Correlation Id: A79799BA296DF9035A11D1FF553D1AD2
-        Order: correct 
+        Order: correct
         Inventory : reservations for sessionId A79799BA296DF9035A11D1FF553D1AD2 not deleted. ==> expected: <false> but was: <true>
-        Saga Instance: correct 
+        Saga Instance: correct
