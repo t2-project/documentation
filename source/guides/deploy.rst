@@ -135,6 +135,15 @@ The metrics server is running as intended when the command
 
 does not throw an error.
 
+If you are on Minikube and still encounter an error, there is one more known troubleshooting solution:
+
+.. code-block:: sh
+
+   minikube stop
+   minikube start --extra-config=kubelet.housekeeping-interval=10s
+
+If your metrics server still won't work, good luck fixing it.
+
 
 Creating the autoscaling behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
