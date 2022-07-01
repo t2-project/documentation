@@ -7,9 +7,22 @@ Usage
 The T2 Store main point of usage is to trigger SLO violations with regard to response time and availability.
 For that we need:
 
+- :ref:`autoscaling`
 - :ref:`monitoring`
 - :ref:`trigger`
-- :ref:`generate` 
+- :ref:`generate`
+
+.. _autoscaling:
+
+Influencing autoscaling behavior
+================================
+
+Assuming you set up the T2 Store on a platform that enables autoscaling (-> **Kubernetes**), you can use the *autoscaling management routes* to influence the autoscaling behavior of every service.
+You can also use them otherwise, but what's the point of creating a *memory leak*/ *Denial of Service* if you don't use it?
+These routes offer exactly that:
+They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) to setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/{memory}`, :file:`/autoscaling/(clear|disable)-memory-leak`).
+More information about these routes can be found in the swagger files (:file:`/swagger-ui.html`).
+
 
 .. _monitoring:
 
@@ -19,7 +32,7 @@ Monitoring
 Instrumentation (Provided Metrics)
 ----------------------------------
 
-The T2 Store's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__. 
+The T2 Store's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__.
 
 Each service, except the CDC service, which is provided by eventuate, expose prometheus metrics at the endpoint :file:`/actuator/prometheus>`.
 Assuming you followed the instructions under :ref:`deploy` for either a deployment with kubernetes or docker-compose, and thus have the :file:`creditinstitute` service available at :file:`localhost:8087`, go to `<localhost:8087/actuator/prometheus>`__ to get the metrics of the credit institute service.
