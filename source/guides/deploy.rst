@@ -4,19 +4,19 @@
 Deployment
 ======================
 
-This section describes two ways to deploy the T2 Store.
+This section describes two ways to deploy the T2-Project.
 Either on an Kubernetes Cluster or as Dockercontainer with docker compose.
-The images for the T2 stores services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
+The images for the T2-Projects services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
 The images for the services from eventuate come also from dockerhub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
 
-This section also describes how to build an run the T2 Stores services locally, however this is discouraged unless you want to develop
+This section also describes how to build an run the T2-Projects services locally, however this is discouraged unless you want to develop
 
 Deploy on a Kubernetes Cluster
 ========================================
 
-This section describes how to deploy the T2 Store on a Kubernetes cluster. 
+This section describes how to deploy the T2-Project on a Kubernetes cluster. 
 
-The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
+The T2-Project needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
 .. code-block:: sh
 
@@ -25,10 +25,10 @@ The T2 Store needs Kafka and a MongoDB. Install them any way you want to, e.g. f
    helm install mongo --set auth.enabled=false bitnami/mongodb
    helm install kafka bitnami/kafka
 
-In case you want to name the deployed releases differently, you must adapt some environment variables in the T2 Store deployments. 
+In case you want to name the deployed releases differently, you must adapt some environment variables in the T2-Project deployments. 
 Confer the services' READMEs for more details regarding the setting of the services' properties.
 
-For the T2 Store itself get the deployments and deploy them: 
+For the T2-Project itself get the deployments and deploy them: 
 
 .. code-block:: sh
 
@@ -38,7 +38,7 @@ For the T2 Store itself get the deployments and deploy them:
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
-Access the T2 Store  
+Access the T2-Project  
 -------------------
 
 The UI is available through the service   ui-cs`.
@@ -73,12 +73,12 @@ This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, 
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to :ref:`Usage  <use>` to figure out what you can to with the T2 Store.
+Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
 
 Run with Docker  
 ===============
 
-You can run the T2 store as docker containers.
+You can run the T2-Project as docker containers.
 
 .. code-block:: sh
 
@@ -97,12 +97,12 @@ You can also access some services via Swagger-UI, as listed below (assuming that
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to :ref:`Usage  <use>` to figure out what you can to with the T2 Store.
+Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
 
 Build and Run Locally  
 =====================
 
-You can build and run the entire T2 Store locally. 
+You can build and run the entire T2-Project locally. 
 This is most likely not relevant to you.
 
 The following guide describes how to this with the Order service as an example. 
@@ -114,9 +114,9 @@ Step 0 : Clone Repositories
 
 .. code-block:: sh
 
-   git clone --recursive https://github.com/t2-project/t2store.git
+   git clone --recursive https://github.com/t2-project/t2-project.git
    # Or if an SSH key has been registered with GitHub:
-   git clone --recursive git@github.com:t2-project/t2store.git
+   git clone --recursive git@github.com:t2-project/t2-project.git
    # Or to only download the order repo:
    git clone https://github.com/t2-project/order.git
    
@@ -124,7 +124,7 @@ Step 0 : Clone Repositories
 Step 1 : Versions and Environment Variables
 ----------------------------------------------------
 
-The T2 Store is build with the following dependencies and tools. 
+The T2-Project is build with the following dependencies and tools. 
 There is no guarantee that it works with others as well. 
 
 ======================= ==========================
@@ -159,7 +159,7 @@ You want to consult the service's README on the meaning of the properties.
 Step 3 : Build Local Dependencies
 ------------------------------------------
 
-Most services of the T2 store depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
+Most services of the T2-Project depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
 
 .. code-block:: sh
 

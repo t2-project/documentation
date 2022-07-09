@@ -4,7 +4,7 @@
 Architecture Overview
 =====================
 
-The T2 Store consists of seven services.
+The T2-Project consists of seven services.
 
 .. image:: figs/component_total_colour.jpg
 
@@ -23,14 +23,14 @@ The UIBackend communicates over HTTP with a REST like interface.
 The Saga participants (marked in blue) use message based communication among each other. 
 This is necessary because of the saga pattern. 
 
-The T2 Store realizes the following business process:
+The T2-Project realizes the following business process:
 
 .. image:: figs/bpmn_sub.png
 
 The activities within the *Saga* subprocess must be executed as a transaction.
 The transaction is implemented according to the `Saga Pattern <https://microservices.io/patterns/data/saga.html>`__.
 
-The T2 Store's services realise the activities of the business process like this:
+The T2-Project's services realise the activities of the business process like this:
 
 ============    ========================================================
 Service	        Activity
@@ -46,7 +46,7 @@ Orchestrator    confirm order
 The Saga
 ========
 
-The T2 Store's saga is composed of the following steps: 
+The T2-Project's saga is composed of the following steps: 
 
 ====  =========  ====================  ========================
 Step	Service	  Transaction           Compensation 
@@ -82,7 +82,7 @@ As there is now no action to perform on the inventory before the pivot transacti
 Frameworks, Dependencies and Others
 ===================================
 
-The T2 Store uses the following frameworks (and services):
+The T2-Project uses the following frameworks (and services):
 
 Spring and Spring Boot
 ----------------------
@@ -99,7 +99,7 @@ Eventuate Tram and Eventuate Tram Saga
 
 `Eventuate Tram <https://github.com/eventuate-tram/eventuate-tram-core>`__ is a framework for Transactional Messaging and `Eventuate Tram Sagas <https://github.com/eventuate-tram/eventuate-tram-sagas>`__ is a framework for saga orchestration.
 They are both work on top of Spring / Spring Boot. 
-The T2 Store uses the Eventuate Tram Core framework with Kafka as the message broker and Postgres as the database.
+The T2-Project uses the Eventuate Tram Core framework with Kafka as the message broker and Postgres as the database.
 
 Versions
 ^^^^^^^^
@@ -126,19 +126,19 @@ eventuateio/eventuate-cdc-service  latest
 Message Broker
 --------------
 
-The T2 Store uses Kafka and Zookeeper as message broker.
+The T2-Project uses Kafka and Zookeeper as message broker.
 
 Saga Database
 -------------
 
-The T2 Store uses a Postgres Database for the saga data. 
+The T2-Project uses a Postgres Database for the saga data. 
 It uses the Postgres image from `eventuateio <https://hub.docker.com/r/eventuateio/eventuate-postgres>`__ because it already contains the tables required for the transactional outboxing.
 
 
 Domain Database
 ---------------
 
-The T2 Store uses MongoDBs and a Postgres Database as databases for the domain data.
+The T2-Project uses MongoDBs and a Postgres Database as databases for the domain data.
 The *cart repository* and the *order repository* are MongoDBs.
 The *product repository* is a Postgres Database. 
 

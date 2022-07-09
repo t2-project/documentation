@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'T2 Store'
+project = u'T2-Project'
 copyright = u'2021, Sarah Sophie Stieß'
 author = u'Sarah Sophie Stieß'
 
@@ -100,7 +100,7 @@ html_static_path = []
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'T2Storedoc'
+htmlhelp_basename = 'T2Projectdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -127,7 +127,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'T2Store.tex', u'T2 Store Documentation',
+    (master_doc, 'T2Project.tex', u'T2-Project Documentation',
      u'Sarah Sophie Stieß', 'manual'),
 ]
 
@@ -137,7 +137,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 't2store', u'T2 Store Documentation',
+    (master_doc, 't2project', u'T2-Project Documentation',
      [author], 1)
 ]
 
@@ -148,8 +148,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'T2Store', u'T2 Store Documentation',
-     author, 'T2Store', 'One line description of project.',
+    (master_doc, 'T2Project', u'T2-Project Documentation',
+     author, 'T2Project', 'One line description of project.',
      'Miscellaneous'),
 ]
 
