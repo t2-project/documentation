@@ -1,10 +1,10 @@
-.. T2 Store documentation master file, created by
+.. T2-Project documentation master file, created by
    sphinx-quickstart on Mon May 10 08:39:55 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 ======================
-T2 Store Documentation
+T2-Project Documentation
 ======================
 
 .. toctrees must come first or they won't be displayed correctly
@@ -28,10 +28,10 @@ T2 Store Documentation
 Introduction
 ============
 
-The T2 Store is a micro-service reference application that implements the Saga pattern.
+The T2-Project is a micro-service reference application that implements the Saga pattern.
 It is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
-The T2 Store consists of seven services that realise the store’s business logic plus two additional services, one to simulate an external payment provider, as an example some credit institute and the other to test the store at runtime. 
+The T2-Project consists of seven services that realise the store’s business logic plus two additional services, one to simulate an external payment provider, as an example some credit institute and the other to test the store at runtime. 
 
 All services are Spring Boot Applications. 
 They are instrumented with `Prometheus <https://prometheus.io/>`__ for metrics and with `Jaeger <https://www.jaegertracing.io/>`__  for tracing.
@@ -43,7 +43,7 @@ See the :ref:`howtos  <use>` and :ref:`howtos  <deploy>` for more information ab
 .. Requirements
 .. ------------
 
-.. The T2 Store is developed as a reference application.
+.. The T2-Project is developed as a reference application.
 
 .. TODO : copy Requirements from proposal
 
@@ -52,9 +52,9 @@ Repository Structure
 
 .. TODO : where do i want do put this?
 
-The T2 Store services are organized in multiple repositories under the `t2-project <https://github.com/t2-project>`__ GitHub organization.
+The T2-Project services are organized in multiple repositories under the `t2-project <https://github.com/t2-project>`__ GitHub organization.
 
-These repositories contain the core services of the T2 Store:
+These repositories contain the core services of the T2-Project:
 
 *  `Order service <https://github.com/t2-project/order>`__
 *  `Inventory service <https://github.com/t2-project/inventory>`__
@@ -78,7 +78,7 @@ This repository contains the source for this documentation:
 
 *  `Documentation <https://github.com/t2-project/documentation>`__
 
-This repository contains the files for deploying the T2 store on kubernetes as well other files, that did not belong anywhere else:
+This repository contains the files for deploying the T2-Project on kubernetes as well other files, that did not belong anywhere else:
 
 *  `Kube <https://github.com/t2-project/kube>`__
 
