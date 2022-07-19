@@ -4,12 +4,25 @@
 Usage
 ======================
 
-The T2 Store main point of usage is to trigger SLO violations with regard to response time and availability.
+The T2-Project main point of usage is to trigger SLO violations with regard to response time and availability.
 For that we need:
 
+- :ref:`autoscaling`
 - :ref:`monitoring`
 - :ref:`trigger`
-- :ref:`generate` 
+- :ref:`generate`
+
+.. _autoscaling:
+
+Influencing autoscaling behavior
+================================
+
+Assuming you set up the T2-Project on a platform that enables autoscaling (-> **Kubernetes**), you can use the *autoscaling management routes* to influence the autoscaling behavior of every service.
+You can also use them otherwise, but what's the point of creating a *memory leak*/ *Denial of Service* if you don't use it?
+These routes offer exactly that:
+They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) to setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/{memory}`, :file:`/autoscaling/(clear|disable)-memory-leak`).
+More information about these routes can be found in the swagger files (:file:`/swagger-ui.html`).
+
 
 .. _monitoring:
 
@@ -19,14 +32,13 @@ Monitoring
 Instrumentation (Provided Metrics)
 ----------------------------------
 
-The T2 Store's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__. 
+The T2-Project's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__.
 
 Each service, except the CDC service, which is provided by eventuate, expose prometheus metrics at the endpoint :file:`/actuator/prometheus>`.
 Assuming you followed the instructions under :ref:`deploy` for either a deployment with kubernetes or docker-compose, and thus have the :file:`creditinstitute` service available at :file:`localhost:8087`, go to `<localhost:8087/actuator/prometheus>`__ to get the metrics of the credit institute service.
 Change the port according to your deployment to see the metrics of the other services.
 
 For the :file:`creditinstitute` service, the most interesting metrics are the :file:`http_server_requests_seconds` for the endpoint :file:`/pay`, because that is the API to be used by services that depend on the :file:`creditinstitute` service.
-
 
 .. _trigger:
 
@@ -59,7 +71,7 @@ Read section `generate`_ on how to generate load.
 
 To manually change the response time, you can use the creditinstitute service.
 
-Assuming you deployed the T2 Store as described in section :ref:`Deployment  <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
+Assuming you deployed the T2-Project as described in section :ref:`Deployment  <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
 Use this API to increase or decrease the response time of the :file:`/pay` endpoint.
 
 .. _generate:
@@ -75,13 +87,13 @@ We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
 Apache JMeter
 -------------
 
-To run the T2 Store with the JMeter Load Generator, do the following :
+To run the T2-Project with the JMeter Load Generator, do the following :
 
-#. Deploy the T2 Store
+#. Deploy the T2-Project
 #. Get JMeter
 #. Get a load profile and run the load generator
 
-Deploy T2 Store
+Deploy T2-Project
 ~~~~~~~~~~~~~~~
 
 Deploy the Store as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
@@ -99,19 +111,19 @@ Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/down
 Get Load Profiles and run Generator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load profiles for the T2 Store and run the generator.
+Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load profiles for the T2-Project and run the generator.
 
 There are two predefined loadprofiles:
 
 .. code-block:: sh
 
-   loadProfile=t2-store-fixed-single.jmx 
+   loadProfile=t2-project-fixed-single.jmx 
 
 which generates load for placing exactly three orders per user and
 
 .. code-block:: sh
 
-   loadProfile=t2-store-random-infinite.jmx 
+   loadProfile=t2-project-random-infinite.jmx 
 
 | which runs indefinitely.
 | Once you have chosen which profile to use, you can run them by calling
@@ -147,14 +159,14 @@ For more details on what the profiles do, read the next two sections.
 Fixed Single Load Profile
 """""""""""""""""""""""""
 
-The profile :file:`t2-store-fixed-single.jmx` is similar to the previous one, but, as visualized below, it places only one order over 3 random products.
+The profile :file:`t2-project-fixed-single.jmx` is similar to the previous one, but, as visualized below, it places only one order over 3 random products.
 
 .. image:: ../arch/figs/load_generator_single.jpg
 
 Random Infinite Load Profile
 """"""""""""""""""""""""""""
 
-The profile :file:`t2-store-random-infinite.jmx` generates requests to the UI Backend as visualized below.
+The profile :file:`t2-project-random-infinite.jmx` generates requests to the UI Backend as visualized below.
 
 .. image:: ../arch/figs/load_generator.jpg
 
