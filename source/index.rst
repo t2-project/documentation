@@ -51,8 +51,10 @@ Repository Structure
 --------------------
 
 .. TODO : where do i want do put this?
+.. TODO: I have no idea what above (↑) TODOs are supposed to mean...
 
-The T2-Project services are organized in multiple repositories under the `t2-project <https://github.com/t2-project>`__ GitHub organization.
+| The T2-Project services are organized in multiple repositories under the `t2-project <https://github.com/t2-project>`__ GitHub organization.
+| A convenience repo also exists so that not every repo needs to be downloaded separately: `<https://github.com/t2-project/t2store>`__.
 
 These repositories contain the core services of the T2-Project:
 

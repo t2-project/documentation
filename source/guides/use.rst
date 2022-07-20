@@ -40,30 +40,6 @@ Change the port according to your deployment to see the metrics of the other ser
 
 For the :file:`creditinstitute` service, the most interesting metrics are the :file:`http_server_requests_seconds` for the endpoint :file:`/pay`, because that is the API to be used by services that depend on the :file:`creditinstitute` service.
 
-Prometheus set up
------------------
-
-Beware: the T2-Project is instrumented to provide metrics (as described in the previous section), but you must still set up the actual monitoring yourself.
-This section describes how to set up prometheus along side the T2-Project kubernetes deployment described under :ref:`deploy`.
-(If you are on docker, you are on you own.)
-
-The following instructions rely on the helm charts from the prometheus community.
-
-.. code-block:: sh
-
-   # add repo for prometheus 
-   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-   
-   # get files to customize chart values
-   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-operator-values.yaml
-   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
-
-   # install charts
-   helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
-   helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
-
-
-
 .. _trigger:
 
 Triggers
@@ -162,15 +138,21 @@ Both loadprofiles take the following arguments:
 ==================== ======================================================================================================================================= ========== ======================================
  Argument             Description                                                                                                                             Required              Default Value
 ==================== ======================================================================================================================================= ========== ======================================
- -Jhostname           Address of the UI Backend                                                                                                                true           "" (localhost for local testing)
- -JnumUser            Number of users to test with                                                                                                             true           "" 
- -Jport               Port of the UI Backend                                                                                                                   true           "" (8081 for local testing) 
- -JrampUp             Timeout (in seconds) until every user must have been started - one user will be started after every ($numUser/ $rampUp) second(s)        true           "" 
- -JthinkTimeTimeout   minimal amount of time (in millisceonds) a user needs to choose a product                                                                false      30000 (30s)
- -JthinkTimeRange     Maximum possible value of the normal distribution deciding when the user chooses a product (in millisceonds) once the timeout is over    false      30000 (30s)
- -l                   Logfile to write test results into                                                                                                       false          "" (logfile.log recommended)
- -n                   Start JMeter in CLI Mode                                                                                                                 true           <no argument>
+ -n                   Start JMeter in CLI Mode                                                                                                                 true                 <no argument>
+ -Jhostname           Address of the UI Backend                                                                                                                true        (use localhost for local testing)
+ -JnumUser            Number of users to test with                                                                                                             true
+ -Jport               Port of the UI Backend                                                                                                                   true           (use 8081 for local testing)
+ -JrampUp             Timeout (in seconds) until every user must have been started - one user will be started after every ($numUser/ $rampUp) second(s)        true
+ -JthinkTimeTimeout   minimal amount of time (in millisceonds) a user needs to choose a product                                                                false                 30000 (30s)
+ -JthinkTimeRange     Maximum possible value of the normal distribution deciding when the user chooses a product (in millisceonds) once the timeout is over    false                 30000 (30s)
+ -l                   Logfile to write test results into                                                                                                       false          (logfile.log recommended)
 ==================== ======================================================================================================================================= ========== ======================================
+
+Hence, the testing command will look something like this:
+
+.. code-block:: sh
+
+   java -jar ./apache-jmeter-${JMETER_VERSION:-5.4.3}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-store-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeTimeout ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-logfile.log}
 
 For more details on what the profiles do, read the next two sections.
 
