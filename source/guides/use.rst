@@ -17,11 +17,11 @@ For that we need:
 Influencing autoscaling behavior
 ================================
 
-Assuming you set up the T2-Project on a platform that enables autoscaling (-> **Kubernetes**), you can use the *autoscaling management routes* to influence the autoscaling behavior of every service.
-You can also use them otherwise, but what's the point of creating a *memory leak*/ *Denial of Service* if you don't use it?
-These routes offer exactly that:
-They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) to setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/{memory}`, :file:`/autoscaling/(clear|disable)-memory-leak`).
-More information about these routes can be found in the swagger files (:file:`/swagger-ui.html`).
+| Assuming you set up the T2-Project on a platform that enables autoscaling (-> **Kubernetes**), you can use the *autoscaling management routes* to influence the autoscaling behavior of every service.
+| You can also use them otherwise, but what's the point of creating a *memory leak*/ *Denial of Service* if you don't use it?
+| These routes offer exactly that:
+| They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) to setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/{memory}`, :file:`/autoscaling/(clear|disable)-memory-leak`).
+| More information about these routes can be found in the swagger files (:file:`/swagger-ui.html`).
 
 
 .. _monitoring:

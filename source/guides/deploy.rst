@@ -4,10 +4,10 @@
 Deployment
 ======================
 
-This section describes two ways to deploy the T2-Project.
-Either on an Kubernetes Cluster or as Dockercontainer with docker compose.
-The images for the T2-Projects services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
-The images for the services from eventuate come also from dockerhub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
+| This section describes two ways to deploy the T2-Project.
+| Either on a Kubernetes Cluster or as Docker container with Docker compose.
+| The images for the T2-Projects services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
+| The images for the services from eventuate come also from dockerhub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
 
 This section also describes how to build an run the T2-Projects services locally, however this is discouraged unless you want to develop
 
@@ -32,8 +32,8 @@ The T2-Project needs Kafka and a MongoDB. Install them any way you want to, e.g.
 Deploy the T2-Project
 ---------------------
 
-In case you want to name the deployed releases differently, you must adapt some environment variables in the T2-Project deployments.
-Confer the services' READMEs for more details regarding the setting of the services' properties.
+| In case you want to name the deployed releases differently, you must adapt some environment variables in the T2-Project deployments.
+| Confer the services' READMEs for more details regarding the setting of the services' properties.
 
 For the T2-Project itself get the deployments and deploy them:
 
@@ -45,10 +45,23 @@ For the T2-Project itself get the deployments and deploy them:
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
+Configuring the database
+------------------------
+
+| The T2-Project uses a Postgresql pod as its database.
+| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/kube/main/k8/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
+| Change the configuration to your liking, or simply use the provided defaults.
+| Then, you can set it for your cluster using
+
+.. code-block:: sh
+
+   kubectl create configmap postgres-config --from-file postgresql.conf
+
+
 Access the T2-Project
 ---------------------
 
-The UI is available through the service   ui-cs`.
+| The UI is available through the service   ui-cs`.
 To access it forward that service to your local machine:
 
 .. code-block:: sh
@@ -57,7 +70,7 @@ To access it forward that service to your local machine:
 
 And open `<http://localhost:8086>`__.
 
-You can also skip the UI and access the service via the Swagger-UI.
+| You can also skip the UI and access the service via the Swagger-UI.
 To do that, forward the service, as an example :file:`uibackend-cs`:
 
 .. code-block:: sh
@@ -86,8 +99,8 @@ Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
 Prometheus setup
 -----------------
 
-Beware: the T2 Store is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
-(If you are on docker, you are on you own.)
+| Beware: the T2 Store is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
+| (If you are on docker, you are on you own.)
 
 The following instructions rely on the helm charts from the prometheus community.
 
@@ -108,8 +121,8 @@ The following instructions rely on the helm charts from the prometheus community
 Autoscaling setup
 -----------------
 
-To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps except for the Prometheus setup were completed successfully.
-Additionally, the `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ must have been set up and working.
+| To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps except for the Prometheus setup were completed successfully.
+| Additionally, the `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ must have been set up and working.
 
 
 Metrics Server setup
@@ -179,8 +192,8 @@ You can run the T2-Project as docker containers.
 
 These commands should deploy 13 services in total.
 
-You can now the UI at `<http://localhost:8086>`__.
-You can also access some services via Swagger-UI, as listed below (assuming that you did not change the mapped ports):
+| You can now the UI at `<http://localhost:8086>`__.
+| You can also access some services via Swagger-UI, as listed below (assuming that you did not change the mapped ports):
 
 *  UIBackend : `<localhost:8081/swagger-ui.html>`__
 *  Inventory : `<localhost:8082/swagger-ui.html>`__
@@ -193,12 +206,12 @@ Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
 Build and Run Locally
 =====================
 
-You can build and run the entire T2-Project locally. 
-This is most likely not relevant to you.
+| You can build and run the entire T2-Project locally.
+| This is most likely not relevant to you.
 
-The following guide describes how to this with the Order service as an example.
-You can build all other services (with minor exceptions) the same way.
-You just need to replace 'order' with the respective service name.
+| The following guide describes how to this with the Order service as an example.
+| You can build all other services (with minor exceptions) the same way.
+| You just need to replace 'order' with the respective service name.
 
 Step 0 : Clone Repositories
 ----------------------------------------------------
