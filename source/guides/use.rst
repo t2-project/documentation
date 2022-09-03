@@ -20,7 +20,11 @@ Influencing autoscaling behavior
 | Assuming you set up the T2-Project on a platform that enables autoscaling (-> **Kubernetes**), you can use the *autoscaling management routes* to influence the autoscaling behavior of every service.
 | You can also use them otherwise, but what's the point of creating a *memory leak*/ *Denial of Service* if you don't use it?
 | These routes offer exactly that:
-| They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) to setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/{memory}`, :file:`/autoscaling/(clear|disable)-memory-leak`).
+| They are located under :file:`/autoscaling/` and offer functionality from disallowing all requests outside this directory (:file:`/autoscaling/(un)block-routes`) over setting a minimal percentage of memory to use at all times (:file:`/autoscaling/require-memory/ratio-{memory}`, :file:`/autoscaling/require-memory/{memory}-percent`, :file:`/autoscaling/(clear|disable)-memory-leak`) to setting a minimal amount of CPU to use (:file:`/autoscaling/require-cpu-from-humans`, :file:`/autoscaling/require-cpu`, :file:`/autoscaling/remove-cpu-usage-requirements`).
+| :file:`/autoscaling/require-memory/ratio-{memory}` requires the memory as mathematical ratio, so for example ``memory = 0.5`` means ``use 50% of the available memory``. ``0`` keeps the current memory leak without ensuring that the previously set percentage is kept, negative values clear the leak.
+| :file:`/autoscaling/require-memory/{memory}-percent` does the same except it expects literal percents, so for example ``memory = 50.0`` means ``use 50% of the available memory`` as well.
+| :file:`/autoscaling/(clear|disable)` are simply convenience routes so that you don't have to know which value to send.
+| The same principles apply to the CPU routes except the upper boundary is now ``numberOfCores * 1.0`` (or ``numberOfCores * 100.0`` for the human route).
 | More information about these routes can be found in the swagger files (:file:`/swagger-ui.html`).
 
 
@@ -94,7 +98,7 @@ To run the T2-Project with the JMeter Load Generator, do the following :
 #. Get a load profile and run the load generator
 
 Deploy T2-Project
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 Deploy the Store as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
 

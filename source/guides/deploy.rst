@@ -62,7 +62,7 @@ Access the T2-Project
 ---------------------
 
 | The UI is available through the service   ui-cs`.
-To access it forward that service to your local machine:
+| To access it forward that service to your local machine:
 
 .. code-block:: sh
 
@@ -71,7 +71,7 @@ To access it forward that service to your local machine:
 And open `<http://localhost:8086>`__.
 
 | You can also skip the UI and access the service via the Swagger-UI.
-To do that, forward the service, as an example :file:`uibackend-cs`:
+| To do that, forward the service, as an example :file:`uibackend-cs`:
 
 .. code-block:: sh
 
