@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-======================
+========================
 T2-Project Documentation
-======================
+========================
 
 .. toctrees must come first or they won't be displayed correctly
 
