@@ -25,6 +25,14 @@ T2-Project Documentation
    guides/deploy
    guides/use
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: DEVELOPMENT
+
+   ./develop/format
+
+
 Introduction
 ============
 
