@@ -12,7 +12,7 @@ The _T2-Project_ uses the following conventions to format (Java) code:
     Some.class,
     SomeOther.class })
 ```
-- `*` imports as soon as there are 2 imports of the same package:
+- `*` imports as soon as there are 2 imports of the same package
 - blank lines must also be empty (no `            ` lines)
 - one space between parameters (`doSomething(String a, String b)`)
 - one space between the curly parentheses of arrays (`{ "Hi", "Second String" }`)
