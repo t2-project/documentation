@@ -15,12 +15,12 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+import time
 
 # -- Project information -----------------------------------------------------
 
 project = u'T2-Project'
-copyright = u'2021, Sarah Sophie Stieß'
+copyright = f'2021-{time.strftime("%Y")}, Sarah Sophie Stieß'
 author = u'Sarah Sophie Stieß'
 
 # The short X.Y version
