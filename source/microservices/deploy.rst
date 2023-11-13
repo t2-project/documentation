@@ -1,7 +1,5 @@
-.. _deploy:
-
 ======================
-Deployment
+T2-Project Deployment
 ======================
 
 | This section describes two ways to deploy the T2-Project.
@@ -21,7 +19,7 @@ This section describes how to deploy the T2-Project on a Kubernetes cluster.
 
 The T2-Project needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
 
-.. code-block:: sh
+.. code-block:: shell
 
    helm repo add bitnami https://charts.bitnami.com/bitnami
    helm repo update
@@ -37,7 +35,7 @@ Deploy the T2-Project
 
 For the T2-Project itself get the deployments and deploy them:
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/kube.git
    cd kube/k8
@@ -53,7 +51,7 @@ Configuring the database
 | Change the configuration to your liking, or simply use the provided defaults.
 | Then, you can set it for your cluster using
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl create configmap postgres-config --from-file postgresql.conf
 
@@ -64,7 +62,7 @@ Access the T2-Project
 | The UI is available through the service   ui-cs`.
 | To access it forward that service to your local machine:
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl port-forward svc/ui-cs 8086:80
 
@@ -73,7 +71,7 @@ And open `<http://localhost:8086>`__.
 | You can also skip the UI and access the service via the Swagger-UI.
 | To do that, forward the service, as an example :file:`uibackend-cs`:
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl port-forward svc/uibackend-cs 8081:80
 
@@ -81,7 +79,7 @@ And open `<localhost:8081/swagger-ui.html>`__.
 
 This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, :file:`cart-cs` and :file:`creditinstitute-cs`.
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl port-forward svc/inventory-cs 8082:80 &
    kubectl port-forward svc/orchestrator-cs 8085:80 &
@@ -93,7 +91,7 @@ This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, 
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
+Now go to page :doc:`Usage <use>` to figure out what you can to with the T2-Project.
 
 
 Prometheus setup
@@ -104,7 +102,7 @@ Prometheus setup
 
 The following instructions rely on the helm charts from the prometheus community.
 
-.. code-block:: sh
+.. code-block:: shell
 
    # add repo for prometheus
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -135,14 +133,14 @@ There are two ways to install the metrics server:
 
 If you use `Minikube <https://minikube.sigs.k8s.io/docs/>`__, there is a third way to install the metrics server:
 
-.. code-block:: sh
+.. code-block:: shell
 
    minikube addons enable metrics-server
 
 Should you encounter an error with your metrics server, the `following article <https://www.linuxsysadmins.com/service-unavailable-kubernetes-metrics/>`__ might be helpful.
 The metrics server is running as intended when the command
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl top pod
 
@@ -150,7 +148,7 @@ does not throw an error.
 
 If you are on Minikube and still encounter an error, there is one more known troubleshooting solution:
 
-.. code-block:: sh
+.. code-block:: shell
 
    minikube stop
    minikube start --extra-config=kubelet.housekeeping-interval=10s
@@ -163,7 +161,7 @@ Creating the autoscaling behavior
 
 Afterwards, navigate to the :file:`k8/autoscaling` directory in the `Kube repo <https://github.com/t2-project/kube>`__ and create all resources inside:
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl create -f .
 
@@ -173,7 +171,7 @@ Modifying the autoscaling behavior
 
 If you want to modify the autoscaling behavior, i.e. by increasing the maximum replicas, add the change in the corresponding :file:`hpa_$SERVICE.yaml` file there, and apply it by calling
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl delete horizontalpodautoscalers.autoscaling $SERVICE
    kubectl create -f .
@@ -184,7 +182,7 @@ Run with Docker
 
 You can run the T2-Project as docker containers.
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/kube.git
    cd kube/docker
@@ -201,7 +199,7 @@ These commands should deploy 13 services in total.
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
+Now go to page :doc:`Usage <use>` to figure out what you can to with the T2-Project.
 
 Build and Run Locally
 =====================
@@ -216,7 +214,7 @@ Build and Run Locally
 Step 0 : Clone Repositories
 ----------------------------------------------------
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone --recursive https://github.com/t2-project/t2-project.git
    # Or if an SSH key has been registered with GitHub:
@@ -247,7 +245,7 @@ Docker                  :file:`20.10.6`
 The :file:`pom.xml` files read the versions from environment variables.
 That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
 
-.. code-block:: sh
+.. code-block:: shell
 
    wget https://raw.githubusercontent.com/t2-project/kube/main/setenv.sh
    . ./setenv.sh
@@ -265,7 +263,7 @@ Step 3 : Build Local Dependencies
 
 Most services of the T2-Project depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/common.git
    cd common/
@@ -278,21 +276,21 @@ The E2E Test also depends on the saga participants *inventory*, *payment* and *o
 
 You must build and install them to your local maven repository as well.
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/payment.git
    cd payment/
    ./mvnw clean install
    ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/inventory.git
    cd inventory/
    ./mvnw clean install
    ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
 
-.. code-block:: sh
+.. code-block:: shell
 
    git clone https://github.com/t2-project/order.git
    cd order/
@@ -305,14 +303,14 @@ Step 4 : Build and Run
 
 Now you can build and run the order service.
 
-.. code-block:: sh
+.. code-block:: shell
 
    cd order/
    ./mvnw spring-boot:run
 
 Or like this, in case you want to supply specific application properties (remember to use the path to *your* properties file).
 
-.. code-block:: sh
+.. code-block:: shell
 
    cd order/
    ./mvnw clean install
@@ -333,7 +331,7 @@ With this setup, the Test service knows the supposed outcome of all requests and
 
 For more Details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
 
-.. image:: ../arch/figs/component_test.jpg
+.. image:: figs/component_test.jpg
 
 Step by Step
 ------------
@@ -349,7 +347,7 @@ Step 1 : Run E2E Test Service
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
 If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl apply -f testsetup/e2etest.yaml
 
@@ -396,7 +394,7 @@ This might change but for now it is the easiest solution.
 For Kubernetes
 ~~~~~~~~~~~~~~
 
-.. code-block:: sh
+.. code-block:: shell
 
    kubectl logs <e2etest-pod>
 

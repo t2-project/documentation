@@ -1,7 +1,5 @@
-.. _use:
-
 ======================
-Usage
+T2-Project Usage
 ======================
 
 The T2-Project main point of usage is to trigger SLO violations with regard to response time and availability.
@@ -39,7 +37,7 @@ Instrumentation (Provided Metrics)
 The T2-Project's services are instrumented with `Micrometer <https://micrometer.io/>`__ for monitoring with `Prometheus <https://prometheus.io/>`__.
 
 Each service, except the CDC service, which is provided by eventuate, expose prometheus metrics at the endpoint :file:`/actuator/prometheus>`.
-Assuming you followed the instructions under :ref:`deploy` for either a deployment with kubernetes or docker-compose, and thus have the :file:`creditinstitute` service available at :file:`localhost:8087`, go to `<localhost:8087/actuator/prometheus>`__ to get the metrics of the credit institute service.
+Assuming you followed the instructions under :doc:`Deployment <deploy>` for either a deployment with kubernetes or docker-compose, and thus have the :file:`creditinstitute` service available at :file:`localhost:8087`, go to `<localhost:8087/actuator/prometheus>`__ to get the metrics of the credit institute service.
 Change the port according to your deployment to see the metrics of the other services.
 
 For the :file:`creditinstitute` service, the most interesting metrics are the :file:`http_server_requests_seconds` for the endpoint :file:`/pay`, because that is the API to be used by services that depend on the :file:`creditinstitute` service.
@@ -56,13 +54,13 @@ Easiest way to violate an availability SLO is to kill the service.
 
 Kubernetes : 
 
-.. code-block:: sh
+.. code-block:: shell
    
    kubectl delete service creditinstitute-cs
 
 Docker :
 
-.. code-block:: sh
+.. code-block:: shell
 
    docker container stop creditinstitute
 
@@ -75,7 +73,7 @@ Read section `generate`_ on how to generate load.
 
 To manually change the response time, you can use the creditinstitute service.
 
-Assuming you deployed the T2-Project as described in section :ref:`Deployment  <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
+Assuming you deployed the T2-Project as described on page :doc:`Deployment <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
 Use this API to increase or decrease the response time of the :file:`/pay` endpoint.
 
 .. _generate:
@@ -100,14 +98,14 @@ To run the T2-Project with the JMeter Load Generator, do the following :
 Deploy T2-Project
 ~~~~~~~~~~~~~~~~~
 
-Deploy the T2-Projects services as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
+Deploy the T2-Projects services as described on page :doc:`Deployment <deploy>` and make the UIBackend service accessible.
 
 Get JMeter
 ~~~~~~~~~~~~~~~
 
 Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/download_jmeter.cgi>`__. 
 
-.. code-block:: sh
+.. code-block:: shell
 
    wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
    tar xvf apache-jmeter-<version-of-your-choice>.tgz
@@ -119,20 +117,20 @@ Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load pro
 
 There are two predefined loadprofiles:
 
-.. code-block:: sh
+.. code-block:: shell
 
    loadProfile=t2-project-fixed-single.jmx 
 
 which generates load for placing one order per user and
 
-.. code-block:: sh
+.. code-block:: shell
 
    loadProfile=t2-project-random-infinite.jmx 
 
 | which runs indefinitely.
 | Once you have chosen which profile to use, you can run them by calling
 
-.. code-block:: sh
+.. code-block:: shell
 
    wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/$loadProfile
    java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
@@ -154,7 +152,7 @@ Both loadprofiles take the following arguments:
 
 Hence, the testing command will look something like this:
 
-.. code-block:: sh
+.. code-block:: shell
 
    java -jar ./apache-jmeter-${JMETER_VERSION:-5.4.3}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-project-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeTimeout ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-results.csv}
 
@@ -165,14 +163,14 @@ Fixed Single Load Profile
 
 The profile :file:`t2-project-fixed-single.jmx` generates requests to the UI Backend and places one order with 3 random products as visualized below.
 
-.. image:: ../arch/figs/load_generator_single.jpg
+.. image:: figs/load_generator_single.jpg
 
 Random Infinite Load Profile
 """"""""""""""""""""""""""""
 
 The profile :file:`t2-project-random-infinite.jmx` is similar to the previous one, but runs infinitely as visualized below.
 
-.. image:: ../arch/figs/load_generator.jpg
+.. image:: figs/load_generator.jpg
 
 With this profile the generator adds between 1 to 5 products to the cart, and confirm the order afterwards.
 It chooses the product at random from the products in the inventory.
