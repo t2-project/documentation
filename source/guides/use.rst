@@ -100,7 +100,7 @@ To run the T2-Project with the JMeter Load Generator, do the following :
 Deploy T2-Project
 ~~~~~~~~~~~~~~~~~
 
-Deploy the Store as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
+Deploy the T2-Projects services as described in :ref:`Deployment  <deploy>` and make the UIBackend service accessible.
 
 Get JMeter
 ~~~~~~~~~~~~~~~

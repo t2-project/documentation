@@ -99,7 +99,7 @@ Now go to :ref:`Usage  <use>` to figure out what you can to with the T2-Project.
 Prometheus setup
 -----------------
 
-| Beware: the T2 Store is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
+| Beware: the T2-Project is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
 | (If you are on docker, you are on you own.)
 
 The following instructions rely on the helm charts from the prometheus community.
@@ -121,7 +121,7 @@ The following instructions rely on the helm charts from the prometheus community
 Autoscaling setup
 -----------------
 
-| To unlock the autoscaling capabilities of the T2Store, ensure that all prior steps except for the Prometheus setup were completed successfully.
+| To unlock the autoscaling capabilities of the T2-Project, ensure that all prior steps except for the Prometheus setup were completed successfully.
 | Additionally, the `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ must have been set up and working.
 
 
