@@ -34,8 +34,8 @@ T2-Project Documentation
    :hidden:
    :caption: DEVELOPMENT
 
-   develop/format
-
+   Implementation <develop/impl>
+   Code Format <develop/format>
 
 Introduction
 ============
@@ -100,7 +100,6 @@ This repository contains the files for deploying the T2-Project on Kubernetes as
 .. 
 .. Each service repositories contain the following files and directories:
 .. 
-.. *  Dockerfile : To build a docker image of the service.
+.. *  Dockerfile : To build a Docker image of the service.
 .. *  README.md : The readme. Look here for more information about the service.
 .. *  src/ : Actual code of the service.
-

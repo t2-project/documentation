@@ -71,7 +71,7 @@ Trigger Violation of a Response Time SLO
 Make sure to generate some load, because without request there are no responses and without responses you cannot measure any response time.
 Read section `generate`_ on how to generate load.
 
-To manually change the response time, you can use the creditinstitute service.
+To manually change the response time, you can use the *creditinstitute* service.
 
 Assuming you deployed the T2-Project as described on page :doc:`Deployment <deploy>`, go to `<localhost:8087/swagger-ui.html>`__ to access the creditinstitute's API.
 Use this API to increase or decrease the response time of the :file:`/pay` endpoint.
@@ -84,7 +84,7 @@ Load Generation
 You can generate load manually accessing the UI or the UIBackend's Swagger-UI.
 
 Or you can use a Load Generator to send request.
-We recommend `Apache JMeter <https://jmeter.apache.org/>`__.
+We recommend using `Apache JMeter <https://jmeter.apache.org/>`__.
 
 Apache JMeter
 -------------
@@ -98,7 +98,7 @@ To run the T2-Project with the JMeter Load Generator, do the following :
 Deploy T2-Project
 ~~~~~~~~~~~~~~~~~
 
-Deploy the T2-Projects services as described on page :doc:`Deployment <deploy>` and make the UIBackend service accessible.
+Deploy the T2-Project services as described on page :doc:`Deployment <deploy>` and make the *UIBackend* service accessible.
 
 Get JMeter
 ~~~~~~~~~~~~~~~
@@ -107,15 +107,15 @@ Download Apache JMeter, e.g. from their `website <https://jmeter.apache.org/down
 
 .. code-block:: shell
 
-   wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
+   wget https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-<version-of-your-choice>.tgz 
    tar xvf apache-jmeter-<version-of-your-choice>.tgz
 
 Get Load Profiles and run Generator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the `JMeter <https://jmeter.apache.org/download_jmeter.cgi>`__ load profiles for the T2-Project and run the generator.
+Download the JMeter load profiles for the T2-Project and run the generator.
 
-There are two predefined loadprofiles:
+There are two predefined loadprofiles in the `Kube repo <https://github.com/t2-project/kube>`__:
 
 .. code-block:: shell
 
@@ -154,7 +154,7 @@ Hence, the testing command will look something like this:
 
 .. code-block:: shell
 
-   java -jar ./apache-jmeter-${JMETER_VERSION:-5.4.3}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-project-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeTimeout ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-results.csv}
+   java -jar ./apache-jmeter-${JMETER_VERSION:-5.6.2}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-project-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeTimeout ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-results.csv}
 
 For more details on what the profiles do, read the next two sections.
 

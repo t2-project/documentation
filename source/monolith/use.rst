@@ -8,7 +8,7 @@ You can use the T2-Modulith application either by accessing the UI or by using t
 * API: http://localhost:8081/swagger-ui/index.html
 
 On how to use the UI see the usage section of the `T2-Project UI repository <https://github.com/t2-project/ui#usage>`_.
-How to use the API is described below in section `HTTP Endpoints <#http-endpoints>`_.
+How to use the API is described below in the following section `HTTP Endpoints <#http-endpoints>`_.
 
 HTTP Endpoints
 --------------
@@ -18,7 +18,6 @@ The JSP-specific http endpoints provided by the ``ui`` module are not listed her
 
 **UI Backend:**
 
-
 * ``/products`` GET list of all products in the inventory
 * ``/cart/{id}`` GET list of all products in cart of a specific session
 * ``/cart/{id}`` POST list of products to add/update/delete in/from cart of a specific session
@@ -26,11 +25,9 @@ The JSP-specific http endpoints provided by the ``ui`` module are not listed her
 
 **Cart:**
 
-
 * ``/cart/{id}`` GET, PUT, POST or DELETE the cart with sessionId ``id`` (does only manipulate the cart, no reservations are made in the inventory)
 
 **Inventory:**
-
 
 * ``/inventory/{id}`` : GET, PUT, POST or DELETE the product with productId ``id``
 * ``/generate`` : GET to generate new products
@@ -164,77 +161,3 @@ With this, you place an order for the session ``{sessionId}``\ , with the given 
 .. code-block:: shell
 
    curl -i -X POST -H "Content-Type:application/json" -d '{"cardNumber":"num","cardOwner":"own","checksum":"sum", "sessionId":"{sessionId}"}' http://localhost:8081/confirm
-
-----
-
-Application Properties
-----------------------
-
-Property files: ``./src/main/resources/application-*.yaml``
-
-**T2 configuration:**
-
-.. list-table::
-   :header-rows: 1
-
-   * - property
-     - read from env var
-     - description
-   * - t2.cart.TTL
-     - T2_CART_TTL
-     - time to live of items in cart (in seconds)
-   * - t2.cart.taskRate
-     - T2_CART_TASKRATE
-     - rate at which the cart checks for items that exceeded their TTL (in milliseconds)
-   * - t2.inventory.size
-     - INVENTORY_SIZE
-     - number of items to be generated into the inventory repository on start up
-   * - t2.inventory.TTL
-     - T2_INVENTORY_TTL
-     - time to live of reservations (in seconds)
-   * - t2.inventory.taskRate
-     - T2_INVENTORY_TASKRATE
-     - rate at which the inventory checks for reservations that exceeded their TTL (in milliseconds).
-   * - t2.payment.provider.dummy.url
-     - T2_PAYMENT_PROVIDER_DUMMY_URL
-     - url of the payment provider.
-   * - t2.payment.provider.timeout
-     - T2_PAYMENT_PROVIDER_TIMEOUT
-     - timeout in seconds. the payment service waits this long for an reply from the payment provider.
-
-
-Setting either ``TTL`` or ``taskrate`` to a value less or equal to zero disables the collection of expired entries (cart module and inventory module).
-
-**Postgres database:**
-
-.. list-table::
-   :header-rows: 1
-
-   * - property
-     - read from env var
-     - description
-   * - spring.datasource.url
-     - SPRING_DATASOURCE_URL
-     - 
-   * - spring.datasource.username
-     - SPRING_DATASOURCE_USERNAME
-     - 
-   * - spring.datasource.password
-     - SPRING_DATASOURCE_PASSWORD
-     - 
-   * - spring.datasource.driver-class-name
-     - SPRING_DATASOURCE_DRIVER_CLASS_NAME
-     - Should be usually set to ``org.postgresql.Driver``
-
-
-**MongoDB database:**
-
-.. list-table::
-   :header-rows: 1
-
-   * - property
-     - read from env var
-     - description
-   * - spring.data.mongodb.uri
-     - MONGO_HOST
-     - host of the mongo db

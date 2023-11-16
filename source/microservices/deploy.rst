@@ -3,11 +3,11 @@ T2-Project Deployment
 ======================
 
 | This section describes two ways to deploy the T2-Project.
-| Either on a Kubernetes Cluster or as Docker container with Docker compose.
-| The images for the T2-Projects services come from `here <https://hub.docker.com/u/stiesssh>`__ at docker hub.
-| The images for the services from eventuate come also from dockerhub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
+| Either on a Kubernetes cluster or as Docker containers with Docker Compose.
+| The container images for the T2-Projects services come from `here <https://hub.docker.com/r/t2project>`__ at Docker Hub.
+| The images for the services from eventuate come also from Docker Hub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
 
-This section also describes how to build an run the T2-Projects services locally, however this is discouraged unless you want to develop
+This section also describes how to build and run the T2-Projects services locally, however this is discouraged unless you want to develop.
 
 Deploy on a Kubernetes Cluster
 ========================================
@@ -46,7 +46,7 @@ These commands should deploy 10 services in addition to the MongoDB, the Kafka a
 Configuring the database
 ------------------------
 
-| The T2-Project uses a Postgresql pod as its database.
+| The T2-Project uses a PostgreSQL pod as its database.
 | If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/kube/main/k8/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
 | Change the configuration to your liking, or simply use the provided defaults.
 | Then, you can set it for your cluster using
@@ -59,7 +59,7 @@ Configuring the database
 Access the T2-Project
 ---------------------
 
-| The UI is available through the service   ui-cs`.
+| The UI is available through the service :file:`ui-cs`.
 | To access it forward that service to your local machine:
 
 .. code-block:: shell
@@ -68,8 +68,8 @@ Access the T2-Project
 
 And open `<http://localhost:8086>`__.
 
-| You can also skip the UI and access the service via the Swagger-UI.
-| To do that, forward the service, as an example :file:`uibackend-cs`:
+| You can also skip the UI and access the service via Swagger-UI.
+| To do that, forward the port of your target service, as an example :file:`uibackend-cs`:
 
 .. code-block:: shell
 
@@ -91,16 +91,16 @@ This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, 
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to page :doc:`Usage <use>` to figure out what you can to with the T2-Project.
+Now go to page :doc:`Usage <use>` to figure out what you can do with the T2-Project.
 
 
 Prometheus setup
 -----------------
 
 | Beware: the T2-Project is instrumented to provide metrics, but you must still set up the actual monitoring yourself.
-| (If you are on docker, you are on you own.)
+| (If you are on Docker, you are on you own.)
 
-The following instructions rely on the helm charts from the prometheus community.
+The following instructions rely on the Helm charts from the Prometheus community.
 
 .. code-block:: shell
 
@@ -137,7 +137,8 @@ If you use `Minikube <https://minikube.sigs.k8s.io/docs/>`__, there is a third w
 
    minikube addons enable metrics-server
 
-Should you encounter an error with your metrics server, the `following article <https://www.linuxsysadmins.com/service-unavailable-kubernetes-metrics/>`__ might be helpful.
+Should you encounter an error with your metrics server, `this article <https://www.linuxsysadmins.com/service-unavailable-kubernetes-metrics/>`__ might be helpful.
+
 The metrics server is running as intended when the command
 
 .. code-block:: shell
@@ -180,7 +181,7 @@ If you want to modify the autoscaling behavior, i.e. by increasing the maximum r
 Run with Docker
 ===============
 
-You can run the T2-Project as docker containers.
+You can run the T2-Project as Docker containers.
 
 .. code-block:: shell
 
@@ -190,7 +191,7 @@ You can run the T2-Project as docker containers.
 
 These commands should deploy 13 services in total.
 
-| You can now the UI at `<http://localhost:8086>`__.
+| You can now access the UI at `<http://localhost:8086>`__.
 | You can also access some services via Swagger-UI, as listed below (assuming that you did not change the mapped ports):
 
 *  UIBackend : `<localhost:8081/swagger-ui.html>`__
@@ -255,7 +256,7 @@ Step 2 : Set Application properties
 ----------------------------------------
 
 Set the `application properties <https://github.com/t2-project/order/tree/main/src/main/resources>`__.
-They are in located at :file:`./src/main/resources/`
+They are located at :file:`./src/main/resources/`
 You want to consult the service's README on the meaning of the properties.
 
 Step 3 : Build Local Dependencies
@@ -316,6 +317,15 @@ Or like this, in case you want to supply specific application properties (rememb
    ./mvnw clean install
    java -jar -Dspring.config.location=./src/main/resources/application.local.properties ./target/order-0.0.1-SNAPSHOT.jar
 
+Of course, you can also use own profiles like e.g. *local* (:file:`./src/main/resources/application-local.yml` is used automatically, if created):
+
+.. code-block:: shell
+
+   cd order/
+   ./mvnw clean install
+   java -jar -Dspring.profiles.active=local ./target/order-0.0.1-SNAPSHOT.jar
+
+
 Step 5 : Build Docker Image
 ---------------------------
 
@@ -325,11 +335,11 @@ Each service repository contains a Dockerfile to build an image of that service.
 Run with Test Service
 =======================
 
-The test service intercepts request from the UI Backend to the Orchestrator and also snatches the requests from the Payment Service to the Credit Institute and answers them in the Credit Institute's stead.
+The *Test* service intercepts request from the *UI Backend* to the *Orchestrator* and also snatches the requests from the *Payment* service to the *Credit Institute* and answers them in the *Credit Institute's* stead.
 The setup is depicted below.
-With this setup, the Test service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
+With this setup, the *Test* service knows the supposed outcome of all requests and can assert that the databases are in the correct state, after a saga instance finished.
 
-For more Details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
+For more details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
 
 .. image:: figs/component_test.jpg
 
@@ -339,13 +349,13 @@ Step by Step
 #. Run the E2E Test Service
 #. Configure the UI Backend and the Payment Service
 #. Generate load
-#. Look at the Logs
+#. Look at the logs
 
 Step 1 : Run E2E Test Service
 -----------------------------
 
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
-If you are on a kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
+If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
 
 .. code-block:: shell
 
@@ -354,7 +364,7 @@ If you are on a kubernetes cluster, you may apply the deployment from the folder
 Step 2 : Configure the UI Backend and the Payment Service
 ---------------------------------------------------------
 
-Configure the UI Backend such that it sends confirmed orders to the Test service and configure the Payment service to send the payment requests to the Test service.
+Configure the *UI Backend* such that it sends confirmed orders to the *Test* service and configure the *Payment* service to send the payment requests to the *Test* service.
 
 For Kubernetes
 ~~~~~~~~~~~~~~
@@ -380,14 +390,14 @@ Or use the deployment in the folder `testsetup <https://github.com/t2-project/ku
 Step 3 : Generate Load
 -----------------------------
 
-Confer the following section on how to generate load.
+Refer to the following section for information on how to create a load.
 There must be some request or else there is nothing to test.
-The Test service does not generate load by itself.
+The *Test* service does not generate load by itself.
 
 Step 4 : Look at the Logs
 -----------------------------
 
-The Test results are printed to the logs.
+The test results are printed to the logs.
 This might change but for now it is the easiest solution.
 
 
@@ -401,15 +411,15 @@ For Kubernetes
 Interpret Output
 ~~~~~~~~~~~~~~~~
 
-A Test Report contains these Infomation:
+A test report contains these information:
 
 *  **Expected Saga Status** : If it is :file:`FAILURE` then the saga instance supposed to have rolled back, other wise it should have run to completion.
-*  **Saga Id** : Id of the Saga Instance in the Saga Instance DB. Used to look the Saga Instance up.
+*  **Saga Id** : Id of the Saga instance in the Saga instance DB. Used to look the Saga instance up.
 *  **Correlation Id** : Id used by the test service to correlate saga request to the Orchestrator with payment request from the Payment Service.
-*  **Order**, **Inventory**, **Saga Instance** : Displays the test Result for the Order and Inventory service and the Saga Instance.
+*  **Order**, **Inventory**, **Saga Instance** : Displays the test result for the Order and Inventory service and the Saga instance.
 
 
-Report for Test that found every thing correct:
+Report for rest that found every thing correct:
 
 .. code-block:: text
 
@@ -420,7 +430,7 @@ Report for Test that found every thing correct:
         Inventory: correct
         Saga Instance: correct
 
-Report for Test that found that some entries in the inventory database were not deleted correctly:
+Report for test that found that some entries in the inventory database were not deleted correctly:
 
 .. code-block:: text
 
