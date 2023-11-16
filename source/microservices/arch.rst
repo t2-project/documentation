@@ -1,14 +1,12 @@
-.. _arch:
-
-=====================
-Architecture Overview
-=====================
+=======================
+T2-Project Architecture
+=======================
 
 The T2-Project consists of seven services.
 
 .. image:: figs/component_total_colour.jpg
 
-The green and blue services are the core T2 Services. The blue ones participate in the saga, the green ones do not. 
+The green and blue services are the core T2 services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  
 
 *  `UI <https://github.com/t2-project/ui>` : The application frontend.
