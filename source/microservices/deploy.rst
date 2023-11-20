@@ -212,6 +212,8 @@ Build and Run Locally
 | You can build all other services (with minor exceptions) the same way.
 | You just need to replace 'order' with the respective service name.
 
+| If you want to build all services at once, you can use the script ``build-all.sh`` provided in the :file:`kube` repository.
+
 Step 0 : Clone Repositories
 ----------------------------------------------------
 
@@ -233,18 +235,18 @@ There is no guarantee that it works with others as well.
 ======================= ==========================
 Name                    Version
 ======================= ==========================
-Maven                   :file:`3.6.3`
-Spring Boot             :file:`2.4.4`
-io.eventuate.tram.core  :file:`0.29.0.RELEASE`
-io.eventuate.tram.sagas :file:`0.18.0.RELEASE`
-jaeger                  :file:`3.2.0`
-resilience4j            :file:`3.2.0`
-springdoc               :file:`1.5.11`
-Docker                  :file:`20.10.6`
+Maven                   ``3.9.5``
+Docker                  ``24.0.6``
+Spring Boot             ``3.1.5``
+io.eventuate.tram.core  ``0.34.0.RELEASE``
+io.eventuate.tram.sagas ``0.23.0.RELEASE``
+jaeger                  ``3.3.1``
+resilience4j            ``2.1.0``
+springdoc               ``2.2.0``
 ======================= ==========================
 
 The :file:`pom.xml` files read the versions from environment variables.
-That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file.
+That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file. There are also files for Windows users: `setenv.cmd <https://github.com/t2-project/kube/blob/main/setenv.cmd>` and `setenv.ps1 <https://github.com/t2-project/kube/blob/main/setenv.ps1>`.
 
 .. code-block:: shell
 
