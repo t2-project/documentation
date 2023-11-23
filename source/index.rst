@@ -43,14 +43,14 @@ Introduction
 The T2-Project is a reference application provided in two variants:
 
 *  :ref:`Microservices <microservices>` (implementing the Saga pattern)
-*  :ref:`Modular Monolith <monolith>`
+*  :ref:`Monolith <monolith>` (retaining the modular structure)
 
-The microservices reference application is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
+The project is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
 | Initially, we only implemented the application in the microservices architecture style and called it **T2-Project**. Later, we added a monolithic variant for comparison.
 | The monolith retains the modular structure, therefore we call it **T2-Modulith**.
 
-The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see `Microservices Usage <microservices/use>` for more information).
+The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
 The initial purpose of the T2-Modulith was to compare a microservices application with a monolith application in terms of energy consumption.
 
 Repository Structure
