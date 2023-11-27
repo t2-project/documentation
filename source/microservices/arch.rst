@@ -4,18 +4,18 @@ T2-Project Architecture
 
 The T2-Project consists of seven services.
 
-.. image:: figs/component_total_colour.jpg
+.. image:: figs/component_total_colour.svg
 
 The green and blue services are the core T2 services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  
 
-*  `UI <https://github.com/t2-project/ui>` : The application frontend.
-*  `UIBackend <https://github.com/t2-project/uibackend>` : API Gateway for the UI.
-*  `Cart <https://github.com/t2-project/cart>` : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
-*  `Orchestrator <https://github.com/t2-project/orchestrator>` : Manages the saga.
-*  `Order <https://github.com/t2-project/order>` : Persists orders to the *order repository* and marks them as either *success* or *failure*.
-*  `Payment <https://github.com/t2-project/payment>` : Handles the store’s payment by contacting some credit institute.
-*  `Inventory <https://github.com/t2-project/inventory>`: Manages the store's products. They are stored in the *product repository*.
+*  `UI <https://github.com/t2-project/ui>`__ : The application frontend.
+*  `UIBackend <https://github.com/t2-project/uibackend>`__ : API Gateway for the UI.
+*  `Cart <https://github.com/t2-project/cart>`__ : Manages the user shopping carts. It saves the cart contents to the *cart repository*.
+*  `Orchestrator <https://github.com/t2-project/orchestrator>`__ : Manages the saga.
+*  `Order <https://github.com/t2-project/order>`__ : Persists orders to the *order repository* and marks them as either *success* or *failure*.
+*  `Payment <https://github.com/t2-project/payment>`__ : Handles the store’s payment by contacting some credit institute.
+*  `Inventory <https://github.com/t2-project/inventory>`__ : Manages the store's products. They are stored in the *product repository*.
 
 The UIBackend communicates over HTTP with a REST like interface.
 The Saga participants (marked in blue) use message based communication among each other. 
@@ -88,7 +88,7 @@ Spring and Spring Boot
 =================== ==============
 Dependency          Version
 =================== ==============
-Spring Boot         2.4.4
+Spring Boot         3.1.x
 =================== ==============
 
 

@@ -2,56 +2,15 @@
 T2-Modulith Architecture
 ========================
 
-On this page the architecture of the T2-Modulith application is described.
-
-Microservices → Monolith
-------------------------
-
-The following table shows how the microservices implementation was migrated to a monolithic implementation.
-
-.. list-table::
-   :header-rows: 1
-
-   * - Microservice
-     - Monolith
-     - Comments
-   * - `Cart <https://github.com/t2-project/cart>`_
-     - Cart Module
-     - 
-   * - `Inventory <https://github.com/t2-project/inventory>`_
-     - Inventory Module
-     - 
-   * - `Order <https://github.com/t2-project/order>`_
-     - Order Module
-     - 
-   * - `Payment <https://github.com/t2-project/payment>`_
-     - Payment Module
-     - 
-   * - `UI <https://github.com/t2-project/ui>`_
-     - UI Module
-     - JSP 😕 → application has to be packaged as a ``war`` package (see :doc:`Development <dev>`)
-   * - `UI Backend <https://github.com/t2-project/uibackend>`_
-     - UI Backend Module
-     - | Still an API gateway for the UI but in a different way:
-       | UI interacts with UI Backend via inter-process communication instead of HTTP requests over the network
-   * - `Orchestrator <https://github.com/t2-project/orchestrator>`_
-     - ❌
-     - | Saga Pattern not needed anymore
-       | → Simple transaction is used to finalize an order, part of the order module
-
-
-The `common <https://github.com/t2-project/common>`_ package that is used as a jar dependency by all microservices for inter-service communication is not used by the monolith. Some parts are moved to the respective domain-specific module. There is now a ``config`` package that includes the configuration that is relevant for multiple modules, however, without any class definitions required used for communication.
-
-Architecture Description
-------------------------
-
 The T2-Modulith application consists of six modules:
 
-.. image:: ./figs/component-diagram.svg
-   :target: ./figs/component-diagram.svg
-   :alt: Components Diagram of the T2-Modulith application
+.. image:: ./figs/component_diagram.svg
+   :alt: Component Diagram of the T2-Modulith application
 
-Diagram was created by `Spring Modulith <https://docs.spring.io/spring-modulith/reference/documentation.html>`_.
+The main difference between this architecture of the monolith implementation and the implementation of the :doc:`microservices architecture <../microservices/arch>` is the removal of the orchestrator service. In the monolithic implementation the finalization of an order gets coordinated by the order module.
+
+Module Descriptions
+-------------------
 
 UI Module
 ~~~~~~~~~
@@ -94,3 +53,52 @@ Cart Module
 The cart module manages the shopping carts of the T2-Project.
 The content of a user's shopping cart is a map of Strings to Integers.
 Within the context of the T2-Project it contains which products (identified by their id) and how many units there of a users wants to buy.
+
+
+Microservices → Monolith
+------------------------
+
+The following table shows how the microservices implementation was migrated to a monolithic implementation.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Microservice
+     - Monolith
+     - Comments
+   * - `Cart <https://github.com/t2-project/cart>`_
+     - Cart Module
+     - 
+   * - `Inventory <https://github.com/t2-project/inventory>`_
+     - Inventory Module
+     - 
+   * - `Order <https://github.com/t2-project/order>`_
+     - Order Module
+     - 
+   * - `Payment <https://github.com/t2-project/payment>`_
+     - Payment Module
+     - 
+   * - `UI <https://github.com/t2-project/ui>`_
+     - UI Module
+     - JSP 😕 → application has to be packaged as a ``war`` package (see :doc:`Implementation <../develop/impl>`)
+   * - `UI Backend <https://github.com/t2-project/uibackend>`_
+     - UI Backend Module
+     - | Still an API gateway for the UI but in a different way:
+       | UI interacts with UI Backend via inter-process communication instead of HTTP requests over the network
+   * - `Orchestrator <https://github.com/t2-project/orchestrator>`_
+     - ❌
+     - | Saga Pattern not needed anymore
+       | → Simple transaction is used to finalize an order, part of the order module
+
+
+The `common <https://github.com/t2-project/common>`_ package that is used as a jar dependency by all microservices for inter-service communication is not used by the monolith. Some parts are moved to the respective domain-specific module. There is now a ``config`` package that includes the configuration that is relevant for multiple modules, however, without any class definitions required used for communication.
+
+
+Spring Modulith
+---------------
+
+The modularity of the application gets verified by `Spring Modulith <https://spring.io/projects/spring-modulith>`_.
+In addition to that, it generates a component diagram:
+
+.. image:: ./figs/component_diagram-spring_modulith.svg
+   :alt: Component Diagram of the T2-Modulith application generated by Spring Modulith
