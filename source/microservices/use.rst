@@ -115,7 +115,7 @@ Get Load Profiles and run Generator
 
 Download the JMeter load profiles for the T2-Project and run the generator.
 
-There are two predefined loadprofiles in the `Kube repo <https://github.com/t2-project/kube>`__:
+There are two predefined loadprofiles in the `DevOps repo <https://github.com/t2-project/devops>`__:
 
 .. code-block:: shell
 
@@ -132,7 +132,7 @@ which generates load for placing one order per user and
 
 .. code-block:: shell
 
-   wget https://raw.githubusercontent.com/t2-project/kube/main/loadprofiles/$loadProfile
+   wget https://raw.githubusercontent.com/t2-project/devops/main/loadprofiles/$loadProfile
    java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
 
 Both loadprofiles take the following arguments:

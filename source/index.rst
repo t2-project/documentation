@@ -92,9 +92,9 @@ It is a dependency to all other services:
 
 *  `Common <https://github.com/t2-project/common>`__
 
-This repository contains the files for deploying the T2-Project on Kubernetes as well other files, that did not belong anywhere else:
+This repository contains some DevOps configuration files, e.g. for the deployment of the T2-Project on Kubernetes:
 
-*  `Kube <https://github.com/t2-project/kube>`__
+*  `DevOps <https://github.com/t2-project/devops>`__
 
 
 .. Common Repository Structure

@@ -37,8 +37,8 @@ For the T2-Project itself get the deployments and deploy them:
 
 .. code-block:: shell
 
-   git clone https://github.com/t2-project/kube.git
-   cd kube/k8
+   git clone https://github.com/t2-project/devops.git
+   cd devops/k8
    kubectl create -f .
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
@@ -47,7 +47,7 @@ Configuring the database
 ------------------------
 
 | The T2-Project uses a PostgreSQL pod as its database.
-| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/kube/main/k8/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
+| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/devops/main/k8/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
 | Change the configuration to your liking, or simply use the provided defaults.
 | Then, you can set it for your cluster using
 
@@ -108,8 +108,8 @@ The following instructions rely on the Helm charts from the Prometheus community
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
    # get files to customize chart values
-   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-operator-values.yaml
-   wget https://raw.githubusercontent.com/t2-project/kube/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheusfiles/prometheus-operator-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
 
    # install charts
    helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
@@ -160,7 +160,7 @@ If your metrics server still won't work, good luck fixing it.
 Creating the autoscaling behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Afterwards, navigate to the :file:`k8/autoscaling` directory in the `Kube repo <https://github.com/t2-project/kube>`__ and create all resources inside:
+Afterwards, navigate to the :file:`k8/autoscaling` directory in the `DevOps repo <https://github.com/t2-project/devops>`__ and create all resources inside:
 
 .. code-block:: shell
 
@@ -185,8 +185,8 @@ You can run the T2-Project as Docker containers.
 
 .. code-block:: shell
 
-   git clone https://github.com/t2-project/kube.git
-   cd kube/docker
+   git clone https://github.com/t2-project/devops.git
+   cd devops/docker
    docker-compose up -d
 
 These commands should deploy 13 services in total.
@@ -212,7 +212,7 @@ Build and Run Locally
 | You can build all other services (with minor exceptions) the same way.
 | You just need to replace 'order' with the respective service name.
 
-| If you want to build all services at once, you can use the script ``build-all.sh`` provided in the :file:`kube` repository.
+| If you want to build all services at once, you can use the script ``build-all.sh`` provided in the :file:`devops` repository.
 
 Step 0 : Clone Repositories
 ----------------------------------------------------
@@ -246,11 +246,11 @@ springdoc               ``2.2.0``
 ======================= ==========================
 
 The :file:`pom.xml` files read the versions from environment variables.
-That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/kube/blob/main/setenv.sh>`__ file. There are also files for Windows users: `setenv.cmd <https://github.com/t2-project/kube/blob/main/setenv.cmd>` and `setenv.ps1 <https://github.com/t2-project/kube/blob/main/setenv.ps1>`.
+That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/devops/blob/main/setenv.sh>`__ file. There are also files for Windows users: `setenv.cmd <https://github.com/t2-project/devops/blob/main/setenv.cmd>` and `setenv.ps1 <https://github.com/t2-project/devops/blob/main/setenv.ps1>`.
 
 .. code-block:: shell
 
-   wget https://raw.githubusercontent.com/t2-project/kube/main/setenv.sh
+   wget https://raw.githubusercontent.com/t2-project/devops/main/setenv.sh
    . ./setenv.sh
 
 
@@ -357,7 +357,7 @@ Step 1 : Run E2E Test Service
 -----------------------------
 
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
-If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`kube` repository.
+If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`devops` repository.
 
 .. code-block:: shell
 
@@ -387,7 +387,7 @@ In the Payment Deployment (:file:`payment.yml`):
 
 In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
 
-Or use the deployment in the folder `testsetup <https://github.com/t2-project/kube/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
+Or use the deployment in the folder `testsetup <https://github.com/t2-project/devops/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
 
 Step 3 : Generate Load
 -----------------------------
