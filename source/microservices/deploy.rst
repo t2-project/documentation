@@ -284,21 +284,21 @@ You must build and install them to your local maven repository as well.
    git clone https://github.com/t2-project/payment.git
    cd payment/
    ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original
 
 .. code-block:: shell
 
    git clone https://github.com/t2-project/inventory.git
    cd inventory/
    ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original
 
 .. code-block:: shell
 
    git clone https://github.com/t2-project/order.git
    cd order/
    ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original -DpomFile=./pom.xml
+   ./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original
 
 
 Step 4 : Build and Run
