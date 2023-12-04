@@ -32,6 +32,15 @@ T2-Project Documentation
 .. toctree::
    :maxdepth: 1
    :hidden:
+   :caption: MEASUREMENTS
+
+   Overview <measurements/index>
+   JMeter <measurements/jmeter>
+   Green Metrics Tool <measurements/gmt>
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
    :caption: DEVELOPMENT
 
    Implementation <develop/impl>
@@ -51,7 +60,7 @@ The project is loosely based on the `TeaStore Application <https://github.com/De
 | The monolith retains the modular structure, therefore we call it **T2-Modulith**.
 
 The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
-The initial purpose of the T2-Modulith was to compare a microservices application with a monolith application in terms of energy consumption.
+The initial purpose of the T2-Modulith was to compare a microservices application with a monolith application in terms of energy consumption (see :doc:`Energy Measurements <measurements/index>` for more information).
 
 Repository Structure
 ====================
@@ -92,16 +101,6 @@ It is a dependency to all other services:
 
 *  `Common <https://github.com/t2-project/common>`__
 
-This repository contains some DevOps configuration files, e.g. for the deployment of the T2-Project on Kubernetes:
+This repository contains some DevOps configuration files, e.g. for the deployment of the T2-Project on Kubernetes or Docker:
 
 *  `DevOps <https://github.com/t2-project/devops>`__
-
-
-.. Common Repository Structure
-.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. 
-.. Each service repositories contain the following files and directories:
-.. 
-.. *  Dockerfile : To build a Docker image of the service.
-.. *  README.md : The readme. Look here for more information about the service.
-.. *  src/ : Actual code of the service.

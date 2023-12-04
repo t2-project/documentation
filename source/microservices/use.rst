@@ -137,24 +137,24 @@ which generates load for placing one order per user and
 
 Both loadprofiles take the following arguments:
 
-==================== ======================================================================================================================================= ========== ======================================
- Argument             Description                                                                                                                             Required              Default Value
-==================== ======================================================================================================================================= ========== ======================================
- -n                   Start JMeter in CLI Mode                                                                                                                 true                 <no argument>
- -Jhostname           Address of the UI Backend                                                                                                                true        (use localhost for local testing)
- -JnumUser            Number of users to test with                                                                                                             true
- -Jport               Port of the UI Backend                                                                                                                   true           (use 8081 for local testing)
- -JrampUp             Timeout (in seconds) until every user must have been started - one user will be started after every ($rampUp/ $numUser) second(s)        true
- -JthinkTimeTimeout   minimal amount of time (in millisceonds) a user needs to choose a product                                                                false                 30000 (30s)
- -JthinkTimeRange     Maximum possible value of the normal distribution deciding when the user chooses a product (in millisceonds) once the timeout is over    false                 30000 (30s)
- -l                   Name of the file to write the sample results to                                                                                          false          (results.csv recommended)
-==================== ======================================================================================================================================= ========== ======================================
+============================ ======================================================================================================================================= ========== ======================================
+ Argument                    Description                                                                                                                             Required              Default Value
+============================ ======================================================================================================================================= ========== ======================================
+ -n                          Start JMeter in CLI Mode                                                                                                                 true                 <no argument>
+ -Jhostname                  Address of the UI Backend                                                                                                                true        (use localhost for local testing)
+ -JnumUser                   Number of users to test with                                                                                                             true
+ -Jport                      Port of the UI Backend                                                                                                                   true           (use 8081 for local testing)
+ -JrampUp                    Timeout (in seconds) until every user must have been started - one user will be started after every ($rampUp/ $numUser) second(s)        true
+ -JthinkTimeMin              minimal amount of time (in milliseconds) a user needs to choose a product                                                                false                 30000 (30s)
+ -JthinkTimeAdditionalRange  Maximum possible value of the normal distribution deciding when the user chooses a product (in milliseconds) once the timeout is over    false                 30000 (30s)
+ -l                          Name of the file to write the sample results to                                                                                          false          (results.csv recommended)
+============================ ======================================================================================================================================= ========== ======================================
 
 Hence, the testing command will look something like this:
 
 .. code-block:: shell
 
-   java -jar ./apache-jmeter-${JMETER_VERSION:-5.6.2}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-project-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeTimeout ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-results.csv}
+   java -jar ./apache-jmeter-${JMETER_VERSION:-5.6.2}/bin/ApacheJMeter.jar -t ./${LOAD_PROFILE:-t2-project-fixed-single.jmx} -n -Jhostname ${HOST:-localhost} -Jport ${UI_BACKEND_PORT:-8081} -JnumUser ${USERS:-100} -JrampUp ${RAMP_UP:-2} -JthinkTimeMin ${THINK_TIME_TIMEOUT:-30000} -JthinkTimeAdditionalRange ${THINK_TIME_RANGE:-30000} -l ${LOGFILE:-results.csv}
 
 For more details on what the profiles do, read the next two sections.
 
