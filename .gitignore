@@ -1,5 +1,14 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
 **/.vscode
 **/*.code-workspace
+
+### ME ###
 build/
 /venv/
 .venv
