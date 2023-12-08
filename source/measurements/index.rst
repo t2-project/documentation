@@ -1,4 +1,4 @@
-
+===================
 Energy Measurements
 ===================
 
@@ -6,7 +6,15 @@ How does the `T2-Project <https://github.com/t2-project/t2-project>`_ with a mic
 
 To answer this question we use different methodologies and tools to measure the energy consumption of both variants under various scenarios.
 
-The configuration files are located in the ``energy-tests`` folder of the `DevOps <https://github.com/t2-project/devops>`_ repository.
+Results
+=======
+
+The results are discussed on the page :doc:`Measurement Results <results>`.
+
+Execution
+=========
+
+The files used for executing the measurements are located in the ``energy-tests`` folder of the `DevOps <https://github.com/t2-project/devops>`_ repository.
 
 JMeter
 ------

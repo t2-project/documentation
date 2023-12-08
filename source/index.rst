@@ -37,6 +37,7 @@ T2-Project Documentation
    Overview <measurements/index>
    JMeter <measurements/jmeter>
    Green Metrics Tool <measurements/gmt>
+   Results <measurements/results>
 
 .. toctree::
    :maxdepth: 1

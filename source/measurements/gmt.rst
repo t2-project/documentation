@@ -1,3 +1,4 @@
+==================
 Green Metrics Tool
 ==================
 
@@ -11,9 +12,9 @@ Currently, only usage scenarios are provided that are using `JMeter <https://jme
 * Monolith: `T2-Modulith <https://github.com/t2-project/modulith>`_ → ``backend:8080``
 
 JMeter
-------
+======
 
-JMeter uses the test plan ``t2-project-flexible.jmx``.
+:doc:`JMeter <jmeter>` uses the test plan ``t2-project-flexible.jmx``.
 
 Example request:
 
@@ -70,8 +71,8 @@ Example request:
      - ``false``
 
 
-Local testing
--------------
+Local testing of usage scenarios
+================================
 
 See the `official documentation <https://docs.green-coding.berlin/docs/prologue/introduction/>`_ on how to install and run the Green Metrics Tool on your local system.
 
@@ -93,7 +94,7 @@ Run with remote usage_scenario:
 .. _measurement_on_cluster:
 
 Measurement on GCB Cluster
---------------------------
+==========================
 
 To measure a software on the measurement cluster of Green Coding Berlin (GCB) you can submit it via the form on `https://metrics.green-coding.berlin/request.html <https://metrics.green-coding.berlin/request.html>`_.
 
@@ -104,3 +105,14 @@ T2-Modulith (Minimal Scenario with JMeter)
 * Branch: ``main``
 * Hardware: Fujitsu Esprimo P956
 * Measurement: One-Off [Free - Fair use]
+
+Results
+-------
+
+All measurements can be found on the GMT page `Repository overview <https://metrics.green-coding.berlin/repositories.html>`_ under the repository ``/t2-project/devops``. There you also have the possibility to compare multiple measurements on your own:
+
+* Open the repository ``/t2-project/devops``
+* Select the measurements you want to compare
+* Click the button "Compare: x Run(s)" on the top of the page
+
+The results are discussed on the page :doc:`Measurement Results <results>`.
