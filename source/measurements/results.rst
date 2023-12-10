@@ -79,7 +79,15 @@ Logging on/off
 Multiple executions
 -------------------
 
-**Research question:** Is the energy consumption proportional to the number of executions?
+*Here we are using some scenarios consisting of only one GMT flow and some consisting of multiple GMT flows. Multiple flows means that we get results in a more fine-grained way for every individual flow.*
+
+**Research questions:**
+
+* Should the first measurements be ignored, because the JVM needs some time to get warm?
+* Is the energy consumption proportional to the number of executions?
+
+One GMT flow
+~~~~~~~~~~~~
 
 **Scenario:** One user executes multiple orders one after another.
 
@@ -125,12 +133,236 @@ Multiple executions
 
 **Findings:**
 
-* The more executions, the lower the SCI score (emissions per order)
-* required energy for the second execution (based on the difference between 1 and 2 executions):
-   - Machine Energy: 2.55 J
-   - CPU Energy 1.6 J
-   - Memory Energy: 0.04 J
-   - Network Energy: 0.91 J
+* calculations:
+   - required energy for the second execution (based on the difference between 1 and 2 executions):
+      + Duration: 0.16 s
+      + Machine Energy: 2.55 J
+      + CPU Energy 1.6 J
+      + Memory Energy: 0.04 J
+      + Network Energy: 0.91 J
+   - average required energy for one execution in the scenario with 100 executions (consumption of 0 executions is subtracted):
+      + Duration: 0.1 s
+      + Machine Energy: 2.81 J
+      + CPU Energy 1.13 J
+      + Memory Energy: 0.11 J
+      + Network Energy: 0.83 J
+* CPU energy consumption gets more efficient with more executions
+
+Multiple GMT flows - single user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Scenario:** `25 flows á 100 executions <https://metrics.green-coding.berlin/stats.html?id=b5478c99-c8b4-4f65-a25b-99180f5ced2f>`__
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Flow
+     - Duration [s]
+     - Machine Power [W]
+     - Machine Energy [J]
+     - Network Energy [J]
+     - ``backend`` CPU Utilization Mean [%]
+   * - All
+     - 226.04
+     - 24.28
+     - 5488.78
+     - 2079.65
+     - 10.33
+   * - 1.
+     - 12.10
+     - 26.93
+     - 325.9
+     - 83.52
+     - 29.38
+   * - 2.
+     - 8.94
+     - 27.96
+     - 249.82
+     - 83.14
+     - 23.90
+   * - 3.
+     - 9.32
+     - 24.82
+     - 231.35
+     - 83.12
+     - 13.57
+   * - 4.
+     - 8.85
+     - 24.54
+     - 217.22
+     - 83.12
+     - 11.43
+   * - 5.
+     - 8.55
+     - 25.52
+     - 218.25
+     - 83.12
+     - 13.22
+   * - 6.
+     - 8.92
+     - 24.00
+     - 214.04
+     - 83.15
+     - 9.95
+   * - 7.
+     - 8.55
+     - 25.10
+     -  214.54
+     - 83.14
+     - 10.69
+   * - 8.
+     - 8.80
+     - 24.28
+     - 213.72
+     - 83.15
+     - 9.85
+   * - ...
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 16.
+     - 9.30
+     - 23.24
+     - 216.14
+     - 83.15
+     - 5.76
+   * - 17.
+     - 8.90
+     - 25.48
+     - 208.98
+     - 83.13
+     - 6.85
+   * - 18.
+     - 8.69
+     - 24.45
+     - 212.39
+     - 83.16
+     - 9.57
+   * - 19.
+     - 8.75
+     - 24.06
+     - 210.50
+     - 83.17
+     - 7.81
+   * - 20.
+     - 8.95
+     - 23.54
+     - 210.67
+     - 83.13
+     - 6.71
+   * - 21.
+     - 9.04
+     - 22.98
+     - 207.64
+     - 83.16
+     - 4.99
+   * - 22.
+     - 9.01
+     - 23.00
+     - 207.34
+     - 83.17
+     - 6.53
+   * - 23.
+     - 8.97
+     - 23.62
+     - 211.96
+     - 83.15
+     - 6.50
+   * - 24.
+     - 9.02
+     - 23.65
+     - 213.38
+     - 83.16
+     - 7.29
+   * - 25.
+     - 8.82
+     - 23.46
+     - 206.83
+     - 83.16
+     - 7.37
+
+**Findings:**
+
+* Using multiple flows has the disadvantage, that JMeter has a bigger impact. Therefore the energy values are not a good metric here for comparison. Instead we are using the CPU utilization of ``backend`` here for comparison.
+* The average CPU utilization of the first (29.38 %) and the second flow (23.90 %) with 100 executions each is much higher than the subsequent flows (<14 %)
+* After the 10. flow the average CPU utilization stays under 10 %
+* There is some kind of optimizations happening!
+
+Multiple GMT flows - 100 parallel users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Scenario:** `10 flows á 100 users <https://metrics.green-coding.berlin/stats.html?id=fc9d3906-c0fa-4327-85d6-eac12b4a72ed>`__
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Flow
+     - Duration [s]
+     - Machine Power [W]
+     - Machine Energy [J]
+     - Network Energy [J]
+     - ``backend`` CPU Utilization Mean [%]
+   * - All
+     - 79.11
+     - 28.48
+     - 2253.41
+     - 951.19
+     - 19.79
+   * - 1.
+     - 27.36
+     - 23.28
+     - 637.00
+     - 130.40
+     - 18.22
+   * - 2.
+     - 6.03
+     - 30.46
+     - 183.77
+     - 95.65
+     - 22.15
+   * - 3.
+     - 6.02
+     - 32.00
+     - 192.67
+     - 94.39
+     - 20.26
+   * - 4.
+     - 5.76
+     - 31.15
+     - 179.58
+     - 92.58
+     - 21.17
+   * - ...
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 9.
+     - 5.64
+     - 31.16
+     - 175.69
+     - 89.25
+     - 19.43
+   * - 10.
+     - 5.57
+     - 30.30
+     - 168.87
+     - 88.02
+     - 17.71
+
+**Findings:**
+
+* The first flow required a lot of time (reason unknown) and therefore also a lot more energy.
+* All the other results were quite similar with a little increase in performance and a little decrease in energy consumption.
+
+**What does the findings mean for other tests?**
+
+* It makes sense to execute multiple flows to be able to only use representative results and ignore the first ones
 
 Think time
 ----------
@@ -207,7 +439,7 @@ Differences CPU Energy to base (0 sec):
 
 **Findings:**
 
-* One additional sec think time increases the machine energy consumption by ~13-15 J and the cpu energy consumption by 4-5 J → idle consumption per second
+* One additional sec think time increases the machine energy consumption by ~13-15 J and the cpu energy consumption by 4-5 J (idle consumption per second)
 
 Load Test (high CPU utilization)
 --------------------------------
