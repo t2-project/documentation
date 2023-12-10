@@ -24,30 +24,23 @@ Idle
    :header-rows: 1
    :stub-columns: 1
 
-   * - Logging
+   * - Number of executions
      - Duration [s]
      - Machine Energy [J]
      - CPU Energy [J]
      - Memory Energy [J]
      - Network Energy [J]
-   * - `on <https://metrics.green-coding.berlin/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
+   * - `0 <https://metrics.green-coding.berlin/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
      - 3.81
      - 113.25
      - 53.19
      - 3.00
-     - 0.00
-   * - `off <https://metrics.green-coding.berlin/stats.html?id=97f993cf-54e9-4f0a-9cb9-10a98f39ac24>`__
-     - 3.76
-     - 118.94
-     - 53.61
-     - 2.94
      - 0.00
 
 **Findings:**
 
 * JMeter itself already consumes a lot of energy when it starts executing a test plan, even no requests are made. However, this only effects the beginning of the phase and should not influence the behavior of the backend later on. Also, because we use JMeter in all measurements with the same test plan, comparisons should also not be a problem.
 * Machine components other than CPU and memory also consume a significant amount of energy. In the scenario circa 60 J.
-* Logging at startup phase is not significant regarding energy consumption.
 
 Logging on/off
 --------------
@@ -81,7 +74,7 @@ Logging on/off
 
 **Findings:**
 
-* Logging requires a significant amount of energy (in this scenario +13%)
+* Logging of all requests requires a significant amount of energy (in this scenario +13%)
 
 Multiple executions
 -------------------
@@ -212,7 +205,7 @@ Differences CPU Energy to base (0 sec):
      - +4.4 J (+5,1 %)
      - +8.5 J (+9,9 %)
 
-**Findings:** *(more measurement are needed)*
+**Findings:**
 
 * One additional sec think time increases the machine energy consumption by ~13-15 J and the cpu energy consumption by 4-5 J → idle consumption per second
 
@@ -410,6 +403,46 @@ tbd.
 Modulith vs. Microservices
 ==========================
 
+Standard Usage Scenario
+-----------------------
+
+**Research question:** What is more energy efficient in the standard usage scenario with 1 user, monolith or microservices?
+
+**Scenario:** One user checks out the inventory, thinks for 30 sec, adds a random product to cart, thinks again, add a second product, thinks again, add a third product, and finally confirms the order.
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 3
+
+   * - Monolith / Microservices
+     - Duration [s]
+     - Machine Power [W]
+     - Machine Energy [J]
+     - CPU Energy [J]
+     - Memory Energy [J]
+     - Network Energy [J]
+     - SCI [mgCO2e/order]
+   * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=50008066-07ef-438e-a727-dfcaf1d1c46b>`__
+     - 95.72
+     - 15.09
+     - 1444.10
+     - 161.28
+     - 46.23
+     - 2.47
+     - 35.9
+   * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=b3352d36-ba6e-4b9e-9e67-3b5d345a7ff7>`__
+     - 106.01
+     - 18.05
+     - 1913.97
+     - 359.95
+     - 60.35
+     - 18.43
+     - 43.9
+
+**Findings:**
+
+* The monolith in the standard usage scenario with 1 user is more efficient than the microservices implementation.
+
 Multiple executions
 -------------------
 
@@ -551,10 +584,10 @@ Load Test (high CPU utilization)
      - 300
      - 5
      - 175.22
-   * - `Microservices <?>`__
+   * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
      - 300
      - 5
-     - 
+     - 182.88
    * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
      - 400
      - 5
@@ -621,13 +654,13 @@ Load Test (high CPU utilization)
      - 513.25
      - 100.76
      - 1608.60
-   * - `Microservices <?>`__
+   * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
      - 300
-     - 
-     - 
-     - 
-     - 
-     - 
+     - 24.57
+     - 4493.86
+     - 1525.81
+     - 173.44
+     - 2402.92
    * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
      - 400
      - 17.66
@@ -710,11 +743,11 @@ Note: JMeter is part of ``system``.
      - 490.38
    * - `Microservices <?>`__
      - 300
-     - 
-     - 
-     - 
-     - 
-     - 
+     - 43.17
+     - 100.00
+     - 3553.26
+     - 3829.44
+     - 2670.32
    * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
      - 400
      - 17.15
@@ -746,10 +779,12 @@ Note: JMeter is part of ``system``.
 
 **Findings:**
 
-* In the scenario with 100 users the Microservices system consumed a lot more energy
+* In these scenarios the Microservices system consumes a lot more energy
+* Comparison in scenario 100 users:
    - Machine Energy: 2949 J vs. 3891 J (+32 %)
    - CPU Energy: 1050 J vs. 370 J (+184 %)
    - Memory Energy: 95 J vs. 136 J (+ 43 %) 
    - Network Energy: 311 J vs. 717 J (+131 %)
    - CPU Mean: 7.5 % vs. 27.2 %
    - Memory Mean: 1144 MB vs. 3369 MB
+* Conclusion: This comparison is not fair → we need a more compute-intensive scenario
