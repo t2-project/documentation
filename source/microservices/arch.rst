@@ -41,8 +41,8 @@ Orchestrator    confirm order
 ============    ========================================================
 
 
-The Saga
-========
+Saga
+====
 
 The T2-Project's saga is composed of the following steps: 
 
@@ -77,8 +77,8 @@ To prevent such failures the ordered units of a product are locked as soon as th
 As there is now no action to perform on the inventory before the pivot transaction (do payment), there is only the compensation that deletes the reservation (in case the saga rolls back) or the step commitReservations() that handles served reservations. 
 
 
-Frameworks, Dependencies and Others
-===================================
+Frameworks & Dependencies
+=========================
 
 The T2-Project uses the following frameworks (and services):
 
@@ -140,8 +140,8 @@ The T2-Project uses MongoDBs and a Postgres Database as databases for the domain
 The *cart repository* and the *order repository* are MongoDBs.
 The *product repository* is a Postgres Database. 
 
-The Services
-============
+Services
+========
 
 All Services are implemented as `Spring Boot <https://spring.io/projects/spring-boot>`__ Applications.
 This is the services' general package structure:

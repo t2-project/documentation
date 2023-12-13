@@ -10,9 +10,9 @@ T2-Project Documentation
 .. toctrees must come first or they won't be displayed correctly
 
 .. toctree::
-   :hidden:
-   :maxdepth: 1
    :caption: MICROSERVICES
+   :maxdepth: 2
+   :hidden:
 
    Overview <microservices/index>
    Architecture <microservices/arch>
@@ -20,9 +20,9 @@ T2-Project Documentation
    Usage <microservices/use>
 
 .. toctree::
-   :hidden:
-   :maxdepth: 1
    :caption: MONOLITH
+   :maxdepth: 2
+   :hidden:
 
    Overview <monolith/index>
    Architecture <monolith/arch>
@@ -30,9 +30,9 @@ T2-Project Documentation
    Usage <monolith/use>
 
 .. toctree::
-   :maxdepth: 1
-   :hidden:
    :caption: MEASUREMENTS
+   :maxdepth: 3
+   :hidden:
 
    Overview <measurements/index>
    JMeter <measurements/jmeter>
@@ -40,9 +40,9 @@ T2-Project Documentation
    Results <measurements/results>
 
 .. toctree::
-   :maxdepth: 1
-   :hidden:
    :caption: DEVELOPMENT
+   :maxdepth: 2
+   :hidden:
 
    Implementation <develop/impl>
    Code Format <develop/format>

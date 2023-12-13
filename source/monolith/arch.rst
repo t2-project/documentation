@@ -9,8 +9,8 @@ The T2-Modulith application consists of six modules:
 
 The main difference between this architecture of the monolith implementation and the implementation of the :doc:`microservices architecture <../microservices/arch>` is the removal of the orchestrator service. In the monolithic implementation the finalization of an order gets coordinated by the order module.
 
-Module Descriptions
--------------------
+Modules
+-------
 
 UI Module
 ~~~~~~~~~
@@ -55,8 +55,8 @@ The content of a user's shopping cart is a map of Strings to Integers.
 Within the context of the T2-Project it contains which products (identified by their id) and how many units there of a users wants to buy.
 
 
-Microservices → Monolith
-------------------------
+Migration from Microservices
+----------------------------
 
 The following table shows how the microservices implementation was migrated to a monolithic implementation.
 
@@ -94,8 +94,8 @@ The following table shows how the microservices implementation was migrated to a
 The `common <https://github.com/t2-project/common>`_ package that is used as a jar dependency by all microservices for inter-service communication is not used by the monolith. Some parts are moved to the respective domain-specific module. There is now a ``config`` package that includes the configuration that is relevant for multiple modules, however, without any class definitions required used for communication.
 
 
-Spring Modulith
----------------
+Modularity & Spring Modulith
+----------------------------
 
 The modularity of the application gets verified by `Spring Modulith <https://spring.io/projects/spring-modulith>`_.
 In addition to that, it generates a component diagram:
