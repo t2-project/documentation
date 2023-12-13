@@ -20,8 +20,8 @@ import time
 # -- Project information -----------------------------------------------------
 
 project = u'T2-Project'
-copyright = f'2021-{time.strftime("%Y")}, Sarah Sophie Stieß'
-author = u'Sarah Sophie Stieß'
+copyright = f'2021-{time.strftime("%Y")}, Sarah Sophie Stieß & David Kopp'
+author = u'Sarah Sophie Stieß, David Kopp'
 
 # The short X.Y version
 version = u''
