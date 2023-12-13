@@ -20,7 +20,7 @@ Example request:
 
 .. code-block:: bash
 
-   jmeter -Jhostname=backend -Jport=8080 -JnumExecutions=1 -JnumUser=1 -JrampUp=0 -JnumProducts=1 -JthinkTimeMin=0 -JthinkTimeAdditionalRange=0 -JtimeBetweenExecutions=0 -JloggingEnabled=true -n -t t2-project-flexible.jmx
+   jmeter -Jhostname=backend -Jport=8080 -JnumExecutions=1 -JnumUser=1 -JrampUp=0 -JnumProducts=1 -JthinkTimeMin=0 -JthinkTimeAdditionalRange=0 -JpauseBeforeExecution=0 -JpauseAfterExecution=0 -JloggingEnabled=true -n -t t2-project-flexible.jmx
 
 .. list-table::
    :header-rows: 1
@@ -61,15 +61,22 @@ Example request:
      - additional amount of time (in milliseconds) of the normal distribution deciding when the user chooses a product once the timeout is over
      - no
      - 0
-   * - ``timeBetweenExecutions``
-     - time in milliseconds to pause between executions (only make sense in conjunction with ``numExecutions``)
+   * - ``pauseBeforeExecution``
+     - time in milliseconds to pause before an execution - can be useful to delay the start of the first request
+     - no
+     - 0
+   * - ``pauseAfterExecution``
+     - time in milliseconds to pause after an execution - can be useful for pauses between multiple executions (``numExecutions``) or to extend the measurement time of the GMT runtime phase (important if there are asynchronous operations happening)
      - no
      - 0
    * - ``loggingEnabled``
-     - boolean value, if logging every request is enabled
+     - boolean value, if true for every request and pause a note for GMT will be created
      - no
      - ``false``
-
+   * - ``loggingSCIEnabled``
+     - boolean value, if true a `SCI note for GMT <https://docs.green-coding.berlin/docs/measuring/sci/>`__ will be created right after the request ``POST confirm order`` is sent (``GMT_SCI_R=1``)
+     - no
+     - ``false``
 
 Local testing of usage scenarios
 ================================
