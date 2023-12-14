@@ -31,7 +31,7 @@ T2-Project Documentation
 
 .. toctree::
    :caption: MEASUREMENTS
-   :maxdepth: 3
+   :maxdepth: 2
    :hidden:
 
    Overview <measurements/index>

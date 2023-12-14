@@ -8,7 +8,9 @@ You can use the T2-Modulith application either by accessing the UI or by using t
 * API: http://localhost:8081/swagger-ui/index.html
 
 On how to use the UI see the usage section of the `T2-Project UI repository <https://github.com/t2-project/ui#usage>`_.
-How to use the API is described below in the following section `HTTP Endpoints <#http-endpoints>`_.
+How to use the API is described below in the following section :ref:`http-endpoints`.
+
+.. _http-endpoints:
 
 HTTP Endpoints
 --------------

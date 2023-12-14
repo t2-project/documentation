@@ -41,6 +41,7 @@ release = u''
 extensions = [
     'myst_parser',
     'sphinx_search.extension',
+    'sphinx_toolbox.collapse',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

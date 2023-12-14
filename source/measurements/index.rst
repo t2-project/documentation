@@ -26,4 +26,4 @@ Green Metrics Tool
 ------------------
 
 The Green Metrics Tool is used for measure the energy consumption with different usage case scenarios.
-See page :doc:`Green Metrics Tool <gmt>` for more information.
+See page :doc:`Green Metrics Tool <gmt>` for more information and our learnings from using it.
