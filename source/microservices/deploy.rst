@@ -17,15 +17,16 @@ Get Helm Charts
 
 This section describes how to deploy the T2-Project on a Kubernetes cluster.
 
-The T2-Project needs Kafka and a MongoDB. Install them any way you want to, e.g. from helm charts:
+The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. from helm charts:
 
 .. code-block:: shell
 
    helm repo add bitnami https://charts.bitnami.com/bitnami
    helm repo update
    helm install mongo --set auth.enabled=false bitnami/mongodb
-   helm install kafka bitnami/kafka
+   helm install kafka bitnami/kafka --version 18.5.0 --set replicaCount=3
 
+Note: We are using the Helm chart ``bitnami/kafka`` in the already outdated version 18.5.0 to use the same Kafka version as Eventuate (Kafka version 3.2.3) to avoid backwards compatibility issues. See used `Kafka server version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/kafka/Dockerfile>`_ and used `Kafka client version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/gradle.properties>`_ in the Eventuate project.
 
 Deploy the T2-Project
 ---------------------
