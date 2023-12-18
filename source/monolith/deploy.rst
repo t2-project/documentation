@@ -4,6 +4,61 @@ T2-Modulith Deployment
 
 This section describes different ways to deploy the T2-Modulith.
 
+Deploy on a Kubernetes Cluster
+==============================
+
+This section describes how to deploy the T2-Modulith on a Kubernetes cluster. You find the the deployment files in the directory :file:`k8s` in the `modulith <https://github.com/t2-project/modulith>`__ repository.
+
+Install MongoDB
+---------------
+
+The T2-Modulith needs MongoDB. Install it any way you want to, e.g. from helm charts:
+
+.. code-block:: shell
+
+   helm repo add bitnami https://charts.bitnami.com/bitnami
+   helm repo update
+   helm install mongo --set auth.enabled=false bitnami/mongodb
+
+Deploy PostgreSQL
+-----------------
+
+The T2-Modulith needs PostgreSQL. Install it by using the provided YAML file:
+
+.. code-block:: shell
+
+   kubectl create -f k8s/postgres_stateful.yaml
+
+To configure the PostgreSQL database change the file ``postgresql.conf`` to your liking, or simply use the provided defaults, and set it for your cluster using
+
+.. code-block:: shell
+
+   kubectl create configmap postgres-config --from-file k8s/postgresql.conf
+
+Deploy the backend
+------------------
+
+To install the backend use the provided YAML file:
+
+.. code-block:: shell
+
+   kubectl create -f k8s/backend.yaml
+
+Access the T2-Modulith
+----------------------
+
+To access the UI forward the port of the backend to your local machine:
+
+.. code-block:: shell
+
+   kubectl port-forward svc/backend-cs 8081:80
+
+And open `<http://localhost:8081/ui>`__.
+
+You can also access the backend via Swagger-UI: `<http://localhost:8081/swagger-ui/index.html>`__.
+
+Now go to page :doc:`Usage <use>` to figure out what you can do with the T2-Modulith.
+
 Run with Docker
 ===============
 
