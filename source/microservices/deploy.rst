@@ -38,7 +38,7 @@ For the T2-Project itself get the deployments and deploy them:
 .. code-block:: shell
 
    git clone https://github.com/t2-project/devops.git
-   cd devops/k8
+   cd devops/k8s
    kubectl create -f .
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
@@ -47,7 +47,7 @@ Configuring the database
 ------------------------
 
 | The T2-Project uses a PostgreSQL pod as its database.
-| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/devops/main/k8/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
+| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/devops/main/k8s/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
 | Change the configuration to your liking, or simply use the provided defaults.
 | Then, you can set it for your cluster using
 
@@ -160,7 +160,7 @@ If your metrics server still won't work, good luck fixing it.
 Creating the autoscaling behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Afterwards, navigate to the :file:`k8/autoscaling` directory in the `DevOps repo <https://github.com/t2-project/devops>`__ and create all resources inside:
+Afterwards, navigate to the :file:`k8s/autoscaling` directory in the `DevOps repo <https://github.com/t2-project/devops>`__ and create all resources inside:
 
 .. code-block:: shell
 
@@ -200,7 +200,7 @@ These commands should deploy 13 services in total.
 *  Cart : `<localhost:8080/swagger-ui.html>`__
 *  Credit Institute : `<localhost:8087/swagger-ui.html>`__
 
-Now go to page :doc:`Usage <use>` to figure out what you can to with the T2-Project.
+Now go to page :doc:`Usage <use>` to figure out what you can do with the T2-Project.
 
 Build and Run Locally
 =====================
