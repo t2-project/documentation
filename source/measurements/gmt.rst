@@ -327,19 +327,17 @@ Here a list of parameters with comments, if they are worth to consider and chang
 
 Applications with a runtime and JIT compilations optimizes themselves during runtime. This is the case with the HotSpot JVM used by the T2-Project services. Therefore, for accuracy, it is necessary to *warm-up* the application and make the actual measurement when the application is *warm*.
 
+**Understanding the differences:**
+
 See the measurements of multiple flows below to see the difference between a *cold* application and a *warm* application. To get measurement data for multiple executions, multiple flows within a usage scenario were used.
 | In the scenario with 1 user, the average CPU utilization of the ``backend`` component of the first flow (29.38 %) and the second flow (23.90 %) with 100 executions each is much higher than the subsequent flows (<14 %). After the 10. flow the average CPU utilization stays under 10 %.
 | In the scenario with 100 users, only the first flow required a lot of time (reason unknown) and therefore also a lot more energy. All the other results were quite similar with a little increase in performance and a little decrease in energy consumption.
 
-**Challenges & open questions:**
+**What to do?**
 
-* Is it really problematic to compare the energy consumption of *cold* applications, or are the relative differences between *cold* applications and *warm* applications the same?
-* How many requests/executions are required until the application is *warm*?
-* Would it make sense to introduce an optional "warm-up" phase in GMT?
+Include the warm-up of the application in the measurement as part of the runtime phase as a separate step.
 
-**What does this mean for other measurements?**
-
-We should probably execute multiple flows to be able to see major differences and use results when the application is *warm*.
+See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-metrics-tool/discussions/595>`_ for insights.
 
 .. collapse:: Measurement of multiple flows (1 user)
 
