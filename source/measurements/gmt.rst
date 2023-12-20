@@ -215,9 +215,11 @@ This is the case with JMeter that always executes the same test plan (perhaps wi
 5. Network energy estimation
 ----------------------------
 
-The metric "Network Energy" that is displayed in the UI refers to the **potential energy consumption** by network traffic in a **distributed global system**. It is calculated by the total amount of sent and received bytes from the network interface multiplied by the constant 0.00375 kWH / GB.
+The metric "Network Energy" that is displayed in the UI refers to the **estimated energy consumption** by network traffic in a **distributed global system**. It is calculated by the total amount of sent and received bytes from the network interface multiplied by the constant 0.00375 kWH / GB.
 
 See the documentation of the metric provider `Network IO - cgroup - container <https://docs.green-coding.berlin/docs/measuring/metric-providers/network-io-cgroup-container/>`_ and the article `List of CO2 formulas <https://www.green-coding.berlin/co2-formulas/>`_ for more information.
+
+The description was improved by `pull request 608 <https://github.com/green-coding-berlin/green-metrics-tool/pull/608>`_.
 
 6. Measure asynchronous operations
 ----------------------------------
