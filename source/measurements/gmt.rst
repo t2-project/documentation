@@ -92,8 +92,8 @@ There are two ways of achieving a waiting time:
            - backend: 10 sec, to ensure that the backend is ready when the flow starts
       - microservices:
            - postgres: 5 sec, to ensure that the database is ready when the T2 services start
-           - cdcservice: 10 sec, to ensure that the message communication with Kafka works before the T2 services start (maybe not necessary)
-           - uibackend: 40 sec, to ensure that all service are ready when the flow start
+           - kafka: 10 sec, to ensure that Kafka is ready, so all other services can connect with it immediately
+           - uibackend: 60 sec, to ensure that all T2 services are ready when the flow start
 
 In the future, when the health check feature is implemented, the manual waiting times are not required anymore.
 
