@@ -163,6 +163,7 @@ Load Tests
 ----------
 
 **Important: The measurements have some problems and have to be fixed**
+
 * a long think time was used, so the average CPU usage in all scenario was quite low
 * asynchronous way of the order confirmation in the microservices scenario was not considered
 * compute-intensive component was missing
@@ -205,14 +206,6 @@ Load Tests
         - 100
         - 2
         - 185.92
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
-        - 200
-        - 2
-        - 181.97
-      * - `Microservices <?>`__
-        - 200
-        - 2
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 5
@@ -221,22 +214,39 @@ Load Tests
         - 300
         - 5
         - 182.88
+
+    All measurement runs with monolith system:
+
+    .. list-table::
+      :header-rows: 1
+      :stub-columns: 2
+      :align: left
+
+      * - Monolith
+        - Number of Users
+        - Ramp-up time (pre-configured) [s]
+        - Duration [s]
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+        - 100
+        - 2
+        - 186.26
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+        - 200
+        - 2
+        - 181.97
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+        - 300
+        - 5
+        - 175.22
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 5
         - 180.08
-      * - `Microservices <?>`__
-        - 400
-        - 5
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 5
         - 182.32
-      * - `Microservices <?>`__
-        - 100
-        - 5
-        - 
+
 
 .. collapse:: <strong>Energy Consumption</strong>
 
@@ -266,20 +276,6 @@ Load Tests
         - 1050.28
         - 135.97
         - 717.14
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
-        - 200
-        - 16.42
-        - 2990.24
-        - 449.09
-        - 99.10
-        - 844.34
-      * - `Microservices <?>`__
-        - 200
-        - 
-        - 
-        - 
-        - 
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 17.18
@@ -294,6 +290,42 @@ Load Tests
         - 1525.81
         - 173.44
         - 2402.92
+
+    All measurement runs with monolith system:
+
+    .. list-table::
+      :header-rows: 1
+      :stub-columns: 2
+      :align: left
+
+      * - Monolith
+        - Number of Users
+        - Machine Power [W]
+        - Machine Energy [J]
+        - CPU Energy [J]
+        - Memory Energy [J]
+        - Network Energy [J]
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+        - 100
+        - 15.83
+        - 2949.27
+        - 370.25
+        - 94.94
+        - 311.21
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+        - 200
+        - 16.42
+        - 2990.24
+        - 449.09
+        - 99.10
+        - 844.34
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+        - 300
+        - 17.18
+        - 3009.78
+        - 513.25
+        - 100.76
+        - 1608.60
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.66
@@ -301,13 +333,6 @@ Load Tests
         - 610.23
         - 108.03
         - 2588.05
-      * - `Microservices <?>`__
-        - 400
-        - 
-        - 
-        - 
-        - 
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 18.43
@@ -315,13 +340,7 @@ Load Tests
         - 687.72
         - 113.05
         - 3781.67
-      * - `Microservices <?>`__
-        - 500
-        - 
-        - 
-        - 
-        - 
-        - 
+
 
 .. collapse:: <strong>CPU Utilization & Memory Usage</strong>
 
@@ -353,20 +372,6 @@ Load Tests
         - 3368.59
         - 3648.12
         - 2708.28
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
-        - 200
-        - 10.83
-        - 100.00
-        - 956.88
-        - 1022.09
-        - 505.19
-      * - `Microservices <?>`__
-        - 200
-        - 
-        - 
-        - 
-        - 
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 14.50
@@ -381,6 +386,42 @@ Load Tests
         - 3553.26
         - 3829.44
         - 2670.32
+
+    All measurement runs with monolith system:
+
+    .. list-table::
+      :header-rows: 1
+      :stub-columns: 1
+      :align: left
+
+      * - Monolith
+        - Number of Users
+        - ``system`` CPU Mean [%]
+        - ``system`` CPU Max [%]
+        - ``system`` Memory Sum Mean [MB]
+        - ``system`` Memory Sum Max [MB]
+        - ``system`` Memory Sum Min [MB]
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+        - 100
+        - 7.52
+        - 100.00
+        - 1144.43
+        - 1199.25
+        - 741.55
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+        - 200
+        - 10.83
+        - 100.00
+        - 956.88
+        - 1022.09
+        - 505.19
+      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+        - 300
+        - 14.50
+        - 100.00
+        - 961.48
+        - 1025.16
+        - 490.38
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.15
@@ -388,13 +429,6 @@ Load Tests
         - 1041.08
         - 1132.27
         - 536.1
-      * - `Microservices <?>`__
-        - 400
-        - 
-        - 
-        - 
-        - 
-        - 
       * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 19.97
@@ -402,10 +436,3 @@ Load Tests
         - 1104.04
         - 1202.52
         - 507.04
-      * - `Microservices <?>`__
-        - 500
-        - 
-        - 
-        - 
-        - 
-        - 
