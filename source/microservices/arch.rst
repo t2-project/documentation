@@ -96,7 +96,7 @@ Eventuate Tram and Eventuate Tram Saga
 --------------------------------------
 
 `Eventuate Tram <https://github.com/eventuate-tram/eventuate-tram-core>`__ is a framework for Transactional Messaging and `Eventuate Tram Sagas <https://github.com/eventuate-tram/eventuate-tram-sagas>`__ is a framework for saga orchestration.
-They are both work on top of Spring / Spring Boot. 
+They both work on top of Spring / Spring Boot. 
 The T2-Project uses the Eventuate Tram Core framework with Kafka as the message broker and Postgres as the database.
 
 Versions
@@ -114,11 +114,12 @@ Eventuate CDC Service
 
 The `Eventuate CDC Service <https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html>`__ realizes the `Transactional Outboxing Pattern <https://microservices.io/patterns/data/transactional-outbox.html>`__ required by the Saga Pattern.
 
+The default value for polling is 500 milliseconds (property ``eventuatelocal.cdc.polling.interval.in.milliseconds``). Because of this one Saga operation needs around 3 seconds to finish. You can change the polling interval by setting the environment variable ``EVENTUATELOCAL_CDC_POLLING_INTERVAL_IN_MILLISECONDS`` to a different value.
 
 ================================== ==============
 Dependency                         Version
 ================================== ==============
-eventuateio/eventuate-cdc-service  latest
+eventuateio/eventuate-cdc-service  0.16.0.RELEASE
 ================================== ==============
 
 Message Broker
