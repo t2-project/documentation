@@ -238,12 +238,12 @@ Name                    Version
 ======================= ==========================
 Maven                   ``3.9.5``
 Docker                  ``24.0.6``
-Spring Boot             ``3.1.5``
+Spring Boot             ``3.1.7``
 io.eventuate.tram.core  ``0.34.0.RELEASE``
 io.eventuate.tram.sagas ``0.23.0.RELEASE``
 jaeger                  ``3.3.1``
-resilience4j            ``2.1.0``
-springdoc               ``2.2.0``
+resilience4j            ``2.2.0``
+springdoc               ``2.3.0``
 ======================= ==========================
 
 The :file:`pom.xml` files read the versions from environment variables.
