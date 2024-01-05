@@ -378,11 +378,11 @@ Step 1 : Run E2E Test Service
 -----------------------------
 
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
-If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`testsetup/` in the :file:`devops` repository.
+If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`k8s/saga-test` in the :file:`devops` repository.
 
 .. code-block:: shell
 
-   kubectl apply -f testsetup/e2etest.yaml
+   kubectl apply -f k8s/saga-test/e2etest.yaml
 
 Step 2 : Configure the UI Backend and the Payment Service
 ---------------------------------------------------------
@@ -408,7 +408,11 @@ In the Payment Deployment (:file:`payment.yml`):
 
 In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
 
-Or use the deployment in the folder `testsetup <https://github.com/t2-project/devops/tree/main/testsetup>`__ because there the environment variables are already set as described above. 
+Or use the deployment in the folder `k8s/saga-test <https://github.com/t2-project/devops/tree/main/k8s/saga-test>`__ because there the environment variables are already set as described above:
+
+.. code-block:: shell
+
+   kubectl apply -f k8s/saga-test/
 
 Step 3 : Generate Load
 -----------------------------
