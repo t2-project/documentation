@@ -40,7 +40,7 @@ For the T2-Project itself get the deployments and deploy them:
 
    git clone https://github.com/t2-project/devops.git
    cd devops/k8s
-   kubectl create -f .
+   kubectl create -f . --save-config
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
@@ -178,6 +178,26 @@ If you want to modify the autoscaling behavior, i.e. by increasing the maximum r
    kubectl delete horizontalpodautoscalers.autoscaling $SERVICE
    kubectl create -f .
 
+
+Intensive computation simulation
+--------------------------------
+
+| If you want to simulate an intensive computation task, you can use the *computation-simulator* service.
+| It executes an intensive computation after an order confirmation was sent to the uibackend.
+| The computation is not part of the Saga, but it is executed in parallel to it.
+
+Install the *computation-simulator* and change the config of the *uibackend* service:
+
+.. code-block:: shell
+
+   kubectl apply -f computation-simulation/
+
+Uninstall:
+
+.. code-block:: shell
+
+   kubectl delete -f computation-simulation/
+   kubectl create -f uibackend.yaml --save-config
 
 Run with Docker
 ===============
