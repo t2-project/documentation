@@ -67,7 +67,7 @@ Access the T2-Project
 
    kubectl port-forward svc/ui-cs 8086:80
 
-And open `<http://localhost:8086>`__.
+And open `<http://localhost:8086/ui>`__.
 
 | You can also skip the UI and access the service via Swagger-UI.
 | To do that, forward the port of your target service, as an example :file:`uibackend-cs`:
