@@ -10,12 +10,24 @@ T2-Project Deployment
 This section also describes how to build and run the T2-Projects services locally, however this is discouraged unless you want to develop.
 
 Deploy on a Kubernetes Cluster
-========================================
+==============================
+
+| This section describes how to deploy the T2-Project on a Kubernetes cluster.
+| All the required files are located in the `devops repository <https://github.com/t2-project/devops.git>`__ in the subfolder :file:`k8s`.
+| The basic deployment steps that are explained are part of the provided script :file:`install.sh`.
+
+To install all required components to your connected Kubernetes cluster, just run the script: 
+
+.. code-block:: shell
+
+   ./k8s/install.sh
+
+| Note: To deploy the T2-Project to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), etc., some additional configuration may be required.
+
+.. | Currently, we provide install scripts for AWS and Azure: :file:`k8s/aws/start-aws.sh` and :file:`k8s/azure/start-azure.sh`.
 
 Get Helm Charts
 ---------------
-
-This section describes how to deploy the T2-Project on a Kubernetes cluster.
 
 The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. from helm charts:
 
@@ -27,6 +39,11 @@ The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. f
    helm install kafka bitnami/kafka --version 18.5.0 --set replicaCount=3
 
 Note: We are using the Helm chart ``bitnami/kafka`` in the already outdated version 18.5.0 to use the same Kafka version as Eventuate (Kafka version 3.2.3) to avoid backwards compatibility issues. See used `Kafka server version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/kafka/Dockerfile>`_ and used `Kafka client version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/gradle.properties>`_ in the Eventuate project.
+
+Documentation of used helm charts:
+
+- `MongoDB <https://github.com/bitnami/charts/tree/main/bitnami/mongodb/>`_
+- `Kafka <https://github.com/bitnami/charts/tree/main/bitnami/kafka>`_
 
 Deploy the T2-Project
 ---------------------
@@ -109,8 +126,8 @@ The following instructions rely on the Helm charts from the Prometheus community
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
    # get files to customize chart values
-   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheusfiles/prometheus-operator-values.yaml
-   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheusfiles/prometheus-blackbox-exporter-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/k8s/prometheus/prometheus-operator-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/k8s/prometheus/prometheus-blackbox-exporter-values.yaml
 
    # install charts
    helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
