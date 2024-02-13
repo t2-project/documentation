@@ -114,7 +114,7 @@ Eventuate CDC Service
 
 The `Eventuate CDC Service <https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html>`__ realizes the `Transactional Outboxing Pattern <https://microservices.io/patterns/data/transactional-outbox.html>`__ required by the Saga Pattern.
 
-The default value for polling is 500 milliseconds (property ``eventuatelocal.cdc.polling.interval.in.milliseconds``). Because of this one Saga operation needs around 3 seconds to finish. You can change the polling interval by setting the environment variable ``EVENTUATELOCAL_CDC_POLLING_INTERVAL_IN_MILLISECONDS`` to a different value.
+Since we are using Postgres, there are two strategies for reading messages/events available to the CDC reader: Postgres WAL and Polling. The default value for polling is 500 milliseconds, which results in a delay of about 3 seconds for the whole Saga operation. Therefore, we switched to Postgres WAL, which is more time efficient and results in a delay of only about 200 milliseconds (without concurrent requests).
 
 ================================== ==============
 Dependency                         Version
@@ -127,19 +127,22 @@ Message Broker
 
 The T2-Project uses Kafka and Zookeeper as message broker.
 
-Saga Database
--------------
+Saga Databases
+--------------
 
-The T2-Project uses a Postgres Database for the saga data. 
-It uses the Postgres image from `eventuateio <https://hub.docker.com/r/eventuateio/eventuate-postgres>`__ because it already contains the tables required for the transactional outboxing.
+The T2-Project uses two PostgreSQL databases for the saga data: one for the inventory service and one for the orchestrator.
+The other two services that participate in Saga, Order service and Payment service, don't store their domain data in a relational database. Therefore, they also use the orchestrator's Postgres database for the Saga messages.
 
+The Postgres databases use the container image from `eventuateio <https://hub.docker.com/r/eventuateio/eventuate-postgres>`__ because it already contains the tables required for the transactional outboxing (`source code <https://github.com/eventuate-foundation/eventuate-common/tree/master/postgres>`__).
 
-Domain Database
----------------
+Domain Databases
+----------------
 
-The T2-Project uses MongoDBs and a Postgres Database as databases for the domain data.
+The T2-Project uses MongoDBs and PostgreSQL databases for storing the domain data.
 The *cart repository* and the *order repository* are MongoDBs.
-The *product repository* is a Postgres Database. 
+The *product repository* used by the Inventory service is a PostgreSQL database.
+As mentioned above, the Postgres database of the Inventory service is used for both domain data and saga data to ensure atomicity of local transactions (transactional outbox pattern).
+
 
 Services
 ========
