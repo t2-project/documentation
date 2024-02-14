@@ -14,17 +14,17 @@ Deploy on a Kubernetes Cluster
 
 | This section describes how to deploy the T2-Project on a Kubernetes cluster.
 | All the required files are located in the `devops repository <https://github.com/t2-project/devops.git>`__ in the subfolder :file:`k8s`.
-| The basic deployment steps that are explained are part of the provided script :file:`install.sh`.
+| The basic deployment steps that are explained are part of the provided script :file:`start.sh`.
 
-To install all required components to your connected Kubernetes cluster, just run the script: 
+To install and start all required components in your connected Kubernetes cluster, just run the script:
 
 .. code-block:: shell
 
-   ./k8s/install.sh
+   ./k8s/start.sh
 
 | Note: To deploy the T2-Project to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), etc., some additional configuration may be required.
 
-.. | Currently, we provide install scripts for AWS and Azure: :file:`k8s/aws/start-aws.sh` and :file:`k8s/azure/start-azure.sh`.
+.. | Currently, we provide install scripts for AWS and Azure: :file:`aws/start-aws.sh` and :file:`azure/start-azure.sh`.
 
 Get Helm Charts
 ---------------
@@ -35,7 +35,8 @@ The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. f
 
    helm repo add bitnami https://charts.bitnami.com/bitnami
    helm repo update
-   helm install mongo --set auth.enabled=false bitnami/mongodb
+   helm install mongo-cart --set auth.enabled=false bitnami/mongodb
+   helm install mongo-order --set auth.enabled=false bitnami/mongodb
    helm install kafka bitnami/kafka --version 18.5.0 --set replicaCount=3
 
 Note: We are using the Helm chart ``bitnami/kafka`` in the already outdated version 18.5.0 to use the same Kafka version as Eventuate (Kafka version 3.2.3) to avoid backwards compatibility issues. See used `Kafka server version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/kafka/Dockerfile>`_ and used `Kafka client version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/gradle.properties>`_ in the Eventuate project.
@@ -383,6 +384,21 @@ For more details, see the `Test Service's README <https://github.com/t2-project/
 
 .. image:: figs/component_test.jpg
 
+Run with script
+---------------
+
+Start:
+
+.. code-block:: shell
+
+   ./k8s/start-saga-e2e-test.sh
+
+Stop:
+
+.. code-block:: shell
+
+   ./k8s/stop-saga-e2e-test.sh
+
 Step by Step
 ------------
 
@@ -395,11 +411,11 @@ Step 1 : Run E2E Test Service
 -----------------------------
 
 Run the `E2E Test Service <https://github.com/t2-project/e2e-tests>`__.
-If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`k8s/saga-test` in the :file:`devops` repository.
+If you are on a Kubernetes cluster, you may apply the deployment from the folder :file:`k8s/saga-e2e-test` in the :file:`devops` repository.
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/saga-test/e2etest.yaml
+   kubectl apply -f k8s/saga-e2e-test/e2etest.yaml
 
 Step 2 : Configure the UI Backend and the Payment Service
 ---------------------------------------------------------
@@ -425,11 +441,11 @@ In the Payment Deployment (:file:`payment.yml`):
 
 In both cases replace :file:`<e2e-test-host>` with the location of the Test Service.
 
-Or use the deployment in the folder `k8s/saga-test <https://github.com/t2-project/devops/tree/main/k8s/saga-test>`__ because there the environment variables are already set as described above:
+Or use the deployment in the folder `k8s/saga-e2e-test <https://github.com/t2-project/devops/tree/main/k8s/saga-e2e-test>`__ because there the environment variables are already set as described above:
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/saga-test/
+   kubectl apply -f k8s/saga-e2e-test/
 
 Step 3 : Generate Load
 -----------------------------
