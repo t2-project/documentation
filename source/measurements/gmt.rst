@@ -2,9 +2,9 @@
 Green Metrics Tool
 ==================
 
-We are using the `Green Metrics Tool <https://docs.green-coding.berlin/>`_ (GMT) for executing energy tests with different usage scenarios.
+We are using the `Green Metrics Tool <https://docs.green-coding.io/>`_ (GMT) for executing energy tests with different usage scenarios.
 
-The T2 usage scenarios are located in the directory ``energy-tests`` in the GitHub repo `DevOps <https://github.com/t2-project/devops/tree/main/energy-tests/gmt>`_. You can find the documentation about the format ``usage_scenario.yml`` `here <https://docs.green-coding.berlin/docs/measuring/usage-scenario/>`_.
+The T2 usage scenarios are located in the directory ``energy-tests`` in the GitHub repo `DevOps <https://github.com/t2-project/devops/tree/main/energy-tests/gmt>`_. You can find the documentation about the format ``usage_scenario.yml`` `here <https://docs.green-coding.io/docs/measuring/usage-scenario/>`_.
 
 Currently, only usage scenarios are provided that use :doc:`JMeter <jmeter>` for the execution of requests to the T2-Project backend:
 
@@ -38,7 +38,7 @@ Depending on the usage scenario you may need to remove the parameter ``--dry-run
 Measurement on GCB Cluster
 ==========================
 
-To measure a software on the `measurement cluster provided by Green Coding Berlin (GCB) <https://docs.green-coding.berlin/docs/measuring/measurement-cluster/>`_ you can submit it via the form on `https://metrics.green-coding.berlin/request.html <https://metrics.green-coding.berlin/request.html>`_.
+To measure a software on the `measurement cluster provided by Green Coding Berlin (GCB) <https://docs.green-coding.io/docs/measuring/measurement-cluster/>`_ you can submit it via the form on `https://metrics.green-coding.io/request.html <https://metrics.green-coding.io/request.html>`_.
 
 Example form inputs:
 
@@ -49,7 +49,7 @@ Example form inputs:
 * Hardware: Fujitsu Esprimo P956
 * Measurement: One-Off [Free - Fair use]
 
-All executed measurements can be found on the GMT page `Repository overview <https://metrics.green-coding.berlin/repositories.html>`_ under the repository ``/t2-project/devops``. There you also have the possibility to compare multiple measurements on your own:
+All executed measurements can be found on the GMT page `Repository overview <https://metrics.green-coding.io/repositories.html>`_ under the repository ``/t2-project/devops``. There you also have the possibility to compare multiple measurements on your own:
 
 * Open the repository ``/t2-project/devops``
 * Select the measurements you want to compare
@@ -74,10 +74,10 @@ While testing and executing various usage scenarios with the Green Metrics Tool,
 As of today (2023-12-13) GMT doesn't support a health check of containers during the boot phase (see `issue 423 <https://github.com/green-coding-berlin/green-metrics-tool/issues/423>`_). Therefore, a manual waiting time is required to ensure that all services are ready before the flow gets executed (runtime phase). If a service under test is not ready, the flow is likely is fail.
 There are two ways of achieving a waiting time:
 
-* increase ``phase-transition-time`` in `GMT configuration <https://docs.green-coding.berlin/docs/measuring/configuration/>`_  to set the waiting time between phases
+* increase ``phase-transition-time`` in `GMT configuration <https://docs.green-coding.io/docs/measuring/configuration/>`_  to set the waiting time between phases
    - current setting on GCB measurement cluster: 10 sec
    - change is only possible if you operate the measurement machine on your own
-* using ``sleep`` in ``setup-commands`` as part of your `usage_scenario <https://docs.green-coding.berlin/docs/measuring/usage-scenario/>`_
+* using ``sleep`` in ``setup-commands`` as part of your `usage_scenario <https://docs.green-coding.io/docs/measuring/usage-scenario/>`_
    - example:
    
    .. code-block:: yaml
@@ -103,7 +103,7 @@ In the future, when the health check feature is implemented, the manual waiting 
 With GMT the absolute energy consumption result is not really important, because this value depends on many variables, especially the machine and environment. Therefore, the results are usually only relevant for relative comparisons between different runs. It's important that the energy consumption of the machine in idle mode (**baseline**) is the same between runs, so it doesn't influence the results.
 
 Green Coding Berlin ensures this by executing a measurement that should always give the same result regularly:
-`Measurement Control Workload <https://metrics.green-coding.berlin/timeline.html?uri=https://github.com/green-coding-berlin/measurement-contol-workload&filename=usage_scenario.yml&branch=&machine_id=7>`_
+`Measurement Control Workload <https://metrics.green-coding.io/timeline.html?uri=https://github.com/green-coding-berlin/measurement-contol-workload&filename=usage_scenario.yml&branch=&machine_id=7>`_
 
 3. Request-Consumption Proportionality
 --------------------------------------
@@ -126,28 +126,28 @@ See the data of measurements with different number of executions.
         - Memory Energy [J]
         - Network Energy [J]
         - SCI [mgCO2e/order]
-      * - `0 <https://metrics.green-coding.berlin/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
+      * - `0 <https://metrics.green-coding.io/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
         - 3.81
         - 113.25
         - 53.19
         - 3.00
         - 0.00
         - N/A
-      * - `1 <https://metrics.green-coding.berlin/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
+      * - `1 <https://metrics.green-coding.io/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
         - 5.82
         - 181.52
         - 85.83
         - 5.40
         - 1.02
         - 34.2
-      * - `2 <https://metrics.green-coding.berlin/stats.html?id=a75a499b-b066-440c-ba0d-9ac8c552baa4>`__
+      * - `2 <https://metrics.green-coding.io/stats.html?id=a75a499b-b066-440c-ba0d-9ac8c552baa4>`__
         - 5.98
         - 184.07
         - 87.43
         - 5.46
         - 1.93
         - 17.4
-      * - `100 <https://metrics.green-coding.berlin/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
+      * - `100 <https://metrics.green-coding.io/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
         - 13.40
         - 393.86
         - 166.47
@@ -198,7 +198,7 @@ This is the case with JMeter that always executes the same test plan (perhaps wi
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `0 <https://metrics.green-coding.berlin/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
+      * - `0 <https://metrics.green-coding.io/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
         - 3.81
         - 39.54
         - 82.12
@@ -217,14 +217,14 @@ This is the case with JMeter that always executes the same test plan (perhaps wi
 
 The metric "Network Energy" that is displayed in the UI refers to the **estimated energy consumption** by network traffic in a **distributed global system**. It is calculated by the total amount of sent and received bytes from the network interface multiplied by the constant 0.00375 kWH / GB.
 
-See the documentation of the metric provider `Network IO - cgroup - container <https://docs.green-coding.berlin/docs/measuring/metric-providers/network-io-cgroup-container/>`_ and the article `List of CO2 formulas <https://www.green-coding.berlin/co2-formulas/>`_ for more information.
+See the documentation of the metric provider `Network IO - cgroup - container <https://docs.green-coding.io/docs/measuring/metric-providers/network-io-cgroup-container/>`_ and the article `List of CO2 formulas <https://www.green-coding.io/co2-formulas/>`_ for more information.
 
 The description was improved by `pull request 608 <https://github.com/green-coding-berlin/green-metrics-tool/pull/608>`_.
 
 6. Measure asynchronous operations
 ----------------------------------
 
-The runtime phase in GMT is based on the defined `flow <https://docs.green-coding.berlin/docs/measuring/usage-scenario/#flow>`_: it starts with the execution of a command and ends when the command is finished.
+The runtime phase in GMT is based on the defined `flow <https://docs.green-coding.io/docs/measuring/usage-scenario/#flow>`_: it starts with the execution of a command and ends when the command is finished.
 If the command triggers an asynchronous operation the flow/phase may end before the asynchronous operation actually has finished.
 
 Currently I'm aware of two options to measure a whole asynchronous operation:
@@ -236,7 +236,7 @@ Currently I'm aware of two options to measure a whole asynchronous operation:
 
 The *confirm order* operation (``POST http://backend/confirm``) of the T2-Project in the monolithic implementation is synchronous, but in the microservices implementation it is asynchronous. There the order confirmation is implemented with the Saga pattern, so the operation is only considered finished as soon as the *orchestrator* received a success message from all services participating in the saga (*payment*, *order* and *inventory*) via the message broker Kafka.
 
-To make it visible in the graphs of a measurement results page, when the order is finished, a `note with a timestamp can be written to stdout <https://docs.green-coding.berlin/docs/measuring/usage-scenario/#read-notes-stdout-format-specification>`_ (in this case by the *orchestrator* service).
+To make it visible in the graphs of a measurement results page, when the order is finished, a `note with a timestamp can be written to stdout <https://docs.green-coding.io/docs/measuring/usage-scenario/#read-notes-stdout-format-specification>`_ (in this case by the *orchestrator* service).
 
 Currently I'm using the first option with sleep commands. In conjunction with writing the note when the order operation is finished, I try to optimize the sleep duration. To make the comparison between the synchronous (monolith) and the asynchronous system (microservices) fair, I add the same sleep to both scenarios. However, this will still be a bit of a disadvantage for the microservices system because its idle consumption is higher.
 
@@ -267,28 +267,28 @@ Here a list of parameters with comments, if they are worth to consider and chang
             - Memory Energy [J]
             - Network Energy [J]
             - SCI [mgCO2e/order]
-          * - `0 <https://metrics.green-coding.berlin/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
+          * - `0 <https://metrics.green-coding.io/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
             - 5.82
             - 181.52
             - 85.83
             - 5.40
             - 1.02
             - 34.2
-          * - `1 <https://metrics.green-coding.berlin/stats.html?id=3849a50a-05ad-4345-9172-abf402ef5810>`__
+          * - `1 <https://metrics.green-coding.io/stats.html?id=3849a50a-05ad-4345-9172-abf402ef5810>`__
             - 6.81
             - 195.18
             - 84.93
             - 5.71
             - 1.03
             - 37.7
-          * - `2 <https://metrics.green-coding.berlin/stats.html?id=1b760419-456b-489d-b462-7d0201894a3c>`__
+          * - `2 <https://metrics.green-coding.io/stats.html?id=1b760419-456b-489d-b462-7d0201894a3c>`__
             - 7.83
             - 214.53
             - 90.22
             - 6.42
             - 1.03
             - 42.1
-          * - `10 <https://metrics.green-coding.berlin/stats.html?id=6fd10682-c40b-4f48-a1a6-77bb80ecf7cd>`__
+          * - `10 <https://metrics.green-coding.io/stats.html?id=6fd10682-c40b-4f48-a1a6-77bb80ecf7cd>`__
             - 15.66
             - 319.88
             - 94.31
@@ -341,7 +341,7 @@ See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-m
 
 .. collapse:: Measurement of multiple flows (1 user)
 
-    **Scenario:** `25 flows á 100 executions <https://metrics.green-coding.berlin/stats.html?id=b5478c99-c8b4-4f65-a25b-99180f5ced2f>`__
+    **Scenario:** `25 flows á 100 executions <https://metrics.green-coding.io/stats.html?id=b5478c99-c8b4-4f65-a25b-99180f5ced2f>`__
 
     .. list-table::
       :header-rows: 1
@@ -476,7 +476,7 @@ See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-m
 
 .. collapse:: Measurement of multiple flows (100 parallel users)
 
-    **Scenario:** `10 flows á 100 users <https://metrics.green-coding.berlin/stats.html?id=fc9d3906-c0fa-4327-85d6-eac12b4a72ed>`__
+    **Scenario:** `10 flows á 100 users <https://metrics.green-coding.io/stats.html?id=fc9d3906-c0fa-4327-85d6-eac12b4a72ed>`__
 
     .. list-table::
       :header-rows: 1
@@ -541,7 +541,7 @@ See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-m
 --------------------
 
 Logging of all requests by JMeter requires a significant amount of energy (in a test scenario +13%). Therefore, it should be enabled only if really necessary, e.g. during testing.
-See also GMT documentation `Best practices <https://docs.green-coding.berlin/docs/measuring/best-practices/#13-turn-logging-off>`_ about when to use logging.
+See also GMT documentation `Best practices <https://docs.green-coding.io/docs/measuring/best-practices/#13-turn-logging-off>`_ about when to use logging.
 
 .. collapse:: Measurement impact of logging
 
@@ -557,13 +557,13 @@ See also GMT documentation `Best practices <https://docs.green-coding.berlin/doc
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `on <https://metrics.green-coding.berlin/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
+      * - `on <https://metrics.green-coding.io/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
         - 13.40
         - 393.86
         - 166.47
         - 13.51
         - 83.08
-      * - `off <https://metrics.green-coding.berlin/stats.html?id=940a3183-0724-46c4-89ab-d52923dbe98f>`__
+      * - `off <https://metrics.green-coding.io/stats.html?id=940a3183-0724-46c4-89ab-d52923dbe98f>`__
         - 11.93
         - 346.74
         - 144.05
@@ -589,19 +589,19 @@ The original idea of GMT is to execute standard usage scenarios and measure the 
       * - Number of Users
         - Duration [s]
         - Ramp-up time [s]
-      * - `100 <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `100 <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 186.26
         - 2
-      * - `200 <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `200 <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 181.97
         - 2
-      * - `300 <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `300 <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 175.22
         - 5
-      * - `400 <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `400 <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 180.08
         - 5
-      * - `500 <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `500 <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 182.32
         - 5
 
@@ -618,31 +618,31 @@ The original idea of GMT is to execute standard usage scenarios and measure the 
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `100 <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `100 <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 15.83
         - 2949.27
         - 370.25
         - 94.94
         - 311.21
-      * - `200 <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `200 <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 16.42
         - 2990.24
         - 449.09
         - 99.10
         - 844.34
-      * - `300 <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `300 <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 17.18
         - 3009.78
         - 513.25
         - 100.76
         - 1608.60
-      * - `400 <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `400 <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 17.66
         - 3180.31
         - 610.23
         - 108.03
         - 2588.05
-      * - `500 <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `500 <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 18.43
         - 3360.63
         - 687.72
@@ -706,27 +706,27 @@ The original idea of GMT is to execute standard usage scenarios and measure the 
         - ``backend`` CPU Max [%]
         - ``backend`` Memory Mean [MB]
         - ``backend`` Memory Max [MB]
-      * - `100 <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `100 <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 4.33
         - 88.39
         - 541.01
         - 566.46
-      * - `200 <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `200 <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 6.99
         - 84.38
         - 493.71
         - 527.79
-      * - `300 <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `300 <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 9.60
         - 79.81
         - 482.71
         - 510.46
-      * - `400 <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `400 <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 11.42
         - 78.71
         - 551.73
         - 602.95
-      * - `500 <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `500 <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 12.95
         - 87.42
         - 587.36

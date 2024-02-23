@@ -72,7 +72,7 @@ We have created one test plan called ``t2-project-flexible.jmx`` that can be use
      - no
      - ``false``
    * - ``loggingSCIEnabled``
-     - boolean value, if true a `SCI note for GMT <https://docs.green-coding.berlin/docs/measuring/sci/>`__ will be created right after the request ``POST confirm order`` is sent (``GMT_SCI_R=1``)
+     - boolean value, if true a `SCI note for GMT <https://docs.green-coding.io/docs/measuring/sci/>`__ will be created right after the request ``POST confirm order`` is sent (``GMT_SCI_R=1``)
      - no
      - ``false``
 

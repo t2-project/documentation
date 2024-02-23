@@ -39,7 +39,7 @@ Standard Usage Scenario
         - Memory Energy [J]
         - Network Energy [J]
         - SCI [mgCO2e/order]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=50008066-07ef-438e-a727-dfcaf1d1c46b>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=50008066-07ef-438e-a727-dfcaf1d1c46b>`__
         - 95.72
         - 15.09
         - 1444.10
@@ -47,7 +47,7 @@ Standard Usage Scenario
         - 46.23
         - 2.47
         - 35.9
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=b3352d36-ba6e-4b9e-9e67-3b5d345a7ff7>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=b3352d36-ba6e-4b9e-9e67-3b5d345a7ff7>`__
         - 106.01
         - 18.05
         - 1913.97
@@ -84,7 +84,7 @@ Multiple executions
         - Memory Energy [J]
         - Network Energy [J]
         - SCI [mgCO2e/order]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
         - 0
         - 0
         - 3.81
@@ -93,7 +93,7 @@ Multiple executions
         - 3.00
         - 0.00
         - N/A
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=e6c84f8f-971e-4401-97b1-3cd75e57c4a9>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=e6c84f8f-971e-4401-97b1-3cd75e57c4a9>`__
         - 0
         - 0
         - 4.01
@@ -102,7 +102,7 @@ Multiple executions
         - 3.36
         - 0.46
         - N/A
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
         - 1
         - 0
         - 5.82
@@ -111,7 +111,7 @@ Multiple executions
         - 5.40
         - 1.02
         - 34.2
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=59ed4330-d15b-465f-933c-9a7d966802f0>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=59ed4330-d15b-465f-933c-9a7d966802f0>`__
         - 1
         - 0
         - 16.56
@@ -120,7 +120,7 @@ Multiple executions
         - 14.00
         - 4.74
         - 87.3
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
         - 100
         - 0
         - 13.40
@@ -129,7 +129,7 @@ Multiple executions
         - 13.51
         - 83.08
         - 0.8
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=bf22a5c1-670b-4bd2-ba94-ad225cefe7c0>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=bf22a5c1-670b-4bd2-ba94-ad225cefe7c0>`__
         - 100
         - 0
         - 78.13
@@ -138,7 +138,7 @@ Multiple executions
         - 67.15
         - 330.28
         - 3.8
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=c8aca13e-428a-4616-8677-93db8ebb0259>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=c8aca13e-428a-4616-8677-93db8ebb0259>`__
         - 100
         - 1
         - 113.50
@@ -147,7 +147,7 @@ Multiple executions
         - 58.08
         - 84.94
         - 4.4
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=a372a5ed-cb11-45bd-9b4c-8ad626f451bd>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=a372a5ed-cb11-45bd-9b4c-8ad626f451bd>`__
         - 100
         - 1
         - 175.16
@@ -198,19 +198,19 @@ Load Tests
         - Number of Users
         - Ramp-up time (pre-configured) [s]
         - Duration [s]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 2
         - 186.26
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
         - 100
         - 2
         - 185.92
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 5
         - 175.22
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
         - 300
         - 5
         - 182.88
@@ -226,23 +226,23 @@ Load Tests
         - Number of Users
         - Ramp-up time (pre-configured) [s]
         - Duration [s]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 2
         - 186.26
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 2
         - 181.97
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 5
         - 175.22
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 5
         - 180.08
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 5
         - 182.32
@@ -262,28 +262,28 @@ Load Tests
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 15.83
         - 2949.27
         - 370.25
         - 94.94
         - 311.21
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
         - 100
         - 20.93
         - 3891.40
         - 1050.28
         - 135.97
         - 717.14
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 17.18
         - 3009.78
         - 513.25
         - 100.76
         - 1608.60
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=2c2f7111-9eaf-42be-854a-3ccb71f41241>`__
         - 300
         - 24.57
         - 4493.86
@@ -305,35 +305,35 @@ Load Tests
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 15.83
         - 2949.27
         - 370.25
         - 94.94
         - 311.21
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 16.42
         - 2990.24
         - 449.09
         - 99.10
         - 844.34
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 17.18
         - 3009.78
         - 513.25
         - 100.76
         - 1608.60
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.66
         - 3180.31
         - 610.23
         - 108.03
         - 2588.05
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 18.43
         - 3360.63
@@ -358,21 +358,21 @@ Load Tests
         - ``system`` Memory Sum Mean [MB]
         - ``system`` Memory Sum Max [MB]
         - ``system`` Memory Sum Min [MB]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 7.52
         - 100.00
         - 1144.43
         - 1199.25
         - 741.55
-      * - `Microservices <https://metrics.green-coding.berlin/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
+      * - `Microservices <https://metrics.green-coding.io/stats.html?id=ed9b2b05-740e-4769-a533-15e21154dbb0>`__
         - 100
         - 27.23
         - 100.00
         - 3368.59
         - 3648.12
         - 2708.28
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 14.50
         - 100.00
@@ -401,35 +401,35 @@ Load Tests
         - ``system`` Memory Sum Mean [MB]
         - ``system`` Memory Sum Max [MB]
         - ``system`` Memory Sum Min [MB]
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 7.52
         - 100.00
         - 1144.43
         - 1199.25
         - 741.55
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 10.83
         - 100.00
         - 956.88
         - 1022.09
         - 505.19
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 14.50
         - 100.00
         - 961.48
         - 1025.16
         - 490.38
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.15
         - 100.00
         - 1041.08
         - 1132.27
         - 536.1
-      * - `Monolith <https://metrics.green-coding.berlin/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 19.97
         - 100.00
