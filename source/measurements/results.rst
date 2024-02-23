@@ -5,7 +5,7 @@ Measurements Results
 ====================
 
 This page deals with the measurement related to the main research question:
-| Under which scenarios is there a significant difference in energy consumption between the monolith and microservices implementation?
+Under which scenarios is there a significant difference in energy consumption between the monolith and microservices implementation?
 
 The measurement results listed on this page were generated with the :doc:`Green Metrics Tool <gmt>`. The values relate to the runtime phase, if not mentioned other. While using the Green Metrics Tool, many lessons were learned about what needs to be considered. Please have a look at the section :ref:`GMT Learnings <gmt-learnings>` before looking into the measurement results.
 

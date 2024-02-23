@@ -37,6 +37,7 @@ T2-Project Documentation
    Overview <measurements/index>
    JMeter <measurements/jmeter>
    Green Metrics Tool <measurements/gmt>
+   Kepler <measurements/kepler>
    Results <measurements/results>
 
 .. toctree::
