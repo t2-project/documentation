@@ -56,7 +56,7 @@ Kubernetes :
 
 .. code-block:: shell
    
-   kubectl delete service creditinstitute-cs
+   kubectl delete service creditinstitute
 
 Docker :
 

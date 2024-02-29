@@ -51,7 +51,7 @@ To access the UI forward the port of the backend to your local machine:
 
 .. code-block:: shell
 
-   kubectl port-forward svc/backend-cs 8081:80
+   kubectl port-forward svc/backend 8081:80
 
 And open `<http://localhost:8081/ui>`__.
 

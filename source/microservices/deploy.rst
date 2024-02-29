@@ -78,32 +78,32 @@ Configuring the database
 Access the T2-Project
 ---------------------
 
-| The UI is available through the service :file:`ui-cs`.
+| The UI is available through the service :file:`ui`.
 | To access it forward that service to your local machine:
 
 .. code-block:: shell
 
-   kubectl port-forward svc/ui-cs 8086:80
+   kubectl port-forward svc/ui 8086:80
 
 And open `<http://localhost:8086/ui>`__.
 
 | You can also skip the UI and access the service via Swagger-UI.
-| To do that, forward the port of your target service, as an example :file:`uibackend-cs`:
+| To do that, forward the port of your target service, as an example :file:`uibackend`:
 
 .. code-block:: shell
 
-   kubectl port-forward svc/uibackend-cs 8081:80
+   kubectl port-forward svc/uibackend 8081:80
 
 And open `<localhost:8081/swagger-ui.html>`__.
 
-This also works for the services :file:`inventory-cs`, :file:`orchestrator-cs`, :file:`cart-cs` and :file:`creditinstitute-cs`.
+This also works for the services :file:`inventory`, :file:`orchestrator`, :file:`cart` and :file:`creditinstitute`.
 
 .. code-block:: shell
 
-   kubectl port-forward svc/inventory-cs 8082:80 &
-   kubectl port-forward svc/orchestrator-cs 8085:80 &
-   kubectl port-forward svc/cart-cs 8080:80 &
-   kubectl port-forward svc/creditinstitute-cs 8087:80 &
+   kubectl port-forward svc/inventory 8082:80 &
+   kubectl port-forward svc/orchestrator 8085:80 &
+   kubectl port-forward svc/cart 8080:80 &
+   kubectl port-forward svc/creditinstitute 8087:80 &
 
 *  Inventory : `<localhost:8082/swagger-ui.html>`__
 *  Orchestrator : `<localhost:8085/swagger-ui.html>`__
