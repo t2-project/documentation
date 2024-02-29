@@ -127,20 +127,22 @@ The following instructions rely on the Helm charts from the Prometheus community
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
    # get files to customize chart values
-   wget https://raw.githubusercontent.com/t2-project/devops/main/k8s/prometheus/prometheus-operator-values.yaml
-   wget https://raw.githubusercontent.com/t2-project/devops/main/k8s/prometheus/prometheus-blackbox-exporter-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheus/prometheus-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheus/blackbox-exporter-values.yaml
+   wget https://raw.githubusercontent.com/t2-project/devops/main/prometheus/prometheus-adapter-values.yaml
 
    # install charts
-   helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-operator-values.yaml
-   helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./prometheus-blackbox-exporter-values.yaml
+   helm install prometheus prometheus-community/kube-prometheus-stack -f ./prometheus-values.yaml
+   helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f ./blackbox-exporter-values.yaml
 
+   # optional if you want to use HPA
+   helm install prometheus-adapter prometheus-community/prometheus-adapter -f ./prometheus-adapter-values.yaml
 
 Autoscaling setup
 -----------------
 
-| To unlock the autoscaling capabilities of the T2-Project, ensure that all prior steps except for the Prometheus setup were completed successfully.
-| Additionally, the `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ must have been set up and working.
-
+| To unlock the autoscaling capabilities of the T2-Project, ensure that all required prior steps were completed successfully.
+| The Horizontal Pod Autoscaler (HPA) requires a metrics server that provides CPU and memory usage data of the pods. Either use the default `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ or the `prometheus-adapter <https://github.com/kubernetes-sigs/prometheus-adapter>`__ in conjunction with Prometheus (see above).
 
 Metrics Server setup
 ~~~~~~~~~~~~~~~~~~~~
