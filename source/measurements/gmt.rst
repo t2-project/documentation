@@ -14,7 +14,7 @@ Currently, only usage scenarios are provided that use :doc:`JMeter <jmeter>` for
 Local testing
 =============
 
-See the `official documentation <https://docs.green-coding.berlin>`_ on how to install and run the Green Metrics Tool on your local system.
+See the `official documentation <https://docs.green-coding.io>`_ on how to install and run the Green Metrics Tool on your local system.
 
 The following examples are only meant to check if the usage scenarios are executed without an error. To execute real measurements, see the section :ref:`measurement_on_cluster`.
 

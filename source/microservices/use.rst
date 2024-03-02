@@ -115,27 +115,34 @@ Get Load Profiles and run Generator
 
 Download the JMeter load profiles for the T2-Project and run the generator.
 
-There are two predefined loadprofiles in the `DevOps repo <https://github.com/t2-project/devops>`__:
+There are three predefined loadprofiles in the `DevOps repo <https://github.com/t2-project/devops>`__:
 
 .. code-block:: shell
 
    loadProfile=t2-project-fixed-single.jmx 
 
-which generates load for placing one order per user and
+which generates load for placing one order per user,
 
 .. code-block:: shell
 
    loadProfile=t2-project-random-infinite.jmx 
 
-| which runs indefinitely.
-| Once you have chosen which profile to use, you can run them by calling
+which runs indefinitely and
+
+.. code-block:: shell
+
+   loadProfile=t2-project-flexible.jmx 
+
+that provides many options. See page :ref:`JMeter <jmeter>` about more information on how to use the flexible test plan.
+
+Once you have chosen which profile to use, you can run them by calling
 
 .. code-block:: shell
 
    wget https://raw.githubusercontent.com/t2-project/devops/main/loadprofiles/$loadProfile
    java -jar ./apache-jmeter-$JMETER_VERSION/bin/ApacheJMeter.jar -t ./$loadProfile -n $ARGUMENTS
 
-Both loadprofiles take the following arguments:
+The two load profiles ``t2-project-fixed-single.jmx`` and ``t2-project-random-infinite.jmx`` take the following arguments:
 
 ============================ ======================================================================================================================================= ========== ======================================
  Argument                    Description                                                                                                                             Required              Default Value

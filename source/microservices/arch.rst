@@ -60,7 +60,7 @@ Step	Service	  Transaction           Compensation
 The doPayment() step is the saga's pivot transaction.
 If this step succeeds, the saga runs to completion. 
 
-The step commitReservations() is designed to be retrieable. 
+The step commitReservations() is designed to be repeatable. 
 It will succeed eventually. 
 
 The same applies to the compensations rejectOrder() and cancelReservations().

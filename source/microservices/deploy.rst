@@ -2,32 +2,37 @@
 T2-Project Deployment
 ======================
 
-| This section describes two ways to deploy the T2-Project.
+| This section describes two ways to deploy the T2-Project in the microservices variant.
 | Either on a Kubernetes cluster or as Docker containers with Docker Compose.
 | The container images for the T2-Projects services come from `here <https://hub.docker.com/r/t2project>`__ at Docker Hub.
 | The images for the services from eventuate come also from Docker Hub: `eventuateio <https://hub.docker.com/u/eventuateio>`__
 
 This section also describes how to build and run the T2-Projects services locally, however this is discouraged unless you want to develop.
 
+All the deployment files mentioned below are part of the `DevOps <https://github.com/t2-project/devops.git>`__ repository.
+
+Infrastructure Provisioning
+===========================
+
+With `Terraform <https://www.terraform.io/>`__ you can easily provision the required infrastructure and dependencies of the T2-Project.
+
+Currently, we provide configurations for three Kubernetes environments: local (kind), AWS (EKS) and Azure (AKS). The Terraform configurations are located in the directory :file:`terraform` of the DevOps repository. You can find more information about how to use the provided Terraform configurations in the file `README.md <https://github.com/t2-project/devops/blob/main/terraform/README.md>`__ of the terraform directory.
+
 Deploy on a Kubernetes Cluster
 ==============================
 
-| This section describes how to deploy the T2-Project on a Kubernetes cluster.
-| All the required files are located in the `devops repository <https://github.com/t2-project/devops.git>`__ in the subfolder :file:`k8s`.
-| The basic deployment steps that are explained are part of the provided script :file:`start.sh`.
+This section describes how to deploy the T2-Project on a Kubernetes cluster. All the K8s manifests are located in the `devops repository <https://github.com/t2-project/devops.git>`__ in the subfolder :file:`k8s` or more specifically in :file:`k8s/t2-microservices`.
 
-To install and start all required components in your connected Kubernetes cluster, just run the script:
+In the following we explain the basic deployment steps, however, there are also some slightly more sophisticated Bash scripts to make the deployment easier:
 
-.. code-block:: shell
+* ``start-microservices.sh``
+* ``stop-microservices.sh``
+* ``update-microservices.sh``
 
-   ./k8s/start.sh
+Note: To deploy the T2-Project to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), etc., some additional configuration may be required. Look into the provided Terraform configurations for more information.
 
-| Note: To deploy the T2-Project to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), etc., some additional configuration may be required.
-
-.. | Currently, we provide install scripts for AWS and Azure: :file:`aws/start-aws.sh` and :file:`azure/start-azure.sh`.
-
-Get Helm Charts
----------------
+Helm Charts
+-----------
 
 The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. from helm charts:
 
@@ -37,7 +42,7 @@ The T2-Project needs Kafka and MongoDB. Install them any way you want to, e.g. f
    helm repo update
    helm install mongo-cart --set auth.enabled=false bitnami/mongodb
    helm install mongo-order --set auth.enabled=false bitnami/mongodb
-   helm install kafka bitnami/kafka --version 18.5.0 --set replicaCount=3
+   helm install kafka bitnami/kafka --version 18.5.0
 
 Note: We are using the Helm chart ``bitnami/kafka`` in the already outdated version 18.5.0 to use the same Kafka version as Eventuate (Kafka version 3.2.3) to avoid backwards compatibility issues. See used `Kafka server version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/kafka/Dockerfile>`_ and used `Kafka client version <https://github.com/eventuate-foundation/eventuate-messaging-kafka/blob/master/gradle.properties>`_ in the Eventuate project.
 
@@ -57,23 +62,10 @@ For the T2-Project itself get the deployments and deploy them:
 .. code-block:: shell
 
    git clone https://github.com/t2-project/devops.git
-   cd devops/k8s
+   cd devops/k8s/t2-microservices
    kubectl create -f . --save-config
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
-
-Configuring the database
-------------------------
-
-| The T2-Project uses a PostgreSQL pod as its database.
-| If you want to configure it, download the `postgres config <https://raw.githubusercontent.com/t2-project/devops/main/k8s/postgresql.conf>`__ and store it under the name :file:`postgresql.conf` (should automatically be downloaded as that).
-| Change the configuration to your liking, or simply use the provided defaults.
-| Then, you can set it for your cluster using
-
-.. code-block:: shell
-
-   kubectl create configmap postgres-config --from-file postgresql.conf
-
 
 Access the T2-Project
 ---------------------
@@ -142,7 +134,8 @@ Autoscaling setup
 -----------------
 
 | To unlock the autoscaling capabilities of the T2-Project, ensure that all required prior steps were completed successfully.
-| The Horizontal Pod Autoscaler (HPA) requires a metrics server that provides CPU and memory usage data of the pods. Either use the default `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ or the `prometheus-adapter <https://github.com/kubernetes-sigs/prometheus-adapter>`__ in conjunction with Prometheus (see above).
+| The Horizontal Pod Autoscaler (HPA) requires a metrics server that provides CPU and memory usage data of the pods. Either use the default `metrics server <https://github.com/kubernetes-sigs/metrics-server>`__ or the `prometheus-adapter <https://github.com/kubernetes-sigs/prometheus-adapter>`__ in conjunction with Prometheus.
+| The Prometheus Adapter is used in the provided Terraform configurations.
 
 Metrics Server setup
 ~~~~~~~~~~~~~~~~~~~~
@@ -181,7 +174,7 @@ If your metrics server still won't work, good luck fixing it.
 Creating the autoscaling behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Afterwards, navigate to the :file:`k8s/autoscaling` directory in the `DevOps repo <https://github.com/t2-project/devops>`__ and create all resources inside:
+Afterwards, navigate to the :file:`k8s/t2-microservices/autoscaling` directory in the `DevOps repo <https://github.com/t2-project/devops>`__ and create all resources inside:
 
 .. code-block:: shell
 

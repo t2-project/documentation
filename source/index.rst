@@ -60,6 +60,7 @@ The project is loosely based on the `TeaStore Application <https://github.com/De
 
 | Initially, we only implemented the application in the microservices architecture style and called it **T2-Project**. Later, we added a monolithic variant for comparison.
 | The monolith retains the modular structure, therefore we call it **T2-Modulith**.
+| In order to easily distinguish between the two variants linguistically, we sometimes also use the terms **T2-Microservices** and **T2-Monolith**.
 
 The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
 The initial purpose of the T2-Modulith was to compare a microservices application with a monolith application in terms of energy consumption (see :doc:`Energy Measurements <measurements/index>` for more information).

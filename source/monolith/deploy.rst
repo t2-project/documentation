@@ -7,7 +7,15 @@ This section describes different ways to deploy the T2-Modulith.
 Deploy on a Kubernetes Cluster
 ==============================
 
-This section describes how to deploy the T2-Modulith on a Kubernetes cluster. You find the the deployment files in the directory :file:`k8s` in the `modulith <https://github.com/t2-project/modulith>`__ repository.
+This section describes how to deploy the T2-Modulith on a Kubernetes cluster. You find the K8s manifest files in the directory :file:`k8s/t2-monolith` in the `DevOps <https://github.com/t2-project/devops>`__ repository.
+
+In the following we explain the basic deployment steps, however, there are also some slightly more sophisticated Bash scripts to make the deployment easier:
+
+* ``start-monolith.sh``
+* ``stop-monolith.sh``
+* ``update-monolith.sh``
+
+Note: To deploy the T2-Modulith to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), etc., some additional configuration may be required. Look into the provided Terraform configurations for more information.
 
 Install MongoDB
 ---------------
@@ -27,13 +35,7 @@ The T2-Modulith needs PostgreSQL. Install it by using the provided YAML file:
 
 .. code-block:: shell
 
-   kubectl create -f k8s/postgres_stateful.yaml
-
-To configure the PostgreSQL database change the file ``postgresql.conf`` to your liking, or simply use the provided defaults, and set it for your cluster using
-
-.. code-block:: shell
-
-   kubectl create configmap postgres-config --from-file k8s/postgresql.conf
+   kubectl create -f k8s/postgres.yaml
 
 Deploy the backend
 ------------------
@@ -69,7 +71,7 @@ You can run T2-Modulith with all dependencies by using Docker Compose:
    git clone https://github.com/t2-project/modulith.git
    docker compose up
 
-The container image of the T2-Modulith is stored on `Docker Hub <https://hub.docker.com/r/t2project/modulith>`_.
+The container image of the T2-Modulith is stored on `Docker Hub <https://hub.docker.com/r/t2project/modulith>`__.
 
 Now go to page :doc:`Usage <use>` to figure out what you can to with the T2-Modulith application.
 
