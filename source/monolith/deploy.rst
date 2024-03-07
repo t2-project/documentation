@@ -35,7 +35,7 @@ The T2-Modulith needs PostgreSQL. Install it by using the provided YAML file:
 
 .. code-block:: shell
 
-   kubectl create -f k8s/postgres.yaml
+   kubectl apply -f k8s/t2-monolith/base/postgres.yaml
 
 Deploy the backend
 ------------------
@@ -44,7 +44,7 @@ To install the backend use the provided YAML file:
 
 .. code-block:: shell
 
-   kubectl create -f k8s/backend.yaml
+   kubectl apply -f k8s/t2-monolith/base/backend.yaml
 
 Access the T2-Modulith
 ----------------------

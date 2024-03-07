@@ -62,8 +62,8 @@ For the T2-Project itself get the deployments and deploy them:
 .. code-block:: shell
 
    git clone https://github.com/t2-project/devops.git
-   cd devops/k8s/t2-microservices
-   kubectl create -f . --save-config
+   cd devops/k8s/t2-microservices/base
+   kubectl apply -f .
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
@@ -178,7 +178,7 @@ Afterwards, navigate to the :file:`k8s/t2-microservices/autoscaling` directory i
 
 .. code-block:: shell
 
-   kubectl create -f .
+   kubectl apply -f .
 
 
 Modifying the autoscaling behavior
@@ -189,7 +189,7 @@ If you want to modify the autoscaling behavior, i.e. by increasing the maximum r
 .. code-block:: shell
 
    kubectl delete horizontalpodautoscalers.autoscaling $SERVICE
-   kubectl create -f .
+   kubectl apply -f .
 
 
 Intensive computation simulation
@@ -203,14 +203,14 @@ Install the *computation-simulator* and change the config of the *uibackend* ser
 
 .. code-block:: shell
 
-   kubectl apply -f computation-simulation/
+   kubectl apply -k computation-simulation/
 
 Uninstall:
 
 .. code-block:: shell
 
-   kubectl delete -f computation-simulation/
-   kubectl create -f uibackend.yaml --save-config
+   kubectl delete -f computation-simulation/computation-simulator.yaml
+   kubectl apply -k base/
 
 Run with Docker
 ===============
@@ -410,7 +410,7 @@ If you are on a Kubernetes cluster, you may apply the deployment from the folder
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/saga-e2e-test/e2etest.yaml
+   kubectl apply -k k8s/saga-e2e-test/
 
 Step 2 : Configure the UI Backend and the Payment Service
 ---------------------------------------------------------
@@ -440,7 +440,7 @@ Or use the deployment in the folder `k8s/saga-e2e-test <https://github.com/t2-pr
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/saga-e2e-test/
+   kubectl apply -k k8s/saga-e2e-test/
 
 Step 3 : Generate Load
 -----------------------------
