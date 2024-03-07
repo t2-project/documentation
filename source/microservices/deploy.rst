@@ -63,7 +63,7 @@ For the T2-Project itself get the deployments and deploy them:
 
    git clone https://github.com/t2-project/devops.git
    cd devops/k8s/t2-microservices/base
-   kubectl apply -f .
+   kubectl apply -k .
 
 These commands should deploy 10 services in addition to the MongoDB, the Kafka and the Zookeeper instances.
 
@@ -178,7 +178,7 @@ Afterwards, navigate to the :file:`k8s/t2-microservices/autoscaling` directory i
 
 .. code-block:: shell
 
-   kubectl apply -f .
+   kubectl apply -k .
 
 
 Modifying the autoscaling behavior
@@ -189,7 +189,7 @@ If you want to modify the autoscaling behavior, i.e. by increasing the maximum r
 .. code-block:: shell
 
    kubectl delete horizontalpodautoscalers.autoscaling $SERVICE
-   kubectl apply -f .
+   kubectl apply -k .
 
 
 Intensive computation simulation
