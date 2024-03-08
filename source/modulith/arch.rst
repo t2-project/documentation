@@ -7,7 +7,7 @@ The T2-Modulith application consists of six modules:
 .. image:: ./figs/component_diagram.svg
    :alt: Component Diagram of the T2-Modulith application
 
-The main difference between this architecture of the monolith implementation and the implementation of the :doc:`microservices architecture <../microservices/arch>` is the removal of the orchestrator service. In the monolithic implementation the finalization of an order gets coordinated by the order module.
+The main difference between this architecture of the modulith implementation and the implementation of the :doc:`microservices architecture <../microservices/arch>` is the removal of the orchestrator service. In the monolithic implementation the finalization of an order gets coordinated by the order module.
 
 Modules
 -------
@@ -64,7 +64,7 @@ The following table shows how the microservices implementation was migrated to a
    :header-rows: 1
 
    * - Microservice
-     - Monolith
+     - Modulith
      - Comments
    * - `Cart <https://github.com/t2-project/cart>`_
      - Cart Module
@@ -91,7 +91,7 @@ The following table shows how the microservices implementation was migrated to a
        | → Simple transaction is used to finalize an order, part of the order module
 
 
-The `common <https://github.com/t2-project/common>`_ package that is used as a jar dependency by all microservices for inter-service communication is not used by the monolith. Some parts are moved to the respective domain-specific module. There is now a ``config`` package that includes the configuration that is relevant for multiple modules, however, without any class definitions required used for communication.
+The `common <https://github.com/t2-project/common>`_ package that is used as a jar dependency by all microservices for inter-service communication is not used by the modulith. Some parts are moved to the respective domain-specific module. There is now a ``config`` package that includes the configuration that is relevant for multiple modules, however, without any class definitions required used for communication.
 
 
 Modularity & Spring Modulith

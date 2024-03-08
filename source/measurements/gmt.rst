@@ -9,7 +9,7 @@ The T2 usage scenarios are located in the directory ``energy-tests`` in the GitH
 Currently, only usage scenarios are provided that use :doc:`JMeter <jmeter>` for the execution of requests to the T2-Project backend:
 
 * Microservices: `UI Backend Service <https://github.com/t2-project/uibackend>`_ → ``uibackend:8080``
-* Monolith: `T2-Modulith <https://github.com/t2-project/modulith>`_ → ``backend:8080``
+* Modulith: `T2-Modulith <https://github.com/t2-project/modulith>`_ → ``backend:8080``
 
 Local testing
 =============

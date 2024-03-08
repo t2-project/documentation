@@ -7,13 +7,13 @@ This section describes different ways to deploy the T2-Modulith.
 Deploy on a Kubernetes Cluster
 ==============================
 
-This section describes how to deploy the T2-Modulith on a Kubernetes cluster. You find the K8s manifest files in the directory :file:`k8s/t2-monolith` in the `DevOps <https://github.com/t2-project/devops>`__ repository.
+This section describes how to deploy the T2-Modulith on a Kubernetes cluster. You find the K8s manifest files in the directory :file:`k8s/t2-modulith` in the `DevOps <https://github.com/t2-project/devops>`__ repository.
 
 In the following we explain the basic deployment steps, however, there are also some slightly more sophisticated Bash scripts to make the deployment easier:
 
-* ``start-monolith.sh``
-* ``stop-monolith.sh``
-* ``update-monolith.sh``
+* ``start-modulith.sh``
+* ``stop-modulith.sh``
+* ``update-modulith.sh``
 
 Note: To deploy the T2-Modulith to a managed Kubernetes environment like AWS Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), etc., some additional configuration may be required. Look into the provided Terraform configurations for more information.
 
@@ -35,7 +35,7 @@ The T2-Modulith needs PostgreSQL. Install it by using the provided YAML file:
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/t2-monolith/base/postgres.yaml
+   kubectl apply -f k8s/t2-modulith/base/postgres.yaml
 
 Deploy the backend
 ------------------
@@ -44,7 +44,7 @@ To install the backend use the provided YAML file:
 
 .. code-block:: shell
 
-   kubectl apply -f k8s/t2-monolith/base/backend.yaml
+   kubectl apply -f k8s/t2-modulith/base/backend.yaml
 
 Access the T2-Modulith
 ----------------------

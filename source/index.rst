@@ -20,14 +20,14 @@ T2-Project Documentation
    Usage <microservices/use>
 
 .. toctree::
-   :caption: MONOLITH
+   :caption: MODULITH
    :maxdepth: 2
    :hidden:
 
-   Overview <monolith/index>
-   Architecture <monolith/arch>
-   Deployment <monolith/deploy>
-   Usage <monolith/use>
+   Overview <modulith/index>
+   Architecture <modulith/arch>
+   Deployment <modulith/deploy>
+   Usage <modulith/use>
 
 .. toctree::
    :caption: MEASUREMENTS
@@ -54,16 +54,16 @@ Introduction
 The T2-Project is a reference application provided in two variants:
 
 *  :ref:`Microservices <microservices>` (implementing the Saga pattern)
-*  :ref:`Monolith <monolith>` (retaining the modular structure)
+*  :ref:`Modulith <modulith>` (retaining the modular structure)
 
 The project is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
 | Initially, we only implemented the application in the microservices architecture style and called it **T2-Project**. Later, we added a monolithic variant for comparison.
 | The monolith retains the modular structure, therefore we call it **T2-Modulith**.
-| In order to easily distinguish between the two variants linguistically, we sometimes also use the terms **T2-Microservices** and **T2-Monolith**.
+| In order to easily distinguish between the two variants linguistically, we sometimes also use the terms **T2-Microservices** and **T2-Modulith**.
 
 The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
-The initial purpose of the T2-Modulith was to compare a microservices application with a monolith application in terms of energy consumption (see :doc:`Energy Measurements <measurements/index>` for more information).
+The initial purpose of the T2-Modulith was to compare a microservices application with a modulith application in terms of energy consumption (see :doc:`Energy Measurements <measurements/index>` for more information).
 
 Repository Structure
 ====================
@@ -73,7 +73,7 @@ The T2-Project is organized under the GitHub organization `t2-project <https://g
 The source code of this documentation is stored in the repository `Documentation <https://github.com/t2-project/documentation>`__.
 
 
-Monolith implementation
+Modulith implementation
 -----------------------
 
 *  `Modulith <https://github.com/t2-project/modulith>`__

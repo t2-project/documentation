@@ -5,7 +5,7 @@ Measurements Results
 ====================
 
 This page deals with the measurement related to the main research question:
-Under which scenarios is there a significant difference in energy consumption between the monolith and microservices implementation?
+Under which scenarios is there a significant difference in energy consumption between the modulith and microservices implementation?
 
 The measurement results listed on this page were generated with the :doc:`Green Metrics Tool <gmt>`. The values relate to the runtime phase, if not mentioned other. While using the Green Metrics Tool, many lessons were learned about what needs to be considered. Please have a look at the section :ref:`GMT Learnings <gmt-learnings>` before looking into the measurement results.
 
@@ -16,13 +16,13 @@ The measurement results listed on this page were generated with the :doc:`Green 
 Standard Usage Scenario
 -----------------------
 
-**Research question:** What is more energy efficient in the standard usage scenario with 1 user, monolith or microservices?
+**Research question:** What is more energy efficient in the standard usage scenario with 1 user, modulith or microservices?
 
 **Scenario:** One user checks out the inventory, thinks for 30 sec, adds a random product to cart, thinks again, add a second product, thinks again, add a third product, and finally confirms the order.
 
 **Findings:**
 
-* The monolith in the standard usage scenario with 1 user is more efficient than the microservices implementation.
+* The modulith in the standard usage scenario with 1 user is more efficient than the microservices implementation.
 
 .. collapse:: <strong>Measurement</strong>
     :open:
@@ -31,7 +31,7 @@ Standard Usage Scenario
       :header-rows: 1
       :stub-columns: 3
 
-      * - Monolith / Microservices
+      * - Modulith / Microservices
         - Duration [s]
         - Machine Power [W]
         - Machine Energy [J]
@@ -39,7 +39,7 @@ Standard Usage Scenario
         - Memory Energy [J]
         - Network Energy [J]
         - SCI [mgCO2e/order]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=50008066-07ef-438e-a727-dfcaf1d1c46b>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=50008066-07ef-438e-a727-dfcaf1d1c46b>`__
         - 95.72
         - 15.09
         - 1444.10
@@ -59,13 +59,13 @@ Standard Usage Scenario
 Multiple executions
 -------------------
 
-**Research question:** What is more energy efficient in the simple scenario with 1 user, monolith or microservices?
+**Research question:** What is more energy efficient in the simple scenario with 1 user, modulith or microservices?
 
 **Scenario:** One user executes multiple orders one after another.
 
 **Findings:**
 
-* In this basic scenario with 1 user, the microservices system consumes significantly more energy → monolith is more energy-efficient if there is no load
+* In this basic scenario with 1 user, the microservices system consumes significantly more energy → modulith is more energy-efficient if there is no load
 * Some services in the microservices system are always active (Kafka, Zookeeper, Eventuate CDC Service, Orchestrator) that communicate with each other. Therefore in the scenario with 0 executions there is still an energy consumption of 0.46 J due to the network communication.
 
 .. collapse:: <strong>Measurement</strong>
@@ -75,7 +75,7 @@ Multiple executions
       :header-rows: 1
       :stub-columns: 3
 
-      * - Monolith / Microservices
+      * - Modulith / Microservices
         - Number of Executions
         - Think Time [s]
         - Duration [s]
@@ -84,7 +84,7 @@ Multiple executions
         - Memory Energy [J]
         - Network Energy [J]
         - SCI [mgCO2e/order]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=f1e0171c-a5f6-4f24-b5e4-558fe334993c>`__
         - 0
         - 0
         - 3.81
@@ -102,7 +102,7 @@ Multiple executions
         - 3.36
         - 0.46
         - N/A
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=25614e23-d474-4953-a08b-3808f8e46fe6>`__
         - 1
         - 0
         - 5.82
@@ -120,7 +120,7 @@ Multiple executions
         - 14.00
         - 4.74
         - 87.3
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=7e40ee3b-733e-4b66-aaba-e1e32a412a28>`__
         - 100
         - 0
         - 13.40
@@ -138,7 +138,7 @@ Multiple executions
         - 67.15
         - 330.28
         - 3.8
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=c8aca13e-428a-4616-8677-93db8ebb0259>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=c8aca13e-428a-4616-8677-93db8ebb0259>`__
         - 100
         - 1
         - 113.50
@@ -170,7 +170,7 @@ Load Tests
 
 **Research questions:**
 
-* What is more energy efficient in a load test scenario with many parallel users, monolith or microservices?
+* What is more energy efficient in a load test scenario with many parallel users, modulith or microservices?
 * How relevant is the CPU, memory and network?
 
 **Scenario:** Many users in parallel: Each user checks out the inventory, think for 30-60 sec, add a random product to cart (3 times) and finally confirms the order. Logging of JMeter requests is disabled.
@@ -194,11 +194,11 @@ Load Tests
       :stub-columns: 2
       :align: left
 
-      * - Monolith / Microservices
+      * - Modulith / Microservices
         - Number of Users
         - Ramp-up time (pre-configured) [s]
         - Duration [s]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 2
         - 186.26
@@ -206,7 +206,7 @@ Load Tests
         - 100
         - 2
         - 185.92
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 5
         - 175.22
@@ -215,34 +215,34 @@ Load Tests
         - 5
         - 182.88
 
-    All measurement runs with monolith system:
+    All measurement runs with modulith system:
 
     .. list-table::
       :header-rows: 1
       :stub-columns: 2
       :align: left
 
-      * - Monolith
+      * - Modulith
         - Number of Users
         - Ramp-up time (pre-configured) [s]
         - Duration [s]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 2
         - 186.26
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 2
         - 181.97
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 5
         - 175.22
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 5
         - 180.08
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 5
         - 182.32
@@ -255,14 +255,14 @@ Load Tests
       :stub-columns: 2
       :align: left
 
-      * - Monolith / Microservices
+      * - Modulith / Microservices
         - Number of Users
         - Machine Power [W]
         - Machine Energy [J]
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 15.83
         - 2949.27
@@ -276,7 +276,7 @@ Load Tests
         - 1050.28
         - 135.97
         - 717.14
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 17.18
         - 3009.78
@@ -291,49 +291,49 @@ Load Tests
         - 173.44
         - 2402.92
 
-    All measurement runs with monolith system:
+    All measurement runs with modulith system:
 
     .. list-table::
       :header-rows: 1
       :stub-columns: 2
       :align: left
 
-      * - Monolith
+      * - Modulith
         - Number of Users
         - Machine Power [W]
         - Machine Energy [J]
         - CPU Energy [J]
         - Memory Energy [J]
         - Network Energy [J]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 15.83
         - 2949.27
         - 370.25
         - 94.94
         - 311.21
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 16.42
         - 2990.24
         - 449.09
         - 99.10
         - 844.34
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 17.18
         - 3009.78
         - 513.25
         - 100.76
         - 1608.60
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.66
         - 3180.31
         - 610.23
         - 108.03
         - 2588.05
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 18.43
         - 3360.63
@@ -351,14 +351,14 @@ Load Tests
       :stub-columns: 1
       :align: left
 
-      * - Monolith / Microservices
+      * - Modulith / Microservices
         - Number of Users
         - ``system`` CPU Mean [%]
         - ``system`` CPU Max [%]
         - ``system`` Memory Sum Mean [MB]
         - ``system`` Memory Sum Max [MB]
         - ``system`` Memory Sum Min [MB]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 7.52
         - 100.00
@@ -372,7 +372,7 @@ Load Tests
         - 3368.59
         - 3648.12
         - 2708.28
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 14.50
         - 100.00
@@ -387,49 +387,49 @@ Load Tests
         - 3829.44
         - 2670.32
 
-    All measurement runs with monolith system:
+    All measurement runs with modulith system:
 
     .. list-table::
       :header-rows: 1
       :stub-columns: 1
       :align: left
 
-      * - Monolith
+      * - Modulith
         - Number of Users
         - ``system`` CPU Mean [%]
         - ``system`` CPU Max [%]
         - ``system`` Memory Sum Mean [MB]
         - ``system`` Memory Sum Max [MB]
         - ``system`` Memory Sum Min [MB]
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=9c29b4e9-7ee5-416e-9be5-6d183f14e3fc>`__
         - 100
         - 7.52
         - 100.00
         - 1144.43
         - 1199.25
         - 741.55
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=eb85a781-4e7b-4570-a7bb-b9cd98ab7ebb>`__
         - 200
         - 10.83
         - 100.00
         - 956.88
         - 1022.09
         - 505.19
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=2737a2e8-677c-43c0-a167-57f7e9495160>`__
         - 300
         - 14.50
         - 100.00
         - 961.48
         - 1025.16
         - 490.38
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=1797131a-8bf2-44af-a845-f5fc462e6de0>`__
         - 400
         - 17.15
         - 100.00
         - 1041.08
         - 1132.27
         - 536.1
-      * - `Monolith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
+      * - `Modulith <https://metrics.green-coding.io/stats.html?id=d213415f-584c-407e-ab3b-ebc7c911df30>`__
         - 500
         - 19.97
         - 100.00
