@@ -170,14 +170,14 @@ Fixed Single Load Profile
 
 The profile :file:`t2-project-fixed-single.jmx` generates requests to the UI Backend and places one order with 3 random products as visualized below.
 
-.. image:: figs/load_generator_single.jpg
+.. image:: ../diagrams/microservices-load_generator_single.jpg
 
 Random Infinite Load Profile
 """"""""""""""""""""""""""""
 
 The profile :file:`t2-project-random-infinite.jmx` is similar to the previous one, but runs infinitely as visualized below.
 
-.. image:: figs/load_generator.jpg
+.. image:: ../diagrams/microservices-load_generator.jpg
 
 With this profile the generator adds between 1 to 5 products to the cart, and confirm the order afterwards.
 It chooses the product at random from the products in the inventory.

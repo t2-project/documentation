@@ -377,7 +377,7 @@ With this setup, the *Test* service knows the supposed outcome of all requests a
 
 For more details, see the `Test Service's README <https://github.com/t2-project/e2e-tests>`__.
 
-.. image:: figs/component_test.jpg
+.. image:: ../diagrams/microservices-component_test.jpg
 
 Run with script
 ---------------

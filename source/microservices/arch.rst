@@ -4,7 +4,7 @@ T2-Project Architecture
 
 The T2-Project consists of seven services.
 
-.. image:: figs/component_total_colour.svg
+.. image:: ../diagrams/microservices-component_total_colour.svg
 
 The green and blue services are the core T2 services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  
@@ -23,7 +23,7 @@ This is necessary because of the saga pattern.
 
 The T2-Project realizes the following business process:
 
-.. image:: figs/bpmn_sub.png
+.. image:: ../diagrams/microservices-bpmn_sub.png
 
 The activities within the *Saga* subprocess must be executed as a transaction.
 The transaction is implemented according to the `Saga Pattern <https://microservices.io/patterns/data/saga.html>`__.
@@ -160,7 +160,7 @@ Each service has a subset of those packages, as visualized in the diagram below.
 The diagram reads as follows: 
 Orchestrator has the *<service-name>* package and a packages *saga*, Order and Inventory have those packages and also a package *repository*, and so on.
 
-.. image:: figs/packages.jpg
+.. image:: ../diagrams/microservices-packages.jpg
 
 
 de.unistuttgart.t2.<service-name>
