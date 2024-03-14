@@ -133,7 +133,7 @@ which runs indefinitely and
 
    loadProfile=t2-project-flexible.jmx 
 
-that provides many options. See page :ref:`JMeter <jmeter>` about more information on how to use the flexible test plan.
+that provides many options. See page :doc:`JMeter <../measurements/jmeter>` about more information on how to use the flexible test plan.
 
 Once you have chosen which profile to use, you can run them by calling
 
