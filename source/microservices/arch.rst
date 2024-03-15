@@ -4,7 +4,7 @@ T2-Project Architecture
 
 The T2-Project consists of seven services.
 
-.. image:: ../diagrams/microservices-component_total_colour.svg
+.. image:: ../diagrams/microservices-components_total_colour.svg
 
 The green and blue services are the core T2 services. The blue ones participate in the saga, the green ones do not. 
 The white things are databases and external services.  

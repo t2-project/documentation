@@ -1,0 +1,33 @@
+' Generated with Spring Modulith
+' https://docs.spring.io/spring-modulith/reference/documentation.html
+
+@startuml
+title ModulithApplication
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary("ModulithApplication.ModulithApplication_boundary", "ModulithApplication", $tags="") {
+  Component(ModulithApplication.ModulithApplication.Ui, "Ui", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Payment, "Payment", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Inventory, "Inventory", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Cart, "Cart", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Computation_simulator, "Computation_simulator", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Order, "Order", "Module", "", $tags="")
+  Component(ModulithApplication.ModulithApplication.Uibackend, "Uibackend", "Module", "", $tags="")
+}
+
+Rel_D(ModulithApplication.ModulithApplication.Order, ModulithApplication.ModulithApplication.Cart, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Order, ModulithApplication.ModulithApplication.Inventory, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Order, ModulithApplication.ModulithApplication.Payment, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Ui, ModulithApplication.ModulithApplication.Uibackend, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Uibackend, ModulithApplication.ModulithApplication.Cart, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Uibackend, ModulithApplication.ModulithApplication.Inventory, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Uibackend, ModulithApplication.ModulithApplication.Order, "uses", $tags="")
+Rel_D(ModulithApplication.ModulithApplication.Uibackend, ModulithApplication.ModulithApplication.Computation_simulator, "uses", $tags="")
+
+SHOW_LEGEND(true)
+@enduml
