@@ -1,0 +1,47 @@
+@startuml sequence-microservices-jmeter
+
+title Sequence Diagram for Test Plan Execution With JMeter - T2-Microservices
+
+participant "JMeter"            as jmeter
+participant "UIBackend Service" as uibackend
+participant "Inventory Service" as inventory
+participant "Cart Service"      as cart
+participant "Orchestrator"      as orchestrator
+
+jmeter -> jmeter ++ : Start
+jmeter -> jmeter : Generate session ID
+
+loop number of items to add
+    jmeter -> uibackend ++ : GET inventory
+    uibackend -> inventory ++  : GET inventory
+    uibackend <- inventory -- : inventory
+    jmeter <- uibackend -- : inventory
+
+    jmeter -> jmeter : pick random item
+    jmeter -> uibackend ++ : POST add item to cart
+    uibackend -> inventory ++ : POST make reserverations for item
+    uibackend <- inventory -- : ok
+    uibackend -> cart ++ : PUT add item to cart
+    uibackend <- cart -- : ok
+    jmeter <- uibackend -- : ok
+end
+
+jmeter -> uibackend ++ : POST confirm order
+uibackend -> uibackend ++ : calculate total
+uibackend -> cart ++ : GET cart
+uibackend <- cart -- : cart
+loop number of items in cart
+    uibackend -> inventory ++ : GET product details
+    uibackend <- inventory -- : product details
+end
+uibackend -> uibackend -- : cart total
+uibackend -> orchestrator ++ : POST start saga
+note over orchestrator : Asynchronous saga\nexecution starts
+uibackend <- orchestrator -- : ok
+uibackend -> cart ++ : DELETE cart
+uibackend <- cart -- : ok
+jmeter <- uibackend -- : ok
+
+jmeter -> jmeter -- : End
+
+@enduml

@@ -1,0 +1,147 @@
+@startuml c4-deployment-measurement-setup-kepler-microservices
+
+title Measurement Setup - EKS & Kepler & T2-Microservices
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/kubernetes.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/cloud.puml
+!include FONTAWESOME/tachometer_alt.puml
+!include FONTAWESOME/laptop.puml
+!include FONTAWESOME/chart_bar.puml
+!include WEATHER/day_sunny.puml
+
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/terraform.puml
+!include CloudoguPuml/tools/grafana.puml
+!include CloudoguPuml/tools/prometheus.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesKubelet.puml
+!include KubernetesPuml/OSS/KubernetesApi.puml
+!include KubernetesPuml/OSS/KubernetesHpa.puml
+!include KubernetesPuml/OSS/KubernetesSvc.puml
+!include KubernetesPuml/OSS/KubernetesPod.puml
+
+' Cloudinsight (https://github.com/plantuml-stdlib/cicon-plantuml-sprites)
+!define CloudinsightPuml https://raw.githubusercontent.com/plantuml-stdlib/cicon-plantuml-sprites/master/sprites
+!include CloudinsightPuml/kafka.puml
+!include CloudinsightPuml/zookeeper.puml
+
+top to bottom direction
+
+Person(user, "User") {
+    Deployment_Node(browser, "Web Browser"){
+        Container(browser_ui, "T2-Project Store UI", "HTML/CSS/JavaScript", "Provides the UI for shopping.", $sprite="laptop")
+    }
+}
+Person(load_testing, "Researcher") {
+    Container(jmeter, "JMeter", "Java", "Executes test plan for load testing.", $sprite="tachometer_alt")
+    Deployment_Node(browser_load_testing, "Web Browser"){
+        Container(browser_grafana, "Grafana UI", "HTML/CSS/JavaScript", "Provides the UI for Grafana.", $sprite="chart_bar")
+    }
+}
+Person(devops, "DevOps") {
+    Container(terraform, "Terraform", "", "Provisioning the infrastructure with Terraform", $sprite="terraform")
+}
+
+Deployment_Node(aws, "AWS Cloud", $sprite="cloud"){
+    Deployment_Node(eks, "EKS", "Elastic Kubernetes Service", $sprite="kubernetes"){
+
+        Container(kubernetes_api, "K8s API Server", $sprite="KubernetesApi")
+
+        Boundary("public_network", "Public Network") {
+            Container(elb_ui, "UI NLB", "ELB", "Network Load Balancer for the UI service.", $sprite="KubernetesSvc")
+            
+            Container(elb_uibackend, "UIBackend NLB", "ELB", "Network Load Balancer for the UIBackend service. The UIBackend is only made available to the public for load testing purposes.", $sprite="KubernetesSvc")
+        }
+
+        ' Deployment_Node(ec2, "K8s Worker Nodes", "EC2 Instances") {
+
+            Container(kubelet, "kubelet", $sprite="KubernetesKubelet")
+
+            Boundary(t2_deployments, "T2-Microservices") {
+                Container(ui, "UI", "K8s Deployment", "Provides the UI", $sprite="spring")
+                Container(uibackend, "UIBackend", "K8s Deployment", "Provides API for UI and is used directly for Load Testing", $sprite="spring")
+                Container(t2_other, "Other Microservices", "K8s Deployment", "Provide the business functionality, condensed to save space", $sprite="spring")
+            }
+
+            Boundary(messaging, "Messaging"){
+                Container(kafka, "Kafka", "K8s Deployment", "Kafka is used for asynchronous communication required to handle Saga", $sprite="kafka")
+                Container(zookeeper, "Zookeeper", "K8s StatefulSet", $sprite="zookeeper")
+            }
+
+            Boundary(databases, "Databases"){
+                ContainerDb(postgres_saga, "PostgreSQL DB Saga", "K8s StatefulSet", $sprite="postgresql")
+                ContainerDb(postgres_inventory, "PostgreSQL DB Inventory", "K8s StatefulSet", $sprite="postgresql")
+                ContainerDb(mongodb_order, "MongoDB Order", "K8s Deployment", $sprite="mongodb")
+                ContainerDb(mongodb_cart, "MongoDB Cart", "K8s Deployment", $sprite="mongodb")
+            }
+
+            Boundary(monitoring, "Monitoring"){
+                Container(grafana, "Grafana", "K8s Deployment", $sprite="grafana")
+                Container(prometheus, "Prometheus", "K8s Deployment", $sprite="prometheus")
+                Container(kepler, "Kepler", "K8s Deployment", "Kepler is used to measure energy consumption", $sprite="day_sunny")
+            }
+        ' }
+
+        Container(hpa, "Autoscaler", "K8s HorizontalPodAutoscaler", $sprite="KubernetesHpa")
+    }
+}
+
+Rel_D(browser_ui, elb_ui, "Retrieves UI from and makes API calls to", "json/HTTP")
+Rel_D(elb_ui, ui, "Forwards requests to", "json/HTTP")
+' Rel(ui, browser_ui, "Delivers to the users's web browser")
+
+Rel_D(jmeter, elb_uibackend, "Makes API calls to", "json/HTTP")
+Rel_D(elb_uibackend, uibackend, "Forwards requests to", "json/HTTP")
+' Rel(uibackend, jmeter, "Response to JMeter")
+
+Rel_D(browser_grafana, grafana, "Retrieves data from", "json/HTTP")
+' Rel(grafana, browser_load_testing, "Returns data from", "json/HTTP")
+
+Rel(terraform, aws, "Provisioning of cloud resources")
+Rel(terraform, kubernetes_api, "Provisioning of K8s resources")
+
+Rel_Neighbor(ui, uibackend, "")
+Rel_Neighbor(uibackend, t2_other, "")
+
+Rel(t2_other, kafka, "Publish messages and subscribe to topics", "TCP")
+Rel(t2_other, postgres_saga, "Reads from /\nwrites to", "JDBC")
+Rel(t2_other, postgres_inventory, "Reads from /\nwrites to", "JDBC")
+Rel(t2_other, mongodb_order, "Reads from /\nwrites to", "TCP")
+Rel(t2_other, mongodb_cart, "Reads from /\nwrites to", "TCP")
+
+Rel(grafana, prometheus, "Retrieves data from", "json/HTTP")
+Rel(prometheus, kubernetes_api, "Scrapes data from", "json/HTTP")
+Rel(prometheus, kubelet, "Scrapes data from", "json/HTTP")
+Rel(prometheus, kepler, "Scrapes data from", "json/HTTP")
+Rel(prometheus, t2_deployments, "Scrapes data from", "json/HTTP")
+
+Rel(kafka, zookeeper, "", "")
+
+Rel(hpa, t2_other, "Scales deployments")
+Rel(hpa, uibackend, "Scales deployments")
+
+' Rel(kubernetes_api, kubelet, "")
+
+' Workaround to improve structuring 
+devops -[hidden]> load_testing
+user -[hidden]> load_testing
+
+SHOW_LEGEND()
+@enduml

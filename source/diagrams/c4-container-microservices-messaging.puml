@@ -1,0 +1,55 @@
+@startuml c4-container-microservices-messaging
+
+title Container Diagram for T2-Microservices - Saga Messaging
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define ICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master
+!include ICONS/common.puml
+!include ICONS/devicons2/spring.puml
+!include ICONS/devicons2/mongodb.puml
+!include ICONS/devicons2/postgresql.puml
+
+' Cloudinsight (https://github.com/plantuml-stdlib/cicon-plantuml-sprites)
+!define CloudinsightPuml https://raw.githubusercontent.com/plantuml-stdlib/cicon-plantuml-sprites/master/sprites
+!include CloudinsightPuml/kafka.puml
+!include CloudinsightPuml/zookeeper.puml
+
+AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
+
+Boundary(saga, "Saga Participants") {
+    Container(orchestrator, "Orchestrator", "Java, Spring MVC", $sprite="spring", $tags="saga")
+    Container(inventory, "Inventory", "Java, Spring MVC", $sprite="spring", $tags="saga")
+    Container(order, "Order", "Java, Spring MVC", $sprite="spring", $tags="saga")
+    Container(payment, "Payment", "Java, Spring MVC", $sprite="spring", $tags="saga")
+}
+
+ContainerDb(db_inventory, "Inventory Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql")
+ContainerDb(db_saga, "Saga Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql")
+ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb")
+
+Container(cdcservice, "CDC Service", "Eventuate Framework", "Implementing the Transactional Outbox Pattern. Provided by the Eventuate Tram Sagas Framework.", $sprite="spring")
+ContainerQueue(kafka, "Kafka", "Eventuate Framework", $sprite="kafka")
+ContainerDb(zookeeper, "Zookeeper", "Eventuate Framework", $sprite="zookeeper")
+
+Rel(order, db_order, " r&w", "")
+Rel(orchestrator, db_saga, "r&w", "")
+Rel(inventory, db_inventory, "r&w", "")
+
+Rel(orchestrator, kafka, "subscribe", "")
+Rel(order, kafka, "subscribe", "")
+Rel(payment, kafka, "subscribe", "")
+Rel(inventory, kafka, "subscribe", "")
+Rel(cdcservice, db_saga, "r&w", "")
+Rel(cdcservice, db_inventory, "r&w", "")
+Rel(cdcservice, kafka, "\n  publish", "")
+
+Rel_R(kafka, zookeeper, "r&w", "")
+
+' Workaround to improve structuring 
+' orchestrator -[hidden]> inventory
+' orchestrator -[hidden]> payment
+' orchestrator -[hidden]> order
+
+@enduml

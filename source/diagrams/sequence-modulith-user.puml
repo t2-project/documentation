@@ -1,0 +1,65 @@
+' scenario:
+' 1. get inventory
+' 2. add one item to cart
+' 3. confirm order
+
+@startuml sequence-modulith-user
+
+title Sequence Diagram for Standard Usage Scenario - T2-Modulith
+
+actor       "User"            as user
+box "Internal Modules" #WhiteSmoke
+participant "UI\nModule"              as ui
+participant "UIBackend\nModule"       as uibackend
+participant "Order\nModule"           as order
+participant "Inventory\nModule"       as inventory
+participant "Cart\nModule"            as cart
+participant "Payment\nModule"         as payment
+end box
+participant "CreditInstitute" as creditinstitute
+
+== Get Products ==
+
+user -> ui ++ : Page /products
+ui -> uibackend ++ : get products
+uibackend -> inventory ++ : get products
+uibackend <- inventory -- : products
+ui <- uibackend -- : products
+user <- ui -- : products
+
+== Add Item to Cart ==
+
+user -> ui ++ : Adds an item to cart
+ui -> uibackend ++ : add item to cart
+uibackend -> inventory ++ : make reserverations for item
+uibackend <- inventory -- : ok
+uibackend -> cart ++ : add item to cart
+uibackend <- cart -- : ok
+ui <- uibackend -- : ok
+user <- ui -- : ok
+
+== Order Checkout ==
+
+user -> ui ++ : Checkout
+ui -> uibackend ++ : confirm order
+uibackend -> order ++ : confirm order
+order -> order ++ : calculate total
+order -> cart ++ : get cart
+order <- cart -- : cart
+order -> inventory ++ : get products details
+order <- inventory -- : product details
+order -> order -- : cart total
+order -> order ++-- : create order
+order -> payment ++ : do payment
+payment -> creditinstitute ++ : do payment
+payment <- creditinstitute -- : ok
+order <- payment -- : ok
+order -> inventory ++ : commit reservations
+order <- inventory -- : ok
+order -> cart ++ : delete cart
+order <- cart -- : ok
+uibackend <- order -- : ok
+ui <- uibackend -- : ok
+user <- ui -- : ok
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml c4-deployment-modulith-docker
+
+title Deployment Diagram using Docker Compose - T2-Modulith
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/java.puml
+!include DEVICONS2/tomcat_line.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/chart_bar.puml
+
+top to bottom direction
+
+Deployment_Node(machine, "Machine with Docker Compose") {
+
+    Boundary(t2_modulith, "T2-Modulith"){
+        
+        Deployment_Node(docker1, "Container", "Docker", $sprite="docker"){
+
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "war")
+            Deployment_Node(tomcat1, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(modulith, "Modulith", "Java, Spring MVC", "Provides the UI and the API endpoints.", $sprite="spring")
+            }
+        }
+        Deployment_Node(docker2, "Container", "Docker", $sprite="docker"){
+            ContainerDb(t2_postgres, "Postgres", "PostreSQL 12", "Relational database used for inventory data", $sprite="postgresql")
+        }   
+        Deployment_Node(docker3, "Container", "Docker", $sprite="docker"){
+            ContainerDb(t2_mongodb, "MongoDB", "MongoDB 7.0", "Document-oriented database used for order and cart data", $sprite="mongodb")
+        }
+    }
+
+    Deployment_Node(docker4, "Container", "Docker", $sprite="docker") {
+        AddProperty("Java Version", "17")
+        AddProperty("Deployment File", "jar")
+        Deployment_Node(tomcat2, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+            Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", "Fake credit institute", $sprite="spring")
+        }
+    }
+}
+
+Rel(modulith, t2_postgres, "")
+Rel(modulith, t2_mongodb, "")
+Rel_R(modulith, creditinstitute, "")
+
+@enduml

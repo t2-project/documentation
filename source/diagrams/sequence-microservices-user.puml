@@ -1,0 +1,57 @@
+' scenario:
+' 1. get inventory
+' 2. add one item to cart
+' 3. confirm order
+
+@startuml sequence-microservices-user
+
+title Sequence Diagram for Standard Usage Scenario - T2-Microservices
+
+actor       "User"              as user
+participant "UI Service"        as ui
+participant "UIBackend Service" as uibackend
+participant "Inventory Service" as inventory
+participant "Cart Service"      as cart
+participant "Orchestrator"      as orchestrator
+
+== Get Products ==
+
+user -> ui ++ : Page /products
+ui -> uibackend ++ : GET products
+uibackend -> inventory ++ : GET products
+uibackend <- inventory -- : products
+ui <- uibackend -- : products
+user <- ui -- : products
+
+== Add Item to Cart ==
+
+user -> ui ++ : Adds an item to cart
+ui -> uibackend ++ : POST add item to cart
+uibackend -> inventory ++ : POST make reserverations for item
+uibackend <- inventory -- : ok
+uibackend -> cart ++ : PUT add item to cart
+uibackend <- cart -- : ok
+ui <- uibackend -- : ok
+user <- ui -- : ok
+
+== Order Checkout ==
+
+user -> ui ++ : Checkout
+ui -> uibackend ++ : POST confirm order
+uibackend -> uibackend ++ : calculate total
+uibackend -> cart ++ : GET cart
+uibackend <- cart -- : cart
+loop number of items in cart
+    uibackend -> inventory ++ : GET product details
+    uibackend <- inventory -- : product details
+end
+uibackend -> uibackend -- : cart total
+uibackend -> orchestrator ++ : POST start saga
+note over orchestrator : Asynchronous saga\nexecution starts
+uibackend <- orchestrator -- : ok
+uibackend -> cart ++ : DELETE cart
+uibackend <- cart -- : ok
+ui <- uibackend -- : ok
+user <- ui -- : ok
+
+@enduml

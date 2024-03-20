@@ -1,0 +1,38 @@
+' only the success case is shown here
+
+@startuml sequence-microservices-saga
+
+title Sequence Diagram for Executing Saga - T2-Microservices
+
+participant Orchestrator    as orchestrator
+queue       Kafka           as kafka
+participant Order           as order
+participant Payment         as payment
+participant Inventory       as inventory
+participant CreditInstitute as creditinstitute
+
+orchestrator -> orchestrator ++ : Start saga
+
+' Order
+orchestrator --> kafka -- : create order
+kafka --> order ++ : create order
+kafka <-- order -- : success
+orchestrator <-- kafka ++ : success
+
+' Payment
+orchestrator --> kafka -- : do payment
+kafka --> payment ++ : do payment
+payment -> creditinstitute ++ : do payment
+payment <- creditinstitute -- : ok
+kafka <-- payment -- : success
+orchestrator <-- kafka ++ : success
+
+' Inventory
+orchestrator --> kafka -- : commit reservations
+kafka --> inventory ++ : commit reservations
+kafka <-- inventory -- : success
+orchestrator <-- kafka ++ : success
+
+orchestrator -> orchestrator -- : End saga
+
+@enduml

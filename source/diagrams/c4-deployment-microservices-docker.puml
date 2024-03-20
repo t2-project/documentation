@@ -1,0 +1,121 @@
+@startuml c4-deployment-microservices-docker
+
+title Deployment Diagram using Docker Compose - T2-Microservices
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/java.puml
+!include DEVICONS2/tomcat_line.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/chart_bar.puml
+
+top to bottom direction
+
+Deployment_Node(machine, "Machine with Docker Compose") {
+
+    Boundary(t2_modulith, "T2-Microservices") {
+
+        Deployment_Node(docker_ui, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "war")
+            Deployment_Node(tomcat_ui, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(ui, "UI", "Java, Spring MVC, JSP", $sprite="spring")
+            }
+        }
+        Deployment_Node(docker_uibackend, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_uibackend, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(uibackend, "UIBackend", "Java, Spring MVC", $sprite="spring")
+            }
+        }
+        Deployment_Node(docker_inventory, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_inventory, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(inventory, "Inventory", "Java, Spring MVC", $sprite="spring", $tags="saga")
+            }
+        }
+        Deployment_Node(docker_order, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_order, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(order, "Order", "Java, Spring MVC", $sprite="spring", $tags="saga")
+            }
+        }
+        Deployment_Node(docker_payment, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_payment, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(payment, "Payment", "Java, Spring MVC", $sprite="spring", $tags="saga")
+            }
+        }
+        Deployment_Node(docker_orchestrator, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_orchestrator, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(orchestrator, "Orchestrator", "Java, Spring MVC", $sprite="spring", $tags="saga")
+            }
+        }
+        Deployment_Node(docker_cart, "Container", "Docker", $sprite="docker"){
+            AddProperty("Java Version", "17")
+            AddProperty("Deployment File", "jar")
+            Deployment_Node(tomcat_cart, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+                AddProperty("Spring Version", "3.1.x")
+                Container(cart, "Cart", "Java, Spring MVC", $sprite="spring")
+            }
+        }
+    }
+
+    Deployment_Node(docker_db_saga, "Container", "Docker", $sprite="docker"){
+        ContainerDb(db_saga, "Saga Database", "PostgreSQL 12", "Relational database used for saga related data", $sprite="postgresql")
+    }
+    Deployment_Node(docker_db_inventory, "Container", "Docker", $sprite="docker"){
+        ContainerDb(db_inventory, "Inventory Database", "PostgreSQL 12", "Relational database used for inventory data", $sprite="postgresql")
+    }
+    Deployment_Node(docker_db_order, "Container", "Docker", $sprite="docker"){
+        ContainerDb(db_order, "Order Database", "MongoDB 7.0", "Document-oriented database used for order data", $sprite="mongodb")
+    }
+    Deployment_Node(docker_db_cart, "Container", "Docker", $sprite="docker"){
+        ContainerDb(db_cart, "Cart Database", "MongoDB 7.0", "Document-oriented database used for cart data", $sprite="mongodb")
+    }
+
+    Deployment_Node(docker_creditinstitute, "Container", "Docker", $sprite="docker") {
+        AddProperty("Java Version", "17")
+        AddProperty("Deployment File", "jar")
+        Deployment_Node(tomcat_creditinstitute, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
+            Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", "Fake credit institute", $sprite="spring")
+        }
+    }
+}
+
+Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
+Rel(uibackend, cart, "Uses", "JSON/HTTP")
+Rel(uibackend, orchestrator, "Uses", "JSON/HTTP")
+Rel(uibackend, inventory, "Uses", "JSON/HTTP")
+Rel(orchestrator, inventory, "Uses", "JSON/HTTP")
+Rel(orchestrator, order, "Uses", "JSON/HTTP")
+Rel(orchestrator, payment, "Uses", "JSON/HTTP")
+
+Rel(cart, db_cart, "Reads from /\nwrites to", "TCP")
+Rel(order, db_order, "Reads from /\nwrites to", "TCP")
+Rel(orchestrator, db_saga, "Reads from /\nwrites to", "JDBC")
+Rel(inventory, db_inventory, "Reads from /\nwrites to", "JDBC")
+
+Rel(payment, creditinstitute, "Makes\ncalls to", "JSON/HTTP")
+
+@enduml

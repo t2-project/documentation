@@ -1,0 +1,123 @@
+@startuml c4-deployment-measurement-setup-kepler-modulith
+
+title Measurement Setup - EKS & Kepler & T2-Modulith
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/kubernetes.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/cloud.puml
+!include FONTAWESOME/tachometer_alt.puml
+!include FONTAWESOME/laptop.puml
+!include FONTAWESOME/chart_bar.puml
+!include WEATHER/day_sunny.puml
+
+' Logos from Cloudogu EcoSystem (https://github.com/cloudogu/plantuml-cloudogu-sprites)
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/terraform.puml
+!include CloudoguPuml/tools/grafana.puml
+!include CloudoguPuml/tools/prometheus.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesKubelet.puml
+!include KubernetesPuml/OSS/KubernetesApi.puml
+!include KubernetesPuml/OSS/KubernetesHpa.puml
+!include KubernetesPuml/OSS/KubernetesSvc.puml
+!include KubernetesPuml/OSS/KubernetesPod.puml
+
+top to bottom direction
+
+Person(user, "User") {
+    Deployment_Node(browser, "Web Browser"){
+        Container(browser_ui, "T2-Project Store UI", "HTML/CSS/JavaScript", "Provides the UI for shopping.", $sprite="laptop")
+    }
+}
+Person(load_testing, "Researcher") {
+    Container(jmeter, "JMeter", "Java", "Executes test plan for load testing.", $sprite="tachometer_alt")
+    Deployment_Node(browser_load_testing, "Web Browser"){
+        Container(browser_grafana, "Grafana UI", "HTML/CSS/JavaScript", "Provides the UI for Grafana.", $sprite="chart_bar")
+    }
+}
+Person(devops, "DevOps") {
+    Container(terraform, "Terraform", "", "Provisioning the infrastructure with Terraform", $sprite="terraform")
+}
+
+Deployment_Node(aws, "AWS Cloud", $sprite="cloud") {
+    Deployment_Node(eks, "EKS", "Elastic Kubernetes Service", $sprite="kubernetes") {
+        
+        Container(kubernetes_api, "K8s API Server", $sprite="KubernetesApi")
+
+        Container(elb_modulith, "Modulith NLB", "ELB", "Network Load Balancer for the deployment of the modulith. Note: For testing purposes the whole API is made available to the public.", $sprite="KubernetesSvc")
+        
+        Deployment_Node(ec2, "K8s Worker Nodes", "EC2 Instances") {
+            
+            Container(kubelet, "kubelet", $sprite="KubernetesKubelet")
+
+            Deployment_Node(modulith, "Modulith", "K8s Deployment", "Provides the UI and API endpoints") {
+                Container_Boundary(pod1, "Pod 1") {
+                    Container(app1, "App", "Spring", $sprite="spring")
+                }
+                Container_Boundary(pod2, "Pod 2") {
+                    Container(app2, "App", "Spring", $sprite="spring")
+                }
+            }
+
+            ContainerDb(postgres, "PostgreSQL", "K8s StatefulSet", $sprite="postgresql")
+            ContainerDb(mongodb, "MongoDB", "K8s Deployment", $sprite="mongodb")
+
+            Container(grafana, "Grafana", "K8s Deployment", $sprite="grafana")
+            Container(prometheus, "Prometheus", "K8s Deployment", $sprite="prometheus")
+            Container(kepler, "Kepler", "K8s Deployment", "Measures the energy consumption of pods", $sprite="day_sunny")
+        }
+
+        Container(hpa, "Autoscaler", "K8s HorizontalPodAutoscaler", $sprite="KubernetesHpa")
+    }
+}
+
+Rel_D(browser_ui, elb_modulith, "Retrieves UI from and makes API calls to", "json/HTTP")
+Rel_D(elb_modulith, modulith, "Forwards requests to", "json/HTTP")
+' Rel(modulith, browser_ui, "Delivers to the users's web browser")
+
+Rel_D(jmeter, elb_modulith, "Makes API calls to", "json/HTTP")
+Rel_D(elb_modulith, modulith, "Forwards requests to", "json/HTTP")
+' Rel(modulith, jmeter, "Response to JMeter")
+
+Rel_D(browser_grafana, grafana, "Retrieves data from", "json/HTTP")
+' Rel(grafana, browser_load_testing, "Returns data from", "json/HTTP")
+
+Rel(terraform, aws, "Provisions cloud resources")
+Rel(terraform, kubernetes_api, "Provisions K8s resources")
+
+Rel(app1, postgres, "", "JDBC")
+Rel(app1, mongodb, "", "TCP")
+Rel(app2, postgres, "", "JDBC")
+Rel(app2, mongodb, "", "TCP")
+
+Rel(grafana, prometheus, "Retrieves data from", "json/HTTP")
+Rel(prometheus, kubelet, "Scrapes data from", "json/HTTP")
+Rel(prometheus, kepler, "Scrapes data from", "json/HTTP")
+' Rel(prometheus, modulith, "Scrapes data from", "json/HTTP")
+
+Rel(hpa, modulith, "Scales deployments")
+
+' Rel(kubernetes_api, kubelet, "")
+
+' Workaround to improve structuring 
+devops -[hidden]> load_testing
+user -[hidden]> load_testing
+
+SHOW_LEGEND()
+@enduml

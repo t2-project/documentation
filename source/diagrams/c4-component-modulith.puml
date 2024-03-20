@@ -1,0 +1,40 @@
+@startuml c4-component-modulith
+
+title Component Diagram for T2-Modulith
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define ICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master
+!include ICONS/common.puml
+!include ICONS/devicons2/spring.puml
+!include ICONS/devicons2/mongodb.puml
+!include ICONS/devicons2/postgresql.puml
+
+top to bottom direction
+
+Container_Boundary(modulith, "Modulith", "Java, Spring MVC") {
+    Component(uibackend, "UIBackend", "Module")
+    Component(ui, "UI", "Module")
+    Component(inventory, "Inventory", "Module")
+    Component(order, "Order", "Module")
+    Component(payment, "Payment", "Module")
+    Component(cart, "Cart", "Module")
+}
+
+ContainerDb(db_inventory, "Inventory Database", "PostgreSQL", $sprite="postgresql")
+ContainerDb(db_cart_and_order, "Cart and Order Database", "MongoDB", $sprite="mongodb")
+
+Rel(ui, uibackend, "Uses")
+Rel(uibackend, cart, "Uses")
+Rel(uibackend, order, "Uses")
+Rel(uibackend, inventory, "Uses")
+Rel(order, inventory, "Uses")
+Rel(order, payment, "Uses")
+Rel(order, cart, "Uses")
+
+Rel(cart, db_cart_and_order, "")
+Rel(order, db_cart_and_order, "")
+Rel(inventory, db_inventory, "")
+
+@enduml

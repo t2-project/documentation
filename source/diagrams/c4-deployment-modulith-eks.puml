@@ -1,0 +1,79 @@
+@startuml c4-deployment-modulith-eks
+
+title Deployment Diagram using Elastic Kubernetes Service (EKS) - T2-Modulith
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/kubernetes.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/cloud.puml
+!include FONTAWESOME/laptop.puml
+!include FONTAWESOME/tachometer_alt.puml
+
+' Logos from Cloudogu EcoSystem (https://github.com/cloudogu/plantuml-cloudogu-sprites)
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/terraform.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesApi.puml
+!include KubernetesPuml/OSS/KubernetesSvc.puml
+
+top to bottom direction
+
+Person(user, "User") {
+    Deployment_Node(browser, "Web Browser"){
+        Container(browser_ui, "T2-Project Store UI", "HTML/CSS/JavaScript", "Provides the UI for shopping.", $sprite="laptop")
+    }
+}
+Person(researcher, "Researcher") {
+    Container(testing_tool, "Testing Tool", "", "", $sprite="tachometer_alt")
+}
+Person(devops, "DevOps") {
+    Container(terraform, "Terraform", "", "Provisions the infrastructure.", $sprite="terraform")
+}
+
+Deployment_Node(aws, "AWS Cloud", $sprite="cloud") {
+    Deployment_Node(eks, "EKS", "Elastic Kubernetes Service", $sprite="kubernetes") {
+        
+        ' Container(kubernetes_api, "K8s API Server", $sprite="KubernetesApi")
+
+        Container(elb_modulith, "Load Balancer", "NLB", "Exposes the UI and the API to the public. API is exposed to make testing easier.", $sprite="KubernetesSvc")
+        
+        Deployment_Node(ec2, "K8s Worker Nodes", "EC2 Instances") {
+            
+            Container(modulith, "Modulith", "K8s Deployment", "Provides the UI and API endpoints", $sprite="spring")
+
+            ContainerDb(postgres, "PostgreSQL", "K8s StatefulSet", $sprite="postgresql")
+            ContainerDb(mongodb, "MongoDB", "K8s Deployment", $sprite="mongodb")
+
+            Container_Ext(creditinstitute, "CreditInstitute", "K8s Deployment", "Fake credit institute", $sprite="spring")
+        }
+    }
+}
+
+Rel(browser_ui, elb_modulith, "Retrieves UI from and makes API calls to", "json/HTTP")
+Rel(testing_tool, elb_modulith, "Makes API calls to", "json/HTTP")
+Rel_L(elb_modulith, modulith, "Forwards requests to", "json/HTTP")
+
+Rel(terraform, aws, "Provisions cloud resources")
+Rel(terraform, eks, "Provisions K8s resources")
+
+Rel(modulith, postgres, "", "JDBC")
+Rel(modulith, mongodb, "", "TCP")
+Rel(modulith, creditinstitute, "", "json/HTTP")
+
+' Workaround to improve structuring 
+terraform -[hidden]> browser_ui
+@enduml

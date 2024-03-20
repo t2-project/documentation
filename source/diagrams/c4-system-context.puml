@@ -1,0 +1,19 @@
+@startuml c4-system-context
+
+title System Context Diagram for the T2-Project
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+' LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "A fictitious user, that buys tea using the UI of the store.")
+Person(researcher, "Researcher", "A real person, that executes various tests using the API's of the store.")
+
+System(t2_project, "T2-Project", "A fictitious web store that offers tea.")
+
+System(creditinstitute, "Credit Institute", "A fake service is provided to simulate a payment process. Therefore, it is not modeled as an external system.")
+
+Rel(user, t2_project, "Uses")
+Rel(researcher, t2_project, " Executes\ntests")
+Rel_R(t2_project, creditinstitute, "Do\npayment")
+@enduml
