@@ -95,7 +95,7 @@ Deployment_Node(aws, "AWS Cloud", $sprite="cloud"){
             Boundary(monitoring, "Monitoring"){
                 Container(grafana, "Grafana", "K8s Deployment", $sprite="grafana")
                 Container(prometheus, "Prometheus", "K8s Deployment", $sprite="prometheus")
-                Container(kepler, "Kepler", "K8s Deployment", "Kepler is used to measure energy consumption", $sprite="day_sunny")
+                Container(kepler, "Kepler", "K8s DaemonSet", "Kepler is used to measure energy consumption", $sprite="day_sunny")
             }
         ' }
 

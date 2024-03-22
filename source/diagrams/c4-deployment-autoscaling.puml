@@ -1,0 +1,42 @@
+@startuml c4-deployment-autoscaling
+
+title Deployment Diagram for Autoscaling Setup
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/kubernetes.puml
+
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/prometheus.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesHpa.puml
+
+Deployment_Node(kubernetes, "Kubernetes", "", $sprite="kubernetes"){
+
+    Container(t2_project, "T2-Project", "K8s Deployment", "The modulith deployment and all deployments of the microservices except the UI are scaled by the autoscaler", $sprite="spring")
+
+    Container(prometheus, "Prometheus", "K8s Deployment", "Collects all the metrics and provides them for others", $sprite="prometheus")
+
+    Container(hpa, "Autoscaler", "K8s HorizontalPodAutoscaler", $sprite="KubernetesHpa")
+
+    Container(metrics_adapter, "Prometheus Adapter for Kubernetes Metrics APIs", "K8s Deployment", "Provides metrics API for HPA")
+}
+
+Rel(hpa, t2_project, "Scales\ndeployments")
+
+Rel_D(hpa, metrics_adapter, "Queries\nmetrics\nfrom")
+Rel_U(metrics_adapter, prometheus, "Gathers\nmetrics\nfrom")
+
+@enduml

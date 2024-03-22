@@ -1,0 +1,49 @@
+@startuml c4-deployment-monitoring
+
+title Deployment Diagram for Monitoring Setup
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/kubernetes.puml
+!include WEATHER/day_sunny.puml
+
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/grafana.puml
+!include CloudoguPuml/tools/prometheus.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesKubelet.puml
+!include KubernetesPuml/OSS/KubernetesApi.puml
+!include KubernetesPuml/OSS/KubernetesHpa.puml
+
+Deployment_Node(kubernetes, "Kubernetes", "", $sprite="kubernetes"){
+
+    Container(kubelet, "kubelet", $sprite="KubernetesKubelet")
+
+    Container(kubernetes_api, "K8s API Server", $sprite="KubernetesApi")
+
+    Container(t2_project, "T2-Project", "K8s Deployment", "Modulith and microservices expose metrics using Spring Actuator", $sprite="spring")
+
+    Container(grafana, "Grafana", "K8s Deployment", "Provides UI with charts", $sprite="grafana")
+    Container(prometheus, "Prometheus", "K8s Deployment", "Collects all the metrics and provides them for others", $sprite="prometheus")
+    Container(kepler, "Kepler", "K8s DaemonSet", "Measures energy consumption", $sprite="day_sunny")
+}
+
+Rel_Neighbor(grafana, prometheus, "Retrieves\ndata\nfrom")
+Rel(prometheus, kubernetes_api, "Scrapes\ndata\nfrom")
+Rel(prometheus, kubelet, "Scrapes\ndata\nfrom")
+Rel(prometheus, kepler, "Scrapes\ndata\nfrom")
+Rel(prometheus, t2_project, "Scrapes\ndata\nfrom")
+
+@enduml

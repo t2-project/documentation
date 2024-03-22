@@ -80,7 +80,7 @@ Deployment_Node(aws, "AWS Cloud", $sprite="cloud") {
 
             Container(grafana, "Grafana", "K8s Deployment", $sprite="grafana")
             Container(prometheus, "Prometheus", "K8s Deployment", $sprite="prometheus")
-            Container(kepler, "Kepler", "K8s Deployment", "Measures the energy consumption of pods", $sprite="day_sunny")
+            Container(kepler, "Kepler", "K8s DaemonSet", "Measures the energy consumption of pods", $sprite="day_sunny")
         }
 
         Container(hpa, "Autoscaler", "K8s HorizontalPodAutoscaler", $sprite="KubernetesHpa")

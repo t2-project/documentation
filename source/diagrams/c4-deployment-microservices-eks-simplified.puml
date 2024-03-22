@@ -1,0 +1,76 @@
+@startuml c4-deployment-microservices-eks-simplified
+
+title Deployment Diagram using Elastic Kubernetes Service (EKS) - T2-Microservices (simplified)
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/mongodb.puml
+!include DEVICONS2/kubernetes.puml
+!include DEVICONS2/postgresql.puml
+!include FONTAWESOME/cloud.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesApi.puml
+!include KubernetesPuml/OSS/KubernetesSvc.puml
+!include KubernetesPuml/OSS/KubernetesPod.puml
+
+' Cloudinsight (https://github.com/plantuml-stdlib/cicon-plantuml-sprites)
+!define CloudinsightPuml https://raw.githubusercontent.com/plantuml-stdlib/cicon-plantuml-sprites/master/sprites
+!include CloudinsightPuml/kafka.puml
+!include CloudinsightPuml/zookeeper.puml
+
+' top to bottom direction
+LAYOUT_LEFT_RIGHT()
+
+Deployment_Node(aws, "AWS Cloud", $sprite="cloud"){
+    Deployment_Node(eks, "EKS", "Elastic Kubernetes Service", $sprite="kubernetes"){
+
+        Boundary("public_network", "Public Network") {
+            Container(elb_ui, "UI Load Balancer", "NLB", "Network Load Balancer for the UI service.", $sprite="KubernetesSvc")
+            
+            Container(elb_uibackend, "UIBackend\nLoad Balancer", "NLB", "Network Load Balancer for the UIBackend service. The UIBackend is only made available to the public for testing purposes.", $sprite="KubernetesSvc")
+        }
+
+        Deployment_Node(ec2, "K8s Worker Nodes", "EC2 Instances") {
+
+        Boundary(t2_deployments, "T2-Microservices") {
+            Container(ui, "UI", "K8s Deployment", "Provides the UI", $sprite="spring")
+            Container(uibackend, "UIBackend", "K8s Deployment", "Provides the API", $sprite="spring")
+            Container(t2_other, "Other Microservices", "K8s Deployment", "Provide the business functionality, condensed into one container to save space", $sprite="spring")
+        }
+
+        Boundary(messaging, "Messaging"){
+            Container(kafka, "Kafka", "K8s Deployment", "Handles the asynchronous communication for Saga", $sprite="kafka")
+            Container(zookeeper, "Zookeeper", "K8s StatefulSet", $sprite="zookeeper")
+        }
+
+        Boundary(databases, "Databases"){
+            ContainerDb(postgres, "PostgreSQL Databases", "K8s StatefulSet", "Condensed into one container to save space", $sprite="postgresql")
+            ContainerDb(mongodb, "MongoDB Databases", "K8s Deployment", "Condensed into one container to save space", $sprite="mongodb")
+        }
+    }
+}
+
+Rel_D(elb_ui, ui, "Forwards requests to", "json/HTTP")
+Rel_D(elb_uibackend, uibackend, "Forwards requests to", "json/HTTP")
+
+Rel_R(ui, uibackend, "")
+Rel_R(uibackend, t2_other, "")
+
+Rel(t2_other, kafka, "Publish messages and subscribe to topics", "TCP")
+Rel(t2_other, postgres, "Reads from /\nwrites to", "JDBC")
+Rel(t2_other, mongodb, "Reads from /\nwrites to", "TCP")
+
+Rel(kafka, zookeeper, "", "")
+
+@enduml
