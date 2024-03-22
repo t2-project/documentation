@@ -271,7 +271,7 @@ Name                    Version
 ======================= ==========================
 Maven                   ``3.9.5``
 Docker                  ``24.0.6``
-Spring Boot             ``3.1.7``
+Spring Boot             ``3.2.4``
 io.eventuate.tram.core  ``0.34.0.RELEASE``
 io.eventuate.tram.sagas ``0.23.0.RELEASE``
 jaeger                  ``3.3.1``

@@ -27,7 +27,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "war")
             Deployment_Node(tomcat_ui, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(ui, "UI", "Java, Spring MVC, JSP", $sprite="spring")
             }
         }
@@ -35,7 +35,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_uibackend, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(uibackend, "UIBackend", "Java, Spring MVC", $sprite="spring")
             }
         }
@@ -43,7 +43,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_inventory, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(inventory, "Inventory", "Java, Spring MVC", $sprite="spring", $tags="saga")
             }
         }
@@ -51,7 +51,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_order, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(order, "Order", "Java, Spring MVC", $sprite="spring", $tags="saga")
             }
         }
@@ -59,7 +59,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_payment, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(payment, "Payment", "Java, Spring MVC", $sprite="spring", $tags="saga")
             }
         }
@@ -67,7 +67,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_orchestrator, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(orchestrator, "Orchestrator", "Java, Spring MVC", $sprite="spring", $tags="saga")
             }
         }
@@ -75,7 +75,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "jar")
             Deployment_Node(tomcat_cart, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(cart, "Cart", "Java, Spring MVC", $sprite="spring")
             }
         }

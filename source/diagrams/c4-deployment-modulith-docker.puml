@@ -28,7 +28,7 @@ Deployment_Node(machine, "Machine with Docker Compose") {
             AddProperty("Java Version", "17")
             AddProperty("Deployment File", "war")
             Deployment_Node(tomcat1, "Apache Tomcat", "Open Source Jakarta EE Server", $sprite="tomcat") {
-                AddProperty("Spring Version", "3.1.x")
+                AddProperty("Spring Boot Version", "3.2.x")
                 Container(modulith, "Modulith", "Java, Spring MVC", "Provides the UI and the API endpoints.", $sprite="spring")
             }
         }
