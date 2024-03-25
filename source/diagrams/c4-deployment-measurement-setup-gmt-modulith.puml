@@ -21,17 +21,17 @@ skinparam ranksep 5
 
 Person(user, "Researcher / Developer") {
     Deployment_Node(browser, "Web Browser"){
-        Container(browser_gmt, "Green Metrics Tool Frontend", "", "", $sprite="chart_bar")
+        Container(browser_gmt, "Green Metrics Tool", "", "URL: https://metrics.green-coding.io", $sprite="chart_bar")
     }
 }
 
 Deployment_Node(machine, "GMT Measurement Machine") {
 
     Container_Boundary(gmt, "GMT Deployment") {
-        Container(gmt_scripts, "Measurement\nScripts", "Python, C", $sprite="python")
-        Container(gmt_frontend, "Frontend", "Docker", $sprite="docker")
-        Container(gmt_api, "API Server", "Docker", $sprite="docker")
-        ContainerDb(gmt_db, "Database", "Docker", $sprite="docker")
+        Container(gmt_scripts, "GMT\nMeasurement\nScripts", "Python, C", $sprite="python")
+        Container(gmt_frontend, "GMT Frontend", "Docker", "Provides the possibility to add new measurements jobs and provides the dashboard to see the measurements results.", $sprite="docker")
+        Container(gmt_api, "GMT API Server", "Docker", $sprite="docker")
+        ContainerDb(gmt_db, "GMT Database", "Docker", $sprite="docker")
     }
 
     Container_Boundary(usage_scenario, "T2-Modulith\nUsage Scenario") {
@@ -42,8 +42,8 @@ Deployment_Node(machine, "GMT Measurement Machine") {
     }
 }
 
-Rel(browser_gmt, gmt_frontend, "Add a new measurement job", "json/HTTP")
-Rel(gmt_frontend, browser_gmt, "Get measurement results", "json/HTTP")
+Rel_R(browser_gmt, gmt_frontend, "", "")
+Rel_L(gmt_frontend, browser_gmt, "", "")
 
 Rel(gmt_scripts, gmt_db, "")
 Rel(gmt_frontend, gmt_api, "")
@@ -51,7 +51,7 @@ Rel(gmt_api, gmt_db, "")
 
 Rel(t2_modulith, t2_postgres, "")
 Rel(t2_modulith, t2_mongodb, "")
-Rel(jmeter, t2_modulith, "Execute\nAPI\nrequests", "json/HTTP")
+Rel(jmeter, t2_modulith, " Execute\n API\n requests\n")
 
 Rel_U(gmt_scripts, usage_scenario, "Orchestrate\nDocker\ncontainers")
 Rel_U(gmt_scripts, jmeter, "Start\nflow")
