@@ -1,0 +1,25 @@
+@startuml sequence-jmeter-simplified
+
+title Sequence Diagram for Test Plan Execution with JMeter (Simplified)
+
+participant "JMeter"           as jmeter
+participant "T2-Project API"   as api
+
+jmeter -> jmeter ++ : Start
+jmeter -> jmeter : Generate session ID
+
+loop number of items to add
+    jmeter -> api ++ : GET inventory
+    jmeter <- api -- : inventory
+    jmeter -> jmeter : pick random item
+    jmeter -> api ++ : POST add picked item to cart using session ID
+    jmeter <- api -- : ok
+end
+
+jmeter -> api ++ : POST confirm order using session ID
+note over api : T2-Modulith:\t\tSynchronous execution \nT2-Microservices:\tAsynchronous saga execution
+jmeter <- api -- : ok
+
+jmeter -> jmeter -- : End
+
+@enduml

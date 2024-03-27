@@ -15,26 +15,29 @@ title Measurement Setup - Green Metrics Tool & T2-Modulith
 !include DEVICONS2/mongodb.puml
 !include DEVICONS2/postgresql.puml
 !include FONTAWESOME/chart_bar.puml
+!include FONTAWESOME/file_alt.puml
 
 top to bottom direction
 skinparam ranksep 5
 
-Person(user, "Researcher / Developer") {
-    Deployment_Node(browser, "Web Browser"){
-        Container(browser_gmt, "Green Metrics Tool", "", "URL: https://metrics.green-coding.io", $sprite="chart_bar")
-    }
-}
+' Person(user, "Researcher / Developer") {
+'     Deployment_Node(browser, "Web Browser"){
+'         Container(browser_gmt, "Green Metrics Tool", "", "URL: https://metrics.green-coding.io", $sprite="chart_bar")
+'     }
+' }
 
 Deployment_Node(machine, "GMT Measurement Machine") {
 
-    Container_Boundary(gmt, "GMT Deployment") {
-        Container(gmt_scripts, "GMT\nMeasurement\nScripts", "Python, C", $sprite="python")
+    Boundary(gmt, "GMT Deployment") {
+        Container(gmt_scripts, "GMT\nMeasurement\nScripts", "Python, C", "Checks if there are new jobs and if so starts a new measurement run.", $sprite="python")
         Container(gmt_frontend, "GMT Frontend", "Docker", "Provides the possibility to add new measurements jobs and provides the dashboard to see the measurements results.", $sprite="docker")
-        Container(gmt_api, "GMT API Server", "Docker", $sprite="docker")
-        ContainerDb(gmt_db, "GMT Database", "Docker", $sprite="docker")
+        Container(gmt_api, "GMT API Server", "Docker", "Backend server for the frontend.", $sprite="docker")
+        ContainerDb(gmt_db, "GMT Database", "Docker", "Stores the measurement jobs and results.", $sprite="docker")
     }
 
-    Container_Boundary(usage_scenario, "T2-Modulith\nUsage Scenario") {
+    Container(usage_scenario, "usage_scenario.yml", "YAML", "Includes the Docker Compose definition to orchestrate the T2-Modulith deployment and it includes the flow to execute a measurement for an usage scenario.", $sprite="file_alt")
+ 
+    Boundary(t2_modulith_deployment, "T2-Modulith") {
         Container(t2_modulith, "Modulith", "Docker", "Provides the API endpoints. Payment to credit institute is disabled in config.", $sprite="docker")
         ContainerDb(t2_postgres, "Postgres", "Docker", $sprite="docker")
         ContainerDb(t2_mongodb, "MongoDB", "Docker", $sprite="docker")
@@ -42,8 +45,8 @@ Deployment_Node(machine, "GMT Measurement Machine") {
     }
 }
 
-Rel_R(browser_gmt, gmt_frontend, "", "")
-Rel_L(gmt_frontend, browser_gmt, "", "")
+' Rel_R(browser_gmt, gmt_frontend, "", "")
+' Rel_L(gmt_frontend, browser_gmt, "", "")
 
 Rel(gmt_scripts, gmt_db, "")
 Rel(gmt_frontend, gmt_api, "")
@@ -53,7 +56,8 @@ Rel(t2_modulith, t2_postgres, "")
 Rel(t2_modulith, t2_mongodb, "")
 Rel(jmeter, t2_modulith, " Execute\n API\n requests\n")
 
-Rel_U(gmt_scripts, usage_scenario, "Orchestrate\nDocker\ncontainers")
+Rel_U(gmt_scripts, usage_scenario, "Uses")
+Rel_U(gmt_scripts, t2_modulith_deployment, "Orchestrate\nDocker\ncontainers")
 Rel_U(gmt_scripts, jmeter, "Start\nflow")
 
 @enduml

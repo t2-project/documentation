@@ -1,6 +1,6 @@
 @startuml sequence-microservices-jmeter
 
-title Sequence Diagram for Test Plan Execution With JMeter - T2-Microservices
+title Sequence Diagram for Test Plan Execution with JMeter - T2-Microservices
 
 participant "JMeter"            as jmeter
 participant "UIBackend Service" as uibackend
@@ -18,15 +18,15 @@ loop number of items to add
     jmeter <- uibackend -- : inventory
 
     jmeter -> jmeter : pick random item
-    jmeter -> uibackend ++ : POST add item to cart
-    uibackend -> inventory ++ : POST make reserverations for item
+    jmeter -> uibackend ++ : POST add item to cart using session ID
+    uibackend -> inventory ++ : POST make reservations for item
     uibackend <- inventory -- : ok
     uibackend -> cart ++ : PUT add item to cart
     uibackend <- cart -- : ok
     jmeter <- uibackend -- : ok
 end
 
-jmeter -> uibackend ++ : POST confirm order
+jmeter -> uibackend ++ : POST confirm order using session ID
 uibackend -> uibackend ++ : calculate total
 uibackend -> cart ++ : GET cart
 uibackend <- cart -- : cart

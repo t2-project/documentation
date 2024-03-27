@@ -27,7 +27,7 @@ user <- ui -- : products
 
 user -> ui ++ : Adds an item to cart
 ui -> uibackend ++ : POST add item to cart
-uibackend -> inventory ++ : POST make reserverations for item
+uibackend -> inventory ++ : POST make reservations for item
 uibackend <- inventory -- : ok
 uibackend -> cart ++ : PUT add item to cart
 uibackend <- cart -- : ok

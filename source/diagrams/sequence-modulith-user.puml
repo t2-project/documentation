@@ -31,7 +31,7 @@ user <- ui -- : products
 
 user -> ui ++ : Adds an item to cart
 ui -> uibackend ++ : add item to cart
-uibackend -> inventory ++ : make reserverations for item
+uibackend -> inventory ++ : make reservations for item
 uibackend <- inventory -- : ok
 uibackend -> cart ++ : add item to cart
 uibackend <- cart -- : ok
