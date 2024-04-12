@@ -92,7 +92,6 @@ Rel_D(elb_modulith, modulith, "Forwards requests to", "json/HTTP")
 ' Rel(modulith, browser_ui, "Delivers to the users's web browser")
 
 Rel_D(jmeter, elb_modulith, "Makes API calls to", "json/HTTP")
-Rel_D(elb_modulith, modulith, "Forwards requests to", "json/HTTP")
 ' Rel(modulith, jmeter, "Response to JMeter")
 
 Rel_D(browser_grafana, grafana, "Retrieves data from", "json/HTTP")

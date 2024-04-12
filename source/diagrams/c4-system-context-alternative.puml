@@ -1,0 +1,23 @@
+@startuml c4-system-context-alternative
+
+title System Context Diagram for the T2-Project
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/mug_hot.puml
+!include FONTAWESOME/dollar_sign.puml
+
+' LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "A fictitious user, that buys tea using the UI of the store.")
+Person(researcher, "Researcher", "A real person, that executes various tests using the API's of the store.")
+
+System(t2_project, "T2-Project", "A fictitious web store that offers tea.", $sprite="mug_hot")
+
+System_Ext(creditinstitute, "Credit Institute", "A fake service is provided to simulate a payment process.", $sprite="dollar_sign")
+
+Rel(user, t2_project, "Uses")
+Rel(researcher, t2_project, " Executes\ntests")
+Rel_R(t2_project, creditinstitute, "Do\npayment")
+@enduml

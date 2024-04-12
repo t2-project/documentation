@@ -5,28 +5,45 @@ JMeter
 We are using `JMeter <https://jmeter.apache.org/>`_ for generating requests.
 JMeter can generate a report with information how much time requests needed, which requests failed, etc. See also the page :doc:`Microservices Usage <../microservices/use>` for how JMeter is used for load generation to trigger SLO violations.
 
-In the context of measuring energy consumption JMeter is used for the execution of a predefined test plan in conjunction with the :doc:`Green Metrics Tool<gmt>`.
+In the context of measuring energy consumption JMeter is used as the workload generator by using of a predefined test plan consisting of multiple HTTP requests.
 
 Test Plan
 =========
 
-We have created one test plan called ``t2-project-flexible.jmx`` that can be used for many different usage case scenarios by configure it via JVM parameters.
+The following sequence diagram visualizes the important steps that are part of the test plan:
 
-**Example request:**
+.. image:: ../diagrams/sequence-jmeter-simplified.svg
 
-.. code-block:: bash
+The test plan is called ``t2-project-flexible.jmx`` that can be used for many different usage case scenarios by configure it via JVM parameters (used internally as environment variables).
 
-   jmeter -Jhostname=backend -Jport=8080 -JnumExecutions=1 -JnumUser=1 -JrampUp=0 -JnumProducts=1 -JthinkTimeMin=0 -JthinkTimeAdditionalRange=0 -JpauseBeforeExecution=0 -JpauseAfterExecution=0 -JloggingEnabled=true -n -t t2-project-flexible.jmx
+The basic command for executing the test plan with JMeter without optional parameters looks like this:
 
-**Parameters:**
+.. code-block:: shell
+
+   jmeter -Jhostname=backend -Jport=8080 -n -t t2-project-flexible.jmx
+
+This command ensures the execution of three requests as shown in the sequence diagram to the target URL ``http://backend:8080``. The loop is run once, as only one product is added to the shopping cart by default in the test plan.
+
+Numerous optional parameters are defined in the test plan, which can be used, for example, to run the loop several times or to execute the requests from several users in parallel. Optional logging is also integrated into the test plan (not shown in the diagram), which can be activated with an environment variable. Logging can be useful for debugging purposes or for calculating the SCI score. A request with all the available parameters looks like this:
+
+.. code-block:: shell
+
+   jmeter -Jhostname=backend -Jport=8080 \ 
+    -JnumExecutions=1 -JnumUser=1 -JrampUp=0 -JnumProducts=1 \ 
+    -JthinkTimeMin=0 -JthinkTimeAdditionalRange=0 \ 
+    -JpauseBeforeExecution=0 -JpauseAfterExecution=0 \ 
+    -JloggingEnabled=false -JloggingSCIEnabled=false \ 
+    -n -t t2-project-flexible.jmx
+
+In the following table all the available parameters are listed and described:
 
 .. list-table::
    :header-rows: 1
 
-   * - parameter
-     - description
-     - required
-     - default value
+   * - Parameter
+     - Description
+     - Required?
+     - Default value
    * - ``hostname``
      - address of the backend
      - yes
@@ -93,15 +110,22 @@ Open ``user.properties`` in the ``bin`` directory and change the value ``overall
 Simple Execution
 ----------------
 
-.. code-block:: bash
+.. code-block:: shell
 
-   jmeter -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 0 -JthinkTimeMin=1000 -JthinkTimeAdditionalRange=0 -JloggingEnabled=true -n -t t2-project-flexible.jmx
+   jmeter -Jhostname localhost -Jport 8081 \ 
+    -JnumUser=1 -JrampUp=0 \ 
+    -JthinkTimeMin=1000 -JthinkTimeAdditionalRange=0 \ 
+    -JloggingEnabled=true -n -t t2-project-flexible.jmx
 
 Report Generation
 -----------------
 
-.. code-block:: bash
+.. code-block:: shell
 
    RESULTS_DIR="fixed-single-100-users-30-sec-think-time--modulith-01"
    mkdir $RESULTS_DIR
-   jmeter -Jhostname localhost -Jport 8081 -JnumUser 1 -JrampUp 0 -JthinkTimeMin=30000 -JthinkTimeAdditionalRange=30000 -JloggingEnabled=false -n -t t2-project-flexible.jmx -l $RESULTS_DIR/results.csv -e -o $RESULTS_DIR/report
+   jmeter -Jhostname localhost -Jport 8081 \ 
+    -JnumUser=1 -JrampUp=0 \ 
+    -JthinkTimeMin=30000 -JthinkTimeAdditionalRange=30000 \ 
+    -JloggingEnabled=false -n -t t2-project-flexible.jmx \ 
+    -l $RESULTS_DIR/results.csv -e -o $RESULTS_DIR/report

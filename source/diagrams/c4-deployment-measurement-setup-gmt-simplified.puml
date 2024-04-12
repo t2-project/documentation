@@ -1,0 +1,50 @@
+@startuml c4-deployment-measurement-setup-gmt-simplified
+
+' title Measurement Setup - Green Metrics Tool & T2-Modulith
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include FONTAWESOME/code.puml
+!include FONTAWESOME/file_alt.puml
+!include FONTAWESOME/tools.puml
+
+left to right direction
+skinparam ranksep 5
+
+AddElementTag("db", $bgColor="#MidnightBlue")
+AddElementTag("file", $bgColor="#Gray")
+AddElementTag("provider", $bgColor="#SlateGray")
+AddElementTag("gmt", $bgColor="#438369")
+
+Deployment_Node(machine, "GMT Measurement Machine") {
+
+    Container(gmt, "Green Metrics Tool", "", "", $sprite="code", $tags="gmt")
+
+    Container(usage_scenario, "usage_scenario.yml", "", "", $sprite="file_alt", $tags="file")
+ 
+    Boundary(sut, "System under Test") {
+        Container(t2_modulith, "T2-Modulith", "", "", $sprite="docker")
+        ContainerDb(t2_postgres, "PostgreSQL", "", $sprite="docker", $tags="db")
+        ContainerDb(t2_mongodb, "MongoDB", "", $sprite="docker", $tags="db")
+        Container(jmeter, "JMeter", "", "", $sprite="docker")
+    }
+
+    Container(metrics_providers, "Metrics Providers", "", "", $sprite="tools", $tags="provider")
+}
+
+Rel_L(jmeter, t2_modulith, "4. Executes\n API\n requests\n")
+Rel(t2_modulith, t2_postgres, "Uses")
+Rel(t2_modulith, t2_mongodb, "Uses")
+
+Rel_D(gmt, usage_scenario, "1. Retrieves, validates and uses")
+Rel_U(gmt, sut, "\n2. Orchestrates\ncontainers\n")
+Rel_D(gmt, jmeter, "\n\n3. Starts\nflow")
+Rel_L(gmt, metrics_providers, "5.\nGathers\nusage\ndata")
+
+@enduml

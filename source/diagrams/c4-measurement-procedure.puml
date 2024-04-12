@@ -1,0 +1,40 @@
+@startuml c4-measurement-procedure
+
+'title Measurement Procedure
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include FONTAWESOME/tools.puml
+!include FONTAWESOME/file_alt.puml
+!include FONTAWESOME/file_medical_alt.puml
+!include FONTAWESOME/bullseye.puml
+
+top to bottom direction
+skinparam ranksep 30
+
+AddElementTag("generator", $bgColor="#SlateBlue")
+AddElementTag("file", $bgColor="#Gray")
+AddElementTag("logger", $bgColor="#DarkCyan")
+
+System_Boundary(machine, "Measurement Machine") {
+
+    Container(workload_generator, "Workload Generator", "", "Executes API requests based on the predefined usage scenario", $sprite="tools", $tags="generator")
+
+    Container(usage_scenario, "Usage Scenario", "", "Defines the execution plan", $sprite="file_alt", $tags="file")
+ 
+    Container(sut, "T2-Project", "", "System under Test (black box approach)", $sprite="bullseye")
+
+    Container(logger, "Logger", "", "Software-based logging of energy usage", $sprite="file_medical_alt", $tags="logger")
+}
+
+Rel_D(workload_generator, usage_scenario, " Uses\n")
+
+Rel_R(workload_generator, sut, " Execute\n API\n requests\n")
+
+Rel_U(logger, sut, " Capture\nusage\ndata")
+
+@enduml

@@ -20,6 +20,9 @@ title Measurement Setup - Green Metrics Tool & T2-Modulith
 top to bottom direction
 skinparam ranksep 5
 
+AddElementTag("db", $bgColor="#MidnightBlue", $legendText="database")
+AddElementTag("file", $bgColor="#Gray", $legendText="file")
+
 ' Person(user, "Researcher / Developer") {
 '     Deployment_Node(browser, "Web Browser"){
 '         Container(browser_gmt, "Green Metrics Tool", "", "URL: https://metrics.green-coding.io", $sprite="chart_bar")
@@ -32,15 +35,15 @@ Deployment_Node(machine, "GMT Measurement Machine") {
         Container(gmt_scripts, "GMT\nMeasurement\nScripts", "Python, C", "Checks if there are new jobs and if so starts a new measurement run.", $sprite="python")
         Container(gmt_frontend, "GMT Frontend", "Docker", "Provides the possibility to add new measurements jobs and provides the dashboard to see the measurements results.", $sprite="docker")
         Container(gmt_api, "GMT API Server", "Docker", "Backend server for the frontend.", $sprite="docker")
-        ContainerDb(gmt_db, "GMT Database", "Docker", "Stores the measurement jobs and results.", $sprite="docker")
+        ContainerDb(gmt_db, "GMT Database", "Docker", "Stores the measurement jobs and results.", $sprite="docker", $tags="db")
     }
 
-    Container(usage_scenario, "usage_scenario.yml", "YAML", "Includes the Docker Compose definition to orchestrate the T2-Modulith deployment and it includes the flow to execute a measurement for an usage scenario.", $sprite="file_alt")
+    Container(usage_scenario, "usage_scenario.yml", "YAML", "Includes the Docker Compose definition to orchestrate the T2-Modulith deployment and it includes the flow to execute a measurement for an usage scenario.", $sprite="file_alt", $tags="file")
  
     Boundary(t2_modulith_deployment, "T2-Modulith") {
         Container(t2_modulith, "Modulith", "Docker", "Provides the API endpoints. Payment to credit institute is disabled in config.", $sprite="docker")
-        ContainerDb(t2_postgres, "Postgres", "Docker", $sprite="docker")
-        ContainerDb(t2_mongodb, "MongoDB", "Docker", $sprite="docker")
+        ContainerDb(t2_postgres, "Postgres", "Docker", $sprite="docker", $tags="db")
+        ContainerDb(t2_mongodb, "MongoDB", "Docker", $sprite="docker", $tags="db")
         Container(jmeter, "JMeter", "Docker", "Executes predefined test plan to send requests to API of the Modulith.", $sprite="docker")
     }
 }

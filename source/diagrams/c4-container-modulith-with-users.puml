@@ -1,4 +1,4 @@
-@startuml c4-container-modulith
+@startuml c4-container-modulith-with-users
 
 title Container Diagram for T2-Modulith
 
@@ -11,18 +11,24 @@ title Container Diagram for T2-Modulith
 !include ICONS/devicons2/mongodb.puml
 !include ICONS/devicons2/postgresql.puml
 
-AddElementTag("db", $bgColor="#MidnightBlue", $legendText="database")
-AddElementTag("external", $bgColor="#Gray", $legendText="external")
+' LAYOUT_TOP_DOWN()
+' LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "Buys tea using the UI of the store.")
+Person(researcher, "Researcher", "Executes various tests using the API's of the store.")
 
 System_Boundary(t2_project, "T2-Modulith") {
 
     Container(modulith, "Modulith", "Java, Spring MVC", $sprite="spring")
 
-    ContainerDb(db_inventory, "Inventory Database", "PostgreSQL", $sprite="postgresql", $tags="db")
-    ContainerDb(db_cart_and_order, "Cart and Order Database", "MongoDB", $sprite="mongodb", $tags="db")
+    ContainerDb(db_inventory, "Inventory Database", "PostgreSQL", $sprite="postgresql")
+    ContainerDb(db_cart_and_order, "Cart and Order Database", "MongoDB", $sprite="mongodb")
 }
 
-Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring", $tags="external")
+Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring")
+
+Rel(researcher, modulith, "Uses", "JSON/HTTP")
+Rel(user, modulith, "Uses", "JSON/HTTP")
 
 Rel(modulith, db_cart_and_order, "Reads from /\nwrites to", "TCP")
 Rel(modulith, db_inventory, "Reads from /\nwrites to", "JDBC")

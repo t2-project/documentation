@@ -1,4 +1,4 @@
-@startuml c4-container-microservices
+@startuml c4-container-microservices-with-users
 
 title Container Diagram for T2-Microservices
 
@@ -11,9 +11,10 @@ title Container Diagram for T2-Microservices
 !include ICONS/devicons2/mongodb.puml
 !include ICONS/devicons2/postgresql.puml
 
-' AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
-AddElementTag("db", $bgColor="#MidnightBlue", $legendText="database")
-AddElementTag("external", $bgColor="#Gray", $legendText="external")
+AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
+
+Person(user, "User", "Buys tea using the UI of the store.")
+Person(researcher, "Researcher", "Executes various tests using the API's of the store.")
 
 System_Boundary(t2_project, "T2-Microservices") {
 
@@ -27,13 +28,16 @@ System_Boundary(t2_project, "T2-Microservices") {
         Container(cart, "Cart", "Java, Spring MVC", $sprite="spring")
     }
 
-    ContainerDb(db_inventory, "Inventory Database", "PostgreSQL", $sprite="postgresql", $tags="db")
-    ContainerDb(db_saga, "Saga Database", "PostgreSQL", $sprite="postgresql", $tags="db")
-    ContainerDb(db_cart, "Cart Database", "MongoDB", $sprite="mongodb", $tags="db")
-    ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb", $tags="db")
+    ContainerDb(db_inventory, "Inventory Database", "PostgreSQL", $sprite="postgresql")
+    ContainerDb(db_saga, "Saga Database", "PostgreSQL", $sprite="postgresql")
+    ContainerDb(db_cart, "Cart Database", "MongoDB", $sprite="mongodb")
+    ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb")
 }
 
-Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring", $tags="external")
+Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring")
+
+Rel(researcher, uibackend, "Uses", "JSON/HTTP")
+Rel(user, ui, "Uses", "JSON/HTTP")
 
 Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
 Rel(uibackend, cart, "Uses", "JSON/HTTP")
@@ -42,12 +46,14 @@ Rel(uibackend, inventory, "Uses", "JSON/HTTP")
 Rel(orchestrator, inventory, "Uses", "JSON/HTTP")
 Rel(orchestrator, order, "Uses", "JSON/HTTP")
 Rel(orchestrator, payment, "Uses", "JSON/HTTP")
- 
+
 Rel(cart, db_cart, "Reads from /\nwrites to", "TCP")
 Rel(order, db_order, "Reads from /\nwrites to", "TCP")
 Rel(orchestrator, db_saga, "Reads from /\nwrites to", "JDBC")
 Rel(inventory, db_inventory, "Reads from /\nwrites to", "JDBC")
 
 Rel(payment, creditinstitute, "Makes\ncalls to", "JSON/HTTP")
+
+' SHOW_LEGEND()
 
 @enduml

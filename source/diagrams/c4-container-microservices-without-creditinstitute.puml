@@ -1,4 +1,4 @@
-@startuml c4-container-microservices
+@startuml c4-container-microservices-without-creditinstitute
 
 title Container Diagram for T2-Microservices
 
@@ -33,8 +33,6 @@ System_Boundary(t2_project, "T2-Microservices") {
     ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb", $tags="db")
 }
 
-Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring", $tags="external")
-
 Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
 Rel(uibackend, cart, "Uses", "JSON/HTTP")
 Rel(uibackend, orchestrator, "Uses", "JSON/HTTP")
@@ -47,7 +45,5 @@ Rel(cart, db_cart, "Reads from /\nwrites to", "TCP")
 Rel(order, db_order, "Reads from /\nwrites to", "TCP")
 Rel(orchestrator, db_saga, "Reads from /\nwrites to", "JDBC")
 Rel(inventory, db_inventory, "Reads from /\nwrites to", "JDBC")
-
-Rel(payment, creditinstitute, "Makes\ncalls to", "JSON/HTTP")
 
 @enduml

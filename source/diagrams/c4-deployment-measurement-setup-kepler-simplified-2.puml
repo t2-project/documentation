@@ -1,0 +1,94 @@
+@startuml c4-deployment-measurement-setup-kepler-simplified-2
+
+' title Measurement Setup - EKS & Kepler (Simplified)
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define WEATHER https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/weather
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include WEATHER/day_sunny.puml
+!include FONTAWESOME/tools.puml
+!include FONTAWESOME/file_alt.puml
+!include FONTAWESOME/file_medical_alt.puml
+!include FONTAWESOME/bullseye.puml
+!include FONTAWESOME/desktop.puml
+!include FONTAWESOME/chart_bar.puml
+!include FONTAWESOME/mug_hot.puml
+!include DEVICONS2/kubernetes.puml
+!include DEVICONS2/java.puml
+
+' Logos from Cloudogu EcoSystem (https://github.com/cloudogu/plantuml-cloudogu-sprites)
+!define CloudoguPuml https://raw.githubusercontent.com/cloudogu/plantuml-cloudogu-sprites/master
+!define ENTITY(e_type,e_color,e_sprite,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>" as e_alias <<e_stereo>>
+!define ENTITY(e_type,e_color,e_sprite,e_label,e_alias,e_stereo) e_type "<color:e_color><$e_sprite></color>\r e_label" as e_alias <<e_stereo>>
+!include CloudoguPuml/tools/grafana.puml
+!include CloudoguPuml/tools/prometheus.puml
+
+' Kubernetes icons (https://github.com/dcasati/kubernetes-PlantUML)
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+!include KubernetesPuml/kubernetes_Common.puml
+!include KubernetesPuml/OSS/KubernetesKubelet.puml
+!include KubernetesPuml/OSS/KubernetesPod.puml
+!include KubernetesPuml/OSS/KubernetesSvc.puml
+!include KubernetesPuml/OSS/KubernetesHpa.puml
+
+left to right direction
+
+AddElementTag("jmeter", $bgColor="#d22128")
+AddElementTag("k8s", $bgColor="#316ce6")
+AddElementTag("kepler", $bgColor="#00766a")
+AddElementTag("grafana", $bgColor="#f39f5f")
+AddElementTag("prometheus", $bgColor="#e8613e")
+AddElementTag("sut", $bgColor="LightYellow")
+
+Deployment_Node(local, "Local Machine", "", $sprite="desktop") {
+
+    Container(browser_ui, "Grafana\nDashboard", "", $sprite="chart_bar", $tags="grafana")
+
+    Container(jmeter, "JMeter", "", "", $sprite="java", $tags="jmeter")
+}
+
+' Deployment_Node(eks, "EKS", "Elastic Kubernetes Service", $sprite="kubernetes") {
+Deployment_Node(eks, "Kubernetes", "", $sprite="kubernetes") {
+
+    Container(grafana, "Grafana", "", "", $sprite="grafana", $tags="grafana")
+    Container(prometheus, "Prometheus", "", "", $sprite="prometheus", $tags="prometheus")
+    Container(kepler, "Kepler", "", "", $sprite="day_sunny", $tags="kepler")
+    Container(kubelet, "kubelet", "", "", $sprite="KubernetesKubelet", $tags="k8s")
+
+    Container(load_balancer, "Load Balancer", "", $sprite="KubernetesSvc", $tags="k8s")
+
+    Deployment_Node(t2_project, "T2-Project", "", $tags="sut") {
+        Container(pod3, "Pod 3", "", $sprite="KubernetesPod", $tags="k8s")
+        Container(pod1, "Pod 1", "", $sprite="KubernetesPod", $tags="k8s")
+        Container(pod4, "Pod 4", "", $sprite="KubernetesPod", $tags="k8s")
+        Container(pod2, "Pod 2", "", $sprite="KubernetesPod", $tags="k8s")
+    }
+
+    Container(hpa, "Autoscaler", "", $sprite="KubernetesHpa", $tags="k8s")
+}
+
+Rel(load_balancer, t2_project, "\n\n2. Forwards\nrequests\nto", "")
+Rel(browser_ui, grafana, "7. Get Results")
+Rel_R(jmeter, load_balancer, "1. Executes\nAPI requests")
+
+Rel_R(grafana, prometheus, "6.\nRetrieves\ndata\nfrom")
+
+Rel(prometheus, kepler, "5.\nScrapes\ndata\nfrom")
+' Rel(prometheus, kubelet, " Scrapes\ndata\nfrom")
+
+Rel_L(kepler, kubelet, "4.\nQueries\nusage\nmetrics\nof pods")
+
+Rel(kubelet, t2_project, "3. Gathers\nmetrics")
+' Rel(kubelet, pod1, "Gathers\nmetrics")
+' Rel(kubelet, pod2, "Gathers\nmetrics")
+' Rel(kubelet, pod3, "Gathers\nmetrics")
+' Rel(kubelet, pod4, "Gathers\nmetrics")
+
+Rel_R(hpa, t2_project, "Scales\ndeployments\nif needed\n\n")
+
+@enduml

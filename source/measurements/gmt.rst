@@ -2,43 +2,65 @@
 Green Metrics Tool
 ==================
 
-We are using the `Green Metrics Tool <https://docs.green-coding.io/>`_ (GMT) for executing energy tests with different usage scenarios.
+We are using the `Green Metrics Tool <https://docs.green-coding.io/>`__ (GMT) from Green Coding Solutions for executing energy tests with different usage scenarios.
 
-The T2 usage scenarios are located in the directory ``energy-tests`` in the GitHub repo `DevOps <https://github.com/t2-project/devops/tree/main/energy-tests/gmt>`_. You can find the documentation about the format ``usage_scenario.yml`` `here <https://docs.green-coding.io/docs/measuring/usage-scenario/>`_.
+The ``usage_scenario.yml`` files are located in the directory ``energy-tests`` in the GitHub repo `DevOps <https://github.com/t2-project/devops/tree/main/energy-tests/gmt>`__. You can find the documentation about the format ``usage_scenario.yml`` `here <https://docs.green-coding.io/docs/measuring/usage-scenario/>`__.
 
-Currently, only usage scenarios are provided that use :doc:`JMeter <jmeter>` for the execution of requests to the T2-Project backend:
+All the usage scenarios provided use :doc:`JMeter <jmeter>` for the execution of requests to the T2-Project backend:
 
-* Microservices: `UI Backend Service <https://github.com/t2-project/uibackend>`_ → ``uibackend:8080``
-* Modulith: `T2-Modulith <https://github.com/t2-project/modulith>`_ → ``backend:8080``
+* T2-Microservices: `UI Backend Service <https://github.com/t2-project/uibackend>`__ → ``uibackend:8080``
+* T2-Modulith: `Modulith <https://github.com/t2-project/modulith>`__ → ``backend:8080``
+
+Setup
+=====
+
+The following shows the measurement setup with the Green Metrics Tool on one of the measurement machines provided by Green Coding Solutions, which measures a usage scenario from the T2-Modulith.
+
+.. image:: ../diagrams/c4-deployment-measurement-setup-gmt-simplified.svg
+
+The actual measurement is executed by Python scripts that are part of the Green Metrics Tol. If a new measurement job is executed, first the ``usage_scenario.yml`` gets downloaded, processed and validated. Afterwards the measurement environment is prepared accordingly and the Docker containers for the system to be measured are started. Finally, the measurement run is started using the flow provided, meaning JMeter executes its test plan. During that time the Green Metrics Tool gathers usage data from various metrics providers and saves them into the database at the end.
+
+Usage
+=====
+
+In this section the usage of the Green Metrics Tool is described, locally and with the measurement cluster provided by Green Coding Solutions.
 
 Local testing
-=============
+-------------
 
-See the `official documentation <https://docs.green-coding.io>`_ on how to install and run the Green Metrics Tool on your local system.
+See the `official documentation <https://docs.green-coding.io>`__ on how to install and run the Green Metrics Tool on your local system.
 
-The following examples are only meant to check if the usage scenarios are executed without an error. To execute real measurements, see the section :ref:`measurement_on_cluster`.
+The following examples are only meant to check if the usage scenarios are executed without any error. To execute real measurements, see the section :ref:`measurement_on_cluster` below.
 
-Run with local usage_scenario.yml:
-
-.. code-block:: bash
-
-    python3 runner.py --uri ~/t2-project/devops --filename "energy-tests/gmt/monolith-usage_scenario-minimal-base.yml" --name "T2-Modulith (Minimal Scenario with JMeter)" --skip-system-checks --dev-repeat-run --dry-run --print-logs
-
-Run with remote usage_scenario.yml:
+Execute a measurement run with a local ``usage_scenario.yml``:
 
 .. code-block:: bash
 
-   python3 runner.py --uri https://github.com/t2-project/devops --branch "main" --filename "energy-tests/gmt/monolith-usage_scenario-minimal-base.yml" --name "T2-Modulith (Minimal Scenario with JMeter)" --skip-system-checks --dev-repeat-run --dry-run --print-logs
+    python3 runner.py --uri ~/t2-project/devops \ 
+     --filename "energy-tests/gmt/monolith-usage_scenario-minimal-base.yml" \ 
+     --name "T2-Modulith (Minimal Scenario with JMeter)" \ 
+     --skip-system-checks --dev-no-build --dev-no-metrics --dev-no-sleeps \ 
+     --print-logs
 
-The parameters ``--skip-system-checks``, ``--dev-repeat-run``, ``--dry-run`` and ``--print-logs`` are all optional. The first three are used to speed up the execution of usage scenarios for testing.
-Depending on the usage scenario you may need to remove the parameter ``--dry-run``. ``--dry-run`` skips all sleeps that may be required to execute a usage scenario e.g. to wait for all services to be ready.
+Execute a measurement run with a remote ``usage_scenario.yml``:
+
+.. code-block:: bash
+
+   python3 runner.py --uri https://github.com/t2-project/devops \ 
+   --filename "energy-tests/gmt/monolith-usage_scenario-minimal-base.yml" \ 
+   --name "T2-Modulith (Minimal Scenario with JMeter)" \ 
+   --skip-system-checks --dev-no-build --dev-no-metrics --dev-no-sleeps \ 
+   --print-logs
+
+The parameters ``--skip-system-checks``, ``--dev-no-build``, ``--dev-no-metrics``, ``--dev-no-sleeps`` and ``--print-logs`` are all optional. The first four are used to speed up the execution of usage scenarios during development and testing.
+Depending on the usage scenario you may need to remove the parameter ``--dev-no-sleeps``. It skips all sleeps that may be required to execute a usage scenario e.g. to wait for all services to be ready.
 
 .. _measurement_on_cluster:
 
-Measurement on GCB Cluster
-==========================
+Measurement Cluster
+-------------------
 
-To measure a software on the `measurement cluster provided by Green Coding Berlin (GCB) <https://docs.green-coding.io/docs/measuring/measurement-cluster/>`_ you can submit it via the form on `https://metrics.green-coding.io/request.html <https://metrics.green-coding.io/request.html>`_.
+To measure a software on the `measurement cluster provided by Green Coding Solutions <https://docs.green-coding.io/docs/measuring/measurement-cluster/>`__ you can submit it via the form on `https://metrics.green-coding.io/request.html <https://metrics.green-coding.io/request.html>`__.
 
 Example form inputs:
 
@@ -49,7 +71,7 @@ Example form inputs:
 * Hardware: Fujitsu Esprimo P956
 * Measurement: One-Off [Free - Fair use]
 
-All executed measurements can be found on the GMT page `Repository overview <https://metrics.green-coding.io/repositories.html>`_ under the repository ``/t2-project/devops``. There you also have the possibility to compare multiple measurements on your own:
+All executed measurements can be found on the GMT page `Repository overview <https://metrics.green-coding.io/repositories.html>`__ under the repository ``/t2-project/devops``. There you also have the possibility to compare multiple measurements on your own:
 
 * Open the repository ``/t2-project/devops``
 * Select the measurements you want to compare
@@ -58,6 +80,26 @@ All executed measurements can be found on the GMT page `Repository overview <htt
 Some measurements are discussed in the following section `gmt-learnings` and on the page :ref:`measurement-results`.
 
 .. _gmt-learnings:
+
+Required Adjustments
+====================
+
+A few adjustments had to be made to the T2-Project, the JMeter container image used and the Green Metrics Tool in order to be able to carry out measurements successfully. The necessary adjustments to the T2-Project and the JMeter container image are briefly described in this section.
+
+Adjustments to the T2-Project
+-----------------------------
+
+The T2-Project uses a fake service as a credit institute for payments. Due to the original orientation of the T2-Project, the `CreditInstitute service <https://github.com/t2-project/creditinstitute/>`__ is designed to randomly provoke SLO violations. This is not acceptable for reproducible energy measurements. Furthermore, there is no added value in
+including this service in the energy measurement. The decision was therefore made to omit the service completely and to make the call to the CreditInstitute service optional via configuration in the payment service. This means that no CreditInstitute service is required for measurements with GMT and the payment service (T2-Microservices) or the payment module (T2-Modulith) returns an ok directly without requesting the CreditInstitute service.
+
+For the deployment of the T2-Microservices system, a change had to be made to the container image for the PostgreSQL databases, which is provided by Eventuate. The image cannot be executed automatically in the interactive mode of Docker (parameter ``-it``), as is done by GMT. A corresponding `pull request <https://github.com/eventuate-foundation/eventuate-common/pull/135>`__ was created, but not merged in the period of this thesis. For this reason, a `self-created container image <https://hub.docker.com/r/t2project/eventuate-tram-sagas-postgres>`__ is used, which contains the required change.
+
+The Orchestrator microservice has been extended with an optional logging mechanism (see `commit 383febd <https://github.com/t2-project/orchestrator/commit/383febd>`__) to be able to log the end of the asynchronous saga process with the message ``GMT_SCI_R=1`` and the corresponding timestamp. This is relevant so that GMT can calculate the SCI score correctly, taking into account not only the synchronous part of the order process, but also the asynchronous part.
+
+Adjustments to the JMeter Container Image
+-----------------------------------------
+
+For JMeter, the container image `justb4/jmeter <https://hub.docker.com/r/t2project/jmeter>`__ is used, which is the most downloaded image for JMeter at DockerHub. It is designed so that JMeter is started using docker run and the container terminates as soon as JMeter has finished executing a test plan. This is unsuitable for the use with GMT. A container must always be running in a GMT setup and must be able to execute commands at runtime using docker exec. This requires the entry point of the container image to be adapted accordingly so that JMeter is not started immediately when the container is started. The customized version can be found in the GitHub repository `t2-project/docker-jmeter <https://github.com/t2-project/docker-jmeter>`__ and at DockerHub under the name `t2project/jmeter <https://hub.docker.com/r/t2project/jmeter>`__.
 
 Learnings
 =========
@@ -68,44 +110,12 @@ While testing and executing various usage scenarios with the Green Metrics Tool,
    :depth: 1
    :local:
 
-1. Waiting time before start
-----------------------------
-
-As of today (2023-12-13) GMT doesn't support a health check of containers during the boot phase (see `issue 423 <https://github.com/green-coding-berlin/green-metrics-tool/issues/423>`_). Therefore, a manual waiting time is required to ensure that all services are ready before the flow gets executed (runtime phase). If a service under test is not ready, the flow is likely is fail.
-There are two ways of achieving a waiting time:
-
-* increase ``phase-transition-time`` in `GMT configuration <https://docs.green-coding.io/docs/measuring/configuration/>`_  to set the waiting time between phases
-   - current setting on GCB measurement cluster: 10 sec
-   - change is only possible if you operate the measurement machine on your own
-* using ``sleep`` in ``setup-commands`` as part of your `usage_scenario <https://docs.green-coding.io/docs/measuring/usage-scenario/>`_
-   - example:
-   
-   .. code-block:: yaml
-   
-      postgres:
-         setup-commands:
-           - sleep 10
-
-   - current used waiting times:
-      - monolith:
-           - postgres: 5 sec, to ensure that the database is ready when the backend starts
-           - backend: 10 sec, to ensure that the backend is ready when the flow starts
-      - microservices:
-           - postgres: 5 sec, to ensure that the database is ready when the T2 services start
-           - kafka: 10 sec, to ensure that Kafka is ready, so all other services can connect with it immediately
-           - uibackend: 60 sec, to ensure that all T2 services are ready when the flow start
-
-In the future, when the health check feature is implemented, the manual waiting times are not required anymore.
-
-2. Idle energy consumption
+1. Idle energy consumption
 --------------------------
 
-With GMT the absolute energy consumption result is not really important, because this value depends on many variables, especially the machine and environment. Therefore, the results are usually only relevant for relative comparisons between different runs. It's important that the energy consumption of the machine in idle mode (**baseline**) is the same between runs, so it doesn't influence the results.
+With GMT the absolute energy consumption value is not really important, because this value depends on many variables, especially the machine and environment. Therefore, the results are usually only relevant for relative comparisons between different runs. It's important that the energy consumption of the machine in idle mode (baseline) is the same between runs, so it doesn't influence the results. The team behind the GMT ensures this by executing a measurement that should always give the same result regularly: `Measurement Control Workload <https://metrics.green-coding.io/timeline.html?uri=https://github.com/green-coding-berlin/measurement-control-workload&filename=usage_scenario.yml&branch=event-bound&machine_id=7>`__.
 
-Green Coding Berlin ensures this by executing a measurement that should always give the same result regularly:
-`Measurement Control Workload <https://metrics.green-coding.io/timeline.html?uri=https://github.com/green-coding-berlin/measurement-contol-workload&filename=usage_scenario.yml&branch=&machine_id=7>`_
-
-3. Request-Consumption Proportionality
+2. Request-Consumption Proportionality
 --------------------------------------
 
 The energy consumption is *not* proportional to the number of requests.
@@ -172,15 +182,15 @@ See the data of measurements with different number of executions.
           + Network Energy: 0.83 J
     * CPU energy consumption decreases with more executions
 
-4. Energy overhead by JMeter
+3. Energy overhead by JMeter
 ----------------------------
 
-GMT can only measure the energy consumption of the whole system that is part of an usage scenario. Therefore, the energy consumption of JMeter is always included in the resulting energy values.
+At the moment (as of April 2024) GMT can only measure the energy consumption of the whole system that is part of an usage scenario. Therefore, the energy consumption of JMeter is always included in the resulting energy values. However, there is the promise that GMT will offer the support for separating two logical and physical disjunct components onto two machines in the future.
 
-The measurement of individual components is not possible with GMT, because there is no clear way of how to isolate individual components and GMT has the philosophy that a usage scenario should contain all components to reflect an actual use case of the software. Therefore, a client / trigger that is part of a usage scenario is also part of the energy measurement. See the discussion `Measure energy consumption for each individual container <https://github.com/green-coding-berlin/green-metrics-tool/discussions/562>`_ for more information.
+The measurement of individual components is not possible with GMT, because there is no clear way of how to isolate individual components and GMT has the philosophy that a usage scenario should contain all components to reflect an actual use case of the software. Therefore, all components that are part of an usage scenario are also part of the energy measurement. See the section `Granularity of energy data <https://docs.green-coding.io/docs/prologue/philosophy-methodology/#granularity-of-energy-data>`__ in the docs of the GMT for more information.
 
-For comparisons between different applications this should not be a problem, as long as the client / trigger behaves the same.
-This is the case with JMeter that always executes the same test plan (perhaps with different parameters, so that have to be kept in mind for comparisons).
+For comparisons between different applications this should not be a problem, as long as the respective components behave the same. In theory, that should also be the case with JMeter that always executes the same test plan (perhaps with different parameters, so that have to be kept in mind for comparisons).
+However, measurements with the GMT setup have shown that the start process of JMeter can take different lengths of time (3--10~seconds), so that this can have a negative effect on the results. This must be taken into account when comparing measurement results.
 
 .. collapse:: Measurement of JMeter Overhead
 
@@ -209,48 +219,50 @@ This is the case with JMeter that always executes the same test plan (perhaps wi
 
     **Findings:**
 
-    * JMeter itself already consumes a lot of energy when it starts executing a test plan, even no requests are made. However, this only effects the beginning of the phase and should not influence the behavior of the backend later on. Also, because we use JMeter in all measurements with the same test plan, comparisons should also not be a problem.
+    * JMeter itself already consumes a lot of energy when it starts executing a test plan, even when no requests are made. However, this only effects the beginning of the phase and should not influence the behavior of the backend later on. Also, because we use JMeter in all measurements with the same test plan, comparisons should not be a problem.
     * Machine components other than CPU and memory also consume a significant amount of energy. In the scenario circa 60 J.
 
-5. Network energy estimation
+4. Network energy estimation
 ----------------------------
 
-The metric "Network Energy" that is displayed in the UI refers to the **estimated energy consumption** by network traffic in a **distributed global system**. It is calculated by the total amount of sent and received bytes from the network interface multiplied by the constant 0.00375 kWH / GB.
+The metric *Network Transmission Energy* that is part of the measurement results shown in the GMT frontend refers to the estimated energy consumption by network traffic in a distributed global system. The value is calculated by the total amount of sent and received bytes from the network interface multiplied by a constant value. The constant used is the one calculated by Aslan et al. down to 2024, i.e. 0.002652 kWh/GB at the time of writing this.
 
-See the documentation of the metric provider `Network IO - cgroup - container <https://docs.green-coding.io/docs/measuring/metric-providers/network-io-cgroup-container/>`_ and the article `List of CO2 formulas <https://www.green-coding.io/co2-formulas/>`_ for more information.
+It is therefore important to note that the value is not the energy consumption of network communication within a machine or data center, but the potential energy consumption that arises when the system is operated in a globally distributed way. This is not the case for a typical microservices system, which is operated in a data center or in several data centers in the same region. The `Cloud Carbon Footprint Tool <https://www.cloudcarbonfootprint.org/docs/methodology/>`__ does not include such network communication within a data center at all. Furthermore, it is generally questionable how useful it is to estimate the energy consumption of network communication using a constant for GB/kWh. Arne Tarara from Green Coding Solutions decided to use this methodology "as it bests incentives the user to keep the network traffic to a minimum" (source: `https://www.green-coding.io/co2-formulas/ <https://www.green-coding.io/co2-formulas/>`__).
 
-The description was improved by `pull request 608 <https://github.com/green-coding-berlin/green-metrics-tool/pull/608>`_.
+See the GMT documentation of the metric provider `Network IO - cgroup - container <https://docs.green-coding.io/docs/measuring/metric-providers/network-io-cgroup-container/>`__ and the article `CO2 formulas <https://www.green-coding.io/co2-formulas/>`__ for more information.
 
-6. Measure asynchronous operations
+5. Measure asynchronous operations
 ----------------------------------
 
 The runtime phase in GMT is based on the defined `flow <https://docs.green-coding.io/docs/measuring/usage-scenario/#flow>`_: it starts with the execution of a command and ends when the command is finished.
 If the command triggers an asynchronous operation the flow/phase may end before the asynchronous operation actually has finished.
 
+So the question arises as to how the entire operation can be recorded and measured?
+
 Currently I'm aware of two options to measure a whole asynchronous operation:
 
 * Add a sleep command to your flow to extend the duration of the flow long enough
    - Challenge: How long should the sleep be?
-* Check in a loop if the asynchronous operation has finished (may only be possible if the operation changes some data that can be checked)
+* Check in a loop if the asynchronous operation has finished
+   - Only possible if the operation changes some data that can be checked
    - Problem: Check increases the overall footprint, so it may make comparisons between synchronous and asynchronous systems unfair
 
-The *confirm order* operation (``POST http://backend/confirm``) of the T2-Project in the monolithic implementation is synchronous, but in the microservices implementation it is asynchronous. There the order confirmation is implemented with the Saga pattern, so the operation is only considered finished as soon as the *orchestrator* received a success message from all services participating in the saga (*payment*, *order* and *inventory*) via the message broker Kafka.
+The *confirm order* operation (``POST http://backend/confirm``) of the T2-Project in the monolithic implementation is synchronous, but in the microservices implementation it is asynchronous. There the order confirmation is implemented with the saga pattern, so the operation is only considered finished as soon as the *orchestrator* received a success message from all services participating in the saga (*payment*, *order* and *inventory*) via the message broker Kafka.
 
 To make it visible in the graphs of a measurement results page, when the order is finished, a `note with a timestamp can be written to stdout <https://docs.green-coding.io/docs/measuring/usage-scenario/#read-notes-stdout-format-specification>`_ (in this case by the *orchestrator* service).
 
-Currently I'm using the first option with sleep commands. In conjunction with writing the note when the order operation is finished, I try to optimize the sleep duration. To make the comparison between the synchronous (monolith) and the asynchronous system (microservices) fair, I add the same sleep to both scenarios. However, this will still be a bit of a disadvantage for the microservices system because its idle consumption is higher.
+6. Using think time or not
+--------------------------
 
-7. Test plan parameters
------------------------
+During testing of usage scenarios I used many different parameters configuring the test plan execution. One of them is think time between requests.
 
-During testing of usage scenarios I used many different parameters configuring the test plan execution.
-Here a list of parameters with comments, if they are worth to consider and change:
+When does it make sense to use a think time in measurements?
 
-* thinking time between requests:
    * most importantly: use always the same thinking times to make comparisons possible
    * if you want to have a load test scenario, don't use a think time
    * if you want to have a real world usage scenario, use a realistic think time
-   * one additional sec think time increases the machine energy consumption by ~13-15 J and the cpu energy consumption by 4-5 J (idle consumption per second)
+   * one additional sec think time increases the machine energy consumption in a one user scenario by ~13-15 J and the cpu energy consumption by 4-5 J (idle consumption per second)
+   * in the most test cases you shouldn't use a think time
 
     .. collapse:: Measurement of Think Time
 
@@ -322,22 +334,20 @@ Here a list of parameters with comments, if they are worth to consider and chang
             - +4.4 J (+5,1 %)
             - +8.5 J (+9,9 %)
 
-8. Warm-up of application
+7. Warm-up of application
 -------------------------
 
-Applications with a runtime and JIT compilations optimizes themselves during runtime. This is the case with the HotSpot JVM used by the T2-Project services. Therefore, for accuracy, it is necessary to *warm-up* the application and make the actual measurement when the application is *warm*.
+Applications with a runtime environment and a JIT compiler optimize themselves during runtime. This is the case with the HotSpot JVM used by the T2-Project services. Therefore, in performance benchmarking, it is common practice ignore the first measurements during *warm-up* and only consider the measurement results when the application is considered to be *warm*.
 
-**Understanding the differences:**
+The question arises as to how this should be handled in energy measurements. Arne Tarara (Green Coding Solutions) is convinced that the warm-up phase must also be included in the energy measurement. Arne argues that these are operations that must be performed at a certain point in time to bring the application to its operating point, thus consuming energy and causing carbon emissions. See `discussion with Arne Tarara <https://github.com/green-coding-solutions/green-metrics-tool/discussions/595>`_ for insights.
+
+However, for a better understanding of the results, it seems useful to have measurement results for the warm-up phase as well as for the actual execution of a scenario and not to mix them together. GMT does not support an explicit warm-up phase. However, due to the flexibility in the definition of a usage scenario, an additional step can easily be defined in the flow part in ``usage_scenario.yml``, which can be used as a warm-up.
+
+**Numbers:**
 
 See the measurements of multiple flows below to see the difference between a *cold* application and a *warm* application. To get measurement data for multiple executions, multiple flows within a usage scenario were used.
 | In the scenario with 1 user, the average CPU utilization of the ``backend`` component of the first flow (29.38 %) and the second flow (23.90 %) with 100 executions each is much higher than the subsequent flows (<14 %). After the 10. flow the average CPU utilization stays under 10 %.
 | In the scenario with 100 users, only the first flow required a lot of time (reason unknown) and therefore also a lot more energy. All the other results were quite similar with a little increase in performance and a little decrease in energy consumption.
-
-**What to do?**
-
-Include the warm-up of the application in the measurement as part of the runtime phase as a separate step.
-
-See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-metrics-tool/discussions/595>`_ for insights.
 
 .. collapse:: Measurement of multiple flows (1 user)
 
@@ -537,11 +547,10 @@ See `discussion with Arne Tarara <https://github.com/green-coding-berlin/green-m
         - 88.02
         - 17.71
 
-9. Impact of logging
+8. Impact of logging
 --------------------
 
-Logging of all requests by JMeter requires a significant amount of energy (in a test scenario +13%). Therefore, it should be enabled only if really necessary, e.g. during testing.
-See also GMT documentation `Best practices <https://docs.green-coding.io/docs/measuring/best-practices/#13-turn-logging-off>`_ about when to use logging.
+Logging of all requests by JMeter requires a significant amount of energy (in a test scenario +13%). Therefore, it should be enabled only if really necessary, e.g. during testing of new usage scenarios. The GMT documentation page `Best practices <https://docs.green-coding.io/docs/measuring/best-practices/#13-turn-logging-off>`_ also recommends to turn logging off to avoid overhead.
 
 .. collapse:: Measurement impact of logging
 
@@ -570,10 +579,10 @@ See also GMT documentation `Best practices <https://docs.green-coding.io/docs/me
         - 12.20
         - 83.06
 
-10. Executing load tests
+9. High Load and Scaling
 ------------------------
 
-The original idea of GMT is to execute standard usage scenarios and measure the energy consumption of such. GMT is not designed for load testing. Nevertheless we are using GMT also to measure the energy consumption in usage scenarios with high load.
+The original idea of the GMT is to execute standard usage scenarios and measure the energy consumption of such. Therefore, GMT is not designed for load testing or similar approaches. However, due to the flexible way in which usage scenarios can be defined, it is easily possible to generate larger loads and measure energy consumption. However, it must be taken into account that GMT cannot be used to create dynamic scaling scenarios. When a measurement is started, exactly one container instance is started for each service and no horizontal scaling is possible at runtime.
 
 .. collapse:: Measurements in load test scenarios
 

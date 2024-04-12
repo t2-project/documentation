@@ -53,20 +53,20 @@ Introduction
 
 The T2-Project is a reference application provided in two variants:
 
-*  :ref:`Microservices <microservices>` (implementing the Saga pattern)
-*  :ref:`Modulith <modulith>` (retaining the modular structure)
+*  :ref:`T2-Microservices <microservices>` (implementing the saga pattern)
+*  :ref:`T2-Modulith <modulith>` (monolith with the same modular structure)
 
 The project is loosely based on the `TeaStore Application <https://github.com/DescartesResearch/TeaStore>`__.
 
-| Initially, we only implemented the application in the microservices architecture style and called it **T2-Project**. Later, we added a monolithic variant for comparison.
+| Initially, we only implemented the application in the microservices architecture style and called it *T2-Project*. Later, we added a monolithic variant for comparison.
 | The monolith retains the modular structure, therefore we call it **T2-Modulith**.
-| In order to easily distinguish between the two variants linguistically, we sometimes also use the terms **T2-Microservices** and **T2-Modulith**.
+| In order to distinguish the individual variants and the overall project linguistically, we now use the term **T2-Project** to refer to the overall project, including both variants, and call the initial microservices implementation **T2-Microservices**.
 
 The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
-The initial purpose of the T2-Modulith was to compare a microservices application with a modulith application in terms of energy consumption (see :doc:`Energy Measurements <measurements/index>` for more information).
+The purpose of the T2-Modulith is to compare a microservices application with a modulith application, mainly in regards of energy efficiency (see :doc:`Energy Measurements <measurements/index>` for more information).
 
-Repository Structure
-====================
+Source Code
+===========
 
 The T2-Project is organized under the GitHub organization `t2-project <https://github.com/t2-project>`__ in multiple repositories.
 
@@ -96,7 +96,7 @@ These repositories contain the core services of the T2-Project:
 
 These repositories contain the supplemental services:
 
-*  `E2E Test <https://github.com/t2-project/e2e-test>`__
+*  `E2E Test <https://github.com/t2-project/e2e-tests>`__
 *  `Credit Institute service  <https://github.com/t2-project/creditinstitute>`__
 
 This repository contains shared domain classes. 

@@ -1,4 +1,4 @@
-@startuml c4-container-modulith
+@startuml c4-container-modulith-without-creditinstitute
 
 title Container Diagram for T2-Modulith
 
@@ -22,10 +22,7 @@ System_Boundary(t2_project, "T2-Modulith") {
     ContainerDb(db_cart_and_order, "Cart and Order Database", "MongoDB", $sprite="mongodb", $tags="db")
 }
 
-Container_Ext(creditinstitute, "CreditInstitute", "Java, Spring MVC", $sprite="spring", $tags="external")
-
 Rel(modulith, db_cart_and_order, "Reads from /\nwrites to", "TCP")
 Rel(modulith, db_inventory, "Reads from /\nwrites to", "JDBC")
 
-Rel(modulith, creditinstitute, "Makes\ncalls to", "JSON/HTTP")
 @enduml

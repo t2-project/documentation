@@ -16,7 +16,9 @@ title Container Diagram for T2-Microservices - Saga Messaging
 !include CloudinsightPuml/kafka.puml
 !include CloudinsightPuml/zookeeper.puml
 
-AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
+' AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
+AddElementTag("db", $bgColor="#MidnightBlue", $legendText="database")
+AddElementTag("messaging", $bgColor="#SlateBlue", $legendText="messaging")
 
 Boundary(saga, "Saga Participants") {
     Container(orchestrator, "Orchestrator", "Java, Spring MVC", $sprite="spring", $tags="saga")
@@ -25,13 +27,13 @@ Boundary(saga, "Saga Participants") {
     Container(payment, "Payment", "Java, Spring MVC", $sprite="spring", $tags="saga")
 }
 
-ContainerDb(db_inventory, "Inventory Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql")
-ContainerDb(db_saga, "Saga Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql")
-ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb")
+ContainerDb(db_inventory, "Inventory Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql", $tags="db")
+ContainerDb(db_saga, "Saga Database", "PostgreSQL,\nEventuate Framework", $sprite="postgresql", $tags="db")
+ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb", $tags="db")
 
-Container(cdcservice, "CDC Service", "Eventuate Framework", "Implementing the Transactional Outbox Pattern. Provided by the Eventuate Tram Sagas Framework.", $sprite="spring")
-ContainerQueue(kafka, "Kafka", "Eventuate Framework", $sprite="kafka")
-ContainerDb(zookeeper, "Zookeeper", "Eventuate Framework", $sprite="zookeeper")
+Container(cdcservice, "CDC Service", "Eventuate Framework", "Implementing the Transactional Outbox Pattern. Provided by the Eventuate Tram Sagas Framework.", $sprite="spring", $tags="messaging")
+ContainerQueue(kafka, "Kafka", "Eventuate Framework", $sprite="kafka", $tags="messaging")
+ContainerDb(zookeeper, "Zookeeper", "Eventuate Framework", $sprite="zookeeper", $tags="messaging")
 
 Rel(order, db_order, " r&w", "")
 Rel(orchestrator, db_saga, "r&w", "")

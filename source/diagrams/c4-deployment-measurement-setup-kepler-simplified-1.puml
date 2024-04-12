@@ -1,4 +1,4 @@
-@startuml c4-deployment-measurement-setup-kepler-simplified
+@startuml c4-deployment-measurement-setup-kepler-simplified-1
 
 title Measurement Setup - EKS & Kepler (Simplified)
 
