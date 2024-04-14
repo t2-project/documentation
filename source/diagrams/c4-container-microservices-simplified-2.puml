@@ -1,0 +1,35 @@
+@startuml c4-container-microservices-simplified-2
+
+title Container Diagram for T2-Microservices (simplified)
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define ICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master
+!include ICONS/common.puml
+!include ICONS/devicons2/spring.puml
+!include ICONS/devicons2/mongodb.puml
+!include ICONS/devicons2/postgresql.puml
+
+' AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
+
+System_Boundary(t2_project, "Microservices") {
+
+    Container(uibackend, "UIBackend", "Microservice")
+    Container(ui, "UI", "Microservice")
+    Container(inventory, "Inventory", "Microservice", $tags="saga")
+    Container(orchestrator, "Orchestrator", "Microservice", $tags="saga")
+    Container(payment, "Payment", "Microservice", $tags="saga")
+    Container(order, "Order", "Microservice", $tags="saga")
+    Container(cart, "Cart", "Microservice")
+}
+
+Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
+Rel(uibackend, cart, "Uses", "JSON/HTTP")
+Rel(uibackend, orchestrator, "Uses", "JSON/HTTP")
+Rel(uibackend, inventory, "Uses", "JSON/HTTP")
+Rel(orchestrator, inventory, "Uses", "JSON/HTTP")
+Rel(orchestrator, order, "Uses", "JSON/HTTP")
+Rel(orchestrator, payment, "Uses", "JSON/HTTP")
+
+@enduml

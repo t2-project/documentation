@@ -1,6 +1,6 @@
-@startuml c4-container-microservices-without-creditinstitute
+@startuml c4-container-microservices-all-without-creditinstitute
 
-title Container Diagram for T2-Microservices
+'title Container Diagram for T2-Microservices
 
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
@@ -11,9 +11,15 @@ title Container Diagram for T2-Microservices
 !include ICONS/devicons2/mongodb.puml
 !include ICONS/devicons2/postgresql.puml
 
+' Cloudinsight (https://github.com/plantuml-stdlib/cicon-plantuml-sprites)
+!define CloudinsightPuml https://raw.githubusercontent.com/plantuml-stdlib/cicon-plantuml-sprites/master/sprites
+!include CloudinsightPuml/kafka.puml
+!include CloudinsightPuml/zookeeper.puml
+
 AddElementTag("saga", $bgColor="#SlateBlue", $legendText="saga")
 AddElementTag("db", $bgColor="#MidnightBlue", $legendText="database")
 AddElementTag("external", $bgColor="#Gray", $legendText="external")
+AddElementTag("messaging", $bgColor="#BlueViolet", $legendText="messaging")
 
 System_Boundary(t2_project, "T2-Microservices") {
 
@@ -31,6 +37,10 @@ System_Boundary(t2_project, "T2-Microservices") {
     ContainerDb(db_saga, "Saga Database", "PostgreSQL", $sprite="postgresql", $tags="db")
     ContainerDb(db_cart, "Cart Database", "MongoDB", $sprite="mongodb", $tags="db")
     ContainerDb(db_order, "Order Database", "MongoDB", $sprite="mongodb", $tags="db")
+
+    Container(cdcservice, "CDC Service", "Eventuate Framework", "", $sprite="spring", $tags="messaging")
+    ContainerQueue(kafka, "Kafka", "Eventuate Framework", $sprite="kafka", $tags="messaging")
+    ContainerDb(zookeeper, "Zookeeper", "Eventuate Framework", $sprite="zookeeper", $tags="messaging")
 }
 
 Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
@@ -40,10 +50,20 @@ Rel(uibackend, inventory, "Uses", "JSON/HTTP")
 Rel(orchestrator, inventory, "Uses", "JSON/HTTP")
 Rel(orchestrator, order, "Uses", "JSON/HTTP")
 Rel(orchestrator, payment, "Uses", "JSON/HTTP")
- 
+
 Rel(cart, db_cart, "R&W", "TCP")
 Rel(order, db_order, "R&W", "TCP")
 Rel(orchestrator, db_saga, "R&W", "JDBC")
 Rel(inventory, db_inventory, "R&W", "JDBC")
+
+Rel(orchestrator, kafka, "Subscribe", "TCP")
+Rel(order, kafka, "Subscribe", "TCP")
+Rel(payment, kafka, "Subscribe", "TCP")
+Rel(inventory, kafka, "Subscribe", "TCP")
+Rel_U(cdcservice, db_saga, "R&W", "JDBC")
+Rel_U(cdcservice, db_inventory, "R&W", "JDBC")
+Rel_U(cdcservice, kafka, "Publish", "TCP")
+
+Rel(kafka, zookeeper, "R&W", "TCP")
 
 @enduml

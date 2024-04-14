@@ -10,12 +10,12 @@ title System Context Diagram for the T2-Project
 
 ' LAYOUT_WITH_LEGEND()
 
-Person(user, "User", "A fictitious user, that buys tea using the UI of the store.")
-Person(researcher, "Researcher", "A real person, that executes various tests using the API's of the store.")
+Person(user, "User", "Buys tea using the UI of the store.")
+Person(researcher, "Researcher", "Executes various tests using the backend API's.")
 
 System(t2_project, "T2-Project", "A fictitious web store that offers tea.", $sprite="mug_hot")
 
-System_Ext(creditinstitute, "Credit Institute", "A fake service is provided to simulate a payment process.", $sprite="dollar_sign")
+System_Ext(creditinstitute, "Credit Institute", "Fake service to simulate a payment process.", $sprite="dollar_sign")
 
 Rel(user, t2_project, "Uses")
 Rel(researcher, t2_project, " Executes\ntests")
