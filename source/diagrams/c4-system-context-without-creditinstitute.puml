@@ -1,4 +1,4 @@
-@startuml c4-system-context-alternative
+@startuml c4-system-context-without-creditinstitute
 
 title System Context Diagram for the T2-Project
 
@@ -6,7 +6,6 @@ title System Context Diagram for the T2-Project
 
 !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
 !include FONTAWESOME/mug_hot.puml
-!include FONTAWESOME/dollar_sign.puml
 
 ' LAYOUT_WITH_LEGEND()
 
@@ -15,9 +14,7 @@ Person(researcher, "Researcher", "Executes various tests using the backend API's
 
 System(t2_project, "T2-Project", "A fictitious web store that offers tea.", $sprite="mug_hot")
 
-System_Ext(creditinstitute, "Credit Institute", "Fake service to simulate a payment process.", $sprite="dollar_sign")
-
 Rel(user, t2_project, "Uses")
 Rel(researcher, t2_project, " Executes\ntests")
-Rel_R(t2_project, creditinstitute, "Do\npayment")
+
 @enduml

@@ -1,0 +1,44 @@
+@startuml c4-deployment-measurement-setup-gmt-simplified-2
+
+' title Measurement Setup - Green Metrics Tool & T2-Modulith
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include DEVICONS2/docker.puml
+!include FONTAWESOME/code.puml
+!include FONTAWESOME/file_alt.puml
+!include FONTAWESOME/tools.puml
+
+left to right direction
+' skinparam ranksep 5
+skinparam ArrowFontSize 16
+
+AddElementTag("db", $bgColor="#MidnightBlue")
+AddElementTag("file", $bgColor="#Gray")
+AddElementTag("provider", $bgColor="#SlateGray")
+AddElementTag("gmt", $bgColor="#438369")
+
+Deployment_Node(machine, "GMT Measurement Machine") {
+
+    Container(gmt, "Green Metrics Tool", "", "", $sprite="code", $tags="gmt")
+
+    Container(usage_scenario, "usage_scenario.yml", "", "", $sprite="file_alt", $tags="file")
+ 
+    Boundary(sut, "System under Test") {
+        Container(t2_project, "Backend", "", "", $sprite="docker")
+        Container(jmeter, "JMeter", "", "", $sprite="docker")
+    }
+}
+
+Rel(jmeter, t2_project, "4. Executes\n API requests")
+
+Rel(gmt, sut, "\n2. Orchestrates\ncontainers")
+Rel_L(gmt, usage_scenario, "1.\nUses")
+Rel(gmt, jmeter, "3. Starts\nflow")
+
+@enduml

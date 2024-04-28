@@ -1,0 +1,38 @@
+@startuml c4-measurement-procedure-3
+
+'title Measurement Procedure
+
+' C4 (https://github.com/plantuml-stdlib/C4-PlantUML/)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Icons (https://github.com/tupadr3/plantuml-icon-font-sprites)
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/common.puml
+!include FONTAWESOME/tools.puml
+!include FONTAWESOME/file_alt.puml
+!include FONTAWESOME/file_medical_alt.puml
+!include FONTAWESOME/bullseye.puml
+!include FONTAWESOME/tachometer_alt.puml
+
+top to bottom direction
+skinparam ArrowFontSize 16
+
+AddElementTag("generator", $bgColor="#SlateBlue")
+AddElementTag("file", $bgColor="#Gray")
+AddElementTag("logger", $bgColor="#DarkCyan")
+
+Container(workload_generator, "Workload Generator", "Apache JMeter", "", $sprite="tachometer_alt", $tags="generator")
+
+Container(usage_scenario, "Usage Scenario", "", "", $sprite="file_alt", $tags="file")
+
+Container(sut, "System under Test (black box)", "T2-Project", "", $sprite="bullseye")
+
+Container(logger, "Energy Logger", "", "Software-based tool", $sprite="file_medical_alt", $tags="logger")
+
+Rel(workload_generator, usage_scenario, " Uses")
+
+Rel_R(workload_generator, sut, " Executes API requests")
+
+Rel_U(logger, sut, " Captures\nusage\ndata")
+
+@enduml
