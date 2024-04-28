@@ -28,8 +28,8 @@ Rel_Neighbor(ui, uibackend, "Uses", "JSON/HTTP")
 Rel(uibackend, cart, "Uses", "JSON/HTTP")
 Rel(uibackend, orchestrator, "Uses", "JSON/HTTP")
 Rel(uibackend, inventory, "Uses", "JSON/HTTP")
-Rel(orchestrator, inventory, "Uses", "JSON/HTTP")
-Rel(orchestrator, order, "Uses", "JSON/HTTP")
-Rel(orchestrator, payment, "Uses", "JSON/HTTP")
+Rel(orchestrator, inventory, "Uses", "via Kafka")
+Rel(orchestrator, order, "Uses", "via Kafka")
+Rel(orchestrator, payment, "Uses", "via Kafka")
 
 @enduml
