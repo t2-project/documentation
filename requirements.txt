@@ -1,4 +1,4 @@
-myst-parser==2.0.0
+myst-parser==3.0.1
 Sphinx==6.2.1
 readthedocs-sphinx-search==0.3.2
 sphinx-toolbox>=3.5
