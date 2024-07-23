@@ -246,47 +246,22 @@ Build and Run Locally
 | You can build all other services (with minor exceptions) the same way.
 | You just need to replace 'order' with the respective service name.
 
-| If you want to build all services at once, you can use the script ``build-all.sh`` provided in the :file:`devops` repository.
+| If you want to build all services at once, you can use the script ``build-microservices.sh`` provided in the :file:`devops` repository.
 
 Step 0 : Clone Repositories
 ----------------------------------------------------
 
 .. code-block:: shell
 
-   git clone --recursive https://github.com/t2-project/t2-project.git
+   git clone --recurse-submodules -j8 https://github.com/t2-project/t2-project.git
    # Or if an SSH key has been registered with GitHub:
-   git clone --recursive git@github.com:t2-project/t2-project.git
-   # Or to only download the order repo:
-   git clone https://github.com/t2-project/order.git
-
+   git clone --recurse-submodules -j8 git@github.com:t2-project/t2-project.git
 
 Step 1 : Versions and Environment Variables
 ----------------------------------------------------
 
-The T2-Project is build with the following dependencies and tools. 
-There is no guarantee that it works with others as well. 
-
-======================= ==========================
-Name                    Version
-======================= ==========================
-Maven                   ``3.9.5``
-Docker                  ``24.0.6``
-Spring Boot             ``3.2.4``
-io.eventuate.tram.core  ``0.34.0.RELEASE``
-io.eventuate.tram.sagas ``0.23.0.RELEASE``
-jaeger                  ``3.3.1``
-resilience4j            ``2.2.0``
-springdoc               ``2.3.0``
-======================= ==========================
-
-The :file:`pom.xml` files read the versions from environment variables.
-That means you either have to manually export the versions into environment variables, or you source the `setenv.sh <https://github.com/t2-project/devops/blob/main/setenv.sh>`__ file. There are also files for Windows users: `setenv.cmd <https://github.com/t2-project/devops/blob/main/setenv.cmd>` and `setenv.ps1 <https://github.com/t2-project/devops/blob/main/setenv.ps1>`.
-
-.. code-block:: shell
-
-   wget https://raw.githubusercontent.com/t2-project/devops/main/setenv.sh
-   . ./setenv.sh
-
+The microservices are build with a Maven multi-module setup.
+See the `pom.xml <https://github.com/t2-project/microservices/blob/main/pom.xml>`__ inside the ``microservices`` repository for the declaration of all dependencies and versions.
 
 Step 2 : Set Application properties
 ----------------------------------------
@@ -295,50 +270,10 @@ Set the `application properties <https://github.com/t2-project/order/tree/main/s
 They are located at :file:`./src/main/resources/`
 You want to consult the service's README on the meaning of the properties.
 
-Step 3 : Build Local Dependencies
-------------------------------------------
-
-Most services of the T2-Project depend on `common <https://github.com/t2-project/common>`__, thus you need to install that first:
-
-.. code-block:: shell
-
-   git clone https://github.com/t2-project/common.git
-   cd common/
-   ./mvnw clean install
-
-Step 2.1 : Exceptions for Service E2E Test
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The E2E Test also depends on the saga participants *inventory*, *payment* and *order*.
-
-You must build and install them to your local maven repository as well.
-
-.. code-block:: shell
-
-   git clone https://github.com/t2-project/payment.git
-   cd payment/
-   ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/payment-0.0.1-SNAPSHOT.jar.original
-
-.. code-block:: shell
-
-   git clone https://github.com/t2-project/inventory.git
-   cd inventory/
-   ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/inventory-0.0.1-SNAPSHOT.jar.original
-
-.. code-block:: shell
-
-   git clone https://github.com/t2-project/order.git
-   cd order/
-   ./mvnw clean install
-   ./mvnw install:install-file -Dfile=./target/order-0.0.1-SNAPSHOT.jar.original
-
-
-Step 4 : Build and Run
+Step 3 : Build and Run
 ----------------------
 
-Now you can build and run the order service.
+You can just build and run the order service with the following command:
 
 .. code-block:: shell
 
@@ -361,6 +296,12 @@ Of course, you can also use own profiles like e.g. *local* (:file:`./src/main/re
    ./mvnw clean install
    java -jar -Dspring.profiles.active=local ./target/order-0.0.1-SNAPSHOT.jar
 
+
+To build multiple services at once, you can go to the parent directory (``microservices``) and execute the following command:
+
+.. code-block:: shell
+
+   ./mvnw --projects order,payment,inventory --also-make clean install
 
 Step 5 : Build Docker Image
 ---------------------------

@@ -70,21 +70,25 @@ Source Code
 
 The T2-Project is organized under the GitHub organization `t2-project <https://github.com/t2-project>`__ in multiple repositories.
 
+A convenience repo including all repositories exists so that not every repo needs to be cloned separately: `<https://github.com/t2-project/t2-project>`__.
+
 The source code of this documentation is stored in the repository `Documentation <https://github.com/t2-project/documentation>`__.
 
+Common deployment and configuration files, e.g. for Kubernetes or Docker, are located in one repository called ``devops``:
+
+*  `DevOps <https://github.com/t2-project/devops>`__
 
 Modulith implementation
 -----------------------
 
 *  `Modulith <https://github.com/t2-project/modulith>`__
 
-
 Microservices implementation
 ----------------------------
 
-| A convenience repo including all microservices exists so that not every repo needs to be downloaded separately: `<https://github.com/t2-project/t2-project>`__.
+| A convenience repo including all microservices exists so that not every repo needs to be downloaded separately: `<https://github.com/t2-project/microservices>`__.
 
-These repositories contain the core services of the T2-Project:
+Core services:
 
 *  `Order service <https://github.com/t2-project/order>`__
 *  `Inventory service <https://github.com/t2-project/inventory>`__
@@ -94,16 +98,11 @@ These repositories contain the core services of the T2-Project:
 *  `UIBackend service <https://github.com/t2-project/uibackend>`__
 *  `UI <https://github.com/t2-project/ui>`__
 
-These repositories contain the supplemental services:
+Supplemental services:
 
 *  `E2E Test <https://github.com/t2-project/e2e-tests>`__
 *  `Credit Institute service  <https://github.com/t2-project/creditinstitute>`__
 
-This repository contains shared domain classes. 
-It is a dependency to all other services:
+Shared domain classes are part of one ``common`` repository, that is a dependency of all services:
 
 *  `Common <https://github.com/t2-project/common>`__
-
-This repository contains some DevOps configuration files, e.g. for the deployment of the T2-Project on Kubernetes or Docker:
-
-*  `DevOps <https://github.com/t2-project/devops>`__
