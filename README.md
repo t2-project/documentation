@@ -11,8 +11,8 @@ It can be found here: [https://t2-documentation.readthedocs.io/](https://t2-docu
 Install dependencies ([using pip and venv](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)):
 
 ```sh
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 

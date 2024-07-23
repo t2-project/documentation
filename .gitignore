@@ -14,5 +14,5 @@
 
 ### ME ###
 build/
-/venv/
+venv/
 .venv
