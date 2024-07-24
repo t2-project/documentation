@@ -144,6 +144,30 @@ The *product repository* used by the Inventory service is a PostgreSQL database.
 As mentioned above, the Postgres database of the Inventory service is used for both domain data and saga data to ensure atomicity of local transactions (transactional outbox pattern).
 
 
+Dependency Management
+=====================
+
+`Apache Maven <https://maven.apache.org/>`__ is used for dependency management.
+
+| The microservices are managed as a multi-module project so that the shared dependencies and versions only have to be defined in one central location:
+| `microservices/pom.xml <https://github.com/t2-project/microservices/blob/main/pom.xml>`__
+
+Initially, the versions and dependencies of the individual services were managed completely independently of each other in their own *pom.xml*.
+However, versions were also managed centrally with the help of environment variables (see the now deleted script `setenv.sh <https://github.com/t2-project/devops/blob/7807b83c69a46085f4a08880e37fd5b9afef5580/setenv.sh>`__).
+
+The structure as a multi-module project offers the following advantages:
+
+* Standard method for managing equal dependencies and versions and for building an entire software system
+* Maven automatically ensures the correct build order, which e.g. simplifies the compilation of `common <https://github.com/t2-project/common>`__
+* Compared to the initial implementation with environment variables, this simplifies local execution and changing versions
+* Less redundant configuration code
+
+However, there are also disadvantages:
+
+* Management of dependencies and versions in a central location contradicts the principle of autonomy of microservices (however, it is possible to overwrite the version definition for individual services if required)
+* CI pipeline for building individual services does not start if something is changed in the central `pom.xml <https://github.com/t2-project/microservices/blob/main/pom.xml>`__ (can be solved via a notification mechanism, but has not yet been implemented)
+
+
 Services
 ========
 
