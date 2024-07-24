@@ -74,9 +74,7 @@ A convenience repo including all repositories exists so that not every repo need
 
 The source code of this documentation is stored in the repository `Documentation <https://github.com/t2-project/documentation>`__.
 
-Common deployment and configuration files, e.g. for Kubernetes or Docker, are located in one repository called ``devops``:
-
-*  `DevOps <https://github.com/t2-project/devops>`__
+Common deployment and configuration files, e.g. for Kubernetes or Docker, are located in one repository called `DevOps <https://github.com/t2-project/devops>`__.
 
 Modulith implementation
 -----------------------
@@ -87,6 +85,8 @@ Microservices implementation
 ----------------------------
 
 | A convenience repo including all microservices exists so that not every repo needs to be downloaded separately: `<https://github.com/t2-project/microservices>`__.
+
+Shared domain classes are part of the `Common <https://github.com/t2-project/common>`__ repository, that is a dependency of all services.
 
 Core services:
 
@@ -102,7 +102,3 @@ Supplemental services:
 
 *  `E2E Test <https://github.com/t2-project/e2e-tests>`__
 *  `Credit Institute service  <https://github.com/t2-project/creditinstitute>`__
-
-Shared domain classes are part of one ``common`` repository, that is a dependency of all services:
-
-*  `Common <https://github.com/t2-project/common>`__

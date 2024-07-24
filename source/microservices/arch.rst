@@ -57,13 +57,13 @@ Step	Service	  Transaction           Compensation
 
 
 
-The doPayment() step is the saga's pivot transaction.
+The ``doPayment()`` step is the saga's pivot transaction.
 If this step succeeds, the saga runs to completion. 
 
-The step commitReservations() is designed to be repeatable. 
+The step ``commitReservations()`` is designed to be repeatable. 
 It will succeed eventually. 
 
-The same applies to the compensations rejectOrder() and cancelReservations().
+The same applies to the compensations ``rejectOrder()`` and ``cancelReservations()``.
 
 Every order is persisted, those that succeeded as well as those that failed.
 An order holds, among other details, the order state.
@@ -74,7 +74,7 @@ Currently an order cannot be cancelled after submission to the orchestrator.
 The inventory manages the number of available units per product. 
 If the inventory decreases the number of available units only after placing the order, the product may not be available anymore because another user bought to many units of that product. 
 To prevent such failures the ordered units of a product are locked as soon as they are placed in the shopping cart.
-As there is now no action to perform on the inventory before the pivot transaction (do payment), there is only the compensation that deletes the reservation (in case the saga rolls back) or the step commitReservations() that handles served reservations. 
+As there is now no action to perform on the inventory before the pivot transaction (``doPayment()``), there is only the compensation that deletes the reservation (in case the saga rolls back) or the step ``commitReservations()`` that handles served reservations. 
 
 
 Frameworks & Dependencies
@@ -88,7 +88,7 @@ Spring and Spring Boot
 =================== ==============
 Dependency          Version
 =================== ==============
-Spring Boot         3.1.x
+Spring Boot         3.2.x
 =================== ==============
 
 
@@ -171,7 +171,7 @@ However, there are also disadvantages:
 Services
 ========
 
-All Services are implemented as `Spring Boot <https://spring.io/projects/spring-boot>`__ Applications.
+All Services are implemented as `Spring Boot <https://spring.io/projects/spring-boot>`__ applications.
 This is the services' general package structure:
 
 *  :file:`de.unistuttgart.t2.<service-name>`
@@ -193,7 +193,7 @@ de.unistuttgart.t2.<service-name>
 The app package contains the following classes, usually prefixed with the service name.
 E.g the application class of the Order Service is called *OrderApplication*, the controller is called *OrderController* and so on.
 
-*  Application : annotated with @SpringBootApplication. 
+*  Application : annotated with ``@SpringBootApplication``. 
 *  Service : contains the logic of the service.
 *  Controller : defines the HTTP endpoint of the service. 
    This class is only present, if the service has HTTP endpoints.
@@ -234,7 +234,7 @@ Most domain specific things are used by multiple services and thus located in th
 Links
 =====
 
-For more Details on each service, look at the repositories or the API documentation:
+For more details on each service, look at the repositories or the API documentation:
 
 *  Order service: `GitHub <https://github.com/t2-project/order>`__
 *  Inventory service: `GitHub <https://github.com/t2-project/inventory>`__
@@ -247,3 +247,5 @@ For more Details on each service, look at the repositories or the API documentat
 
 *  Common: `GitHub <https://github.com/t2-project/common>`__
 *  E2E Test: `GitHub <https://github.com/t2-project/e2e-tests>`__
+
+Note: A convenience repo including all microservices exists so that not every repo needs to be downloaded separately: `<https://github.com/t2-project/microservices>`__.
