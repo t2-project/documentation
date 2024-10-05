@@ -185,7 +185,9 @@ See the data of measurements with different number of executions.
 3. Energy overhead by JMeter
 ----------------------------
 
-At the moment (as of April 2024) GMT can only measure the energy consumption of the whole system that is part of an usage scenario. Therefore, the energy consumption of JMeter is always included in the resulting energy values. However, there is the promise that GMT will offer the support for separating two logical and physical disjunct components onto two machines in the future.
+**Update (October 2024):** GMT is now able to calculate the energy consumption per process by using the average cgroup CPU utilization (see pull request `#795 <https://github.com/green-coding-solutions/green-metrics-tool/pull/795>`__). 
+
+At the time of writing this in April 2024 GMT can only measure the energy consumption of the whole system that is part of an usage scenario. Therefore, the energy consumption of JMeter is always included in the resulting energy values. However, there is the promise that GMT will offer the support for separating two logical and physical disjunct components onto two machines in the future.
 
 The measurement of individual components is not possible with GMT, because there is no clear way of how to isolate individual components and GMT has the philosophy that a usage scenario should contain all components to reflect an actual use case of the software. Therefore, all components that are part of an usage scenario are also part of the energy measurement. See the section `Granularity of energy data <https://docs.green-coding.io/docs/prologue/philosophy-methodology/#granularity-of-energy-data>`__ in the docs of the GMT for more information.
 
