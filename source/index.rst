@@ -65,6 +65,19 @@ The project is loosely based on the `TeaStore Application <https://github.com/De
 The initial main purpose of the T2-Project reference application was to trigger SLO violations with regard to response time and availability (see :doc:`Microservices Usage <microservices/use>` for more information).
 The purpose of the T2-Modulith is to compare a microservices application with a modulith application, mainly in regards of energy efficiency (see :doc:`Energy Measurements <measurements/index>` for more information).
 
+System Context
+==============
+
+The T2-Project is a fictitious store for tea and provides a minimalist User Interface (UI) that enables an ordering process (without real payment).
+However, as a reference application, the T2-Project is primarily aimed at researchers who want to carry out various tests.
+The UI is not required for this, as the tests are carried out directly via the API provided.
+The interface of a credit institute is simulated for the payment process.
+The payment process can also be completely deactivated via configuration so that the fake credit institute is not necessarily required for tests.
+Therefore, there are no dependencies on real external systems.
+The following image visualizes this as a system context diagram:
+
+.. image:: diagrams/c4-system-context.svg
+
 Source Code
 ===========
 
