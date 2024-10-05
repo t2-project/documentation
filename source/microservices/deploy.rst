@@ -273,14 +273,30 @@ You want to consult the service's README on the meaning of the properties.
 Step 3 : Build and Run
 ----------------------
 
-You can just build and run the order service with the following command:
+To build all services at once, run the following command:
+
+.. code-block:: shell
+
+   ./mvnw clean install
+
+Or specify the services you want to build:
+
+.. code-block:: shell
+
+   ./mvnw --projects order,payment,inventory --also-make clean install
+
+If you want to skip unit tests, you can use the argument ``-DskipTests=true``.
+
+Note: The Maven command `install` is required instead of `package` because of how the build for e2e-tests work.
+
+To build and run only one service (e.g. the order service) you can use the following command:
 
 .. code-block:: shell
 
    cd order/
    ./mvnw spring-boot:run
 
-Or like this, in case you want to supply specific application properties (remember to use the path to *your* properties file).
+Or like this, in case you want to supply specific application properties (remember to use the path to *your* properties file):
 
 .. code-block:: shell
 
@@ -296,12 +312,6 @@ Of course, you can also use own profiles like e.g. *local* (:file:`./src/main/re
    ./mvnw clean install
    java -jar -Dspring.profiles.active=local ./target/order-0.0.1-SNAPSHOT.jar
 
-
-To build multiple services at once, you can go to the parent directory (``microservices``) and execute the following command:
-
-.. code-block:: shell
-
-   ./mvnw --projects order,payment,inventory --also-make clean install
 
 Step 5 : Build Docker Image
 ---------------------------
