@@ -439,6 +439,47 @@ Kepler
 
 **Research question:** What is more energy efficient in scenarios with scaling involved, the modulith or microservices architecture style?
 
-.. admonition:: WIP
+First we run the same scenario with Kepler without any scaling involved.
+The following slide shows the comparison between two measurement runs, one with the modulith variant and one with the microservices variant.
 
-   This is currently (April of 2024) under work in progress
+.. image:: ../images/results_k8s_without_scaling.jpg
+   :name: results_k8s_without_scaling
+   :alt: Comparison of the energy consumption of the scenario without scaling behavior between the two variants visualized with Grafana.
+
+The duration of the scenario execution was 2min 30s for the modulith variant and 3 min for the microservices variant.
+The Kubernetes CPU resource requests and limits were both set to 1.5 cores for the modulith variant and 0.25 cores for each microservice.
+In such a scenario with no scaling involved the modulith is faster and is much more energy efficient.
+
+To measure energy consumption during scaling, we use a scenario with 50 parallel users, a 10-minute linear ramp-up duration, and a 5-minute duration with constant load on all users.
+The following slide shows the result of this scenario.
+
+.. image:: ../images/results_k8s_with_scaling.jpg
+   :name: results_k8s_with_scaling
+   :alt: Comparison of the energy consumption of a scenario with 50 parallel users and scaling behavior between the two variants visualized with Grafana.
+
+In this scenario the modulith variant still has a much smaller energy footprint than the microservices variant.
+The main reason is, that the modulith variant is much faster and doesn't have the overhead of the saga workflow.
+
+The peaks in the modulith energy consumption graph are caused by starting multiple instances at the same time.
+It would be much better if the scaling would be smoother without such peaks.
+So there is definitely room for improvement. 
+
+What the result already shows, however, is that in the T2-Project, the microservices variant has fundamental disadvantages in terms of performance and energy efficiency compared to the modulith variant due to the saga pattern.
+
+The microservices variant can only show the advantages of better scalability when more computing is required and communication is no longer the bottleneck.
+To illustrate such a scenario, a compute-intensive scenario will now be simulated.
+A calculation task is added to the order process that takes approximately 1 second.
+With the modulith variant, the task is integrated directly; with the microservices variant, it is outsourced to a separate service called `compute-simulator`.
+The following slide shows the result.
+Although the modulith is still slightly more energy-efficient, the gap is now significantly smaller.
+It can be assumed that with further adjustments to the scenario, the microservices variant could perform better at some point.
+
+.. image:: ../images/results_k8s_with_scaling_compute_intensive.jpg
+   :name: results_k8s_with_scaling_compute_intensive
+   :alt: Comparison of the energy consumption of a compute-intensive scenario between the two variants visualized with Grafana.
+
+Conclusion
+----------
+
+In summary, it can be said that the modulith variant performs significantly better than the microservices variant in the given scenario of the T2-Project.
+Firstly, the monolithic system is much easier to handle than the microservices system with the saga pattern and the middleware components required for communication. Secondly, the modulith also has significantly better energy efficiency. The microservices variant has disadvantages due to the communication overhead, especially due to the saga pattern. Only in a compute-intensive scenario with dynamic scaling does the microservices variant have certain advantages and can potentially perform better under high load.

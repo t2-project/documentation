@@ -2,10 +2,6 @@
 Energy Measurements
 ===================
 
-.. admonition:: WIP
-
-   This is currently (April of 2024) under work in progress
-
 How does the `T2-Project <https://github.com/t2-project/t2-project>`_ with a microservices architecture compare to the monolithic implementation `T2-Modulith <https://github.com/t2-project/modulith/>`_ in terms of energy consumption?
 
 To answer this question we use different methodologies and tools to measure the energy consumption of both variants under various scenarios.
@@ -15,6 +11,7 @@ The files used for executing the measurements are located in the ``energy-tests`
 The following figure visualizes the basic procedure:
 
 .. image:: ../diagrams/c4-measurement-procedure.svg
+   :alt: Overview of the basic procedure of how the energy measurement was executed: Workload generator uses an usage scenario to execute API requests to the system under test and a software-based logger records the energy consumption. 
 
 **Apache JMeter** is used as the load workload generator. It executes a predefined test plan that consists of multiple HTTP requests to the backend.
 See page :doc:`JMeter <jmeter>` for more information.
