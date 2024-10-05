@@ -221,7 +221,7 @@ You can run the T2-Project as Docker containers.
 
    git clone https://github.com/t2-project/devops.git
    cd devops/docker
-   docker-compose up -d
+   docker compose up -d
 
 These commands should deploy 13 services in total.
 
